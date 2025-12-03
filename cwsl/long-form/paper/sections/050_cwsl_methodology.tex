@@ -1,0 +1,491 @@
+% ----------------------------------------------------------
+% CWSL METHODOLOGY
+% ----------------------------------------------------------
+\section{Methodology: Cost-Weighted Service Loss (CWSL)}
+
+This section formalizes the Cost-Weighted Service Loss (CWSL) metric and its supporting
+diagnostic measures. Our objective is to construct a forecast evaluation framework that
+reflects the asymmetric operational consequences of under-forecasting and
+over-forecasting, while remaining interpretable, demand-normalized, and applicable
+across items and intervals. We begin by defining shortfall and overbuild components,
+introduce asymmetric penalty weights, and present the formal CWSL definition. We then
+describe supplementary metrics designed to quantify service reliability, tolerance
+accuracy, and shortfall severity.
+
+\subsection{Shortfall and Overbuild Components}
+
+Let \(\mathcal{I}\) denote the set of items (or commodities) and \(\mathcal{T}\) the set
+of evaluation intervals. For item \(i \in \mathcal{I}\) and interval \(t \in \mathcal{T}\),
+let \(y_{it}\) denote the actual demand and \(\hat{y}_{it}\) the corresponding forecast.
+Forecast error can be decomposed into two nonnegative components:
+\[
+s_{it} = \max(0,\, y_{it} - \hat{y}_{it}) \qquad \text{(shortfall)},
+\]
+\[
+o_{it} = \max(0,\, \hat{y}_{it} - y_{it}) \qquad \text{(overbuild)}.
+\]
+
+This decomposition ensures that only one component is positive for any \((i,t)\) pair.
+Shortfalls capture instances where demand exceeds the forecast, while overbuilds capture
+instances where production or allocation exceeded realized demand. This
+directionally-aware formulation is essential in environments where operational cost is
+not symmetric around zero error.
+
+\subsection{Asymmetric Penalty Weights}
+
+The shortfall and overbuild components \(s_{it}\) and \(o_{it}\) become operationally
+meaningful once they are linked to the relative cost of being short versus long.
+Operational evidence consistently demonstrates that the cost of under-forecasting
+short-horizon demand exceeds the cost of over-forecasting. Shortfalls may lead to unmet
+demand, slower service, inventory depletion, or labor reallocation. Overbuilds, by
+contrast, typically incur modest waste or holding cost. To reflect this asymmetry, we
+assign each item \(i\) two nonnegative penalty parameters:
+
+\begin{itemize}[itemsep=4pt]
+    \item \(c_{u,i}\): unit penalty for shortfalls,
+    \item \(c_{o,i}\): unit penalty for overbuilds, typically \(c_{u,i} > c_{o,i}\).
+\end{itemize}
+
+These penalties may differ across items due to recovery times, perishability, guest
+impact, or cost of waste. In the baseline formulation, we treat \(c_{u,i}\) and
+\(c_{o,i}\) as fixed for each item over the evaluation horizon, but the framework
+readily extends to time- or context-varying penalties (e.g., by daypart or service
+window). CWSL therefore permits full item-level flexibility, allowing penalties to
+reflect operational realities rather than assuming uniform cost across the product mix.
+
+Throughout this paper, we refer to \(c_{u,i} s_{it} + c_{o,i} o_{it}\) as a
+\emph{cost-weighted penalty}. These penalty weights need not correspond to literal
+currency values; rather, they encode the \emph{relative} operational impact of
+shortfalls and overbuilds for each item. This distinction allows CWSL to remain flexible
+across domains while still capturing the directional asymmetry inherent in operational
+cost.
+
+\subsection{Selecting Cost Parameters}
+
+The penalty parameters \(c_{u,i}\) and \(c_{o,i}\) encode an organization’s view of the
+relative cost of shortfalls and overbuilds for item \(i\). In principle, these
+quantities could be expressed in monetary terms (e.g., lost margin versus waste cost),
+but in many operational settings it is sufficient---and often more practical---to work
+with \emph{relative} penalties that summarize how much worse it is to be short than to
+be long. In this subsection we outline simple, practitioner-oriented guidance for
+selecting cost parameters that is consistent with the CWSL framework and scalable across
+items.
+
+\subsubsection*{Operational Judgment (Practical Baseline)}
+
+In organizations without detailed cost accounting or where the drivers of shortfall cost
+are diffuse (e.g., lost throughput, guest dissatisfaction, recovery time), it is rarely
+feasible to pin down exact currency-valued penalties for every item. In such cases,
+CWSL can be parameterized using structured managerial judgment.
+
+A natural starting point is to work with the \emph{penalty ratio}
+\[
+R_i = \frac{c_{u,i}}{c_{o,i}},
+\]
+which summarizes how many times more costly a unit of shortfall is than a unit of
+overbuild for item \(i\). Rather than specifying \(c_{u,i}\) and \(c_{o,i}\) separately,
+practitioners can first elicit an approximate value of \(R_i\) and then choose
+convenient scaled penalties (e.g., \(c_{o,i} = 1\), \(c_{u,i} = R_i\)).
+
+In practice, this can be implemented through structured discussions with operations
+leaders, store managers, or production supervisors. For each item (or item group),
+managers can be asked qualitative questions such as:
+\begin{itemize}[itemsep=4pt]
+    \item ``If we are short by one unit in a peak interval, is that roughly two times,
+          five times, or ten times worse than having one unit left over?''
+    \item ``For this item, would you rather be slightly long most of the time, or risk
+          being short in exchange for lower waste?''
+\end{itemize}
+Their responses can be mapped to simple, interpretable ratios, for example:
+\begin{itemize}[itemsep=4pt]
+    \item \emph{Moderately asymmetric} environments: \(R_i \in [2,4]\),
+    \item \emph{Strongly asymmetric} environments (e.g., core items during peaks):
+          \(R_i \in [5,8]\),
+    \item \emph{Extremely asymmetric} environments (e.g., critical bottleneck items):
+          \(R_i \ge 8\).
+\end{itemize}
+
+Once an approximate ratio has been selected, penalties can be normalized without loss of
+generality. A common convention is to set \(c_{o,i} = 1\) for all items and let
+\(c_{u,i} = R_i\). Under this convention, \(R_i\) has a direct interpretation as the
+relative operational weight placed on shortfalls, and CWSL retains its demand-normalized
+interpretation. Organizations that wish to differentiate further by item importance,
+margin, or perishability can assign higher \(R_i\) values to high-impact items and
+lower \(R_i\) values to secondary or flexible items.
+
+This judgment-based approach does not require precise monetary costing; instead, it
+translates practitioner knowledge about service risk and tolerance for waste into
+penalty structures that are consistent with the CWSL framework and immediately usable
+in evaluation.
+
+\subsubsection*{Sensitivity Analysis and Penalty Sweeps}
+
+Even when initial penalty ratios are based on sound operational judgment, it is valuable
+to understand how sensitive conclusions are to the choice of \(c_{u,i}\) and \(c_{o,i}\).
+Rather than committing to a single penalty ratio, analysts can compute CWSL over a
+\emph{range} of plausible values and examine how model rankings and readiness
+assessments change. This provides a robustness check and helps identify penalty regimes
+where decisions are stable.
+
+For a given item (or item group), let \(R_i = c_{u,i} / c_{o,i}\) denote the penalty
+ratio as before. A simple sensitivity procedure proceeds as follows:
+
+\begin{enumerate}[itemsep=4pt]
+    \item Select a grid of candidate ratios
+          \(\mathcal{R} = \{R^{(1)}, R^{(2)}, \dots, R^{(K)}\}\) that spans the range of
+          operationally plausible asymmetries (e.g., \(R^{(k)} \in [2,10]\)).
+    \item For each \(R^{(k)} \in \mathcal{R}\), define penalties using a convenient
+          normalization such as
+          \[
+          c_{o,i}^{(k)} = 1, \qquad c_{u,i}^{(k)} = R^{(k)},
+          \]
+          or, more generally, by scaling a base pair
+          \((c_{u,i}^{(0)}, c_{o,i}^{(0)})\) to achieve the desired ratio.
+    \item Compute \(\mathrm{CWSL}\) (and, if desired, derived quantities such as FRS) for
+          each forecasting model or policy under each ratio \(R^{(k)}\).
+    \item Examine how model rankings, gap sizes, and readiness conclusions vary across
+          \(\mathcal{R}\). In particular, identify:
+          \begin{itemize}[itemsep=2pt]
+              \item ranges of \(R\) for which the preferred model is unchanged;
+              \item regimes where conclusions flip because a model is especially
+                    shortfall-heavy or overbuild-heavy;
+              \item values of \(R\) at which CWSL becomes dominated by shortfalls for
+                    specific items, dayparts, or locations.
+          \end{itemize}
+\end{enumerate}
+
+From an operational perspective, the most informative outcome is the presence of a
+\emph{stability region}: an interval of penalty ratios for which the same forecasting
+approach remains preferred and CWSL-based conclusions do not materially change. When a
+model is robustly preferred across a wide range of \(R\) values, managers can be more
+confident that its selection does not hinge on a narrow or controversial choice of
+penalty parameters. Conversely, if model rankings are highly sensitive to small changes
+in \(R\), this indicates that the organization’s implicit trade-off between shortfalls
+and overbuilds is itself a critical design choice that may warrant further discussion.
+
+Sensitivity analysis can also be applied at different levels of aggregation. Analysts
+may sweep penalty ratios for:
+\begin{itemize}[itemsep=4pt]
+    \item a single high-impact item to understand its local trade-offs;
+    \item a group of related items (e.g., a production station or category);
+    \item an entire store, region, or network, using common ratios for broad comparison.
+\end{itemize}
+In each case, the goal is not to identify a uniquely ``correct'' penalty ratio, but to
+ensure that CWSL-based evaluations are consistent with the organization’s tolerance for
+shortfall risk and waste across a plausible set of asymmetric cost assumptions.
+
+\medskip
+The methods above provide practical and analytically sound options for selecting
+penalty parameters that reflect an organization’s tolerance for shortfall risk and waste.
+In the following subsection, we assume that \(c_{u,i}\) and \(c_{o,i}\) have been chosen
+using one of these approaches and present the formal definition of the Cost-Weighted
+Service Loss metric.
+
+\subsection{Definition of Cost-Weighted Service Loss}
+
+CWSL aggregates cost-weighted shortfall and overbuild penalties across all items
+\(\mathcal{I}\) and intervals \(\mathcal{T}\), and normalizes the result by total
+demand:
+\begin{equation}
+\mathrm{CWSL}
+=
+\frac{
+\sum_{i \in \mathcal{I}} \sum_{t \in \mathcal{T}}
+\left(
+c_{u,i} s_{it} + c_{o,i} o_{it}
+\right)
+}{
+\sum_{i \in \mathcal{I}} \sum_{t \in \mathcal{T}} y_{it}
+}.
+\label{eq:cwsl}
+\end{equation}
+
+Using the definitions of \(s_{it}\) and \(o_{it}\), CWSL can also be written in expanded
+form as:
+\[
+\mathrm{CWSL}
+=
+\frac{
+\sum_{i \in \mathcal{I}} \sum_{t \in \mathcal{T}}
+\left[
+c_{u,i}\max(0,\, y_{it} - \hat{y}_{it})
++
+c_{o,i}\max(0,\, \hat{y}_{it} - y_{it})
+\right]
+}{
+\sum_{i \in \mathcal{I}} \sum_{t \in \mathcal{T}} y_{it}
+}.
+\]
+
+CWSL is therefore expressed as a fraction of total demand and answers the question:
+\begin{quote}
+\emph{“What fraction of total demand was effectively ‘lost’ due to the cost-weighted
+impact of forecast error?”}
+\end{quote}
+
+By construction, \(0 \le \mathrm{CWSL} < \infty\), and the measure is scale-free across
+locations, dayparts, and periods.
+
+\subsection{Rationale for Demand Normalization}
+
+Normalizing cost-weighted penalties by total demand ensures that CWSL reflects the
+\emph{relative} impact of forecast error rather than its absolute magnitude. This
+scaling is essential for both operational and statistical interpretability.
+Specifically, normalization by \(\sum_{i,t} y_{it}\):
+
+\begin{itemize}[itemsep=4pt]
+    \item ensures that high- and low-volume intervals contribute proportionally to the
+          metric;
+    \item prevents low-volume noise or rare events from dominating aggregate performance;
+    \item enables fair comparison across stores, dayparts, or products with differing
+          demand scales;
+    \item aligns CWSL with readiness-based performance measures widely used in QSR,
+          retail, manufacturing, and service operations.
+\end{itemize}
+
+Without demand normalization, large-volume items or intervals would mechanically
+dominate the metric, obscuring whether cost-weighted error arises from high-impact
+shortfalls, persistent low-level misses, or structural forecast bias.
+
+\subsection{Interval-Level Granularity}
+
+CWSL is computed at the same temporal resolution used for operational decision-making
+(e.g., 5–30 minute intervals in QSR production systems, retail replenishment cycles, or
+short-horizon staffing environments). Evaluating shortfalls and overbuilds at this
+interval level preserves the operational meaning of the error components, because it is
+within these discrete windows that production cycles, staffing decisions, and recovery
+dynamics occur. Interval-level errors correspond directly to:
+
+\begin{itemize}[itemsep=4pt]
+    \item production or cooking cycles,
+    \item labor allocations and station assignments,
+    \item bottleneck formation and propagation,
+    \item short-horizon service-time variability,
+    \item recovery delays following shortfalls.
+\end{itemize}
+
+Aggregating forecast error to coarser horizons (e.g., hourly or daily) can obscure
+readiness failures concentrated within critical intervals, especially during peak
+demand. Evaluating performance at the operational interval ensures that CWSL captures
+both the timing and severity of forecast error—elements essential for understanding its
+real impact on throughput and service reliability.
+
+\subsection{Item Granularity and Multi-Item Intervals}
+
+Operational datasets often contain multiple items within the same interval. For example,
+in a 15-minute production window, a restaurant may record forecasts and realized demand
+for several menu items, while a retail or manufacturing system may observe multiple SKUs
+or components simultaneously within the same period. The CWSL framework accommodates
+this structure directly because each observation is defined at the item–interval pair
+\((i,t)\).
+
+When multiple items appear in the same interval, the evaluator may compute performance at
+several levels of aggregation:
+
+\begin{itemize}[itemsep=4pt]
+    \item \textbf{Item-level evaluation.}  
+    For a fixed item \(i\), CWSL and its diagnostic metrics (NSL, HR@\(\tau\), UD) are
+    computed over all intervals \(t \in \mathcal{T}\) for that item:
+    \[
+    \mathrm{CWSL}_i
+    =
+    \frac{
+        \sum_{t \in \mathcal{T}}
+        \left( c_{u,i} s_{it} + c_{o,i} o_{it} \right)
+    }{
+        \sum_{t \in \mathcal{T}} y_{it}
+    }.
+    \]
+    This supports SKU-level, product-level, or component-level readiness assessment.
+
+    \item \textbf{Aggregate or system-level evaluation.}  
+    To evaluate readiness across all items within a period or interval, the same
+    cost-weighted penalties are summed across items:
+    \[
+    \mathrm{CWSL}
+    =
+    \frac{
+        \sum_{i \in \mathcal{I}} \sum_{t \in \mathcal{T}}
+        \left( c_{u,i} s_{it} + c_{o,i} o_{it} \right)
+    }{
+        \sum_{i \in \mathcal{I}} \sum_{t \in \mathcal{T}} y_{it}
+    }.
+    \]
+    This yields a single readiness measure for a store, station, daypart, or system.
+
+    \item \textbf{Group-level evaluation.}  
+    Items may be grouped into categories (e.g., burgers, chicken, sides), production
+    stations, demand classes, or any operational hierarchy. Because CWSL is additive
+    across items, the metric can be computed for arbitrary subsets  
+    \(\mathcal{I}' \subseteq \mathcal{I}\).
+\end{itemize}
+
+This hierarchical flexibility is essential in operational environments where forecasters
+may produce predictions at different levels (e.g., station-level forecasts) or where
+interactions among items within the same interval affect readiness. By defining CWSL at
+the item–interval level and aggregating as needed, the framework supports consistent and
+interpretable evaluation across items, categories, stations, stores, and entire systems.
+
+\subsection{Interpretation of CWSL Values}
+
+Because CWSL expresses the cost-weighted impact of forecast error as a fraction of total
+demand, its magnitude provides an immediate sense of operational reliability.
+Practitioners may find it useful to interpret CWSL values in broad bands such as:
+
+\begin{itemize}[itemsep=4pt]
+    \item \textbf{Low CWSL} (e.g., <10\%): shortfalls are infrequent or mild, and
+          overbuild penalties dominate; operational readiness is generally strong.
+    \item \textbf{Moderate CWSL} (10--25\%): shortfalls occur with meaningful frequency
+          or severity; readiness is inconsistent and may require intervention.
+    \item \textbf{High CWSL} (>25\%): shortfall-heavy error patterns drive substantial
+          cost-weighted degradation; forecasts do not adequately support operational
+          execution.
+\end{itemize}
+
+These ranges are illustrative rather than prescriptive. Appropriate thresholds depend on
+penalty-weight selection, item mix, demand volatility, and the cost structure of the
+operational environment. Nonetheless, CWSL offers a consistent comparative scale that
+enables organizations to assess performance across items, dayparts, or locations using a
+single, interpretable metric.
+
+\subsection{Supporting Diagnostic Metrics}
+
+While CWSL provides an aggregate, cost-weighted assessment of forecast performance, it
+is often useful to decompose this performance into specific behavioral dimensions. To
+that end, we define a set of supporting diagnostic metrics that quantify service
+reliability, tolerance accuracy, and the severity of shortfalls. These measures help
+identify whether high CWSL values arise from frequent shortfalls, severe shortfalls, or
+broad forecast inaccuracy, and therefore complement CWSL by providing more granular
+operational insight.
+
+\medskip
+
+Unless otherwise noted, all diagnostic metrics are defined at the item level for a fixed
+\(i \in \mathcal{I}\) over a set of intervals \(\mathcal{T}\). Organizations may
+aggregate these item-level quantities in a variety of ways—for example, by averaging
+across items, pooling item–interval pairs, or reporting metrics at the category or
+store–daypart level, using the same hierarchical structures described for CWSL. We
+present the item-level formulation here for clarity and generality.
+
+\medskip
+
+\subsubsection*{No-Shortfall Level (NSL)}
+
+For a fixed item \(i\), the No-Shortfall Level (NSL) measures the proportion of
+intervals in which the forecast meets or exceeds actual demand. Formally,
+\[
+\mathrm{NSL}_i =
+\frac{
+\left|\{\,t \in \mathcal{T} : \hat{y}_{it} \ge y_{it}\,\}\right|
+}{
+|\mathcal{T}|
+}.
+\]
+
+NSL serves as a direct indicator of service reliability, independent of how large any
+shortfall may be. A low NSL signals frequent service-risk intervals even when overall
+error magnitude (e.g., wMAPE) appears acceptable. Conversely, a high NSL indicates that
+shortfalls are infrequent, though it does not reveal their severity when they occur.
+This makes NSL a natural complement to CWSL, which accounts for both frequency and
+severity through cost-weighted penalties.
+
+\medskip
+
+\subsubsection*{Hit Rate within Tolerance (HR@\(\tau\))}
+
+For a fixed item \(i\), the Hit Rate within Tolerance measures the proportion of
+intervals in which forecast error falls within an operationally acceptable bound. For a
+specified tolerance level \(\tau > 0\),
+\[
+\mathrm{HR}@\tau_i =
+\frac{
+\left|\{\,t \in \mathcal{T} : |\,\hat{y}_{it} - y_{it}\,| \le \tau\,\}\right|
+}{
+|\mathcal{T}|
+}.
+\]
+
+Many operational environments do not require exact forecast accuracy but instead rely on
+forecasts being “close enough” to support production or staffing decisions. The
+tolerance \(\tau\) may reflect batch sizes, cooking or setup windows, labor allocation
+granularity, or acceptable service-time variability. HR@\(\tau\) therefore provides a
+practical measure of decision-relevant accuracy and complements NSL by capturing
+intervals where the forecast is not perfect but still operationally sufficient.
+
+\medskip
+
+\subsubsection*{Underbuild Depth (UD)}
+
+Underbuild Depth quantifies the average magnitude of shortfalls, conditional on a
+shortfall occurring. For a fixed item \(i\), let
+\(\mathcal{T}^{\mathrm{SF}} = \{\,t \in \mathcal{T} : s_{it} > 0\,\}\) denote the set of
+intervals with strictly positive shortfall. When \(|\mathcal{T}^{\mathrm{SF}}| > 0\), we
+define
+\[
+\mathrm{UD}_i =
+\frac{
+\sum_{t \in \mathcal{T}^{\mathrm{SF}}} s_{it}
+}{
+|\mathcal{T}^{\mathrm{SF}}|
+}.
+\]
+
+Whereas NSL measures how often the forecast avoids shortfalls, UD measures how severe
+shortfalls are when they occur. High UD values indicate that misses tend to be deep
+enough to trigger recovery delays, throughput loss, or customer-facing service
+failures. This makes UD a critical complement to NSL: two items may share similar NSL
+values yet differ substantially in UD, implying materially different operational
+impact.
+
+\medskip
+
+\subsubsection*{Weighted MAPE (wMAPE)}
+
+For comparison with traditional symmetric accuracy measures, we compute the item-level
+weighted mean absolute percentage error (wMAPE):
+\[
+\mathrm{wMAPE}_i =
+\frac{
+\sum_{t \in \mathcal{T}} |\,y_{it} - \hat{y}_{it}\,|
+}{
+\sum_{t \in \mathcal{T}} y_{it}
+}.
+\]
+
+wMAPE provides a familiar, volume-normalized measure of average absolute error and is
+widely used in demand forecasting applications \cite{hyndman2006}. However, because
+wMAPE treats under-forecasting and over-forecasting symmetrically, it does not capture
+the directional asymmetry that drives operational performance. In the CWSL framework,
+wMAPE serves as a baseline reference metric, allowing analysts to contrast symmetric
+accuracy with cost-weighted operational impact.
+
+\medskip
+
+\subsubsection*{Forecast Readiness Score (FRS)}
+
+To provide a single, interpretable measure of operational forecast quality, we define
+the Forecast Readiness Score (FRS):
+\[
+\mathrm{FRS} = 100 \times (\mathrm{NSL} - \mathrm{CWSL}),
+\]
+which balances an aggregate measure of service reliability (NSL, computed over the same
+item–interval set) against the corresponding cost-weighted impact of forecast error
+(CWSL).
+
+Because both \(\mathrm{NSL}\) and \(\mathrm{CWSL}\) lie on a 0--1 scale, their
+difference yields a readiness index that can be interpreted directly in percentage
+terms. When \(\mathrm{NSL} \ge \mathrm{CWSL}\), the resulting FRS value falls within the
+0--100 range, with higher values indicating stronger operational readiness. Negative
+values are possible when cost-weighted shortfalls dominate, signaling severe operational
+risk. The FRS thus provides managers with a concise KPI that integrates directional
+accuracy, shortfall frequency, and cost-weighted severity into a single metric.
+
+\subsection{Summary}
+
+CWSL and its supporting diagnostic metrics provide a unified, operationally grounded
+framework for evaluating forecast performance under asymmetric error cost. Together,
+they capture multiple dimensions of operational reliability—including shortfall
+frequency, shortfall severity, tolerance accuracy, demand scaling, and directional
+cost. This decomposition clarifies the drivers of poor operational performance and
+enables a more complete assessment than is possible with symmetric accuracy measures
+alone.

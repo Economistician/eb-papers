@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Cost-Weighted Service Loss (CWSL): A Forecast Evaluation Metric for Operational Readiness Under Asymmetric Error Cost"
+abstract: >
+  Cost-Weighted Service Loss (CWSL) is a demand-normalized, asymmetric forecast
+  performance metric designed for high-frequency operational environments. Unlike
+  symmetric accuracy measures such as RMSE or wMAPE, CWSL incorporates explicit
+  shortfall and overbuild penalties to align forecast evaluation with real operational
+  impact. This repository contains the long-form technical paper that formally defines
+  the CWSL metric, develops supporting readiness diagnostics, and situates the metric
+  within the broader Electric Barometer forecasting framework.
+
+authors:
+  - family-names: Corrie
+    given-names: Kyle
+    email: kcorrie@economistician.com
+    affiliation: "Electric Barometer Research Series"
+
+keywords:
+  - forecasting
+  - asymmetric loss
+  - operational research
+  - quick-service restaurants
+  - demand forecasting
+  - applied statistics
+  - electric barometer
+  - CWSL
+  - readiness metrics
+
+license: "BSD-3-Clause"
+
+version: "0.1.0"
+date-released: "2025-12-03"
+
+repository-code: "https://github.com/Economistician/eb-papers"
+url: "https://github.com/Economistician/eb-papers"
+
+preferred-citation:
+  type: article
+  title: "Cost-Weighted Service Loss (CWSL): A Forecast Evaluation Metric for Operational Readiness Under Asymmetric Error Cost"
+  authors:
+    - family-names: Corrie
+      given-names: Kyle
+  year: 2025
+  journal: "Electric Barometer Research Series"
+  volume: "01"
+  url: "https://github.com/Economistician/eb-papers"

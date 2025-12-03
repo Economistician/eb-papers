@@ -1,0 +1,125 @@
+% ----------------------------------------------------------
+% MANAGERIAL IMPLICATIONS
+% ----------------------------------------------------------
+\section{Managerial Implications}
+
+The CWSL framework has direct implications for managers responsible for production
+planning, staffing, service reliability, and operational readiness. Traditional
+forecast accuracy metrics often fail to highlight the specific conditions under which
+readiness deteriorates. By incorporating asymmetric penalties and interval-level
+performance, CWSL and its supporting metrics provide a more actionable foundation for
+decision-making.
+
+\subsection{Improving Operational Readiness}
+
+Because shortfalls impose disproportionately high operational cost, reducing their
+frequency and severity is central to maintaining readiness. CWSL provides a direct
+signal of cost-weighted performance degradation, while the supporting diagnostics
+identify the underlying drivers:
+
+\begin{itemize}[itemsep=4pt]
+    \item \textbf{Low NSL} indicates frequent shortfalls and highlights intervals where
+          demand regularly exceeds available production or capacity.
+    \item \textbf{High UD} reveals that shortfalls, when they occur, are operationally
+          severe and likely to trigger recovery delays.
+    \item \textbf{Temporal clustering} of shortfalls within peak periods suggests
+          systematic underestimation during high-demand windows.
+    \item \textbf{Low HR@\(\tau\)} signals that forecasts miss even relaxed operational
+          tolerances, reducing the likelihood of stable execution.
+\end{itemize}
+
+By interpreting these diagnostics together, managers can target corrective interventions
+such as adjusting production schedules, reallocating labor, modifying batch sizes, or
+revising operational thresholds. This structured approach links forecast evaluation
+directly to operational decision-making and supports continuous improvement in
+readiness.
+
+\subsection{Aligning Forecasts with Operational Priorities}
+
+CWSL provides managers with a mechanism for evaluating whether forecasting systems are
+aligned with the operational priorities of the organization. A model may achieve strong
+symmetric accuracy (e.g., low wMAPE) yet still perform poorly in practice if it
+systematically underestimates demand during critical periods. Because CWSL penalizes
+shortfalls more heavily than overbuilds, it highlights models whose error structure is
+misaligned with readiness and service-level objectives.
+
+By focusing on minimizing cost-weighted error rather than purely symmetric statistical
+error, managers can select forecasting approaches that better support throughput,
+service reliability, and customer experience. CWSL also facilitates the comparison of
+alternative models, parameter settings, or demand-planning strategies under operational
+conditions that reflect real asymmetry. In this way, CWSL anchors forecast evaluation to
+the organization’s highest-priority outcomes rather than to abstract statistical
+criteria.
+
+\subsection{Choosing and Calibrating Penalty Weights}
+
+Penalty weights represent an organization’s operational priorities by quantifying the
+relative cost of shortfalls and overbuilds. Selecting these weights thoughtfully is
+critical for ensuring that CWSL reflects true readiness requirements and production or
+service constraints. In practice, managers may calibrate penalty weights by considering:
+
+\begin{itemize}[itemsep=4pt]
+    \item \textbf{Item importance and operational impact.}
+    High-volume or high-impact items typically warrant higher shortfall penalties
+    because shortages directly affect throughput and customer experience.
+
+    \item \textbf{Waste cost and product flexibility.}
+    Items with low waste cost, long holding time, or flexible reuse may receive lower
+    overbuild penalties, reflecting their limited downside.
+
+    \item \textbf{Daypart or demand-regime sensitivity.}
+    Penalties may vary by time of day (e.g., lunch peaks), season, or demand
+    volatility, where the operational cost of a shortfall is substantially higher.
+
+    \item \textbf{Sensitivity and scenario analysis.}
+    Managers can compute CWSL across a range of penalty ratios to understand how
+    performance and model rankings change under different operational assumptions.
+\end{itemize}
+
+Calibrating penalty weights in this way allows organizations to align forecast
+evaluation with their specific financial, operational, and service-level objectives.
+
+\subsection{Supporting Continuous Improvement}
+
+The CWSL framework enables a disciplined, repeatable process for monitoring and refining
+forecast performance over time. Because it captures the operational consequences of
+forecast error more directly than symmetric metrics, CWSL can serve as a core component
+of ongoing forecast governance. Managers may use the metric to:
+
+\begin{itemize}[itemsep=4pt]
+    \item \textbf{Benchmark model updates.}
+    Compare new forecasting models, parameter adjustments, or data inputs against
+    existing baselines using cost-weighted performance rather than purely statistical
+    criteria.
+
+    \item \textbf{Identify underperforming locations or items.}
+    Low NSL or high CWSL values can reveal stores, regions, or product categories where
+    readiness reliability fails to meet operational expectations.
+
+    \item \textbf{Monitor improvement longitudinally.}
+    Tracking NSL, UD, and CWSL over time highlights whether operational intervention or
+    model refinement is reducing the frequency and severity of readiness failures.
+
+    \item \textbf{Integrate evaluation into governance systems.}
+    CWSL can be embedded within dashboards, automated monitoring tools, and performance
+    scorecards to support consistent and transparent oversight.
+\end{itemize}
+
+By incorporating CWSL into a structured improvement cycle, organizations reinforce a
+data-driven approach to operational reliability and ensure that forecasting systems
+evolve in alignment with readiness and service-level objectives.
+
+\subsection{Communicating Performance Across Teams}
+
+CWSL and its supporting metrics establish a common performance language that is
+understandable to operators, analysts, and executives alike. Because the metrics
+explicitly reflect operational consequences, they bridge the gap between analytical
+evaluation and frontline decision-making. In particular, the Forecast Readiness Score
+(FRS) provides a concise, interpretable summary that balances service reliability (NSL)
+against cost-weighted performance degradation (CWSL), enabling leadership to assess
+readiness at a glance.
+
+By standardizing communication around these metrics, organizations can improve
+cross-functional coordination, align expectations between analytics and operations, and
+ensure that performance discussions emphasize the operational outcomes most relevant to
+service delivery and customer experience.

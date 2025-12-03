@@ -1,0 +1,80 @@
+% ----------------------------------------------------------
+% FUTURE RESEARCH DIRECTIONS
+% ----------------------------------------------------------
+\section{Future Research Directions}
+
+The Cost-Weighted Service Loss (CWSL) framework offers several avenues for further
+research at the intersection of forecasting, operations management, and applied
+analytics. Because CWSL unifies asymmetric cost, interval-level performance, and
+demand normalization within a single metric, it provides a flexible foundation for
+advancing both methodological work and application-driven inquiry.
+
+\subsection{Integration into Model Training and Optimization}
+
+While CWSL is introduced here as an evaluation metric, an important extension is its
+incorporation into model-training objectives. Embedding asymmetric penalties directly
+into gradient-based forecasting models, quantile regression methods, boosted trees, or
+neural architectures could align model estimation more closely with operational cost.
+Future work may compare models optimized on CWSL-inspired loss functions against those
+trained on symmetric or probabilistic objectives to quantify performance trade-offs.
+
+\subsection{Automated and Data-Driven Penalty Calibration}
+
+Penalty ratios currently rely on domain expertise or scenario-based tuning. Research
+opportunities exist in developing data-driven methods for calibrating penalty weights
+using historical operational outcomes, cost modeling, or reinforcement learning. Such
+approaches could help organizations dynamically infer penalty structures that reflect
+service-level targets, congestion risk, or marginal cost curves. This remains an open
+problem with both methodological and applied relevance.
+
+\subsection{Context-Aware and Time-Varying Penalty Structures}
+
+Operational asymmetry is rarely constant. Daypart effects, system bottlenecks, seasonal
+shift patterns, and location-specific characteristics all influence the relative cost of
+shortfalls and overbuilds. Extending CWSL to incorporate time-varying or
+context-conditioned penalty weights may improve evaluation fidelity, particularly in
+multi-item, multi-location systems. Estimating these penalties from historical behavior
+represents a promising direction for future empirical work.
+
+\subsection{Forecast Monitoring, Drift Detection, and Control}
+
+CWSL provides a natural basis for performance monitoring in production systems.
+Researchers may explore how CWSL behaves under distributional shift, concept drift, or
+data-quality degradation, as well as how it can be incorporated into statistical
+process-control charts or anomaly-detection frameworks. Threshold-based intervention
+rules or early-warning indicators derived from CWSL could support more proactive
+forecast governance.
+
+\subsection{Simulation, Scenario Planning, and Decision Support}
+
+Another research direction lies in integrating CWSL into simulation and scenario-planning
+environments. Discrete-event simulation, agent-based modeling, or stochastic operations
+models could incorporate CWSL-based performance metrics to quantify the operational
+impact of alternative forecast strategies, staffing rules, inventory policies, or
+production schedules. Such tools would enhance both managerial insight and methodological
+understanding of asymmetric error in complex systems.
+
+\subsection{Connections to Optimization and Control Models}
+
+CWSL may also serve as a bridge between forecasting and downstream optimization
+problems. Future work could investigate how CWSL-informed forecasts alter the structure
+or optimality of scheduling, routing, labor allocation, or inventory-control models.
+Embedding asymmetric cost into multi-stage decision models could yield new formulations
+that explicitly account for the differing impacts of shortage and surplus.
+
+\subsection{Empirical Validation and Cross-Domain Benchmarking}
+
+Finally, additional empirical research is needed to benchmark CWSL across industries,
+temporal resolutions, and model classes. Large-scale comparative studies—similar in
+spirit to the M-competitions—could evaluate how CWSL aligns with or diverges from
+traditional metrics and readiness-based KPIs. Such benchmarking would help establish
+normative performance ranges, best practices for penalty selection, and guidelines for
+deploying CWSL in operational workflows.
+
+\medskip
+
+Overall, CWSL introduces a flexible and operationally aligned basis for evaluating
+forecast performance under asymmetric cost. Extending this foundation through model
+training, automated calibration, monitoring, simulation, and empirical validation
+represents a promising research agenda at the intersection of forecasting science and
+operations management.

@@ -1,0 +1,34 @@
+% ----------------------------------------------------------
+% INTRODUCTION
+% ----------------------------------------------------------
+\section{Introduction}
+
+Forecasts play a central role in operational decision-making in environments where
+timing, readiness, and service reliability matter. Quick-service restaurants (QSR),
+retail stores, production lines, and high-frequency inventory systems all rely on
+forecasts to ensure that product, labor, or capacity is available exactly when needed.
+In such environments, forecast errors translate directly into operational outcomes.
+
+Most organizations evaluate forecast performance using symmetric accuracy metrics such
+as mean absolute error (MAE), root mean squared error (RMSE), and mean absolute
+percentage error (MAPE). These measures treat equal-magnitude errors identically
+regardless of direction, implicitly assuming that the operational cost of
+under-forecasting is no different from the cost of over-forecasting. However, this
+assumption rarely holds in practice. Under-forecasting often produces service failures,
+unmet demand, and elevated operational stress, while over-forecasting typically leads
+to excess production or inventory that carries far lower cost.
+
+This mismatch between statistical evaluation and operational impact can lead
+organizations to select models that appear accurate on paper yet consistently produce
+readiness failures. Forecasts may achieve low MAPE while still causing shortfalls during
+peak periods—precisely when operational reliability is most important. As organizations
+increasingly rely on short-horizon forecasts for high-frequency decisions, symmetric
+evaluation metrics become inadequate for assessing real operational performance.
+
+To address this gap, this paper introduces the \textit{Cost-Weighted Service Loss
+(CWSL)} metric, which evaluates forecast performance by explicitly incorporating
+asymmetric penalties for shortfalls and overbuilds and normalizing results by total
+demand. CWSL is complemented by supporting measures that provide insight into
+reliability, tolerance accuracy, and the severity of shortfalls. Together, these metrics
+offer a practical and interpretable framework for assessing forecast quality in
+environments where direction, magnitude, and operational consequence all matter.

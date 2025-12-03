@@ -1,0 +1,62 @@
+% ----------------------------------------------------------
+% ABSTRACT
+% ----------------------------------------------------------
+\begin{abstract}
+Forecast performance in high-frequency operational environments is typically evaluated
+using symmetric error metrics such as mean absolute error (MAE), root mean squared error
+(RMSE), and mean absolute percentage error (MAPE). These metrics implicitly assume that
+under-forecasting and over-forecasting impose equivalent cost, despite substantial
+evidence that shortages create significantly higher operational burden than excess.
+Across domains such as quick-service restaurants (QSR), retail, manufacturing,
+transportation, and workforce management, shortfalls can lead to unmet demand, degraded
+service performance, and recovery delays, whereas overbuilds generally result in modest
+waste or temporary overcapacity.
+
+This paper introduces \textit{Cost-Weighted Service Loss (CWSL)}, a demand-normalized evaluation metric that incorporates explicit asymmetric penalties for shortfalls and overbuilds and supports aggregation across multiple items and intervals. CWSL provides a more operationally aligned assessment of forecast quality by
+capturing both the magnitude and direction of error at the interval level. We further
+propose a set of diagnostic measures—No-Shortfall Level (NSL), Hit Rate within Tolerance
+(HR@\(\tau\)), Underbuild Depth (UD), and the composite Forecast Readiness Score (FRS)—that
+enable practitioners and analysts to evaluate service reliability, tolerance accuracy,
+and shortfall severity.
+
+Through an illustrative example and cross-industry applications, we show that CWSL
+reveals readiness-related performance patterns that symmetric metrics systematically
+obscure. The framework offers a practical and generalizable basis for evaluating
+forecasts in environments where operational reliability and asymmetric error cost are
+central concerns.
+\end{abstract}
+
+% ----------------------------------------------------------
+% MANAGERIAL INSIGHTS (IJAA REQUIRED)
+% ----------------------------------------------------------
+\begin{framed}
+\noindent \textbf{Managerial Insights} \\[4pt]
+Organizations that rely on short-horizon forecasts—such as restaurants, retailers,
+manufacturers, logistics networks, and workforce operations—often experience service
+failures not because forecasts are statistically inaccurate, but because errors occur in
+the wrong direction. Traditional evaluation metrics treat being “5 units short” the same
+as being “5 units long,” even though shortfalls typically lead to unmet demand, slower
+service, operational recovery time, or lost revenue, while overages usually result only
+in modest waste or temporary excess capacity.
+
+The \textit{Cost-Weighted Service Loss (CWSL)} metric makes these operational realities
+visible by weighting shortfalls more heavily than overbuilds and normalizing performance
+by total demand. This enables managers to distinguish between forecasts that are
+numerically accurate but operationally risky, and those that reliably support readiness.
+
+The supporting metrics—No-Shortfall Level (NSL), Hit Rate within Tolerance (HR@\(\tau\)),
+Underbuild Depth (UD), and the Forecast Readiness Score (FRS)—allow managers to pinpoint
+the sources of readiness failures and prioritize corrective actions. These measures help
+leaders identify when problems stem from frequent misses, severe shortages, inadequate
+tolerance accuracy, or misaligned penalty structures.
+
+Taken together, CWSL and its diagnostic framework give managers a practical toolkit for:
+\begin{itemize}[itemsep=4pt]
+    \item evaluating forecast performance in terms of service reliability rather than
+          statistical error alone,
+    \item selecting forecasting models that minimize operational risk,
+    \item calibrating penalty structures to reflect true cost asymmetry across items,
+    \item improving readiness through more targeted production, staffing, and
+          replenishment decisions.
+\end{itemize}
+\end{framed}

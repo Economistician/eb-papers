@@ -1,0 +1,162 @@
+% ----------------------------------------------------------
+% ILLUSTRATIVE EXAMPLE
+% ----------------------------------------------------------
+\section{Illustrative Example}
+
+To demonstrate how \cwsl{} and its supporting diagnostic metrics behave in practice, we
+construct an example involving two items with differing operational characteristics.
+Item \(A\) represents a high-volume, high-impact product (e.g., a core entrée), for which
+shortfalls are especially costly due to recovery time and throughput effects. Item \(B\)
+represents a lower-volume, lower-impact item where recovery is quicker and the
+operational consequences of misses are less severe.
+
+To reflect these differences, shortfall penalties are set to \(\cu = 6\) for Item \(A\)
+and \(\cu = 3\) for Item \(B\), while overbuild penalties are \(\co = 2\) and \(\co = 1\),
+respectively. These values mirror typical operational asymmetry in environments where
+shortages impose substantially higher cost than excess. Forecasts are evaluated over
+twelve consecutive intervals, representative of a peak service window with meaningful
+variability.
+
+Table~\ref{tab:example-expanded} summarizes actual demand, forecasts, shortfalls,
+overbuilds, and resulting penalties for both items across all intervals.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{@{}cccccccccc@{}}
+\toprule
+ & \multicolumn{4}{c}{Item A (Core)} & & \multicolumn{4}{c}{Item B (Secondary)} \\
+\cmidrule(lr){2-5} \cmidrule(lr){7-10}
+Interval &
+$y$ & $\hat{y}$ & $s$ & $o$ &
+ &
+$y$ & $\hat{y}$ & $s$ & $o$ \\
+\midrule
+1  & 20 & 22 & 0 & 2 & & 8 & 9 & 0 & 1 \\
+2  & 28 & 25 & 3 & 0 & & 7 & 9 & 0 & 2 \\
+3  & 32 & 29 & 3 & 0 & & 10 & 8 & 2 & 0 \\
+4  & 35 & 33 & 2 & 0 & & 11 & 11 & 0 & 0 \\
+5  & 40 & 36 & 4 & 0 & & 12 & 10 & 2 & 0 \\
+6  & 42 & 45 & 0 & 3 & & 9 & 11 & 0 & 2 \\
+7  & 38 & 34 & 4 & 0 & & 8 & 7 & 1 & 0 \\
+8  & 30 & 32 & 0 & 2 & & 7 & 8 & 0 & 1 \\
+9  & 26 & 22 & 4 & 0 & & 6 & 5 & 1 & 0 \\
+10 & 24 & 27 & 0 & 3 & & 5 & 7 & 0 & 2 \\
+11 & 22 & 23 & 0 & 1 & & 8 & 9 & 0 & 1 \\
+12 & 18 & 21 & 0 & 3 & & 9 & 8 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Illustrative example showing actual demand ($y$), forecast ($\hat{y}$),
+shortfall ($s$), and overbuild ($o$) for two items over twelve intervals.}
+\label{tab:example-expanded}
+\end{table}
+
+\subsection{Cost-Weighted Penalties}
+
+The cost-weighted penalty for item \(i\) in interval \(t\) is defined as
+\[
+\text{Penalty}_{it} = \cu s_{it} + \co o_{it},
+\]
+which assigns substantially higher cost to shortfalls than to overbuilds. For Item~\(A\),
+each unit of shortfall and overbuild incurs penalties of 6 and 2, respectively; for
+Item~\(B\), the corresponding penalties are 3 and 1.
+
+Summing across items and intervals yields a total penalty of
+\[
+\sum_{i \in \{A,B\}} \sum_{t=1}^{12}
+(c_{u,i} s_{it} + c_{o,i} o_{it}) = 186.
+\]
+
+Total realized demand across the horizon is
+\[
+\sum_{i \in \{A,B\}} \sum_{t=1}^{12} y_{it} = 340,
+\]
+and the Cost-Weighted Service Loss is therefore
+\[
+\cwsl = \frac{186}{340} = 0.547.
+\]
+
+A value of \(\cwsl = 0.547\) indicates that, when weighted by asymmetric penalties,
+forecast errors generated an operational burden equivalent to approximately 54.7\% of
+total demand. This reveals how a modest number of high-penalty shortfall intervals can
+dominate overall performance, even when symmetric error appears moderate.
+
+\subsection{Supporting Metrics}
+
+We compute additional diagnostic metrics to provide visibility into error structure
+beyond what \cwsl{} alone captures.
+
+\begin{itemize}[itemsep=4pt]
+
+    \item \textbf{No-Shortfall Level (NSL).}
+    Across the 24 item–interval pairs, forecasts meet or exceed actual demand in 10
+    cases:
+    \[
+    \nsl = \frac{10}{24} = 0.417.
+    \]
+    Fewer than half of the evaluation intervals achieved full service.
+
+    \item \textbf{Hit Rate within Tolerance (HR@\(\tau = 2\)).}
+    The forecast lies within \(\pm2\) units of actual demand in 15 of 24 cases:
+    \[
+    \mathrm{HR}@2 = \frac{15}{24} = 0.625.
+    \]
+    Although tolerance accuracy appears respectable, it conceals the severity of key
+    shortfall intervals.
+
+    \item \textbf{Underbuild Depth (UD).}
+    Conditional on a shortfall occurring, the average magnitude of the miss is
+    \[
+    \ud = 2.82 \text{ units}.
+    \]
+    Shortfalls, when they occur, are operationally meaningful rather than minor.
+
+    \item \textbf{Weighted MAPE (wMAPE).}
+    Total absolute error across both items is 78 units, yielding
+    \[
+    \wMAPE = \frac{78}{340} = 0.229.
+    \]
+    Symmetric error appears modest, but fails to reflect asymmetric operational risk.
+
+\end{itemize}
+
+\subsection{Comparison Against Symmetric Metrics}
+
+This example highlights a sharp divergence between symmetric and asymmetric evaluation.
+Although \wMAPE{} suggests moderate average error (\(0.229\)), the Cost-Weighted Service
+Loss is more than twice as large (\(0.547\)), indicating significantly higher
+operational burden. The discrepancy arises because \wMAPE{} assigns equal weight to
+over-forecasting and under-forecasting, allowing relatively benign overbuild intervals
+to offset severe shortfalls.
+
+NSL indicates that full demand was met in only 41.7\% of item–intervals despite the
+moderate symmetric error. UD confirms that when shortfalls occur, their magnitude is
+nontrivial, amplifying operational risk.
+
+\cwsl{} resolves these inconsistencies by integrating shortfall frequency, shortfall
+depth, and asymmetric penalty weights into a single demand-normalized measure. It
+therefore exposes readiness failures that symmetric metrics systematically obscure.
+
+\subsection{Interpretation}
+
+The illustrative example underscores several key properties of \cwsl{} in a realistic
+operational setting:
+
+\begin{enumerate}[itemsep=4pt]
+    \item \textbf{Shortfalls disproportionately drive operational cost.}
+    High-penalty shortfall intervals dominate the total cost-weighted penalty even when
+    symmetric error is moderate.
+
+    \item \textbf{Symmetric metrics obscure readiness failures.}
+    Measures such as \wMAPE{} understate operational risk because overbuilds offset
+    shortfalls in the average.
+
+    \item \textbf{CWSL integrates all relevant dimensions of service readiness.}
+    By combining shortfall frequency, shortfall depth, and penalty asymmetry into a
+    single metric, \cwsl{} provides an evaluation aligned with actual operational
+    impact.
+\end{enumerate}
+
+These insights reinforce the need for cost-weighted, directionally aware evaluation
+methods in high-frequency operational environments where symmetric accuracy measures
+offer an incomplete and sometimes misleading view of forecast performance.
