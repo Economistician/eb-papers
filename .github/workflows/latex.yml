@@ -8,7 +8,10 @@ on:
     branches: [ "main" ]
 
 env:
+  TEX_MAIN: cwsl/long-form/paper/main.tex
+  TEX_DIR: cwsl/long-form/paper
   PDF_NAME: ElectricBarometer_WP01_CWSL_TechnicalPaper_2025.pdf
+  PDF_DEST: versions/ElectricBarometer_WP01_CWSL_TechnicalPaper_2025.pdf
   ARTIFACT_NAME: ElectricBarometer_WP01_CWSL_TechnicalPaper
 
 jobs:
@@ -19,24 +22,26 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Compile LaTeX (cwsl/main.tex)
+      - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: cwsl/main.tex
+          root_file: ${{ env.TEX_MAIN }}
 
-      - name: Rename output PDF
-        run: mv cwsl/main.pdf cwsl/${{ env.PDF_NAME }}
+      - name: Rename/move output PDF
+        run: |
+          mkdir -p versions
+          mv "${{ env.TEX_DIR }}/main.pdf" "${{ env.PDF_DEST }}"
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.ARTIFACT_NAME }}
-          path: cwsl/${{ env.PDF_NAME }}
+          path: ${{ env.PDF_DEST }}
 
       - name: Attach PDF to GitHub Release (on tags)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: cwsl/${{ env.PDF_NAME }}
+          files: ${{ env.PDF_DEST }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
