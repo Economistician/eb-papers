@@ -2,10 +2,10 @@ name: Build CWSL PDF
 
 on:
   push:
-    branches: ["main"]
-    tags: ["v*"]
+    branches: [ "main" ]
+    tags: [ "v*" ]
   pull_request:
-    branches: ["main"]
+    branches: [ "main" ]
 
 jobs:
   build-latex:
@@ -18,10 +18,11 @@ jobs:
       - name: Compile LaTeX (cwsl long-form paper)
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: cwsl/long-form/paper/main.tex
+          # We are *inside* cwsl/long-form/paper when compiling
+          root_file: main.tex
           working_directory: cwsl/long-form/paper
 
-      - name: Prepare versions folder and rename output PDF
+      - name: Rename output PDF
         run: |
           mkdir -p cwsl/versions
           mv cwsl/long-form/paper/main.pdf \
