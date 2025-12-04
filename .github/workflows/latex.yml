@@ -2,10 +2,10 @@ name: Build CWSL PDF
 
 on:
   push:
-    branches: [ "main" ]
-    tags: [ "v*" ]
+    branches: ["main"]
+    tags: ["v*"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-latex:
@@ -15,15 +15,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Compile LaTeX (cwsl long-form main.tex)
+      - name: Compile LaTeX (cwsl long-form paper)
         uses: xu-cheng/latex-action@v3
         with:
-          # Compile the main file inside the paper directory
-          root_file: main.tex
+          root_file: cwsl/long-form/paper/main.tex
           working_directory: cwsl/long-form/paper
 
-      - name: Rename output PDF
+      - name: Prepare versions folder and rename output PDF
         run: |
+          mkdir -p cwsl/versions
           mv cwsl/long-form/paper/main.pdf \
              cwsl/versions/ElectricBarometer_WP01_CWSL_TechnicalPaper_2025.pdf
 
