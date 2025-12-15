@@ -1,0 +1,56 @@
+% ----------------------------------------------------------
+% PROPERTIES
+% ----------------------------------------------------------
+\section{Properties and Behavior}
+
+The \NSL\ metric exhibits several properties that are relevant for interpretation
+and application in operational forecasting contexts.
+
+\subsection{Range and Interpretability}
+
+The \NSL\ metric lies within $[0,1]$ and admits a direct interpretation as the
+proportion of intervals in which realized demand was met. Thresholds for acceptable
+performance are application-specific, but the bounded scale supports intuitive
+interpretation across domains and use cases.
+
+\subsection{Sensitivity to Forecast Bias}
+
+Directional bias affects \NSL\ asymmetrically. A downward-biased forecast is likely
+to exhibit a lower \NSL, as a greater number of intervals will experience shortfalls.
+Conversely, an upward-biased forecast may yield higher \NSL\ values, reflecting more
+frequent coverage. As a result, \NSL\ is useful for detecting the operational
+consequences of bias even when average error metrics appear balanced.
+
+\subsection{Sensitivity to Temporal Clustering}
+
+Because each interval contributes equally to the metric, \NSL\ reflects not only
+the number of shortfalls but also their temporal distribution. Forecasts that
+concentrate shortfalls in peak or high-impact periods may exhibit similar \NSL\
+values to forecasts with shortfalls spread uniformly across time, even though the
+operational implications differ. \NSL\ makes these patterns visible without relying
+on aggregate error measures.
+
+\subsection{Invariance to Demand Scaling}
+
+Multiplying all $y_{it}$ and $\yhat_{it}$ values by a positive constant does not
+affect the comparison $\yhat_{it} \ge y_{it}$. The \NSL\ metric is therefore invariant
+to demand scaling and can be applied consistently across items, locations, or
+systems with substantially different demand volumes.
+
+\subsection{Binary Event Structure}
+
+The \NSL\ metric evaluates performance at the level of binary events: each interval
+either meets demand or does not. This structure simplifies interpretation and
+prevents the metric from being dominated by extreme values. However, it also implies
+that \NSL\ does not capture the severity of shortfalls. Forecasts with different
+error magnitudes may therefore exhibit identical \NSL\ values if they fail in the
+same number of intervals.
+
+\subsection{Sampling Variability}
+
+As an empirical proportion, \NSL\ is subject to sampling variability. For a sample
+of $|T|$ intervals, the variance of the estimator is given by $p(1-p)/|T|$, where
+$p$ denotes the true probability that demand is met in a given interval. Confidence
+intervals may be constructed using standard binomial methods. This consideration is
+most relevant when comparing \NSL\ values across models or items with differing
+numbers of evaluation intervals.

@@ -1,0 +1,27 @@
+% ----------------------------------------------------------
+% OPERATIONAL MOTIVATION
+% ----------------------------------------------------------
+\section{Operational Motivation}
+
+In many applications, meeting demand within each interval is more important than
+minimizing average deviation over time. Operational systems such as production
+lines, service environments, and short-horizon scheduling processes depend on
+consistent alignment between forecasted and realized demand. Shortfalls, even when
+small, may immediately affect throughput, capacity utilization, or service levels.
+
+The \NSL\ metric quantifies how often a forecast provides adequate coverage, making
+it a natural indicator of interval-level reliability. High $\NSL$ values suggest
+that shortfalls are infrequent and that the forecast generally supports
+uninterrupted execution. Low $\NSL$ values may signal recurring mismatches between
+forecasted and required capacity.
+
+The metric is particularly informative when shortfalls cluster in critical
+periods. Because $\NSL$ evaluates each interval independently, it highlights
+patterns in which shortfalls are concentrated in peak or high-impact windows, even
+when overall average accuracy appears reasonable.
+
+Finally, $\NSL$ aligns with common operational preferences. In many settings, a
+slight surplus is preferable to a shortfall, particularly when the cost of unmet
+demand is high. Because $\NSL$ does not penalize surplus magnitude, it supports
+interpretations rooted in operational sufficiency rather than strict error
+minimization.

@@ -1,0 +1,32 @@
+% ----------------------------------------------------------
+% LIMITATIONS
+% ----------------------------------------------------------
+\section{Limitations and Appropriate Use}
+
+Although the \NSL\ metric offers an interpretable measure of interval-level
+reliability, several limitations should guide its application.
+
+\subsection{Lack of Severity Information}
+
+The \NSL\ metric does not indicate how large shortfalls are when they occur.
+Forecasts that occasionally miss demand by large amounts may exhibit the same
+\NSL\ value as forecasts that frequently miss by small amounts.
+
+\subsection{Insensitivity to Surplus Magnitude}
+
+Intervals in which forecasted demand exceeds realized demand contribute equally to
+\NSL, regardless of surplus magnitude. In operational settings where excess
+capacity is costly, \NSL\ should therefore be supplemented with additional metrics
+that reflect surplus severity.
+
+\subsection{Dependence on Interval Specification}
+
+The choice of interval length affects the interpretation of \NSL. Shorter
+intervals may reveal shortfalls that are masked under aggregation, while longer
+intervals can obscure timing-specific failures.
+
+\subsection{Interpretation in Low-Demand Settings}
+
+When demand is sparse or intermittent, \NSL\ values may be dominated by
+zero-demand intervals. In such cases, additional context or complementary metrics
+may be required to interpret results meaningfully.

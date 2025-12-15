@@ -1,0 +1,35 @@
+% ----------------------------------------------------------
+% DEFINITION
+% ----------------------------------------------------------
+\section{Definition and Mathematical Formulation}
+
+Let $T$ denote the set of evaluation intervals and let $i$ index an item, product,
+workload type, or operational entity. For each interval $t \in T$, let $y_{it}$
+represent realized demand and let $\yhat_{it}$ denote the corresponding forecast.
+A shortfall occurs in interval $t$ when $\yhat_{it} < y_{it}$.
+
+The No-Shortfall Level for item $i$ is defined as
+\[
+\NSL_i
+=
+\frac{\left| \{\, t \in T : \yhat_{it} \ge y_{it} \,\} \right|}{|T|}.
+\]
+
+This expression represents the proportion of intervals in which forecasted demand
+was sufficient to cover realized demand. The metric therefore reflects the
+frequency of successful intervals, independent of the magnitude of any forecast
+errors.
+
+By construction, $\NSL \in [0,1]$. A value of $\NSL_i = 1$ indicates that demand
+was met in every interval, while $\NSL_i = 0$ indicates that every interval
+experienced a shortfall. Intermediate values correspond to the empirical frequency
+with which adequate coverage was achieved.
+
+Because shortfalls are identified at the interval level, $\NSL$ is sensitive to the
+timing of forecast errors. Forecasts with similar aggregate error may exhibit
+different $\NSL$ values if shortfalls occur in different intervals. The metric is
+also invariant to multiplicative scaling: multiplying all $y_{it}$ and $\yhat_{it}$
+values by a positive constant does not change the indicator $\yhat_{it} \ge y_{it}$.
+While magnitude-based accuracy metrics such as MAE and MSE are commonly used for
+forecast evaluation \citep{hyndman2006another}, they do not describe how frequently
+operational requirements are met within individual intervals.

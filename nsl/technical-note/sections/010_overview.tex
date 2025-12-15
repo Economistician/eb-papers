@@ -1,0 +1,27 @@
+% ----------------------------------------------------------
+% OVERVIEW
+% ----------------------------------------------------------
+\section{Overview}
+
+Operational environments that rely on short-horizon forecasting often require
+demand to be met within discrete intervals in order to maintain throughput,
+service quality, and system stability. In such settings, even small shortfalls
+can introduce delays, trigger bottlenecks, or disrupt workflow. As a result,
+evaluating forecasts solely on average accuracy may be insufficient; it is
+also necessary to assess how reliably forecasts provide adequate coverage
+within each interval.
+
+The No-Shortfall Level (\NSL) provides a concise measure of this reliability.
+Defined as the proportion of intervals in which forecasted demand meets or
+exceeds realized demand, \NSL captures a binary notion of success that aligns
+directly with the operational requirement to avoid shortfall events. Its
+structure makes the metric easy to interpret, invariant to demand scaling,
+and broadly applicable across domains characterized by interval-based
+decision-making.
+
+While magnitude-based accuracy metrics summarize average deviation, they do
+not describe how frequently operational requirements are satisfied within
+individual intervals. \NSL complements these metrics by focusing on the
+occurrence, rather than the size, of shortfalls. This technical note presents
+a formal definition of \NSL, examines its key properties, and illustrates its
+behavior under different forecasting patterns.
