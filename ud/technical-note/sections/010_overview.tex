@@ -1,0 +1,25 @@
+% ----------------------------------------------------------
+% OVERVIEW
+% ----------------------------------------------------------
+\section{Overview}
+
+Underbuild Depth (UD) measures the average magnitude of forecast shortfalls,
+conditional on a shortfall occurring. While coverage-oriented metrics describe
+whether a forecast meets realized demand, UD isolates the severity of the misses
+that do occur. This severity dimension is particularly relevant in high-frequency
+operational environments—such as QSR production systems, retail replenishment
+cycles, manufacturing lines, staffing operations, and logistics networks—where
+deep underbuilding can produce substantial disruption even when shortfalls are
+relatively infrequent.
+
+In these settings, the depth of a shortfall often determines the extent of
+operational impact, including delayed recovery, throughput degradation, and
+service instability. UD provides a concise measure of this effect by averaging the
+positive part of underbuilding across shortfall intervals. By focusing exclusively
+on intervals in which demand exceeds the forecast, the metric reveals whether a
+forecasting system tends to miss narrowly or by margins large enough to trigger
+material performance degradation.
+
+This technical note formalizes the Underbuild Depth metric, outlines its
+mathematical and operational properties, and illustrates how the measure captures
+the magnitude dimension of underbuilding in interval-based forecasting contexts.

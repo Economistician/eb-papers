@@ -1,0 +1,26 @@
+% ----------------------------------------------------------
+% OPERATIONAL MOTIVATION
+% ----------------------------------------------------------
+\section{Operational Motivation}
+
+In readiness-oriented forecasting environments, the operational impact of a miss
+depends not only on whether a shortfall occurs, but on its depth. Shallow
+underbuilding may be absorbed with limited disruption, while deep shortfalls can
+trigger extended recovery periods, throughput degradation, or service failures.
+Underbuild Depth captures this severity dimension directly by quantifying how far
+realized demand exceeds forecasted values in intervals where underbuilding occurs.
+
+Beyond measuring operational risk, \UD\ provides insight into the structural
+behavior of a forecasting system. A process that underbuilds infrequently but by
+large margins may pose greater operational risk than one that misses more often
+but by smaller amounts. By conditioning on shortfall events, \UD\ isolates this
+severity signal without dilution from intervals in which demand is fully covered.
+
+In contexts where the cost of unmet demand increases with the size of the miss,
+\UD\ serves as a focused diagnostic for evaluating forecast robustness and
+identifying patterns of undercoverage. While commonly used magnitude-based
+accuracy metrics summarize average deviation \citep{hyndman2006another}, they do
+not distinguish between shallow and deep underbuilding events. When used
+alongside frequency-based measures of shortfall occurrence, \UD\ contributes a
+complementary perspective on forecast readiness by highlighting the magnitude of
+operational insufficiency.

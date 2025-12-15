@@ -1,0 +1,39 @@
+% ----------------------------------------------------------
+% DEFINITION
+% ----------------------------------------------------------
+\section{Definition and Mathematical Formulation}
+
+Let $e$ denote the entity being forecasted (item, store, workload type, capacity
+stream, or similar), and let $T$ represent the set of evaluation intervals. For each
+interval $t \in T$, let $y_{et}$ denote realized demand (or load) and let
+$\yhat_{et}$ denote the corresponding forecast. A shortfall occurs in interval $t$
+when $\yhat_{et} < y_{et}$.
+
+Define the shortfall magnitude as
+\[
+s_{et}
+=
+\pospart{y_{et} - \yhat_{et}}
+=
+\max\!\bigl(y_{et} - \yhat_{et},\, 0\bigr).
+\]
+
+The set of shortfall intervals for entity $e$ is
+\[
+T^{SF}_e
+=
+\{\, t \in T : s_{et} > 0 \,\}.
+\]
+
+Underbuild Depth measures the average shortfall magnitude over these intervals:
+\[
+\UD_e
+=
+\frac{\sum_{t \in T^{SF}_e} s_{et}}{|T^{SF}_e|}
+\quad \text{for } |T^{SF}_e| > 0.
+\]
+
+Intervals in which $\yhat_{et} \ge y_{et}$ do not contribute to the metric. When no
+shortfalls occur, $\UD$ is undefined; practical implementations may return zero or a
+missing value depending on whether the distinction between ``no shortfalls'' and
+``no depth to average'' is operationally meaningful.

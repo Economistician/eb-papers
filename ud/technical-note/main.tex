@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+
+% ----------------------------------------------------------
+% PACKAGES
+% ----------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{framed}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage[authoryear]{natbib}
+
+% ----------------------------------------------------------
+% CUSTOM MACROS (shared notation)
+% ----------------------------------------------------------
+\input{macros/commands}
+
+% ----------------------------------------------------------
+% PDF METADATA
+% ----------------------------------------------------------
+\hypersetup{
+    pdftitle={Underbuild Depth (UD): A Conditional Severity Metric for Forecast Shortfalls},
+    pdfauthor={Kyle Corrie},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+% ----------------------------------------------------------
+% TITLE BLOCK
+% ----------------------------------------------------------
+\title{
+\textbf{Underbuild Depth (UD):}\\[4pt]
+{\large A Conditional Severity Metric for Forecast Shortfalls}
+}
+
+\author{
+  Kyle Corrie\\[4pt]
+  \small Forecast Readiness Framework (FRF)\\
+  \small Electric Barometer Series
+}
+
+\date{December 2025\\[4pt]
+\small Technical Note --- Electric Barometer Series\\
+Version 1.0}
+
+% ==================================================
+\begin{document}
+
+\maketitle
+
+% ----------------------------------------------------------
+% ABSTRACT
+% ----------------------------------------------------------
+\begin{abstract}
+Underbuild Depth (UD) measures the average magnitude of forecast shortfalls,
+conditional on a shortfall occurring. While coverage-based metrics describe how
+often forecasts meet realized demand, UD isolates the severity of underbuilding
+events when they occur. The metric provides a focused diagnostic for environments
+in which deep misses create disproportionate operational disruption, and it is
+well suited to interval-based forecasting contexts where the cost of unmet demand
+increases with the size of the shortfall.
+\end{abstract}
+
+% ----------------------------------------------------------
+% ORDERED SECTION INPUTS (Technical Note Schema)
+% ----------------------------------------------------------
+\input{010_overview}
+\input{020_definition}
+\input{030_operational_motivation}
+\input{040_properties}
+\input{050_illustrative_example}
+\input{060_use_cases}
+\input{070_limitations}
+\input{080_conclusion}
+
+% ----------------------------------------------------------
+% REFERENCES (optional but recommended)
+% ----------------------------------------------------------
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

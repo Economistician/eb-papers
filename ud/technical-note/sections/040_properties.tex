@@ -1,0 +1,54 @@
+% ----------------------------------------------------------
+% PROPERTIES AND BEHAVIOR
+% ----------------------------------------------------------
+\section{Properties and Behavior}
+
+Underbuild Depth exhibits several mathematical and operational properties that
+govern its interpretation and appropriate use.
+
+\subsection{Non-Negativity}
+
+By construction, shortfall magnitudes satisfy $s_{et} \ge 0$ for all intervals.
+Consequently, \UD\ is always non-negative. A value of zero indicates that no
+underbuilding occurred during the evaluation horizon.
+
+\subsection{Conditionality}
+
+\UD\ is computed only over intervals in which shortfalls occur. The metric
+therefore captures the \emph{severity} of underbuilding rather than its frequency.
+Two entities may exhibit identical \UD\ values despite having different numbers
+of shortfall intervals.
+
+\subsection{Sensitivity to Shortfall Magnitude}
+
+\UD\ responds directly and linearly to the depth of shortfalls. Deeper misses
+increase the metric proportionally, making \UD\ effective for identifying systems
+that experience large, operationally consequential underbuilds.
+
+\subsection{Sensitivity to Temporal Patterns}
+
+Although \UD\ does not encode temporal ordering explicitly, clustered deep
+shortfalls often correspond to periods of heightened operational strain. Elevated
+\UD\ values may therefore indicate structural underforecasting during critical
+intervals, even when shortfalls are relatively infrequent.
+
+\subsection{Scale Dependence}
+
+\UD\ is sensitive to the scale of the underlying demand. Systems forecasting
+higher-volume entities may naturally exhibit larger potential shortfalls. For
+comparisons across entities with differing demand levels, normalization or
+supplemental metrics may be required.
+
+\subsection{Relationship to Forecast Bias}
+
+Downward-biased forecasting systems tend to produce deeper and more frequent
+shortfalls, which increases \UD. The metric can therefore help surface
+bias-related patterns that may not be evident from symmetric accuracy measures
+that focus on average error magnitude.
+
+\subsection{Robustness to Overbuilding}
+
+Intervals in which forecasts exceed realized demand do not contribute to \UD.
+As a result, the metric exclusively reflects the severity of underbuilding and is
+insensitive to surplus magnitude. Evaluations concerned with the balance between
+overbuilding and underbuilding require additional diagnostics.

@@ -1,0 +1,46 @@
+% ----------------------------------------------------------
+% LIMITATIONS
+% ----------------------------------------------------------
+\section{Limitations and Appropriate Use}
+
+Although \UD\ provides a focused measure of shortfall severity, several limitations
+should guide its interpretation and application.
+
+\subsection{Undefined When No Shortfalls Occur}
+
+When no shortfall intervals are observed, \UD\ is undefined because there is no
+depth to average. Implementations may return zero or a missing value depending on
+whether the distinction between ``no shortfalls'' and ``no depth'' is
+operationally meaningful.
+
+\subsection{No Frequency Information}
+
+\UD\ measures severity rather than incidence. Forecasting systems with identical
+\UD\ values may exhibit very different frequencies of shortfalls. For a complete
+assessment of forecast readiness, \UD\ should be paired with coverage-based
+metrics.
+
+\subsection{Scale Dependence}
+
+Because \UD\ reflects the magnitude of unmet demand, it is sensitive to the scale
+of the underlying process. Comparisons across entities with different demand
+levels require normalization or supplemental diagnostics.
+
+\subsection{Sensitivity to Rare Extremes}
+
+A small number of deep shortfalls can disproportionately elevate \UD. While this
+behavior is often desirable for risk identification, it should be interpreted
+carefully in noisy or highly volatile environments.
+
+\subsection{No Information on Overbuilding}
+
+\UD\ does not capture surplus capacity or overforecasting behavior. Evaluations
+concerned with the balance between underbuilding and overbuilding require
+additional metrics.
+
+\subsection{Dependence on Interval Resolution}
+
+The choice of interval length affects the metric. Shorter intervals may reveal
+localized deep shortfalls, while longer intervals may obscure them. \UD\ should be
+computed at the operational decision cadence relevant to the system being
+evaluated.
