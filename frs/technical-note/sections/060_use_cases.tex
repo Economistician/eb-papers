@@ -1,0 +1,84 @@
+% ----------------------------------------------------------
+% USE CASES
+% ----------------------------------------------------------
+\section{Use Cases Across Operational Domains}
+
+The Forecast Readiness Score (\FRS) supports decision-making in environments
+where service reliability, asymmetric cost considerations, and execution
+feasibility are more important than purely statistical accuracy. Because \FRS{}
+summarizes both shortfall avoidance and cost-efficient performance, it is
+well-suited for operational forecasting workflows that require interpretable
+readiness diagnostics.
+
+\subsection{Short-Horizon Demand Planning}
+
+In short-horizon production, retail replenishment, and perishable inventory
+settings, operational disruption is driven primarily by \emph{shortfalls}.
+Small overbuilds are often absorbable, but even a modest number of shortfall
+intervals can degrade service or throughput. \FRS{} is valuable here because:
+
+\begin{itemize}
+    \item \NSL{} captures how frequently demand is fully covered,
+    \item \CWSLscaled{} penalizes shortfalls more heavily than excess,
+    \item the composite score reflects readiness to execute without service failure.
+\end{itemize}
+
+These properties make \FRS{} a natural KPI for short-horizon service reliability.
+
+\subsection{Labor and Capacity Planning}
+
+In staffing, labor scheduling, and capacity planning environments (e.g.,
+restaurants, logistics centers, call centers), underforecasts degrade service
+quality by generating long queues, slow response times, or labor shortages.
+Overstaffing, while inefficient, is typically less harmful than understaffing.
+
+\FRS{} provides a principled framework to:
+
+\begin{itemize}
+    \item incorporate asymmetric cost assumptions through the \((\cu, \co)\) parameters,
+    \item quantify readiness to meet workload requirements,
+    \item compare alternative forecast models under realistic operational criteria.
+\end{itemize}
+
+\subsection{Model Selection and Deployment Decisions}
+
+\FRS{} can serve as a primary metric for choosing among competing forecasting
+models. Because it encodes operational feasibility rather than purely numerical
+accuracy, it helps prevent situations in which a statistically optimal model
+performs poorly once deployed.
+
+Applications include:
+
+\begin{itemize}
+    \item validation-set model comparison,
+    \item production monitoring of forecast degradation,
+    \item regression testing after model retraining.
+\end{itemize}
+
+\subsection{Segmented and Entity-Level Evaluation}
+
+Operational environments often exhibit heterogeneous behavior across products,
+locations, time blocks, or customer segments. \FRS{} can be computed:
+
+\begin{itemize}
+    \item globally (system-wide readiness),
+    \item per entity (e.g., per SKU or store),
+    \item per segment (e.g., store clusters, product families).
+\end{itemize}
+
+This enables targeted diagnosis of readiness gaps and supports interventions
+tailored to specific segments.
+
+\subsection{Operational Monitoring and Governance}
+
+Because \FRS{} is bounded and interpretable, it can function as an operational
+KPI within forecasting governance frameworks. Declines in \FRS{} over time signal:
+
+\begin{itemize}
+    \item increasing shortfall frequency,
+    \item rising asymmetric error costs,
+    \item erosion of deployment readiness.
+\end{itemize}
+
+This makes \FRS{} useful for ongoing monitoring, alerting, and readiness audits
+in production forecasting systems.

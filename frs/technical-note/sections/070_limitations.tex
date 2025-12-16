@@ -1,0 +1,66 @@
+% ----------------------------------------------------------
+% LIMITATIONS
+% ----------------------------------------------------------
+\section{Limitations and Appropriate Use}
+
+While the Forecast Readiness Score (\FRS) provides an operationally aligned
+measure of forecast quality, several limitations should be considered when
+interpreting or comparing readiness across systems. These limitations reflect
+the modeling assumptions and context-dependent nature of the metric.
+
+\subsection{Dependence on Cost Assumptions}
+
+\FRS{} incorporates asymmetric penalties through the cost parameters \(\cu\) and
+\(\co\). Its interpretation is therefore conditioned on the selected cost
+structure. If these parameters do not reflect the true operational trade-offs,
+the resulting readiness score may misrepresent decision relevance.
+
+Accordingly:
+
+\begin{itemize}
+    \item \(\cu\) and \(\co\) should be selected with domain knowledge,
+    \item sensitivity analysis is recommended when cost parameters are uncertain,
+    \item \FRS{} values should be compared only when cost assumptions are consistent across forecasts.
+\end{itemize}
+
+\subsection{Not a Pure Accuracy Metric}
+
+\FRS{} is intentionally not a symmetric accuracy measure. Two forecasts with
+similar RMSE, MAE, or wMAPE may yield very different \FRS{} values if their
+shortfall frequency or asymmetric cost exposure differs. As such, \FRS{} is best
+used alongside traditional accuracy metrics to provide a fuller assessment of
+forecast performance.
+
+\subsection{Sensitivity to the Normalization Bound}
+
+The scaled cost term \(\CWSLscaled\) relies on a user-selected upper bound
+\(\CWSLmax\), which represents the worst economically meaningful loss in the
+application. If this bound is chosen poorly:
+
+\begin{itemize}
+    \item cost variation may be compressed, obscuring meaningful differences, or
+    \item cost differences may be exaggerated, overstating readiness deficits.
+\end{itemize}
+
+As operational conditions evolve, \CWSLmax{} should be reviewed and recalibrated.
+
+\subsection{Unsuitability for Long-Horizon Strategic Forecasting}
+
+\FRS{} is designed for short- to medium-horizon operational forecasting, where
+service failures and asymmetric penalties are salient. It is generally not
+appropriate for long-horizon strategic forecasting, trend analysis, or settings
+where execution feasibility is not the primary concern.
+
+\subsection{Appropriate Role of FRS}
+
+\FRS{} is best viewed as an \emph{operational readiness indicator}. Its strength
+lies in:
+
+\begin{itemize}
+    \item deployment decision-making,
+    \item model evaluation under asymmetric risk,
+    \item early detection of degradation in production forecasting systems.
+\end{itemize}
+
+Used in combination with diagnostic accuracy metrics and operational KPIs, \FRS{}
+supports more resilient and informed forecasting practices.

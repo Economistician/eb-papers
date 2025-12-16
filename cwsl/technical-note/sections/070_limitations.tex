@@ -1,0 +1,59 @@
+% ----------------------------------------------------------
+% LIMITATIONS
+% ----------------------------------------------------------
+\section{Limitations and Appropriate Use}
+
+While Cost-Weighted Service Loss (\CWSL) provides an operationally aligned,
+asymmetric evaluation of forecast error, several limitations should be
+considered when applying the metric or comparing models across settings.
+
+\subsection{Dependence on Cost Weights}
+
+Because \CWSL{} relies on user-specified penalty weights \((\cui, \coi)\),
+interpretability depends on selecting values that accurately reflect the true
+operational trade-offs. If cost weights are misaligned with system priorities,
+the resulting \CWSL{} values may misrepresent risk or readiness.
+
+Accordingly:
+\begin{itemize}
+    \item cost weights should be grounded in domain knowledge or empirical study,
+    \item sensitivity analysis is recommended when costs are uncertain,
+    \item models should be compared only under a consistent cost structure.
+\end{itemize}
+
+\subsection{Sensitivity to Outliers and Large Deviations}
+
+Because \CWSL{} aggregates cost-weighted error magnitudes, a small number of
+large deviations can dominate the metric. Operational systems with heavy-tailed
+or volatile demand patterns should interpret large \CWSL{} values carefully and
+may benefit from complementary diagnostics that characterize error distribution.
+
+\subsection{No Direct Information on Error Frequency}
+
+\CWSL{} captures the \emph{cost-weighted magnitude} of forecast error but does
+not distinguish how often errors occur. Two forecasts may produce identical
+\CWSL{} values despite very different shortfall frequencies. For this reason,
+\CWSL{} is often interpreted alongside frequency-based measures (e.g.,
+No–Shortfall Level).
+
+\subsection{Lack of Temporal Differentiation}
+
+Unless temporal importance is encoded directly into the cost weights, \CWSL{}
+treats all intervals equally. In settings where certain periods (e.g., peaks,
+events, promotions) are disproportionately important, additional weighting or
+separate evaluation may be required.
+
+\subsection{Scale Sensitivity Across Heterogeneous Entities}
+
+Although normalization by realized demand improves comparability, entities with
+extremely small volumes may exhibit unstable or highly variable \CWSL{} values.
+Entity-level smoothing, segmentation, or minimum-volume thresholds may be needed
+for robust comparison.
+
+\subsection{Appropriate Role Within a Broader Evaluation Framework}
+
+\CWSL{} is not a substitute for symmetric accuracy metrics or distributional
+diagnostics. Rather, it is a complementary measure designed to capture the
+operational cost of directional error. When used together with traditional error
+metrics and readiness-focused measures, \CWSL{} supports a more complete
+assessment of forecasting system performance.

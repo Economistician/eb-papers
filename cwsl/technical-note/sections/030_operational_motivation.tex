@@ -1,0 +1,35 @@
+% ----------------------------------------------------------
+% OPERATIONAL MOTIVATION
+% ----------------------------------------------------------
+\section{Operational Motivation}
+
+Many operational workflows exhibit strong directional asymmetry in the
+consequences of forecast error. A modest underforecast during a peak period may
+lead to lost throughput, service degradation, queueing instability, or cascading
+delays. By contrast, a modest overforecast is often absorbed through buffers,
+inventory, slack labor capacity, or unused production bandwidth. This directional
+imbalance in the operational impact of forecasting error reflects a longstanding
+theme in decision-oriented forecasting research, where asymmetric loss functions
+are used to represent unequal consequences of over- and underprediction
+\citep{zellner1986}. As a result, operators are typically more sensitive to the
+\emph{cost consequences} of error than to its numerical magnitude alone.
+
+Cost-Weighted Service Loss (\CWSL) encodes these consequences directly. By
+assigning explicit penalty weights to shortfall and overbuild magnitudes, the
+metric enables evaluation in environments where:
+
+\begin{itemize}
+    \item underbuilding leads to operational or financial loss,
+    \item overbuilding introduces secondary inefficiencies but is less harmful,
+    \item the relative severity of these effects is understood or can be estimated,
+    \item comparisons must remain meaningful across heterogeneous items, locations,
+          or dayparts.
+\end{itemize}
+
+Traditional symmetric error metrics cannot express these realities. They treat
+positive and negative deviations equivalently and therefore obscure whether a
+forecast poses operational risk. In contrast, \CWSL{} provides a cost-aligned
+view of error by quantifying the \emph{effective fraction of demand lost} under
+the chosen penalty structure. This makes the metric particularly well suited to
+readiness-oriented forecasting contexts—those in which the consequences of being
+short or long differ materially and must be reflected in model evaluation.

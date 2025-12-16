@@ -1,0 +1,26 @@
+% ----------------------------------------------------------
+% OPERATIONAL MOTIVATION
+% ----------------------------------------------------------
+\section{Operational Motivation}
+
+In many operational environments, forecasts do not need to match realized demand
+exactly. Instead, they must remain within a range that allows planned execution to
+proceed without disruption. Small deviations are often absorbed naturally through
+batching rules, resource granularity, service-time flexibility, or built-in
+buffers. These mechanisms of operational tolerance and absorption are well
+established in classical production and inventory theory
+\citep{silver1998inventory}. Only errors that exceed a meaningful operational
+threshold risk creating delays, inefficiencies, or degraded service levels.
+
+HR@\(\tau\) captures this perspective by measuring how often forecast deviations
+remain within the zone of operational adequacy. A high HR@\(\tau\) value indicates
+that the system can typically follow its planned trajectory without requiring
+corrective action, while a low value signals more frequent intervals in which
+forecast errors challenge execution or elevate risk.
+
+Because the tolerance level \(\tau\) is defined with respect to the operational
+context—such as capacity adjustment increments, inventory sensitivities, labor
+scheduling granularity, or workflow rigidity—HR@\(\tau\) serves as a tailored,
+decision-oriented measure of practical forecast reliability. It highlights whether
+a forecasting system meets the precision standards that matter in real-world
+applications, rather than an abstract statistical notion of accuracy.

@@ -1,0 +1,31 @@
+% ----------------------------------------------------------
+% CONCLUSION
+% ----------------------------------------------------------
+\section{Conclusion}
+
+Operational forecasting requires evaluation criteria that extend beyond
+aggregate numerical accuracy. In many real-world settings, the central question
+is not merely how close a forecast is on average, but whether it can reliably
+support execution without incurring unacceptable service failures or asymmetric
+economic costs. Traditional accuracy metrics alone cannot answer this question,
+as they fail to distinguish between operationally harmless deviations and those
+that destabilize workflows.
+
+The Forecast Readiness Score (\FRS) addresses this gap by combining two
+complementary dimensions of operational quality: the frequency with which demand
+is fully covered (\NSL) and the normalized asymmetric economic exposure
+(\CWSLscaled). Together, these components yield a bounded, interpretable
+readiness indicator that reflects both service protection and cost discipline.
+
+\FRS{} is not intended to replace traditional accuracy metrics. Instead, it
+provides an operational lens through which forecast performance can be evaluated
+more holistically. When used alongside measures such as RMSE, MAE, and wMAPE,
+\FRS{} helps clarify why certain models perform better in deployment despite
+similar statistical accuracy, and why others pose hidden operational risks.
+
+With appropriate cost calibration and normalization, \FRS{} enables clearer
+communication with stakeholders, more robust model selection, and early
+detection of readiness degradation in production environments. Future extensions
+may include probabilistic readiness measures, data-driven cost learning, and
+integration with post-processing adjustment layers, further strengthening the
+alignment between statistical forecasting and real-world operational needs.

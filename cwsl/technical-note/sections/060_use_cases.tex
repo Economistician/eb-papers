@@ -1,0 +1,60 @@
+% ----------------------------------------------------------
+% USE CASES
+% ----------------------------------------------------------
+\section{Use Cases Across Operational Domains}
+
+Cost-Weighted Service Loss (\CWSL) is particularly useful in environments where
+underforecasting and overforecasting have materially different operational
+consequences. Because the metric applies explicit penalty weights to shortfall
+and overbuild magnitudes, it allows practitioners to align model evaluation with
+the true cost structure of their system. This section highlights several domains
+in which asymmetric error penalties are essential for readiness-oriented
+forecasting.
+
+\subsection{Production and Manufacturing}
+
+In make-to-order and high-utilization manufacturing environments, underbuilding
+can cause throughput loss, work-in-process buildup, or schedule instability.
+Overbuilding, while inefficient, is often less disruptive. \CWSL{} provides a
+cost-weighted assessment that prioritizes the avoidance of shortfalls, helping
+identify models that maintain stable production flow.
+
+\subsection{Retail and Replenishment}
+
+Retail and omnichannel fulfillment systems experience asymmetric impacts from
+forecast error: underforecasting drives stockouts and lost sales, while
+overforecasting increases inventory carrying cost or spoilage risk. By adjusting
+\((\cu, \co)\) to match these economics, \CWSL{} yields a readiness-oriented
+measure that reflects service protection and inventory efficiency simultaneously.
+
+\subsection{Staffing and Service Operations}
+
+In labor-intensive service systems—such as restaurants, call centers, field
+service operations, and healthcare—underforecasting demand leads to long queues,
+service degradation, and lost revenue. Overstaffing is typically less harmful.
+\CWSL{} captures this asymmetry and supports selection of forecasting methods
+that minimize service failures while balancing labor efficiency.
+
+\subsection{Logistics and Transportation}
+
+Routing, fleet management, and distribution workflows are sensitive to demand
+shortfalls, which create bottlenecks, delays, and capacity imbalances. Excess
+forecasting generally results in modest underutilization. \CWSL{} makes these
+trade-offs explicit, enabling operational teams to compare models based on their
+expected cost exposure.
+
+\subsection{Energy and Utilities}
+
+Load forecasting in energy distribution, generation scheduling, and grid
+operations exhibits pronounced asymmetry: underforecasting load may require
+expensive balancing or reserve activation, while overforecasting typically leads
+to curtailment or minor efficiency loss. \CWSL{} provides a natural evaluation
+framework that reflects this operational reality.
+
+\subsection{Cross-Entity or Portfolio Evaluation}
+
+Because \CWSL{} normalizes by realized demand, it scales naturally across
+products, stores, dayparts, network nodes, or customer segments. This makes the
+metric useful for identifying pockets of asymmetric risk within a broader
+operational portfolio and for diagnosing entities where forecast misalignment
+has outsized impact.

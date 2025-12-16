@@ -1,0 +1,70 @@
+% ----------------------------------------------------------
+% ILLUSTRATIVE EXAMPLE
+% ----------------------------------------------------------
+\section{Illustrative Example}
+
+This section demonstrates how the Forecast Readiness Score (\FRS) behaves in a
+concrete numerical example. The worked example illustrates how reliability
+(\NSL) and asymmetric economic exposure (\CWSLscaled) interact to produce a
+unified readiness measure.
+
+\subsection{Worked Numerical Example}
+
+We consider a short-horizon scenario involving \(T = 6\) evaluation intervals.
+Actual demand values \(y_t\) and corresponding forecasts \(\hat{y}_t\) are shown
+in Table~\ref{tab:frs_example_y}. The associated shortfall indicators appear in
+Table~\ref{tab:frs_example_shortfall}.
+
+\input{tables/050_frs_example_y}
+\input{tables/050_frs_example_shortfall}
+
+A shortfall occurs when \(\hat{y}_t < y_t\). Three of the six intervals exhibit
+no shortfall, yielding:
+\[
+\NSL = \frac{3}{6} = 0.5.
+\]
+
+To compute the cost-weighted service loss, we evaluate the magnitudes of
+shortfall and overbuild for each interval. These appear in
+Table~\ref{tab:frs_example_cost}.
+
+\input{tables/050_frs_example_cost}
+
+Using asymmetry parameters \(\cu = 2\) (shortfall penalty) and \(\co = 1\)
+(overbuild penalty), the total cost-weighted error is:
+\[
+\text{Shortfall cost} = 2(2 + 1 + 1) = 8, \qquad
+\text{Overbuild cost} = 1(1 + 1) = 2,
+\]
+for a total cost of \(10\). Total realized demand is:
+\[
+\sum_{t=1}^6 y_t = 65.
+\]
+
+Thus:
+\[
+\CWSL = \frac{10}{65} \approx 0.154.
+\]
+
+Suppose the application specifies a normalization bound of
+\(\CWSLmax = 0.30\), representing the largest economically meaningful loss in
+this context. The scaled cost exposure becomes:
+\[
+\CWSLscaled = \min\!\left( 1,\, \frac{0.154}{0.30} \right) = 0.513.
+\]
+
+Finally, the Forecast Readiness Score is:
+\[
+\FRS = \NSL - \CWSLscaled
+     = 0.5 - 0.513
+     = -0.013.
+\]
+
+\subsection*{Interpretation}
+
+Although the forecast avoids shortfalls in half of the intervals, the asymmetric
+penalties assign substantial cost to shortfall events relative to overbuild. As
+a result, the normalized cost exposure slightly exceeds the reliability signal,
+yielding a readiness score just below zero. This illustrates how \FRS{}
+synthesizes both service protection and cost discipline: even moderate shortfall
+frequency can dominate readiness when underbuild penalties are high.

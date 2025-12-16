@@ -1,0 +1,32 @@
+% ----------------------------------------------------------
+% OVERVIEW
+% ----------------------------------------------------------
+\section{Overview}
+
+Many operational forecasting environments—such as production, staffing,
+fulfillment, logistics, energy management, and short-horizon retail demand—
+exhibit strong asymmetry in the consequences of forecast error. Traditional
+symmetric metrics (e.g., RMSE, MAE, MAPE) treat positive and negative deviations
+equivalently, but in practice the cost of underforecasting often far exceeds the
+cost of surplus. A small shortfall during a peak period may cause service
+failures, throughput loss, or cascading delays, while a small overforecast is
+frequently absorbed through buffers, slack capacity, or inventory. This reflects
+the broader principle that forecast performance must be evaluated in terms of
+decision or cost impact rather than symmetric numerical accuracy alone
+\citep{armstrong2001}.
+
+Cost-Weighted Service Loss (\CWSL) is designed for these asymmetric environments.
+The metric applies explicit penalty weights to the magnitudes of shortfall and
+overbuild, capturing not just the size of forecast error but its \emph{operational
+consequences}. By normalizing by total realized demand, \CWSL{} expresses the
+effective fraction of throughput “lost’’ due to misalignment between the forecast
+and demand, enabling consistent comparison across items, locations, dayparts,
+and operational settings.
+
+\CWSL{} serves as a directionally aware, operationally aligned complement to
+traditional statistical accuracy metrics. It provides insight into whether a
+forecasting system meets the cost and service expectations of real-world
+execution, rather than simply minimizing numerical error. This technical note
+formalizes the \CWSL{} metric, illustrates its mathematical and behavioral
+properties, and motivates its use in environments where asymmetric error
+penalties are essential for readiness-oriented evaluation.

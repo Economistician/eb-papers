@@ -1,0 +1,105 @@
+% ----------------------------------------------------------
+% PROPERTIES AND BEHAVIOR
+% ----------------------------------------------------------
+\section{Properties and Behavior}
+
+The Forecast Readiness Score (\FRS) inherits interpretable and operationally
+meaningful behavior from its two constituent components—\NSL{} and the scaled
+cost term \CWSLscaled{}. This section summarizes the key mathematical and
+practical properties governing how the score responds to different patterns of
+forecast error.
+
+\subsection{Boundedness}
+
+Because both \NSL{} and \CWSLscaled{} lie in \([0,1]\), their difference satisfies:
+\[
+-1 \;\le\; \FRS = \NSL - \CWSLscaled \;\le\; 1.
+\]
+
+This bounded range facilitates clear interpretation and consistent comparison
+across forecasting systems.
+
+\subsection{Monotonicity}
+
+\FRS{} behaves monotonically with respect to its components:
+
+\begin{itemize}
+    \item Increasing \NSL{} increases \FRS.
+    \item Increasing \CWSL{} (and therefore \CWSLscaled{}) decreases \FRS.
+    \item With identical \NSL{}, the forecast with lower \CWSL{} has the higher \FRS.
+    \item With identical \CWSL{}, the forecast with higher \NSL{} has the higher \FRS.
+\end{itemize}
+
+These relationships ensure that \FRS{} respects intuitive operational
+preferences: reliability is rewarded, and cost exposure is penalized.
+
+\subsection{Sensitivity to Error Types}
+
+\FRS{} differentiates sharply between shortfalls and overbuild errors:
+
+\begin{enumerate}
+    \item \textbf{Shortfalls} reduce \NSL{} and increase \CWSL{}, typically causing
+    significant declines in \FRS.
+    \item \textbf{Overbuild errors} leave \NSL{} unchanged but increase \CWSS{},
+    producing more moderate reductions in \FRS.
+\end{enumerate}
+
+This structural asymmetry reflects real operational priorities, where shortfalls
+create significantly higher service and cost risk.
+
+\input{figures/040_frs_sensitivity}
+
+\subsection{Smoothness and Stability}
+
+Because \CWSL{} is a continuous function of the forecast and \NSL{} is a
+step function, \FRS{} exhibits the following behaviors:
+
+\begin{itemize}
+    \item \FRS{} is piecewise continuous, with discontinuities arising only when
+    \(\hat{y}_t\) crosses \(y_t\), changing the shortfall indicator.
+    \item Small forecast adjustments that do not change shortfall occurrence
+    produce smooth changes in \FRS.
+    \item Structural shifts (such as systematic underforecasting) induce
+    predictable, interpretable shifts in both \NSL{} and \CWSL{}, resulting in
+    corresponding changes in \FRS.
+\end{itemize}
+
+\subsection{Response to Systematic Bias}
+
+\FRS{} responds asymmetrically to forecast bias:
+
+\begin{itemize}
+    \item \textbf{Underforecast bias} reduces \NSL{} and increases \CWSL{},
+    resulting in sharp decreases in \FRS.
+    \item \textbf{Overforecast bias} preserves \NSL{} but increases \CWSL{},
+    reducing \FRS{} more gradually.
+\end{itemize}
+
+This behavior aligns with operational reality in environments where shortages
+carry disproportionately greater cost than excess production.
+
+\subsection{Perfect Forecasts}
+
+If the forecast matches actual demand in every interval
+(\(\hat{y}_t = y_t\)), then:
+\[
+\NSL = 1, \qquad \CWSL = 0, \qquad \CWSLscaled = 0,
+\]
+so that:
+\[
+\FRS = 1.
+\]
+
+\subsection{Extreme Miscalibration}
+
+If a forecasting system persistently underbuilds demand, then:
+\[
+\NSL \approx 0, \qquad \CWSLscaled \approx 1,
+\]
+and thus:
+\[
+\FRS \approx -1.
+\]
+
+Such values signal a severe readiness deficit and a forecasting system misaligned
+with operational service and cost requirements.

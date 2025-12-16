@@ -1,0 +1,47 @@
+% ==========================================================
+% METRIC MACROS (FRF / Electric Barometer)
+% ==========================================================
+
+% Forecast Readiness Score (upright math font)
+\newcommand{\FRS}{\ensuremath{\mathrm{FRS}}}
+
+% No-Shortfall Level
+\newcommand{\NSL}{\ensuremath{\mathrm{NSL}}}
+
+% Cost-Weighted Service Loss
+\newcommand{\CWSL}{\ensuremath{\mathrm{CWSL}}}
+
+% Scaled/normalized CWSL term
+\newcommand{\CWSLscaled}{\ensuremath{\mathrm{CWSL}_{\mathrm{scaled}}}}
+
+% Maximum meaningful cost bound (normalization parameter)
+\newcommand{\CWSLmax}{\ensuremath{\mathrm{CWSL}_{\max}}}
+
+% ----------------------------------------------------------
+% FORECAST / DEMAND NOTATION
+% ----------------------------------------------------------
+
+% Forecast hat (consistent across all FRF notes)
+\newcommand{\yhat}{\hat{y}}
+
+% Error components (optional helpers)
+\newcommand{\underErr}{\ensuremath{(y_t - \hat{y}_t)}}
+\newcommand{\overErr}{\ensuremath{(\hat{y}_t - y_t)}}
+
+% ----------------------------------------------------------
+% OPERATORS
+% ----------------------------------------------------------
+
+% Positive-part operator: (x)_+ = max(x, 0)
+\newcommand{\pospart}[1]{\left(#1\right)_{+}}
+
+% Indicator function
+\newcommand{\indicator}[1]{\ensuremath{\mathbf{1}\{#1\}}}
+
+% ----------------------------------------------------------
+% COST PARAMETERS
+% ----------------------------------------------------------
+
+% Underbuild and overbuild cost weights
+\newcommand{\cu}{\ensuremath{c_u}}
+\newcommand{\co}{\ensuremath{c_o}}

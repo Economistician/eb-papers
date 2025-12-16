@@ -1,0 +1,27 @@
+% ----------------------------------------------------------
+% OVERVIEW
+% ----------------------------------------------------------
+\section{Overview}
+
+Hit Rate within Tolerance (HR@\(\tau\)) measures the proportion of forecast
+intervals in which absolute error remains below an operationally meaningful
+threshold. Rather than emphasizing exact numerical accuracy or distinguishing
+between overestimation and underestimation, HR@\(\tau\) evaluates how often a
+forecast is ``accurate enough'' to support stable execution. This perspective is
+consistent with longstanding critiques of traditional accuracy measures, which
+often fail to reflect the decision-relevant aspects of forecast performance
+\citep{hyndman2006another}. In many practical settings, small deviations do not
+materially affect system performance, making a tolerance-based metric more
+actionable than strict point-accuracy evaluations.
+
+The tolerance level \(\tau > 0\) encodes the degree of deviation that can be
+absorbed by the system without requiring adjustment. Its value depends on
+context-specific factors such as batching granularity, workflow rigidity, service
+time variability, or capacity adjustment rules. By quantifying the frequency with
+which forecast errors remain inside this acceptable band, HR@\(\tau\) provides an
+intuitive and decision-oriented perspective on operational sufficiency.
+
+This technical note formalizes the HR@\(\tau\) metric, outlines its mathematical
+structure and behavioral properties, and illustrates its role in evaluating
+forecasting systems where approximate accuracy is adequate for effective
+performance.

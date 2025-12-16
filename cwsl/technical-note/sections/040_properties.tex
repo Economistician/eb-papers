@@ -1,0 +1,68 @@
+% ----------------------------------------------------------
+% PROPERTIES
+% ----------------------------------------------------------
+\section{Properties and Behavior}
+
+The Cost-Weighted Service Loss (\CWSL) metric exhibits several mathematical and
+operational properties that make it well suited for environments where
+forecast errors have asymmetric consequences. This section summarizes the most
+important characteristics governing how \CWSL{} behaves under different patterns
+of error.
+
+\subsection{Non-Negativity}
+
+Since shortfall and overbuild magnitudes are nonnegative and the penalty weights
+\(\cui, \coi > 0\), the cost-weighted numerator is always nonnegative.
+Therefore,
+\[
+\CWSL \ge 0.
+\]
+
+\subsection{Demand Normalization}
+
+Dividing by total realized demand produces a scale-free metric that is comparable
+across entities of different sizes. The resulting value can be interpreted as the
+fraction of effective throughput ``lost’’ due to misalignment between forecast
+and demand.
+
+\subsection{Asymmetric Sensitivity}
+
+When \(\cui > \coi\), shortfalls contribute more heavily to the loss than
+overbuilds. This encodes directional operational priorities: environments where
+underbuilding is more disruptive will exhibit higher \CWSL{} values for the same
+numerical error profile.
+
+\subsection{Dependence on Both Frequency and Magnitude}
+
+\CWSL{} increases with both the number of errors and the size of those errors
+once cost-weighted. A forecast that underbuilds frequently but by small amounts
+may produce the same \CWSL{} as a forecast that occasionally underbuilds by
+larger amounts. This dual dependence enables flexible and context-aware
+evaluation.
+
+\subsection{Entity-Level Customization}
+
+Different entities (products, locations, dayparts, equipment classes) may incur
+different operational costs for underbuilding or overbuilding. The parameters
+\(\cui\) and \(\coi\) allow \CWSL{} to flexibly encode these differences without
+changing the metric’s structural interpretation.
+
+\subsection{Monotonicity in Cost Weights}
+
+For fixed forecasts and realizations, increasing either \(\cui\) or \(\coi\)
+always increases the value of \CWSL{}. This monotonicity ensures that increasing
+the penalty attached to an error type never reduces its measured impact.
+
+% ----------------------------------------------------------
+% FIGURE: MODEL COMPARISON (Modular)
+% ----------------------------------------------------------
+\input{figures/040_cwsl_model_comparison}
+
+\subsection{Illustrative Comparison of Error Profiles}
+
+Figure~\ref{fig:cwsl_model_comparison} shows two forecasts with similar
+symmetric error but different \CWSL{} outcomes. Model~A consistently underbuilds,
+resulting in higher accumulated shortfall cost. Model~B exhibits balanced errors,
+resulting in substantially lower cost exposure despite comparable RMSE or MAE.
+This demonstrates that \CWSL{} distinguishes operationally risky forecasts even
+when symmetric metrics do not.

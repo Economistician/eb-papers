@@ -1,0 +1,53 @@
+% ----------------------------------------------------------
+% OPERATIONAL MOTIVATION
+% ----------------------------------------------------------
+\section{Operational Motivation}
+
+Operational forecasting differs fundamentally from statistical forecasting. While
+classical accuracy metrics quantify numerical deviation, operational performance
+depends on whether a forecast enables the system to function reliably, safely, and
+efficiently under real conditions. In many production, staffing, retail, and
+short-horizon service environments, the consequences of forecast error are highly
+asymmetric and can produce cascading effects on service quality and cost.
+
+Shortfalls create immediate operational risk: service failures, queueing
+instability, lost throughput, labor inefficiency, and degraded customer
+experience. Overbuild, while typically less harmful, still generates waste,
+excess labor utilization, spoilage, and reduced flexibility. Because these
+consequences differ in severity, a metric that treats all numerical deviations
+symmetrically does not reflect operational priorities.
+
+The Forecast Readiness Score (FRS) addresses this gap by combining two
+complementary signals:
+
+\begin{itemize}
+    \item \textbf{NSL}, which captures how often the forecast avoids shortfalls,
+    reflecting a frequency-based notion of service protection, and
+    \item \textbf{scaled CWSL}, which quantifies the asymmetric economic cost of
+    forecast deviations, normalized to a stable and interpretable range.
+\end{itemize}
+
+These components reflect the expectations of operators and managers:
+
+\begin{enumerate}
+    \item \textit{Shortfalls must be rare.} Even a small number of shortfall
+    events can destabilize workflows, reduce service quality, and trigger costly
+    corrective action. NSL captures this requirement.
+
+    \item \textit{Not all deviations matter equally.} Shortfalls and overbuild
+    incur different operational and economic penalties. CWSL incorporates these
+    asymmetries by assigning different weights (\cu, \co) to each error type.
+
+    \item \textit{Readiness requires both reliability and cost discipline.} A
+    forecast that avoids shortfalls but regularly overbuilds is wasteful, while a
+    forecast that minimizes numerical error but frequently underbuilds may be
+    operationally unacceptable. FRS blends these considerations into a single
+    readiness indicator.
+\end{enumerate}
+
+A normalized composite metric such as FRS is practical for real-world use:
+operators often require a single interpretable score that summarizes whether a
+forecast is suitable for deployment under service, economic, and operational
+constraints. FRS provides this functionality, aligning the evaluation of
+forecasting systems with the objectives and risks inherent in operational
+decision-making.

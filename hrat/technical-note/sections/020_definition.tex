@@ -1,0 +1,36 @@
+% ----------------------------------------------------------
+% DEFINITION
+% ----------------------------------------------------------
+\section{Definition and Mathematical Formulation}
+
+Let \(e\) denote the entity being forecast (e.g., an item, workload, or capacity
+stream), and let \(T\) represent the set of evaluation intervals. For each
+interval \(t \in T\), let \(y_{et}\) denote realized demand and \(\hat{y}_{et}\)
+the corresponding forecast. The interval-level forecast error is
+\[
+e_{et} = \hat{y}_{et} - y_{et}.
+\]
+
+Given a tolerance level \(\tau > 0\), an interval is classified as a
+\emph{hit} if the absolute forecast error lies within the tolerance band:
+\[
+|e_{et}| \le \tau.
+\]
+
+The Hit Rate within Tolerance for entity \(e\) is then defined as
+\[
+\mathrm{HR@}_{\tau,e}
+=
+\frac{
+\left| \{\, t \in T : |e_{et}| \le \tau \, \} \right|
+}{
+|T|
+}.
+\]
+
+By construction, the metric lies in the interval \([0,1]\). Values near 1
+indicate that the forecast remains within the acceptable tolerance band for most
+intervals, while lower values reflect more frequent deviations. Because the
+tolerance level \(\tau\) represents the degree of precision required for stable
+operations, HR@\(\tau\) serves as an empirical measure of how consistently the
+forecast meets these practical requirements.

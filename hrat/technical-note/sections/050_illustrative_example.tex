@@ -1,0 +1,33 @@
+% ----------------------------------------------------------
+% ILLUSTRATIVE EXAMPLE
+% ----------------------------------------------------------
+\section{Illustrative Example}
+
+To demonstrate how HR@\(\tau\) operates at the interval level, this section
+presents a twelve-interval example with a tolerance of \(\tau = 3\). For each
+interval, realized demand, forecasted demand, and the resulting absolute error are
+evaluated against the tolerance band to classify each interval as a hit or miss.
+
+Figure~\ref{fig:hrat_tolerance_plot} visualizes the realized series, forecast
+values, and the \(\pm 3\) tolerance band around realized demand. Intervals in
+which the forecast lies within the tolerance band are shown as hits, while those
+outside the band are shown as misses.
+
+\input{figures/050_hrat_tolerance_plot}
+
+Table~\ref{tab:hrat_example} summarizes the numerical values corresponding to the
+visual example, including the realized demand \(y_t\), forecast \(\hat{y}_t\),
+absolute error \(|e_t|\), and an indicator of whether the interval satisfies the
+tolerance condition.
+
+\input{tables/050_hrat_example_table}
+
+Out of the twelve evaluation intervals, ten satisfy the tolerance condition,
+yielding
+\[
+\mathrm{HR@}_\tau = \frac{10}{12} \approx 0.833.
+\]
+This value indicates that the forecast is operationally acceptable in roughly
+83\% of intervals given a tolerance threshold of three units. The example
+illustrates how HR@\(\tau\) provides a transparent and interpretable assessment of
+practical forecast performance.

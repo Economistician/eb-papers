@@ -1,0 +1,49 @@
+% ----------------------------------------------------------
+% PROPERTIES AND BEHAVIOR
+% ----------------------------------------------------------
+\section{Properties and Behavior}
+
+\subsection{Boundedness and Interpretability}
+HR@\(\tau\) is a proportion and therefore lies within the closed interval
+\([0,1]\). This boundedness makes the metric easy to interpret: values near 1
+indicate that the forecast satisfies the tolerance condition in most intervals,
+whereas values near 0 indicate frequent operationally significant deviations.
+
+\subsection{Dependence on the Tolerance Parameter}
+The tolerance level \(\tau\) determines which intervals qualify as hits. Larger
+values of \(\tau\) classify more intervals as within tolerance, yielding higher
+HR@\(\tau\) values; smaller values impose stricter requirements and reduce the hit
+rate. Interpretation of HR@\(\tau\) therefore depends on the operational meaning
+of \(\tau\), which may vary across domains or entities. Selecting an appropriate
+tolerance is critical for ensuring that the metric reflects true operational
+capability rather than an artifact of parameter choice.
+
+\subsection{Sensitivity to the Error Distribution}
+HR@\(\tau\) depends on the frequency with which absolute forecast errors fall
+inside the tolerance band. Systems that produce stable, low-variance errors
+typically yield high hit rates. In contrast, systems characterized by volatility,
+intermittent spikes, or heavy-tailed error distributions may exhibit lower hit
+rates even when their average accuracy is comparable. HR@\(\tau\) therefore
+provides a complementary perspective to magnitude-based accuracy metrics.
+
+\subsection{Symmetric Treatment of Over- and Underestimation}
+Because HR@\(\tau\) is defined in terms of absolute error, it treats positive and
+negative deviations symmetrically. The metric is therefore most appropriate in
+environments where overforecasting and underforecasting have similar operational
+consequences. If asymmetries exist—such as environments where underbuilding is
+more costly than overbuilding—HR@\(\tau\) should be interpreted alongside
+directionally sensitive diagnostics.
+
+\subsection{Scale and Magnitude Considerations}
+The meaningfulness of a fixed tolerance level depends on the magnitude of the
+underlying demand. A tolerance that is reasonable for a high-volume entity may be
+too permissive or too restrictive for a low-volume one. When comparing entities or
+aggregating results across heterogeneous units, the tolerance parameter may
+require normalization or entity-specific calibration to preserve interpretability.
+
+\subsection{Sampling Variability}
+As an empirical proportion computed over a finite number of intervals, HR@\(\tau\)
+is subject to sampling variability. Standard binomial methods may be used to
+construct confidence intervals, evaluate statistical differences between
+forecasting systems, or assess the reliability of HR@\(\tau\) estimates in
+short-horizon evaluation settings.

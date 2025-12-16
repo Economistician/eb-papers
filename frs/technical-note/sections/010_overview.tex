@@ -1,0 +1,37 @@
+% ----------------------------------------------------------
+% OVERVIEW
+% ----------------------------------------------------------
+\section{Overview}
+
+Operational forecasting environments—such as food production, staffing,
+inventory, transportation, and short-horizon retail demand—impose constraints
+that are not reflected in classical statistical accuracy metrics. Measures such as
+RMSE, MAE, and MAPE quantify numerical deviation, but they do not address the
+operationally fundamental question: \emph{Is this forecast good enough to run the
+system?} As emphasized in the forecast evaluation literature, traditional point
+accuracy measures often fail to capture the decision-relevant qualities of a
+forecast \citep{gneiting2011}. In practice, many small errors are inconsequential,
+while shortfalls and cost-asymmetric deviations can create disproportionate
+service and economic disruption.
+
+The Forecast Readiness Framework (FRF) addresses this gap by evaluating forecasts
+in terms of their operational feasibility rather than purely statistical accuracy.
+Two components are central to this perspective. The \emph{No–Shortfall Level
+(NSL)} measures reliability by capturing the fraction of intervals in which the
+forecast fully covers realized demand. The \emph{Cost–Weighted Service Loss
+(CWSL)} quantifies asymmetric penalties associated with shortfalls and overbuild,
+reflecting the economic reality that these deviations have different operational
+consequences. Together, NSL and CWSL describe whether a forecasting system is not
+only accurate, but \emph{operationally viable}.
+
+The Forecast Readiness Score (FRS) synthesizes these complementary dimensions into
+a single, interpretable readiness metric. By combining (i) the frequency with
+which the forecast avoids shortfalls and (ii) a normalized measure of asymmetric
+economic exposure, FRS evaluates how well a forecast protects service while
+maintaining cost discipline. This produces a bounded metric with clear directional
+interpretation, enabling operators and analysts to assess readiness at a glance.
+
+This technical note develops the formal definition, interpretation, and operational
+motivation of FRS, showing how it supports decision-making in domains where
+service reliability, asymmetric cost, and consistent execution are as critical as
+numerical accuracy.

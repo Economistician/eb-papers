@@ -1,0 +1,48 @@
+% ----------------------------------------------------------
+% USE CASES
+% ----------------------------------------------------------
+\section{Use Cases Across Operational Domains}
+
+HR@\(\tau\) is especially useful in environments where modest forecast deviations
+do not materially disrupt execution, but larger deviations trigger inefficiency,
+risk, or the need for corrective action. Because the metric focuses on the
+frequency of acceptable performance rather than the magnitude of errors,
+HR@\(\tau\) provides an intuitive and operationally grounded diagnostic across a
+broad range of domains.
+
+\subsection{Production and Manufacturing}
+Batching constraints, equipment cycle times, and workflow granularity often allow
+systems to absorb small discrepancies between forecasted and realized demand.
+HR@\(\tau\) quantifies how reliably a forecasting system remains within these
+operational tolerances, supporting decisions related to scheduling, material
+planning, and production sequencing.
+
+\subsection{Retail and Replenishment}
+Small forecast deviations may not meaningfully affect ordering behavior or stock
+availability. By measuring how often forecasts fall within an acceptable margin of
+error, HR@\(\tau\) identifies when the system is sufficiently accurate to avoid
+reactive adjustments or unnecessary safety stock expansions.
+
+\subsection{Service and Staffing}
+Labor cannot typically be adjusted at single-unit resolution. Slight workload
+misalignment can often be absorbed within shift structures or service buffers.
+HR@\(\tau\) therefore helps assess whether demand forecasts are reliable enough to
+maintain staffing efficiency without excessive understaffing or overstaffing risk.
+
+\subsection{Logistics and Transportation}
+Parcel volumes, passenger counts, and routing needs often tolerate modest
+variations. HR@\(\tau\) reflects how consistently forecasts stay within
+operationally manageable bounds, informing decisions on fleet allocation, routing
+stability, and network planning.
+
+\subsection{Energy and Utilities}
+Short-term load forecasts frequently allow for some deviation before requiring
+corrective action. HR@\(\tau\) indicates how often the forecasting system stays
+within this acceptable operating window, supporting decisions around dispatch,
+capacity planning, and reliability assurance.
+
+\subsection{Digital and Online Systems}
+Traffic forecasting for applications, APIs, and digital services often includes
+built-in elasticity or buffering. HR@\(\tau\) highlights whether demand forecasts
+stay within tolerance levels that avoid throttling, latency degradation, or
+unnecessary autoscaling events.

@@ -17,8 +17,8 @@
 % TikZ + PGFPLOTS (REQUIRED FOR FIGURES)
 \usepackage{tikz}
 \usepackage{pgfplots}
-\pgfplotsset{compat=1.18}   % IMPORTANT
-\usepgfplotslibrary{groupplots} % REQUIRED for side-by-side axes
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
 
 \usepackage{framed}
 \usepackage{setspace}
@@ -35,7 +35,7 @@
 % PDF METADATA
 % ----------------------------------------------------------
 \hypersetup{
-    pdftitle={Forecast Readiness Score (FRS): A Composite Readiness Metric for Operational Forecasting},
+    pdftitle={Cost-Weighted Service Loss (\CWSL): An Asymmetric Cost Metric for Forecast Evaluation},
     pdfauthor={Kyle Corrie},
     colorlinks=true,
     linkcolor=blue,
@@ -47,8 +47,8 @@
 % TITLE BLOCK
 % ----------------------------------------------------------
 \title{
-\textbf{Forecast Readiness Score (FRS):}\\[4pt]
-{\large A Composite Readiness Metric for Operational Forecasting}
+\textbf{Cost-Weighted Service Loss (\CWSL):}\\[4pt]
+{\large An Asymmetric Cost Metric for Forecast Evaluation}
 }
 
 \author{
@@ -70,17 +70,18 @@ Version 1.0}
 % ABSTRACT
 % ----------------------------------------------------------
 \begin{abstract}
-The Forecast Readiness Score (FRS) is a composite diagnostic that evaluates how
-well a forecasting system supports operational execution. By combining two
-complementary components—the No--Shortfall Level (NSL), which measures the
-reliability of meeting demand, and the Cost--Weighted Service Loss (CWSL), which
-captures asymmetric economic penalties—FRS summarizes both service protection and
-cost discipline in a single, interpretable score. Unlike symmetric statistical
-accuracy metrics, FRS emphasizes the operational consequences of error, providing
-a readiness-oriented perspective particularly suited for environments where
-shortfalls, cost asymmetry, and execution feasibility matter as much as numerical
-deviation. This technical note introduces the formal definition, properties,
-motivation, and use cases of FRS within the Forecast Readiness Framework.
+Cost-Weighted Service Loss (CWSL) quantifies the asymmetric operational impact 
+of forecast error by applying explicit penalties to underbuild and overbuild.
+Traditional symmetric accuracy metrics treat positive and negative deviations 
+equivalently, but in many operational environments—production, staffing, 
+logistics, inventory, and energy systems—the cost of underforecasting often 
+significantly outweighs the cost of surplus. CWSL encodes this asymmetry 
+directly and normalizes by realized demand, making the metric interpretable as 
+the effective fraction of throughput “lost’’ due to misalignment between 
+forecasted and actual values. This technical note presents the formal definition, 
+properties, motivation, and illustrative examples of CWSL, and outlines how it 
+supports readiness-oriented forecast evaluation within the Forecast Readiness 
+Framework.
 \end{abstract}
 
 % ----------------------------------------------------------

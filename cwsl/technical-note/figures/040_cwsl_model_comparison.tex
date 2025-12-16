@@ -1,0 +1,62 @@
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+
+\begin{groupplot}[
+    group style={group size=2 by 1, horizontal sep=2cm},
+    width=0.48\linewidth,
+    height=0.42\linewidth,
+    xmin=1, xmax=8,
+    ymin=8, ymax=16,
+    xtick={1,...,8},
+    ytick={8,10,12,14,16},
+    xlabel={Interval $t$},
+    ylabel={Quantity},
+    axis lines=left,
+    grid=both,
+    grid style={gray!20},
+    tick align=outside,
+    legend style={draw=none, fill=none},
+    legend cell align={left},
+]
+
+% ----------------------------------------------------------
+% LEFT PANEL: Model A — systematic underbuild
+% ----------------------------------------------------------
+\nextgroupplot[title={Model A: Systematic Underbuild}]
+
+\addplot+[black, thick, mark=*] coordinates {
+    (1,10) (2,12) (3,11) (4,9) (5,13) (6,10) (7,14) (8,12)
+};
+\addlegendentry{Actual $y_t$}
+
+\addplot+[blue, thick, mark=square*] coordinates {
+    (1,9) (2,11) (3,10) (4,8) (5,12) (6,9) (7,13) (8,11)
+};
+\addlegendentry{Forecast $\hat{y}_t$}
+
+% ----------------------------------------------------------
+% RIGHT PANEL: Model B — balanced errors
+% ----------------------------------------------------------
+\nextgroupplot[title={Model B: Balanced Errors}]
+
+\addplot+[black, thick, mark=*] coordinates {
+    (1,10) (2,12) (3,11) (4,9) (5,13) (6,10) (7,14) (8,12)
+};
+
+\addplot+[blue, thick, mark=square*] coordinates {
+    (1,11) (2,13) (3,10) (4,8) (5,12) (6,9) (7,15) (8,11)
+};
+
+\end{groupplot}
+
+\end{tikzpicture}
+
+\caption{
+Comparison of two forecasts with similar symmetric accuracy but different 
+Cost--Weighted Service Loss (CWSL). Model A consistently underbuilds relative to 
+actual demand, producing higher CWSL under an asymmetric cost structure, while 
+Model B exhibits more balanced deviations and therefore lower cost exposure.
+}
+\label{fig:cwsl_model_comparison}
+\end{figure}

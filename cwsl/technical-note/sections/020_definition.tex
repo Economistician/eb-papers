@@ -1,0 +1,53 @@
+% ----------------------------------------------------------
+% DEFINITION AND MATHEMATICAL FORMULATION
+% ----------------------------------------------------------
+\section{Definition and Mathematical Formulation}
+
+Cost-Weighted Service Loss (\CWSL) quantifies the cost-adjusted impact of
+forecast error as a fraction of total realized demand. The metric incorporates
+asymmetric penalties for underbuild and overbuild, allowing users to encode
+operational priorities directly into the evaluation process.
+
+Let \(i\) index entities (e.g., products, locations) and let \(t \in T\) index
+evaluation intervals. For each entity–interval pair, define shortfall and
+overbuild magnitudes as
+\[
+\sit = \pospart{\yit - \yhatit},
+\qquad
+\oit = \pospart{\yhatit - \yit},
+\]
+where \(\yit \ge 0\) denotes realized demand and \(\yhatit \ge 0\) the
+corresponding forecast.
+
+Let \(\cui > 0\) and \(\coi > 0\) denote the asymmetric penalty weights for
+shortfall and overbuild, respectively. The use of asymmetric cost weighting is
+consistent with longstanding results showing that forecast errors can impose
+directionally distinct economic consequences \citep{granger1969}. The
+system-level Cost-Weighted Service Loss is defined as
+\[
+\CWSL
+=
+\frac{
+\sumit
+\left(
+    \cui \,\sit
+    +
+    \coi \,\oit
+\right)
+}{
+\sumit \yit
+}.
+\]
+
+\subsection*{Interpretation}
+
+\CWSL{} measures the fraction of effective throughput ``lost’’ under the chosen
+cost structure. A value of zero indicates perfect alignment between forecast and
+realized demand (or zero penalty weights). Larger values indicate increasing
+operational inefficiency driven by either the magnitude or the frequency of
+errors, scaled by their cost relevance.
+
+% ----------------------------------------------------------
+% FIGURE: ASYMMETRIC PENALTY CURVE (Modular)
+% ----------------------------------------------------------
+\input{figures/020_cwsl_penalty_curve}

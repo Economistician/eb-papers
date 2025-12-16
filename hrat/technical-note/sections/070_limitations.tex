@@ -1,0 +1,51 @@
+% ----------------------------------------------------------
+% LIMITATIONS
+% ----------------------------------------------------------
+\section{Limitations and Appropriate Use}
+
+While HR@\(\tau\) provides a clear and interpretable measure of how often forecast
+errors remain within an operationally acceptable range, the metric also has
+limitations that should be considered when applying it in practice or comparing
+forecasting systems.
+
+\subsection{Dependence on the Tolerance Parameter}
+The informativeness of HR@\(\tau\) depends critically on the value of the
+tolerance parameter. If \(\tau\) is set too high, the metric may overstate
+forecast quality by classifying large deviations as acceptable. If set too low,
+it may understate practical performance by treating small, inconsequential
+differences as failures. Careful domain-specific calibration is therefore
+required.
+
+\subsection{No Information on Error Magnitude or Direction}
+HR@\(\tau\) is a binary classification metric: it records only whether an
+interval's error is within tolerance, not how far out of tolerance a miss is or
+whether the deviation reflects overforecasting or underforecasting. The metric
+should therefore be interpreted alongside magnitude-based and directional
+diagnostics when error severity or asymmetry is operationally meaningful.
+
+\subsection{Symmetric Treatment of Over- and Underestimation}
+Because HR@\(\tau\) uses absolute error, it assumes that positive and negative
+deviations have similar operational consequences. In environments where one form
+of deviation is more costly---for example, where underbuilding leads to lost
+demand or service degradation---HR@\(\tau\) should be supplemented with metrics
+that explicitly account for directional risk.
+
+\subsection{Scale Sensitivity Across Entities}
+A fixed tolerance level may not be universally meaningful across entities with
+different demand magnitudes. A tolerance of three units may be negligible for a
+high-volume item but significant for a low-volume one. When comparing forecasts
+across heterogeneous units, normalization or entity-specific tolerance levels may
+be necessary to maintain interpretability.
+
+\subsection{Loss of Distributional Detail}
+By reducing each interval to a binary hit/miss indicator, HR@\(\tau\) discards
+information about the underlying error distribution. Two forecasting systems may
+achieve similar hit rates while exhibiting very different patterns of error
+severity. HR@\(\tau\) is therefore most effective when used in conjunction with
+metrics that capture variance, tail behavior, or systematic bias.
+
+\subsection{Sampling Variability in Short Horizons}
+As an empirical proportion computed over a finite number of intervals, HR@\(\tau\)
+is subject to sampling variability. In short evaluation windows, small changes in
+performance can lead to large variations in the estimated hit rate. Confidence
+intervals or repeated-sample evaluation may be needed for reliable inference.

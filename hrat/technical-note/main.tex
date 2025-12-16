@@ -1,0 +1,94 @@
+\documentclass[11pt]{article}
+
+% ----------------------------------------------------------
+% PACKAGES
+% ----------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{framed}
+\usepackage{setspace}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\usepackage[authoryear]{natbib}
+
+% ----------------------------------------------------------
+% CUSTOM MACROS (shared notation)
+% ----------------------------------------------------------
+\input{macros/commands}
+
+% ----------------------------------------------------------
+% PDF METADATA
+% ----------------------------------------------------------
+\hypersetup{
+    pdftitle={Hit Rate Within Tolerance (HR@\tau): A Threshold-Based Reliability Metric for Forecast Accuracy},
+    pdfauthor={Kyle Corrie},
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue
+}
+
+% ----------------------------------------------------------
+% TITLE BLOCK
+% ----------------------------------------------------------
+\title{
+\textbf{Hit Rate Within Tolerance (HR@\(\tau\)):}\\[4pt]
+{\large A Threshold-Based Reliability Metric for Forecast Accuracy}
+}
+
+\author{
+  Kyle Corrie\\[4pt]
+  \small Forecast Readiness Framework (FRF)\\
+  \small Electric Barometer Series
+}
+
+\date{December 2025\\[4pt]
+\small Technical Note --- Electric Barometer Series\\
+Version 1.0}
+
+% ==================================================
+\begin{document}
+
+\maketitle
+
+% ----------------------------------------------------------
+% ABSTRACT
+% ----------------------------------------------------------
+\begin{abstract}
+Hit Rate within Tolerance (HR@\(\tau\)) measures the proportion of forecast
+intervals in which absolute error remains below an operationally meaningful
+threshold. Rather than emphasizing exact numerical accuracy, the metric evaluates
+how often a forecast is ``accurate enough'' to support stable execution. HR@\(\tau\)
+is well suited to environments where small deviations are inconsequential but
+out-of-tolerance misses introduce risk, inefficiency, or the need for corrective
+action. By quantifying the empirical frequency of acceptable forecast performance,
+HR@\(\tau\) provides a decision-oriented measure of practical reliability.
+\end{abstract}
+
+% ----------------------------------------------------------
+% ORDERED SECTION INPUTS (Technical Note Schema)
+% ----------------------------------------------------------
+\input{010_overview}
+\input{020_definition}
+\input{030_operational_motivation}
+\input{040_properties}
+\input{050_illustrative_example}
+\input{060_use_cases}
+\input{070_limitations}
+\input{080_conclusion}
+
+% ----------------------------------------------------------
+% REFERENCES
+% ----------------------------------------------------------
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
