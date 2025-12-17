@@ -1,0 +1,65 @@
+\documentclass[11pt]{article}
+
+% ----------------------------------------------------------
+% Packages (keep minimal for now)
+% ----------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{natbib}
+
+\geometry{margin=1in}
+
+% ----------------------------------------------------------
+% Keywords command (journal-agnostic)
+% ----------------------------------------------------------
+\newcommand{\keywords}[1]{%
+  \par\noindent\textbf{Keywords:} #1\par
+}
+
+% ----------------------------------------------------------
+% Macros (must be loaded before content)
+% ----------------------------------------------------------
+\input{macros/notation}
+\input{macros/operators}
+\input{macros/acronyms}
+
+% ----------------------------------------------------------
+% Document
+% ----------------------------------------------------------
+\begin{document}
+
+% ----------------------------------------------------------
+% Frontmatter
+% ----------------------------------------------------------
+\input{000_frontmatter/title}
+\maketitle
+\input{000_frontmatter/abstract}
+\input{000_frontmatter/keywords}
+
+% ----------------------------------------------------------
+% Main content
+% ----------------------------------------------------------
+\input{010_introduction/introduction}
+\input{015_notation/notation}
+\input{020_background_and_related_work/background}
+\input{030_operational_asymmetry_and_readiness/readiness}
+\input{040_forecast_readiness_framework/framework}
+\input{050_cost_weighted_service_loss/cwsl}
+\input{060_composite_readiness/frs}
+\input{070_illustrative_example/example}
+\input{080_implications/implications}
+\input{090_limitations/limitations}
+\input{100_conclusion/conclusion}
+\input{110_future_research/future}
+
+% ----------------------------------------------------------
+% References
+% ----------------------------------------------------------
+\bibliographystyle{apalike}
+\bibliography{references}
+
+\end{document}

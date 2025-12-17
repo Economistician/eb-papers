@@ -1,0 +1,24 @@
+\begin{abstract}
+Forecast performance in operational environments is commonly evaluated using symmetric
+accuracy metrics such as MAE, RMSE, and MAPE. These measures implicitly assume that
+over-forecasting and under-forecasting impose equivalent cost, an assumption that rarely holds
+in high-frequency systems where shortages generate substantially greater operational disruption
+than excess. As a result, forecasts that appear accurate by traditional metrics may still fail to
+support reliable execution.
+
+We introduce the \emph{Forecast Readiness Framework} (FRF), a multi-dimensional approach
+for evaluating forecast performance under asymmetric error structures. Rather than relying on
+a single loss function, the framework decomposes readiness into complementary dimensions
+capturing service reliability, failure severity, tolerance stability, and economic consequence.
+Within this framework, Cost-Weighted Service Loss (CWSL) serves as the primary economic
+axis, explicitly quantifying the asymmetric operational impact of forecast error, while supporting
+diagnostics characterize how frequently shortfalls occur, how severe they are when they arise,
+and whether deviations fall within operationally absorbable bounds.
+
+By reframing forecast evaluation around readiness for deployment rather than numerical accuracy
+alone, the Forecast Readiness Framework provides a structured basis for selecting, monitoring,
+and governing forecasting systems in environments where service reliability and asymmetric
+cost are central concerns. The framework is applicable across a range of operational domains,
+including production planning, staffing, inventory management, logistics, and other short-horizon
+decision systems.
+\end{abstract}

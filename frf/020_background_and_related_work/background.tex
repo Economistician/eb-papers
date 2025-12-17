@@ -1,0 +1,39 @@
+\section{Background and Related Work}
+
+Forecast evaluation has long been a central topic in both the forecasting and operations
+management literatures. Standard approaches assess performance using symmetric accuracy
+metrics such as mean absolute error (MAE), root mean squared error (RMSE), and mean absolute
+percentage error (MAPE), which summarize the magnitude of deviations between forecasts and
+realized demand. These measures are attractive for their simplicity and interpretability and remain
+widely used in empirical studies and applied settings.
+
+A parallel body of work recognizes that forecasting errors often have asymmetric consequences.
+In operational contexts such as inventory management, staffing, and capacity planning,
+under-forecasting and over-forecasting may impose markedly different costs. Classical formulations
+such as the newsvendor model explicitly distinguish between underage and overage cost, and
+asymmetric loss functions are commonly used in model training and decision optimization. More
+recent work has extended these ideas to quantile forecasting, cost-sensitive learning, and
+decision-aware modeling, emphasizing alignment between forecast objectives and downstream
+decisions.
+
+Despite these advances, much of the existing literature focuses on optimization rather than
+evaluation. Asymmetric loss functions are typically employed to train or select models, but their
+use as evaluative diagnostics is less developed. Moreover, performance is often summarized by a
+single scalar loss, which obscures how different error patterns—such as frequent small deviations
+versus rare but severe shortfalls—affect operational execution. As a result, forecasts that appear
+well aligned with asymmetric cost objectives may still exhibit failure modes that undermine service
+reliability or system stability.
+
+Related research in forecast monitoring and service-level analysis addresses aspects of reliability
+and risk, including service level attainment, stockout frequency, and tail behavior of forecast
+errors. While these approaches provide valuable insight into specific operational outcomes, they
+are typically applied in isolation and do not form a unified evaluative structure. The relationship
+between reliability, severity, tolerance, and economic consequence is therefore left implicit rather
+than systematically assessed.
+
+The present work builds on these strands by shifting the focus from accuracy and optimization to
+readiness for operational deployment. Rather than proposing a new loss function or training
+objective, this paper introduces a structured framework for evaluating whether forecasts are fit for
+use in asymmetric operational environments. By integrating economic cost with complementary
+diagnostic dimensions, the Forecast Readiness Framework addresses a gap between existing
+accuracy-based evaluation and decision-focused optimization approaches.

@@ -1,0 +1,63 @@
+\section{Implications for Forecast Evaluation and Governance}
+
+The \FRF\ has several implications for how forecasts are evaluated, selected, and governed in
+operational environments characterized by asymmetric error cost. By shifting the focus from
+numerical accuracy to readiness for deployment, the framework reframes forecast evaluation as
+an operational risk management problem rather than a purely statistical exercise.
+
+\subsection{Implications for Model Evaluation and Selection}
+
+Traditional model evaluation procedures often rely on a small set of symmetric accuracy metrics
+to compare competing forecasting approaches. Within the \FRF, such comparisons are
+necessarily incomplete. Forecasts that perform similarly under symmetric metrics may differ
+substantially in their service reliability, failure severity, or tolerance stability, leading to
+materially different operational outcomes.
+
+Evaluating models under the \FRF\ encourages practitioners to examine error structure explicitly.
+Rather than selecting models based solely on aggregate accuracy, decision-makers can assess
+whether a forecast’s deviations align with operational priorities, such as avoiding deep shortfalls
+or maintaining stability within tolerance bounds. This perspective supports more informed trade-offs
+between efficiency and reliability, particularly in environments where under-forecasting risk
+dominates.
+
+\subsection{Implications for Monitoring and Change Detection}
+
+Because the diagnostic components of the \FRF\ isolate distinct failure modes, the framework
+naturally supports ongoing monitoring of deployed forecasting systems. Changes in readiness
+may arise from increased frequency of shortfalls, greater failure severity, reduced tolerance
+stability, or shifts in the economic alignment of forecast error. Monitoring these dimensions
+separately enables earlier detection of degradation than aggregate accuracy metrics alone.
+
+At the composite level, trends in the \FRS\ can serve as a concise indicator of deployment
+suitability over time. However, interpretation of changes in the composite score should be
+informed by the underlying diagnostics. A declining \FRS\ may reflect different operational risks
+depending on whether it is driven by reliability, severity, stability, or cost-weighted loss, each of
+which may warrant a distinct response.
+
+\subsection{Implications for Governance and Decision Support}
+
+In organizational settings, forecast evaluation often plays a role in governance processes such as
+model approval, retraining, and escalation. The \FRF\ provides a structured basis for defining
+readiness criteria that are transparent and aligned with operational objectives. Acceptance
+thresholds may be specified for individual diagnostics or for the \FRS, enabling consistent and
+defensible deployment decisions across teams or business units.
+
+By embedding asymmetric cost considerations explicitly, the framework also facilitates clearer
+communication between technical and operational stakeholders. Rather than debating abstract
+accuracy improvements, discussions can focus on service reliability, exposure to shortage risk,
+and economic consequence. This alignment supports more effective decision support and reduces
+the likelihood that technically sound forecasts are deployed in contexts for which they are not
+operationally suited.
+
+\subsection{Implications for Forecast Design and Use}
+
+Finally, the \FRF\ has implications for how forecasts are designed and used. Awareness of readiness
+criteria may influence modeling choices, encouraging approaches that trade marginal gains in
+average accuracy for improvements in reliability or stability. At the same time, the framework
+clarifies that no single diagnostic is universally dominant; readiness depends on the interaction
+between error structure and operational context.
+
+By treating readiness as a multi-dimensional construct, the \FRF\ encourages forecasting
+practices that are explicitly aligned with execution requirements. This perspective supports more
+robust deployment decisions in asymmetric environments, where the consequences of forecast
+error are unevenly distributed and operational failure is costly.

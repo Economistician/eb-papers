@@ -1,0 +1,36 @@
+\section{Limitations and Scope}
+
+The Forecast Readiness Framework is intended as an evaluative structure for forecasting systems
+operating under asymmetric error cost, and its applicability is subject to several limitations.
+Recognizing these limitations clarifies the scope of the framework and helps avoid
+misinterpretation of its intended use.
+
+First, the framework depends on the specification of asymmetric penalty parameters, particularly
+within the \CWSL\ component. These parameters encode the relative operational cost of shortfalls
+and overbuilds and may vary across organizations, products, or decision contexts. While precise
+monetary calibration is not required, poorly chosen penalty ratios may misrepresent true
+operational priorities. In practice, sensitivity analysis and stakeholder input are necessary to
+ensure that penalty structures reflect plausible asymmetry assumptions.
+
+Second, the \FRF\ is designed for forecast evaluation rather than model training or optimization.
+Although its diagnostics may inform modeling choices, the framework does not prescribe how
+forecasts should be generated, nor does it guarantee optimal decisions when used as an
+optimization objective. In particular, the composite \FRS\ is intended as a deployment and
+governance signal, not as a loss function to be minimized during model fitting.
+
+Third, the framework evaluates forecast performance conditional on realized demand and does
+not explicitly account for uncertainty representation or probabilistic calibration. In environments
+where full predictive distributions are available, readiness assessment may benefit from
+complementary probabilistic diagnostics. The \FRF\ does not replace such approaches but
+addresses a distinct evaluative need centered on operational execution and asymmetric cost.
+
+Finally, the framework abstracts from certain system-level constraints, such as downstream
+dependencies, dynamic feedback effects, or capacity interactions across items or locations. While
+the diagnostic dimensions capture important aspects of readiness at the forecast level, additional
+analysis may be required to assess system-wide performance in highly coupled operational
+settings.
+
+These limitations reflect deliberate design choices rather than deficiencies. By focusing on
+deployment readiness under asymmetric error structures, the \FRF\ addresses a specific gap in
+forecast evaluation while remaining compatible with broader modeling and decision-support
+approaches.

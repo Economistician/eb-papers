@@ -1,0 +1,47 @@
+\section{Cost-Weighted Service Loss as the Economic Axis}
+
+Among the diagnostic components of the \FRF, Cost-Weighted Service Loss (\CWSL) provides
+the primary economic perspective on forecast performance. While other diagnostics describe
+the frequency, severity, and stability of forecast error, \CWSL\ explicitly quantifies how
+directional deviations translate into operational cost under asymmetric error structures. In
+environments where shortages impose substantially greater burden than excess, this cost
+alignment is essential for evaluating readiness.
+
+\CWSL\ measures forecast error by decomposing deviations into shortfall and overbuild
+components and applying asymmetric penalties to each. Shortfalls are penalized more heavily
+than overbuilds, reflecting their disproportionate impact on service reliability, throughput,
+and recovery dynamics. The resulting penalties are aggregated across items and evaluation
+intervals and normalized by realized demand, yielding a scale-free measure that is comparable
+across locations, products, and time periods. Interpreted directly, \CWSL\ answers the
+question: \emph{what fraction of total demand was effectively lost due to the cost-weighted
+impact of forecast error?}
+
+A key feature of \CWSL\ is its interval-level granularity. Forecast deviations are evaluated at
+the same temporal resolution at which operational decisions are made, preserving the timing
+and directional structure of error. This prevents benign overbuilds from offsetting critical
+shortfalls that occur during high-impact intervals, a common failure mode of symmetric
+accuracy metrics. By normalizing cost-weighted penalties by total demand, \CWSL\ further
+ensures that performance is driven by operationally meaningful volume rather than by
+low-impact noise.
+
+Penalty weights within \CWSL\ encode the relative operational cost of shortfalls and
+overbuilds. These parameters need not correspond to precise monetary values; rather, they
+summarize the organization’s tolerance for shortage risk relative to excess. In practice,
+penalty ratios may be elicited through structured operational judgment or explored through
+sensitivity analysis to assess the robustness of conclusions across plausible asymmetry
+assumptions. This flexibility allows \CWSL\ to adapt to heterogeneous operational contexts
+while retaining a consistent evaluative interpretation.
+
+Within the \FRF, \CWSL\ functions as the economic axis rather than a standalone evaluation
+criterion. Two forecasts may exhibit similar cost-weighted loss while differing substantially
+in the frequency or severity of shortfalls, leading to different operational responses.
+Conversely, forecasts with similar reliability profiles may impose very different economic
+burden depending on the depth and timing of deviations. For this reason, the \FRF\ embeds
+\CWSL\ alongside complementary diagnostics that isolate reliability, severity, and tolerance
+behavior.
+
+The formal definition, properties, and illustrative examples of \CWSL\ are provided in a
+companion technical note. In the present framework, \CWSL\ serves as the mechanism by
+which asymmetric operational cost is incorporated into readiness evaluation, ensuring that
+forecast assessment reflects not only how forecasts deviate from realized demand, but how
+those deviations affect execution in practice.

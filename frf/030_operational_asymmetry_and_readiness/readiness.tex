@@ -1,0 +1,39 @@
+\section{Operational Asymmetry and Forecast Readiness}
+
+Many operational decision environments exhibit pronounced asymmetry in the consequences of
+forecast error. In such settings, under-forecasting and over-forecasting do not represent symmetric
+deviations from a neutral baseline; rather, they trigger qualitatively different operational
+responses. Shortfalls may lead to service failures, lost throughput, expedited recovery actions,
+or cascading disruptions, while excess capacity or production is often absorbed at comparatively
+lower cost. This directional imbalance implies that the operational impact of forecast error depends
+not only on magnitude, but also on direction, timing, and frequency.
+
+Operational asymmetry also interacts with the temporal structure of decision-making. Forecasts
+are typically used at fixed intervals to support execution under limited flexibility. Errors that occur
+during high-impact intervals or periods of constrained recovery may impose disproportionate
+burden, even if they are infrequent. Conversely, small deviations during low-impact periods may
+be effectively neutralized by buffering mechanisms or operational slack. As a result, averaging
+forecast error across time can obscure the specific conditions under which forecasts fail to support
+execution.
+
+These characteristics challenge the adequacy of accuracy-based evaluation alone. Symmetric
+metrics aggregate deviations without regard to direction or consequence, implicitly treating all
+errors as interchangeable. Even when asymmetric loss is considered, a single aggregate measure
+cannot distinguish between forecasts that fail frequently but mildly and those that fail rarely but
+severely. From an operational perspective, these error structures represent fundamentally
+different risk profiles and demand different responses.
+
+In practice, operational systems exhibit varying degrees of tolerance to forecast error. Some
+deviations can be absorbed without material degradation, while others exceed the system’s
+capacity to adjust. The distinction between tolerable and readiness-critical error is therefore central
+to deployment decisions. A forecast may be accurate on average yet consistently violate tolerance
+bounds during critical intervals, rendering it unsuitable for use despite favorable aggregate
+performance.
+
+These considerations motivate the concept of \emph{forecast readiness}. Readiness emphasizes
+whether a forecast is suitable for deployment given the asymmetric and constrained nature of
+operational execution. Rather than asking how close forecasts are to realized demand on average,
+readiness asks whether forecasts reliably support service objectives, limit exposure to severe
+failures, remain stable within tolerance, and align with the economic consequences of error. This
+shift in perspective provides the foundation for the multi-dimensional evaluation framework
+introduced in the following section.

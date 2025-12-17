@@ -1,0 +1,40 @@
+\section{Illustrative Example}
+
+To illustrate the diagnostic value of the \FRF, we consider a stylized example in which two
+forecasts exhibit similar symmetric accuracy but differ substantially in their readiness for
+operational deployment. The example is intentionally simple and is not intended as an empirical
+evaluation; rather, it demonstrates how different error structures produce divergent operational
+outcomes that are obscured by aggregate accuracy metrics.
+
+Consider a single item evaluated over a short decision horizon consisting of multiple intervals.
+Realized demand is fixed across both scenarios. Two competing forecasts, denoted Forecast~A
+and Forecast~B, are constructed such that they achieve comparable performance according to
+a symmetric accuracy metric (e.g., MAE). Under symmetric evaluation, the two forecasts would
+therefore be regarded as equivalent.
+
+Despite this equivalence, the structure of forecast error differs markedly. Forecast~A exhibits
+small but frequent deviations that are predominantly within the operational tolerance band.
+Occasional shortfalls occur, but they are shallow and distributed across low-impact intervals.
+Forecast~B, by contrast, matches demand closely in most intervals but produces a small number
+of pronounced under-forecasting events during high-impact periods. Although these deep
+shortfalls are infrequent, they impose disproportionate operational burden when they occur.
+
+When evaluated under the \FRF, the two forecasts diverge clearly. Forecast~A achieves a higher
+\NSL, indicating that it avoids shortfalls more consistently. Conditional on shortfalls occurring,
+its \UD\ is lower, reflecting limited failure severity. Its deviations also fall within tolerance
+more frequently, yielding a higher \HRtau. As a result, the cost-weighted impact of error captured
+by \CWSL\ is modest, even when asymmetric penalties are applied. Taken together, these
+properties produce a higher \FRS, indicating stronger readiness for deployment.
+
+Forecast~B exhibits the opposite pattern. While its symmetric accuracy is comparable, its \NSL\
+is lower due to the presence of critical shortfall events. Its \UD\ is substantially higher, reflecting
+the depth of those failures, and its deviations more frequently exceed tolerance bounds. Under
+asymmetric penalties, these structural differences translate into a significantly higher \CWSL.
+The resulting \FRS\ reflects diminished readiness, despite otherwise favorable average accuracy.
+
+This example highlights a key limitation of symmetric evaluation: forecasts that appear equivalent
+by aggregate error measures may impose radically different operational risk. By decomposing
+readiness into reliability, severity, tolerance stability, and economic consequence, the \FRF\
+reveals failure modes that symmetric metrics systematically obscure. In doing so, the framework
+provides a more faithful assessment of whether a forecast is suitable for operational deployment
+in asymmetric environments.

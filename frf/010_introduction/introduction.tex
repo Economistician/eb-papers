@@ -1,0 +1,48 @@
+\section{Introduction}
+
+Short-horizon forecasts play a central role in operational decision-making across a wide range of
+settings, including production planning, staffing, inventory replenishment, logistics, and service
+operations. In these environments, forecasts are not evaluated in isolation; they are used to
+determine whether sufficient capacity, labor, or product will be available at specific moments in
+time. As a result, forecast errors translate directly into operational outcomes such as unmet demand,
+service delays, recovery time, and resource inefficiency. Forecast quality in these contexts is therefore
+best understood not only in terms of numerical accuracy, but in terms of whether forecasts are
+\emph{ready} to support reliable execution.
+
+Despite this operational reality, forecast performance is most commonly assessed using symmetric
+accuracy metrics such as mean absolute error (MAE), root mean squared error (RMSE), and mean
+absolute percentage error (MAPE). These measures implicitly assume that over-forecasting and
+under-forecasting impose equivalent cost. In many high-frequency operational systems, however,
+this assumption does not hold. Shortages frequently lead to service failures, lost throughput, or
+cascading recovery effects, whereas excess capacity or production is often absorbed at comparatively
+low cost. As a consequence, forecasts that perform well according to symmetric metrics may still
+exhibit systematic failure patterns during critical intervals, particularly when errors are concentrated
+in the direction of under-forecasting.
+
+A substantial literature in operations management and forecasting recognizes the asymmetric cost
+of shortages and excess. Classic models such as the newsvendor formulation explicitly distinguish
+between underage and overage cost, and asymmetric loss functions are widely used in model training
+and optimization. However, these approaches are primarily concerned with decision optimization
+rather than forecast evaluation. Moreover, they typically reduce performance to a single scalar loss,
+providing limited visibility into how error frequency, severity, and operational tolerance jointly
+affect readiness. As a result, existing methods offer limited guidance for diagnosing why a forecast
+that appears accurate by aggregate measures fails to support reliable execution.
+
+In this paper, we argue that evaluating forecasts in asymmetric operational environments requires a
+multi-dimensional perspective centered on readiness for deployment rather than numerical accuracy
+alone. We introduce the \emph{Forecast Readiness Framework} (FRF), which decomposes readiness
+into complementary dimensions capturing service reliability, failure severity, tolerance stability,
+and economic consequence. Within this framework, Cost-Weighted Service Loss (CWSL) serves as
+the primary economic axis, explicitly quantifying the asymmetric operational impact of forecast
+error. Supporting diagnostic measures characterize how frequently shortfalls occur, how severe they
+are when they arise, and whether deviations fall within bounds that can be absorbed by the
+operational system.
+
+The contributions of this paper are threefold. First, we formalize forecast readiness as a distinct
+evaluation objective that cannot be captured by symmetric accuracy metrics alone. Second, we
+propose a structured framework that integrates multiple diagnostic dimensions to assess whether
+forecasts are fit for operational deployment in asymmetric environments. Third, we demonstrate
+how cost-weighted evaluation and readiness diagnostics jointly reveal failure modes that are
+systematically obscured by traditional performance measures. The remainder of the paper reviews
+related work, introduces the Forecast Readiness Framework, presents an illustrative example, and
+discusses implications for forecast evaluation, governance, and future research.

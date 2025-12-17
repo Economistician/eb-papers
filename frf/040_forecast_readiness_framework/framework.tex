@@ -1,0 +1,98 @@
+\section{The Forecast Readiness Framework}
+
+In asymmetric operational environments, forecast evaluation cannot be reduced to a single notion
+of accuracy. Forecasts are used to support execution under constraints, uncertainty, and time
+pressure, and different patterns of error impose qualitatively different operational consequences.
+A forecast that occasionally produces deep shortages poses a different type of risk than one that
+is consistently biased but stable, even if both achieve similar aggregate accuracy. Evaluating such
+forecasts therefore requires a framework that distinguishes among the dimensions of error that
+matter for operational readiness.
+
+The \emph{Forecast Readiness Framework} (FRF) formalizes this perspective by decomposing
+readiness into a small set of complementary diagnostic dimensions. Each dimension captures a
+distinct aspect of how forecast error affects execution, and no single dimension is sufficient on
+its own. Together, these diagnostics provide a structured basis for assessing whether a forecast is
+fit for deployment in environments where under-forecasting and over-forecasting have asymmetric
+cost.
+
+\subsection{Readiness as a Multi-Dimensional Construct}
+
+Forecast readiness is defined here as the degree to which a forecast reliably supports operational
+execution under asymmetric error cost. This definition emphasizes deployment suitability rather
+than numerical precision. A forecast may achieve low average error while still failing to meet
+readiness requirements if its errors are concentrated in the wrong direction, occur too frequently,
+or exceed the system’s ability to absorb deviations.
+
+Within FRF, readiness is decomposed into four primary dimensions:
+\begin{enumerate}
+    \item \textbf{Service reliability}: how often the forecast avoids shortfalls entirely.
+    \item \textbf{Failure severity}: how large shortfalls are when they occur.
+    \item \textbf{Tolerance stability}: how frequently deviations fall within operationally
+    acceptable bounds.
+    \item \textbf{Economic consequence}: the cost-weighted impact of directional forecast error.
+\end{enumerate}
+
+Each dimension captures information that is obscured when performance is summarized by a
+single symmetric metric. For example, two forecasts with similar average error may differ sharply
+in the frequency of shortfalls, the depth of those shortfalls, or the economic burden they impose
+during peak intervals. FRF is designed to make these distinctions explicit.
+
+\subsection{Diagnostic Components of the Framework}
+
+FRF operationalizes the four readiness dimensions using a set of interpretable metrics. Service
+reliability is measured by the \emph{No--Shortfall Level} (NSL), which quantifies the proportion of
+intervals in which forecasted demand meets or exceeds realized demand. NSL isolates the
+frequency of service-risk events without regard to their magnitude.
+
+Failure severity is captured by \emph{Underbuild Depth} (UD), which measures the average
+magnitude of shortfalls conditional on a shortfall occurring. UD distinguishes between forecasts
+that miss frequently but shallowly and those that occasionally miss by large amounts, a distinction
+with important implications for recovery dynamics and throughput loss.
+
+Tolerance stability is measured by the \emph{Hit Rate within Tolerance} (HR@$\tau$), which
+quantifies the proportion of intervals in which forecast error falls within an operationally acceptable
+bound. This metric reflects the fact that many operational systems can absorb small deviations
+without degradation, and that readiness depends not on exact accuracy but on remaining within
+decision-relevant tolerances.
+
+Economic consequence is captured by \emph{Cost-Weighted Service Loss} (CWSL), which aggregates
+directional forecast error using asymmetric penalties for shortfalls and overbuilds and normalizes
+the result by realized demand. CWSL provides a cost-aligned measure of how forecast error
+translates into effective operational loss under a specified penalty structure.
+
+Each of these diagnostics isolates a distinct behavioral property of forecast error. None is intended
+to stand alone, and each addresses a failure mode that symmetric accuracy measures systematically
+obscure.
+
+\subsection{CWSL as the Economic Axis of Readiness}
+
+Among the diagnostic components, CWSL plays a central role by providing an explicit economic
+lens on forecast performance. Whereas NSL, UD, and HR@$\tau$ describe the structure and
+frequency of error, CWSL translates that structure into cost-weighted consequence. This makes
+CWSL the primary axis along which asymmetric operational risk is expressed within the framework.
+
+Importantly, CWSL does not replace the other diagnostics. Two forecasts may exhibit similar
+cost-weighted loss while differing substantially in the frequency or severity of shortfalls, leading
+to different operational responses. Conversely, forecasts with similar reliability profiles may
+produce very different economic impact depending on the depth and timing of errors. FRF
+therefore treats CWSL as foundational but not sufficient, embedding it within a broader diagnostic
+context.
+
+\subsection{Framework Interpretation and Use}
+
+The Forecast Readiness Framework is intended to support evaluation, comparison, and governance
+of forecasting systems rather than optimization alone. By examining multiple dimensions of
+readiness simultaneously, practitioners can identify why a forecast fails to support execution,
+distinguish among competing failure modes, and select models whose error structure aligns with
+operational priorities.
+
+At an aggregate level, the framework supports comparison across models, items, locations, or
+time periods using a consistent set of diagnostics. At a diagnostic level, it highlights whether poor
+performance arises from frequent shortfalls, severe shortfalls, instability relative to tolerance, or
+misalignment between error structure and cost asymmetry. This decomposition is essential for
+targeted intervention, model refinement, and informed trade-offs between service reliability and
+efficiency.
+
+By reframing forecast evaluation around readiness rather than numerical accuracy alone, the
+Forecast Readiness Framework provides a principled and operationally grounded basis for assessing
+forecast performance in asymmetric environments.
