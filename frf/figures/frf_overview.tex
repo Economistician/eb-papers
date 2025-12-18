@@ -1,0 +1,71 @@
+% frf/figures/frf_overview.tex
+\begin{figure}[t]
+\centering
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+  font=\small,
+  box/.style={draw, rounded corners, align=center, inner sep=8pt, text width=0.90\linewidth},
+  sbox/.style={draw, rounded corners, align=center, inner sep=6pt, text width=0.27\linewidth, font=\scriptsize},
+  arrow/.style={-Latex, thick},
+  node distance=10pt
+]
+
+% --- Main spine ---
+\node[box] (forecasts) {\textbf{Forecasts}\\[2pt]
+Point or probabilistic predictions used for execution};
+
+\node[box, below=10pt of forecasts] (error) {\textbf{Forecast Error}\\[2pt]
+Directional and time-varying deviations relative to realized demand};
+
+% --- SPACER: forces everything below to shift down ---
+\node[inner sep=0pt, minimum height=14pt, below=0pt of error] (spacer) {};
+
+% --- Diagnostics row ---
+\node[sbox, below=14pt of spacer] (ud)
+{\textbf{Severity}\\(\UD)\\[2pt]
+Shortfall depth};
+
+\node[sbox, left=6pt of ud] (nsl)
+{\textbf{Reliability}\\(\NSL)\\[2pt]
+Shortfall incidence};
+
+\node[sbox, right=6pt of ud] (hrtau)
+{\textbf{Tolerance Stability}\\(\HRtau)\\[2pt]
+Violations beyond tolerance};
+
+% --- Full-width diagnostics container ---
+\node[
+  draw, rounded corners,
+  fit=(nsl)(ud)(hrtau),
+  inner sep=18pt
+] (diag) {};
+
+% Title INSIDE the diagnostics box
+\node[font=\small\bfseries, align=center] at ([yshift=-16pt]diag.north)
+{Error Diagnostics (FRF Dimensions)\\[2pt]};
+
+% --- Remaining boxes ---
+\node[box, below=14pt of diag] (cwsl) {\textbf{Economic Impact}\\(\CWSL)\\[2pt]
+Asymmetric cost aggregation of forecast error};
+
+\node[box, below=10pt of cwsl] (frs) {\textbf{Composite Readiness Signal}\\(\FRS)\\[2pt]
+Deployment-oriented synthesis of diagnostics};
+
+\node[box, below=10pt of frs] (gov) {\textbf{Deployment \& Governance}\\[2pt]
+Model selection, threshold monitoring, risk escalation, operational approval};
+
+% --- Arrows ---
+\draw[arrow] (forecasts) -- (error);
+\draw[arrow] (error) -- (diag.north);
+\draw[arrow] (diag.south) -- (cwsl);
+\draw[arrow] (cwsl) -- (frs);
+\draw[arrow] (frs) -- (gov);
+
+\end{tikzpicture}%
+}
+\caption{\textbf{Structure of the Forecast Readiness Framework (FRF).}
+Forecast performance is evaluated across complementary diagnostic dimensions capturing reliability, severity,
+and tolerance stability. These diagnostics are integrated with asymmetric economic impact through \CWSL\ and
+synthesized into a composite readiness signal (\FRS) to support deployment and governance decisions.}
+\label{fig:frf_overview}
+\end{figure}
