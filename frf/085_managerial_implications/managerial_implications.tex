@@ -13,6 +13,30 @@ tolerance stability, and cost alignment. This enables the definition of readines
 explicitly linked to operational priorities, such as acceptable shortfall frequency or maximum
 tolerable service loss, and reduces reliance on ad hoc judgment.
 
+\subsection{Implications for Deployment Governance and Threshold Setting}
+
+A central managerial implication of the Forecast Readiness Framework is its support for
+explicit deployment governance. Rather than approving or rejecting forecasting systems
+based solely on aggregate accuracy metrics, managers can define minimum readiness standards
+aligned with operational risk tolerance. For example, a forecasting system may be required to
+meet a minimum reliability threshold, remain within tolerance bounds for a specified fraction
+of intervals, or limit cost-weighted service loss below an acceptable level before being approved
+for operational use.
+
+This threshold-based approach enables more consistent and defensible deployment decisions.
+Forecasts that achieve high numerical accuracy but exhibit frequent shortfalls or unstable
+behavior can be identified as unready, while forecasts with modest average error but stable
+and reliable performance may be deemed suitable for execution. Importantly, readiness
+thresholds can be adapted to context, allowing different standards for peak periods,
+critical items, or constrained operational environments.
+
+The framework also supports graduated escalation rather than binary approval decisions.
+Early warning signals—such as declining tolerance stability or increasing shortfall depth—
+can trigger targeted interventions, including model retraining, buffer adjustments, or
+temporary operational safeguards. By distinguishing among failure modes, the framework
+helps managers respond proportionately to forecast degradation rather than reacting only
+after service failures occur.
+
 The composite readiness signal provided by the framework further supports monitoring and
 escalation. Changes in overall readiness can be tracked over time, while shifts in individual
 diagnostics indicate whether deterioration arises from increased shortage risk, deeper failures,
