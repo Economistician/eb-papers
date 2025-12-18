@@ -32,6 +32,12 @@ Within FRF, readiness is decomposed into four primary dimensions:
     \item \textbf{Economic consequence}: the cost-weighted impact of directional forecast error.
 \end{enumerate}
 
+Figure~\ref{fig:frf_overview} summarizes the structure of the \FRF\ and the relationship between
+its diagnostic dimensions, the economic axis of evaluation, and the composite readiness signal
+used to support deployment and governance decisions.
+
+\input{figures/frf_overview}
+
 Each dimension captures information that is obscured when performance is summarized by a
 single symmetric metric. For example, two forecasts with similar average error may differ sharply
 in the frequency of shortfalls, the depth of those shortfalls, or the economic burden they impose
@@ -49,7 +55,7 @@ magnitude of shortfalls conditional on a shortfall occurring. UD distinguishes b
 that miss frequently but shallowly and those that occasionally miss by large amounts, a distinction
 with important implications for recovery dynamics and throughput loss.
 
-Tolerance stability is measured by the \emph{Hit Rate within Tolerance} (HR@$\tau$), which
+Tolerance stability is measured by the \emph{Hit Rate within Tolerance} (\HRtau), which
 quantifies the proportion of intervals in which forecast error falls within an operationally acceptable
 bound. This metric reflects the fact that many operational systems can absorb small deviations
 without degradation, and that readiness depends not on exact accuracy but on remaining within
@@ -67,7 +73,7 @@ obscure.
 \subsection{CWSL as the Economic Axis of Readiness}
 
 Among the diagnostic components, CWSL plays a central role by providing an explicit economic
-lens on forecast performance. Whereas NSL, UD, and HR@$\tau$ describe the structure and
+lens on forecast performance. Whereas NSL, UD, and \HRtau describe the structure and
 frequency of error, CWSL translates that structure into cost-weighted consequence. This makes
 CWSL the primary axis along which asymmetric operational risk is expressed within the framework.
 
