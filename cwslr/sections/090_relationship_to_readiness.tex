@@ -1,0 +1,55 @@
+% ----------------------------------------------------------
+% RELATIONSHIP TO FORECAST READINESS
+% ----------------------------------------------------------
+\section{Relationship to Forecast Readiness}
+\label{sec:relationship_to_readiness}
+
+The calibration of asymmetric cost ratios is a foundational component of the
+Forecast Readiness Framework (FRF).
+Within FRF, readiness is defined not by statistical accuracy alone, but by the
+degree to which forecasts align with the operational consequences of error.
+Cost asymmetry is the mechanism through which these consequences are encoded.
+
+Cost-Weighted Service Loss (\CWSL{}) evaluates forecast performance relative to a
+specified cost ratio $\Rdef$, which determines the relative severity of
+underbuild versus overbuild.
+However, without a principled method for selecting $\R$, readiness assessment
+becomes arbitrary and potentially inconsistent across models, entities, or time
+periods.
+Grid-based calibration addresses this gap by grounding $\R$ in observed error
+behavior.
+
+From a readiness perspective, balance-based calibration performs a normalization
+step.
+It identifies the point at which the realized operational burden of shortfall and
+surplus is equalized under the assumed cost structure.
+This does not assert that the organization is risk-neutral, but it establishes a
+coherent baseline from which deliberate risk preferences can be applied.
+
+Importantly, calibration occurs upstream of evaluation.
+The calibrated ratio defines the evaluation environment in which forecasts are
+judged, rather than adapting the metric post hoc to favor a particular model.
+This separation preserves the interpretability and comparability of readiness
+scores across candidates.
+
+At the entity level, calibrated ratios expose structural differences in forecast
+behavior.
+Entities that consistently underforecast require higher shortfall penalties to
+achieve balance, while entities prone to overforecasting exhibit lower effective
+asymmetry.
+These differences are not artifacts of the metric, but signals of readiness
+heterogeneity that can inform segmentation, governance, and targeted model
+intervention.
+
+Within the broader FRF, cost-ratio calibration operates alongside other readiness
+primitives such as tolerance calibration (HR@$\tau$), shortfall avoidance (NSL),
+and loss depth (UD).
+Together with tolerance calibration (HR@$\tau$), cost-ratio calibration defines
+the \emph{evaluation envelope} within which readiness is assessed, establishing
+the bounds of acceptable error magnitude and asymmetry.
+
+In this sense, grid-based cost-ratio calibration is not a tuning convenience but a
+readiness primitive.
+It converts raw forecast error into an operationally meaningful evaluation
+context, enabling consistent, explainable, and decision-aligned assessment across
+the forecasting lifecycle.

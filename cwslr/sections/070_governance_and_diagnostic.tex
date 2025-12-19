@@ -1,0 +1,79 @@
+% ----------------------------------------------------------
+% GOVERNANCE AND DIAGNOSTICS
+% ----------------------------------------------------------
+\section{Governance and Diagnostics}
+\label{sec:governance}
+
+Balance-based calibration introduces an explicit decision layer into forecast
+evaluation.
+While this improves interpretability and operational alignment, it also requires
+clear governance standards to prevent misuse or silent drift.
+This section outlines recommended diagnostics, reporting conventions, and
+controls for responsible deployment.
+
+\subsection{Required diagnostics}
+\label{subsec:required_diagnostics}
+
+Any calibrated cost ratio—global or entity-level—should be accompanied by a
+minimum diagnostic set.
+At a minimum, reported outputs should include:
+\begin{itemize}[leftmargin=*]
+    \item the selected ratio $\Rstar$ or $\Ri$,
+    \item the grid $\Rgrid$ over which calibration was performed,
+    \item realized underbuild and overbuild costs at the selected ratio,
+    \item the absolute imbalance
+    $|\UnderCost(\R) - \OverCost(\R)|$ at selection,
+    \item the sample size $n$ used for calibration.
+\end{itemize}
+
+These diagnostics allow reviewers to assess whether the calibrated ratio reflects
+a stable operating regime or a fragile balance driven by limited data.
+Absent this context, calibrated ratios risk being interpreted as intrinsic
+properties rather than empirical artifacts.
+
+\subsection{Stability and sensitivity checks}
+\label{subsec:stability_checks}
+
+Calibration should be evaluated for stability across reasonable perturbations.
+Recommended checks include:
+\begin{itemize}[leftmargin=*]
+    \item varying the ratio grid resolution or bounds,
+    \item recalibrating on rolling or expanding historical windows,
+    \item comparing calibration outcomes across adjacent time periods,
+    \item evaluating the curvature of the imbalance function near $\Rstar$.
+\end{itemize}
+
+Flat imbalance regions or highly unstable selections indicate that the calibrated
+ratio is weakly identified.
+In such cases, governance rules may dictate defaulting to a global ratio or
+reducing reliance on asymmetric evaluation.
+
+\subsection{Separation of calibration and evaluation}
+\label{subsec:calibration_vs_evaluation}
+
+A central governance principle is the separation of calibration and evaluation.
+Cost ratios should be calibrated on a designated calibration window and held
+fixed when evaluating holdout or forward-looking data.
+Recalibrating ratios on the same data used for evaluation introduces leakage and
+undermines comparability over time.
+
+This separation mirrors best practices in model training and validation and
+supports consistent, auditable performance reporting.
+
+\subsection{Operational controls and overrides}
+\label{subsec:controls}
+
+In production environments, calibrated ratios may serve as defaults rather than
+hard constraints.
+Governance frameworks should allow for explicit overrides, provided such
+decisions are documented and justified.
+For example, leadership may mandate a minimum asymmetry for safety-critical
+operations regardless of empirical balance.
+
+Crucially, overrides should be visible.
+The combination of empirical calibration, documented adjustments, and persistent
+diagnostics enables cost-asymmetric evaluation to function as a decision-support
+tool rather than an opaque optimization artifact.
+
+The final section summarizes how balance-based calibration integrates with
+cost-weighted metrics to support readiness-oriented forecast evaluation.

@@ -1,0 +1,46 @@
+% ----------------------------------------------------------
+% LIMITATIONS
+% ----------------------------------------------------------
+\section{Limitations}
+\label{sec:limitations}
+
+While balance-based calibration provides a principled and transparent method for
+selecting asymmetric cost ratios in \CWSL{}, several limitations should be
+acknowledged.
+
+First, the calibration procedure is inherently retrospective.
+It relies on historical forecast errors and assumes that the relative frequency
+and magnitude of underbuild and overbuild observed during calibration are
+representative of future operating conditions.
+Structural changes in demand patterns, capacity constraints, or operational
+policies may therefore require periodic recalibration.
+
+Second, balance-based calibration equalizes realized underbuild and overbuild
+\emph{cost mass}, not necessarily true economic cost.
+In environments where the actual cost functions are highly nonlinear,
+time-varying, or state-dependent, the inferred ratio should be interpreted as an
+\emph{effective asymmetry} rather than a literal estimate of financial loss.
+
+Third, the approach depends on the choice of the candidate grid of ratios.
+Although coarse grids are often sufficient to reveal stable regions, excessively
+narrow or sparse grids may obscure meaningful structure.
+Conversely, very fine grids may introduce apparent precision that exceeds the
+information content of the data.
+
+At the entity level, small sample sizes pose an additional challenge.
+Entities with limited history may produce unstable or extreme ratio estimates.
+For this reason, practical implementations should enforce minimum sample sizes,
+apply optional global caps, or pool information hierarchically when appropriate.
+
+Finally, balance-based calibration does not encode organizational risk appetite
+or strategic priorities directly.
+In some contexts, decision-makers may intentionally favor persistent
+shortfall-avoidance or surplus-avoidance even when historical costs appear
+balanced.
+In such cases, calibrated ratios should be viewed as informative diagnostics
+rather than binding prescriptions.
+
+These limitations do not diminish the utility of the method, but they emphasize
+the importance of treating cost-ratio calibration as a governed modeling
+component—subject to review, validation, and revision—rather than a one-time
+optimization.

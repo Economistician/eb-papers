@@ -1,0 +1,102 @@
+% ----------------------------------------------------------
+% BALANCE-BASED CALIBRATION
+% ----------------------------------------------------------
+\section{Balance-Based Cost Ratio Calibration}
+\label{sec:calibration}
+
+Sensitivity analysis characterizes how \CWSL{} behaves across a range of cost
+asymmetry assumptions, but practical deployment still requires selecting a
+reference cost ratio.
+This section introduces a deterministic, data-driven calibration rule that
+chooses a cost ratio by balancing realized underbuild and overbuild costs,
+rather than by minimizing \CWSL{} directly.
+
+Treating cost asymmetry as an object to be calibrated rather than optimized
+aligns with foundational principles in cost-sensitive decision theory, where
+misclassification or error costs are understood as exogenous to the learning
+algorithm and reflective of downstream consequences \citep{elkan2001}.
+
+\subsection{Decomposing realized costs}
+\label{subsec:cost_decomposition}
+
+For a fixed cost ratio $\R{}$ and overbuild cost $\co{}$, the total realized cost
+implicit in \CWSL{} can be decomposed into two components:
+\[
+    \UnderCost(\R{})
+    =
+    \sumit \R{} \cdot \co{} \cdot \sit,
+    \qquad
+    \OverCost(\R{})
+    =
+    \sumit \co{} \cdot \oit.
+\]
+The overbuild component is independent of $\R{}$, while the underbuild component
+scales linearly with $\R{}$.
+This decomposition makes explicit how changes in the cost ratio redistribute
+emphasis between shortfall and surplus penalties.
+
+Rather than asking which $\R{}$ minimizes the aggregate metric, we focus on the
+\emph{imbalance} between these two components:
+\[
+    \Delta(\R{}) = \left| \UnderCost(\R{}) - \OverCost(\R{}) \right|.
+\]
+This quantity measures how asymmetrically historical errors are penalized under
+a given cost assumption.
+
+\subsection{Calibration rule}
+\label{subsec:calibration_rule}
+
+Given a candidate grid $\Rgrid$, we define the calibrated cost ratio $\Rstar$ as
+any element of the grid that minimizes the realized cost imbalance:
+\[
+    \Rstar \in \Rbalance.
+\]
+This rule selects a cost ratio for which the weighted contribution of historical
+shortfalls and overbuilds are as balanced as possible.
+Notably, the calibration operates on \emph{aggregate cost mass} rather than error
+frequency, distinguishing it from quantile- or hit-rate-based rules such as
+HR@$\tau$ that target coverage levels rather than cost balance.
+
+Several properties of this approach are worth emphasizing.
+First, the calibration is \emph{deterministic}: for a fixed dataset and grid,
+$\Rstar$ is uniquely determined up to ties.
+Second, the method relies only on observed forecast errors and does not require
+external labels, causal cost models, or optimization of forecast outputs.
+Third, the resulting $\Rstar$ is directly interpretable: it represents a cost
+assumption under which historical under- and over-provisioning are treated as
+equally consequential in aggregate.
+
+\subsection{Why balance rather than minimization}
+\label{subsec:why_balance}
+
+Minimizing \CWSL{} with respect to $\R{}$ is ill-posed.
+Because the underbuild component scales linearly with $\R{}$, unconstrained
+minimization tends to push the solution toward extreme ratios that suppress one
+side of the error decomposition.
+Such values may minimize the metric numerically, but they are rarely meaningful
+or stable as representations of operational cost asymmetry.
+
+In contrast, balance-based calibration seeks a reference point that reflects the
+\emph{structure of historical errors} rather than their exploitation.
+The goal is not to achieve the lowest possible \CWSL{}, but to select a defensible
+and inspectable asymmetry assumption against which forecasts can be compared.
+
+\subsection{Practical interpretation}
+\label{subsec:practical_interpretation}
+
+The calibrated ratio $\Rstar$ should be interpreted as a \emph{reference}
+assumption, not as a ground-truth cost parameter.
+It provides a principled starting point for evaluation, sensitivity reporting,
+and governance, particularly when explicit cost models are unavailable or
+disputed.
+
+In practice, $\Rstar$ is most useful when considered alongside the sensitivity
+curve introduced in Section~\ref{sec:sensitivity_analysis}.
+If $\Rstar$ lies in a flat region of the response surface, evaluation conclusions
+are likely to be robust.
+If it lies in a steep region, additional scrutiny or broader reporting may be
+warranted.
+
+The next section extends this calibration approach to heterogeneous settings by
+allowing cost ratios to vary across entities while maintaining safeguards
+against overfitting and instability.

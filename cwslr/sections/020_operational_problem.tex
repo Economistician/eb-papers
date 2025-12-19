@@ -1,0 +1,89 @@
+% ----------------------------------------------------------
+% OPERATIONAL PROBLEM
+% ----------------------------------------------------------
+\section{The Cost Ratio as an Operational Decision}
+\label{sec:operational_problem}
+
+The cost ratio $\R{} = \cu / \co$ plays a central role in asymmetric forecast
+evaluation, yet it is rarely treated explicitly as an operational decision.
+In practice, $\R{}$ is often fixed a priori, borrowed from prior studies,
+or chosen heuristically based on informal intuition about the relative severity
+of underbuild and overbuild. While such choices may be unavoidable in early
+exploratory analysis, they become problematic once forecasts are used to drive
+production, staffing, inventory, or service-level commitments.
+
+Asymmetric loss functions are well established in the forecast evaluation
+literature, particularly in settings where the consequences of over- and
+under-prediction differ materially \citep{gneiting2011}.
+However, the practical challenge in operational deployments is not whether
+asymmetry is appropriate, but how the implied cost structure should be selected,
+interpreted, and governed.
+
+Crucially, $\R{}$ is not a modeling hyperparameter in the usual sense.
+It does not control the expressive capacity of a forecasting model, nor does it
+affect the statistical fit of predictions to data. Instead, $\R{}$ encodes an
+\emph{operational preference}: how forecast errors are valued once they interact
+with real systems, constraints, and costs. As such, specifying $\R{}$ is a
+governance decision that shapes how forecast performance is interpreted and how
+models are compared.
+
+\subsection{Consequences of mis-specifying the cost ratio}
+\label{subsec:mis_specification}
+
+Mis-specification of $\R{}$ can materially distort evaluation outcomes.
+When $\R{}$ is set too high, small underforecasting errors dominate the metric,
+potentially favoring systematically conservative forecasts that inflate
+overbuild. When $\R{}$ is set too low, underbuild is insufficiently penalized,
+masking readiness risks that may only surface during peak demand or stress
+conditions.
+
+Because \CWSL{} aggregates error asymmetrically, these effects are nonlinear:
+changes in $\R{}$ can alter not only the magnitude of \CWSL{} but also the
+\emph{relative ranking} of competing forecasting approaches.
+Two models that appear equivalent under one cost ratio may diverge sharply
+under another. Treating $\R{}$ as fixed therefore embeds an implicit assumption
+about operational priorities that may not be robust or even explicit.
+
+\subsection{Why optimization is the wrong framing}
+\label{subsec:why_not_optimization}
+
+It may be tempting to frame the choice of $\R{}$ as an optimization problem,
+selecting the ratio that minimizes \CWSL{} on historical data.
+This framing is misleading for two reasons.
+First, $\R{}$ does not correspond to a controllable decision variable in the
+operating system; it represents how costs are \emph{valued}, not how forecasts
+are generated.
+Second, minimizing \CWSL{} over $\R{}$ trivially drives the solution toward extreme
+values that suppress one side of the error decomposition, yielding ratios that
+are difficult to interpret and unlikely to generalize.
+
+Even when forecasting models themselves are trained using asymmetric loss
+functions (e.g., quantile loss or pinball loss), the evaluation cost ratio
+$\R{}$ remains a distinct governance choice that reflects how errors are assessed
+and compared at decision time, rather than how predictions are produced.
+
+The appropriate question is therefore not
+``Which $\R{}$ minimizes \CWSL{}?''
+but rather
+``Which $\R{}$ reflects a defensible balance between underbuild and overbuild costs
+given historical behavior?''
+
+\subsection{Toward governed cost asymmetry}
+\label{subsec:governed_asymmetry}
+
+From an operational perspective, the role of calibration is to make the implicit
+assumptions encoded in $\R{}$ explicit, inspectable, and auditable.
+A governed approach to cost asymmetry should:
+\begin{itemize}[leftmargin=*]
+    \item expose how evaluation outcomes vary across plausible cost ratios,
+    \item avoid extreme or unstable parameter choices driven by noise,
+    \item rely only on information available at evaluation time,
+    \item support consistent application across entities and time periods.
+\end{itemize}
+
+These requirements motivate a sensitivity- and calibration-based treatment of
+$\R{}$, in which \CWSL{} is evaluated across a candidate grid of ratios and
+selection rules are defined in terms of observable cost imbalance rather than
+numerical minimization. The next sections formalize this perspective by framing
+\CWSL{} as a response surface over $\R{}$ and introducing grid-based sensitivity
+analysis.

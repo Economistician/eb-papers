@@ -1,0 +1,99 @@
+% ----------------------------------------------------------
+% ENTITY-LEVEL HETEROGENEITY
+% ----------------------------------------------------------
+\section{Entity-Level Cost Asymmetry}
+\label{sec:entity_level}
+
+Operational systems rarely exhibit homogeneous cost asymmetry across all
+entities.
+Products, locations, services, or demand segments may differ substantially in
+their tolerance for shortfall versus surplus.
+A single global cost ratio can therefore obscure systematic heterogeneity and
+mask localized readiness risks.
+This section extends balance-based calibration to the entity level while
+introducing safeguards to preserve interpretability and stability.
+
+\subsection{Motivation for entity-specific calibration}
+\label{subsec:entity_motivation}
+
+Let $\entity \in I$ index entities such as items, stores, or service classes.
+Historical forecast errors often reveal persistent differences in how entities
+experience shortfall and overbuild.
+For example, a high-volume staple may incur severe penalties when underbuilt,
+while a low-volume or highly substitutable item may tolerate occasional shortage
+with limited impact.
+Applying a single global $\R{}$ in such settings conflates these regimes and can
+produce misleading evaluations.
+
+Allowing entity-specific ratios $\Ri{}$ enables evaluation to reflect these
+systematic differences.
+However, unconstrained per-entity calibration risks overfitting to noise,
+particularly for sparse or volatile entities.
+The objective is therefore not maximal granularity, but controlled heterogeneity.
+
+\subsection{Entity-level calibration rule}
+\label{subsec:entity_rule}
+
+For each entity $\entity$, we apply the balance-based calibration rule to the
+subset of historical observations associated with that entity.
+Given a minimum sample requirement $n_{\min}$, we compute
+\[
+    \Rist \in
+    \arg\min_{\R \in \Rgrid}
+    \left|
+        \UnderCost_{\entity}(\R{}) - \OverCost_{\entity}(\R{})
+    \right|,
+\]
+where $\UnderCost_{\entity}(\R{})$ and $\OverCost_{\entity}(\R{})$ denote realized
+underbuild and overbuild costs aggregated over entity $\entity$.
+
+Entities with fewer than $n_{\min}$ finite observations are excluded from
+calibration and assigned no entity-specific ratio.
+This constraint prevents unstable estimates driven by small samples and makes
+the calibration behavior explicit.
+
+\subsection{Global caps and safeguards}
+\label{subsec:entity_safeguards}
+
+Even with sufficient data, entity-level calibration can produce extreme ratios
+when historical errors are highly unbalanced.
+To prevent tolerance inflation or pathological asymmetry, we introduce optional
+global safeguards.
+
+A common approach is to cap entity-level ratios by a global reference value,
+derived from the full dataset.
+Let $\Rstar$ denote the globally calibrated ratio from
+Section~\ref{sec:calibration}.
+We enforce
+\[
+    \Rist \leftarrow \min(\Rist, \Rstar),
+\]
+or, more generally, cap $\Rist$ by a high quantile of the empirical distribution
+of entity-level ratios.
+Such caps ensure that local calibration does not override system-wide governance
+principles.
+
+\subsection{Interpretation and reporting}
+\label{subsec:entity_interpretation}
+
+Entity-level ratios should be reported alongside diagnostics including sample
+size, achieved balance, and any applied caps.
+These diagnostics are essential for distinguishing meaningful heterogeneity from
+noise-driven variation.
+
+Entity-level calibration should be treated as a \emph{diagnostic and analytical
+tool first}, used to surface structural differences and potential readiness
+risks, rather than as a default mechanism to be deployed uniformly across all
+entities.
+
+Importantly, entity-level calibration is not intended to replace global
+calibration.
+Rather, it provides a refinement layer that can be applied selectively when
+operational context and data availability justify additional complexity.
+In many deployments, a hybrid approach—global calibration with entity-level
+overrides for well-supported cases—offers the best balance between fidelity and
+governance.
+
+The next section consolidates these ideas by discussing practical diagnostics,
+reporting conventions, and governance workflows that support responsible use of
+cost asymmetry in production environments.

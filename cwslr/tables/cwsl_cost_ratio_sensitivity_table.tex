@@ -1,0 +1,95 @@
+% ----------------------------------------------------------
+% OVERVIEW
+% ----------------------------------------------------------
+\section{Overview}
+\label{sec:overview}
+
+Cost-Weighted Service Loss (\CWSL{}) evaluates forecast performance under
+asymmetric operational penalties for underbuild (shortfall) and overbuild
+(surplus). The metric depends on the specification of penalty weights
+$\cu$ and $\co$, and is often parameterized by a cost ratio
+$\Rdef$ that encodes how much more costly underforecasting is relative to
+overforecasting.
+
+This technical note addresses a practical gap that emerges once \CWSL{} is adopted:
+\emph{how should the cost ratio $\R{}$ be selected and governed in real deployments?}
+In many applications, $\R{}$ is treated as a fixed constant chosen heuristically.
+However, model comparisons, readiness decisions, and downstream operating policies
+can be highly sensitive to the assumed cost asymmetry. As a result, responsible
+use of \CWSL{} requires methods that (i) quantify sensitivity to $\R{}$ and
+(ii) provide transparent, auditable mechanisms for selecting $\R{}$ from historical
+forecast behavior.
+
+This note is intended for practitioners and decision-makers deploying asymmetric
+forecast evaluation in production environments where explicit economic cost models
+are unavailable, disputed, or unstable, but where forecast errors nevertheless
+carry asymmetric operational consequences.
+
+\subsection{Scope and non-goals}
+\label{subsec:scope}
+
+This note assumes familiarity with the definition and interpretation of \CWSL{}.
+We do not re-derive the metric; instead, we treat \CWSL{} as a fixed evaluation
+functional and study its dependence on $\R{}$.
+The goal is not to ``optimize'' forecasts by tuning $\R{}$, but to
+\emph{calibrate and govern} the operational asymmetry assumptions used when
+evaluating and selecting forecasting systems.
+
+The methods presented here:
+\begin{itemize}[leftmargin=*]
+    \item require \emph{no exogenous data} (only historical $(y, \hat{y})$ pairs),
+    \item impose \emph{no model assumptions} and do not depend on any model class,
+    \item are \emph{deterministic} given inputs and a specified candidate grid,
+    \item produce diagnostics intended for transparent reporting and governance.
+\end{itemize}
+
+\subsection{Contributions}
+\label{subsec:contributions}
+
+We introduce a sensitivity- and calibration-oriented workflow for specifying
+$\R{}$ in asymmetric forecast evaluation, treating cost-asymmetry selection as
+a readiness primitive $\ReadinessPrimitive{}$ within the Forecast Readiness
+Framework:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Response-surface framing.}
+    We analyze \CWSL{} as a function of the cost ratio, \CWSLR{}, highlighting that
+    the practical question is often about robustness to cost assumptions rather
+    than point evaluation at a single $\R{}$.
+
+    \item \textbf{Grid-based sensitivity analysis.}
+    We formalize evaluation of \CWSL{} across a candidate set $\Rgrid$ to produce
+    an interpretable sensitivity curve that supports stability checks and
+    cost-assumption stress testing.
+
+    \item \textbf{Balance-based cost ratio calibration.}
+    We propose a deterministic, data-driven selection rule that chooses a
+    calibrated ratio $\Rstar$ by minimizing the imbalance between total
+    underbuild and overbuild costs over the calibration window:
+    \[
+        \Rstar \in \Rbalance.
+    \]
+    This approach provides an operationally interpretable ``automatic''
+    selection mechanism without requiring external labels or causal cost models.
+
+    \item \textbf{Entity-level extensions and governance safeguards.}
+    We extend calibration to entity-specific ratios $\Rist$ to capture systematic
+    heterogeneity, and discuss safeguards (e.g., minimum sample requirements,
+    capping strategies, and reporting conventions) to prevent tolerance inflation
+    or overfitting to noise.
+\end{enumerate}
+
+\subsection{Organization of the note}
+\label{subsec:organization}
+
+Section~\ref{sec:operational_problem} motivates the cost ratio $\R{}$ as an
+operational governance decision rather than a modeling hyperparameter.
+Section~\ref{sec:response_surface} frames \CWSL{} as a response surface \CWSLR{}.
+Section~\ref{sec:sensitivity_analysis} presents grid-based sensitivity analysis.
+Section~\ref{sec:calibration} introduces balance-based calibration for $\Rstar$,
+and Section~\ref{sec:entity_level} extends the approach to entity-level
+heterogeneity. Section~\ref{sec:governance} provides diagnostics and governance
+guidance for deployment, and Section~\ref{sec:limitations} discusses limitations
+and non-goals. Section~\ref{sec:relationship_to_readiness} situates cost-asymmetry
+calibration within the broader Forecast Readiness Framework, and
+Section~\ref{sec:conclusion} concludes.

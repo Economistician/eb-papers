@@ -1,0 +1,43 @@
+% ----------------------------------------------------------
+% 010 CONCLUSION
+% ----------------------------------------------------------
+\section{Conclusion}
+\label{sec:conclusion}
+
+Asymmetric cost assumptions are unavoidable in operational forecasting.
+The question is not whether asymmetry exists, but how it is specified,
+justified, and governed.
+This technical note has introduced a principled, data-driven approach to
+calibrating asymmetric cost ratios for use with Cost-Weighted Service Loss
+(\CWSL{}).
+
+By evaluating \CWSL{} over a discrete grid of candidate cost ratios and selecting
+the point of cost balance, the proposed method anchors asymmetry in observed
+forecast behavior rather than subjective preference.
+The resulting calibration is deterministic, transparent, and reproducible,
+making it suitable for production evaluation pipelines and governance contexts.
+
+Crucially, calibration is positioned as a preprocessing step rather than an
+optimization shortcut.
+It defines the evaluation environment in which forecasts are judged, preserving
+the integrity of model comparison and preventing post hoc metric manipulation.
+This separation ensures that readiness scores remain interpretable across models,
+entities, and time periods.
+
+At finer levels of granularity, entity-specific calibration reveals systematic
+differences in forecast behavior that would otherwise be obscured by global cost
+assumptions.
+These differences are not statistical noise, but actionable signals that support
+segmentation, targeted intervention, and readiness-aware deployment strategies.
+
+Within the Forecast Readiness Framework, grid-based cost calibration functions as
+a readiness primitive.
+Together with tolerance calibration (HR@\(\tau\)), shortfall avoidance (NSL),
+loss depth (UD), and readiness adjustment layers, it forms a coherent evaluation
+stack that aligns statistical forecasts with real operational consequences.
+
+The intent of this work is not to prescribe a single ``correct'' cost ratio, but
+to establish a defensible baseline from which informed risk preferences can be
+applied.
+In doing so, it advances forecast evaluation from abstract accuracy toward
+decision-aligned readiness.

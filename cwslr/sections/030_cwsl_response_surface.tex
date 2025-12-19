@@ -1,0 +1,76 @@
+% ----------------------------------------------------------
+% CWSL RESPONSE SURFACE
+% ----------------------------------------------------------
+\section{\CWSL{} as a Function of Cost Asymmetry}
+\label{sec:response_surface}
+
+Although \CWSL{} is typically reported at a single cost ratio $\R$, the metric is
+more naturally understood as a \emph{response surface} over cost asymmetry.
+For fixed forecast outcomes $(y_{it}, \hat{y}_{it})$ and a fixed overbuild cost
+$\co$, \CWSL{} can be written explicitly as a function of $\R$ by setting
+$\cu = \R \cdot \co$:
+\[
+    \CWSLR = 
+    \frac{
+        \sumit
+        \left[
+            \R \cdot \co \cdot \sit
+            +
+            \co \cdot \oit
+        \right]
+    }{
+        \sumit \yit
+    }.
+\]
+This representation makes clear that \CWSL{} is not a single scalar quantity, but
+a family of values indexed by $\R$.
+
+\subsection{Structure of the response surface}
+\label{subsec:surface_structure}
+
+For any fixed dataset, \CWSLR{} is a deterministic, piecewise-linear function of
+$\R$.
+The overbuild component is independent of $\R$, while the underbuild component
+scales linearly with $\R$.
+As a result, the shape of the response surface is governed entirely by the
+distribution and magnitude of historical shortfalls relative to overbuild.
+
+Several qualitative regimes are common in practice:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Underbuild-dominated regimes}, where \CWSLR{} increases rapidly
+    with $\R$, indicating that shortfalls are frequent or deep.
+    \item \textbf{Overbuild-dominated regimes}, where \CWSLR{} is relatively flat
+    for moderate $\R$, reflecting excess capacity or conservative forecasting.
+    \item \textbf{Mixed regimes}, where curvature changes across the range of
+    $\R$, suggesting a tradeoff between shortfall and surplus that depends on
+    cost assumptions.
+\end{itemize}
+
+These regimes are properties of the historical forecast errors, not of the
+forecasting model itself. Consequently, interpreting \CWSL{} at a single
+$\R$ without inspecting the surrounding response surface can obscure important
+operational behavior.
+
+\subsection{Why response surfaces matter}
+\label{subsec:why_surface}
+
+Viewing \CWSL{} as a response surface clarifies two practical points.
+First, robustness to cost assumptions can be assessed directly by examining how
+rapidly \CWSLR{} changes across plausible values of $\R$.
+Flat regions indicate stability: evaluation conclusions are unlikely to change
+materially if the true operational cost ratio differs modestly from the assumed
+one.
+Steep regions indicate fragility: small changes in $\R$ can lead to large changes
+in measured performance or model ranking.
+
+Second, the response-surface view separates \emph{evaluation} from
+\emph{calibration}.
+Rather than selecting $\R$ to minimize \CWSL{}, we can ask how underbuild and
+overbuild costs balance across $\R$, and where that balance yields an
+operationally interpretable reference point.
+This perspective motivates grid-based sensitivity analysis as a first-class
+diagnostic, rather than an auxiliary experiment.
+
+The next section formalizes this idea by introducing a grid-based procedure for
+evaluating \CWSL{} across a candidate set of cost ratios and extracting
+sensitivity diagnostics from the resulting response curve.

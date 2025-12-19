@@ -1,0 +1,95 @@
+% ----------------------------------------------------------
+% METRIC & FRAMEWORK MACROS
+% Forecast Readiness Framework / Electric Barometer
+% ----------------------------------------------------------
+
+% Core metric
+\newcommand{\CWSL}{\ensuremath{\mathrm{CWSL}}}
+
+% ----------------------------------------------------------
+% Indexing
+% ----------------------------------------------------------
+
+\newcommand{\entity}{\ensuremath{i}}
+\newcommand{\timeindex}{\ensuremath{t}}
+
+\newcommand{\yit}{\ensuremath{y_{\entity\timeindex}}}
+\newcommand{\yhatit}{\ensuremath{\hat{y}_{\entity\timeindex}}}
+
+% ----------------------------------------------------------
+% Error decomposition
+% ----------------------------------------------------------
+
+\newcommand{\shortfall}{\ensuremath{s}}
+\newcommand{\overbuild}{\ensuremath{o}}
+
+\newcommand{\sit}{\ensuremath{s_{\entity\timeindex}}}
+\newcommand{\oit}{\ensuremath{o_{\entity\timeindex}}}
+
+% Positive-part operator
+\newcommand{\pospart}[1]{\left(#1\right)_{+}}
+
+% ----------------------------------------------------------
+% Cost parameters
+% ----------------------------------------------------------
+
+\newcommand{\cu}{\ensuremath{c^{u}}}
+\newcommand{\co}{\ensuremath{c^{o}}}
+
+\newcommand{\cui}{\ensuremath{c^{u}_{\entity}}}
+\newcommand{\coi}{\ensuremath{c^{o}_{\entity}}}
+
+% Cost ratio
+\newcommand{\R}{\ensuremath{R}}
+\newcommand{\Ri}{\ensuremath{R_{\entity}}}
+
+% Explicit definition
+\newcommand{\Rdef}{\ensuremath{R = \cu / \co}}
+
+% ----------------------------------------------------------
+% Aggregation
+% ----------------------------------------------------------
+
+\newcommand{\sumit}{\ensuremath{\sum_{\entity \in I} \sum_{\timeindex \in T}}}
+
+% Aggregate under / over cost
+\newcommand{\UnderCost}{\ensuremath{\mathrm{UnderCost}}}
+\newcommand{\OverCost}{\ensuremath{\mathrm{OverCost}}}
+
+% ----------------------------------------------------------
+% Sensitivity & calibration operators
+% ----------------------------------------------------------
+
+% CWSL as a function of R
+\newcommand{\CWSLR}{\ensuremath{\CWSL(\R)}}
+\newcommand{\CWSLRi}{\ensuremath{\CWSL(\Ri)}}
+
+% Candidate grid
+\newcommand{\Rgrid}{\ensuremath{\mathcal{R}}}
+
+% Selected / calibrated R
+\newcommand{\Rstar}{\ensuremath{R^{\ast}}}
+\newcommand{\Rist}{\ensuremath{R^{\ast}_{\entity}}}
+
+% Balance-based selection
+\newcommand{\Rbalance}{
+\ensuremath{
+\arg\min_{\R \in \Rgrid}
+\left|
+\UnderCost(\R) - \OverCost(\R)
+\right|
+}
+}
+
+% ----------------------------------------------------------
+% Diagnostics & governance
+% ----------------------------------------------------------
+
+\newcommand{\Sensitivity}{\ensuremath{\mathrm{Sensitivity}}}
+\newcommand{\Stability}{\ensuremath{\mathrm{Stability}}}
+
+% ----------------------------------------------------------
+% Readiness framework language
+% ----------------------------------------------------------
+
+\newcommand{\ReadinessPrimitive}{\ensuremath{\mathcal{P}}}
