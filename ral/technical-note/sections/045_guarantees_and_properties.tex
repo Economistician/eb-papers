@@ -1,0 +1,88 @@
+% ----------------------------------------------------------
+% GUARANTEES AND BEHAVIORAL PROPERTIES
+% ----------------------------------------------------------
+\section{Guarantees and Behavioral Properties}
+
+The Readiness Adjustment Layer (RAL) is designed as a bounded, deterministic
+control mechanism rather than an unconstrained optimization procedure. This
+section describes the behavioral properties that RAL guarantees by construction,
+as well as properties that hold only under stated conditions. These distinctions
+are critical for correct interpretation and auditability.
+
+\subsection{Determinism}
+
+RAL is fully deterministic. Given identical inputs—including the baseline forecast
+\(\yhat\), feasible adjustment set \(\deltaset\), and loss function parameters—the
+adjusted forecast \(\yhatadj\) is uniquely determined. The adjustment process
+contains no stochastic components, adaptive learning, or stateful dependencies.
+
+This property ensures reproducibility, supports audit replay, and allows
+post-hoc inspection of adjustment decisions without ambiguity.
+
+\subsection{Boundedness}
+
+All adjustments produced by RAL are guaranteed to lie within the predefined
+feasible set \(\deltaset = [\deltamin, \deltamax]\). RAL does not extrapolate beyond
+these bounds, relax constraints, or introduce nonlinear transformations of the
+forecast.
+
+Boundedness ensures that adjusted forecasts remain operationally interpretable
+and consistent with externally imposed readiness constraints.
+
+\subsection{Non-Degradation Under the Specified Loss}
+
+RAL guarantees non-degradation with respect to the specified decision-oriented
+loss function. Specifically, the adjusted forecast \(\yhatadj\) satisfies
+\[
+\CWSL(\yhatadj) \le \CWSL(\yhat),
+\]
+with equality holding when no feasible adjustment yields an improvement.
+
+This guarantee applies only to the loss function used during evaluation and does
+not imply improvement under alternative metrics or symmetric accuracy measures.
+
+\subsection{Identity Condition}
+
+If the loss-minimizing adjustment corresponds to \(\delta = 0\), or if no
+candidate adjustment within \(\deltaset\) reduces loss, RAL defaults to the
+identity transformation:
+\[
+\yhatadj = \yhat.
+\]
+This behavior prevents unnecessary forecast distortion and ensures that RAL
+cannot introduce changes absent a clear decision-relevant benefit.
+
+\subsection{Monotonicity Preservation}
+
+When applied uniformly across forecast intervals, RAL preserves the relative
+ordering of forecasts. That is, if \(\yhat_i \le \yhat_j\) prior to adjustment, the
+same ordering holds for the adjusted forecasts \(\yhatadj_i \le \yhatadj_j\).
+
+This property supports interpretability and prevents rank-order inversions that
+could complicate downstream decision logic.
+
+\subsection{Conditional Properties}
+
+Certain properties of RAL hold only under specific assumptions:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Global optimality} is not guaranteed unless the loss function is
+    convex over the feasible set and the candidate adjustment set is evaluated
+    exhaustively.
+    \item \textbf{Separability across intervals} holds only when the loss function
+    decomposes additively across time or units.
+    \item \textbf{Stability across loss specifications} is not guaranteed; changes
+    in cost calibration may alter the selected adjustment.
+\end{itemize}
+
+These conditions are not enforced by RAL and must be validated externally where
+relevant.
+
+\subsection{What RAL Does Not Guarantee}
+
+RAL does not guarantee improvements in traditional forecast accuracy metrics,
+nor does it correct structural deficiencies in the underlying forecasting model.
+It does not adapt dynamically to unobserved regime changes, nor does it infer or
+learn optimal adjustment bounds.
+
+These limitations reflect the intended role of RAL as a controlled, auditable
+adjustment layer rather than a substitute for model development or evaluation.

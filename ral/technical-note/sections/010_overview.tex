@@ -1,0 +1,44 @@
+% ----------------------------------------------------------
+% OVERVIEW
+% ----------------------------------------------------------
+\section{Overview}
+
+The Readiness Adjustment Layer (RAL) is a post-forecast control mechanism within
+the Forecast Readiness Framework (FRF) designed to improve operational outcomes
+under asymmetric cost and executional risk. Rather than modifying forecasting
+models or retraining predictive systems, RAL applies bounded, deterministic
+adjustments to forecast outputs in order to reduce decision-relevant loss and
+mitigate systemic under-readiness. This distinction reflects the practical reality
+that forecast generation and operational execution are often decoupled, with
+limited opportunity to revise upstream models once decisions must be made.
+
+Importantly, RAL is not an optimizer over forecasts, nor a post-hoc tuning device
+intended to improve apparent accuracy. Instead, it operates as a
+\emph{readiness-preserving control layer}, applying constrained adjustments within
+a predefined feasibility envelope to align forecasts with operational cost and
+risk considerations at decision time. This framing distinguishes RAL from both
+model training and evaluation-stage optimization, and prevents the adjustment
+process from being interpreted as forecast manipulation.
+
+In many operational environments, forecast accuracy alone is insufficient to
+ensure readiness. Under asymmetric cost structures, under-forecasting may incur
+irreversible penalties—such as unmet demand, service degradation, or capacity
+shortfalls—while over-forecasting carries comparatively lower or more recoverable
+costs. Even forecasts that are unbiased or optimal under symmetric error measures
+can therefore lead to systematically fragile outcomes. RAL addresses this gap by
+explicitly incorporating cost asymmetry and readiness constraints into a controlled
+adjustment process applied after forecasting but before execution.
+
+The adjustment performed by RAL is intentionally constrained. Adjustments are
+bounded within predefined feasibility limits and evaluated against a
+decision-oriented loss function, ensuring that forecast modifications remain
+interpretable, auditable, and operationally defensible. When no improvement is
+possible within the allowable bounds, RAL defaults to the identity transformation,
+preserving the original forecast. This design emphasizes risk mitigation and
+robustness rather than aggressive optimization.
+
+This technical note formalizes the Readiness Adjustment Layer, defines its inputs
+and outputs, and describes the control logic governing forecast adjustments. It
+also outlines the behavioral properties, limitations, and intended use cases of
+RAL, situating it as a complementary mechanism to forecast evaluation metrics
+rather than a replacement for predictive modeling.

@@ -1,0 +1,83 @@
+% ----------------------------------------------------------
+% READINESS ADJUSTMENT LAYER (RAL) MACROS
+% ----------------------------------------------------------
+
+% Layer name (upright math font)
+\newcommand{\RAL}{\ensuremath{\mathrm{RAL}}}
+
+% Readiness adjustment operator
+\newcommand{\RALop}{\ensuremath{\mathcal{R}}}
+
+% ----------------------------------------------------------
+% FORECAST NOTATION
+% ----------------------------------------------------------
+
+% Baseline forecast
+\newcommand{\yhat}{\hat{y}}
+
+% Adjusted forecast
+\newcommand{\yhatadj}{\hat{y}^{*}}
+
+% Forecast vector (optional)
+\newcommand{\yhatvec}{\ensuremath{\hat{\mathbf{y}}}}
+\newcommand{\yhatadjvec}{\ensuremath{\hat{\mathbf{y}}^{*}}}
+
+% ----------------------------------------------------------
+% READINESS / ADJUSTMENT PARAMETERS
+% ----------------------------------------------------------
+
+% Adjustment magnitude (scalar or vector)
+\newcommand{\deltaadj}{\ensuremath{\delta}}
+
+% Adjustment bounds
+\newcommand{\deltamin}{\ensuremath{\delta_{\min}}}
+\newcommand{\deltamax}{\ensuremath{\delta_{\max}}}
+
+% Feasible adjustment set
+\newcommand{\deltaset}{\ensuremath{\mathcal{D}}}
+
+% ----------------------------------------------------------
+% COST AND LOSS METRICS
+% ----------------------------------------------------------
+
+% Cost-Weighted Service Loss
+\newcommand{\CWSL}{\ensuremath{\mathrm{CWSL}}}
+
+% Nominal Service Loss
+\newcommand{\NSL}{\ensuremath{\mathrm{NSL}}}
+
+% Forecast Readiness Score
+\newcommand{\FRS}{\ensuremath{\mathrm{FRS}}}
+
+% Change in loss due to adjustment
+\newcommand{\DeltaCWSL}{\ensuremath{\Delta \mathrm{CWSL}}}
+
+% ----------------------------------------------------------
+% OPTIMIZATION / SEARCH
+% ----------------------------------------------------------
+
+% Objective function
+\newcommand{\obj}{\ensuremath{\mathcal{L}}}
+
+% Argmin operator
+\newcommand{\argmin}{\ensuremath{\operatorname*{arg\,min}}}
+
+% ----------------------------------------------------------
+% INDICATORS AND RATES
+% ----------------------------------------------------------
+
+% Underbuild indicator
+\newcommand{\underbuild}{\ensuremath{\mathbb{I}\{ \yhatadj < y \}}}
+
+% Underbuild rate
+\newcommand{\UBR}{\ensuremath{\mathrm{UBR}}}
+
+% ----------------------------------------------------------
+% SETS AND INDEXING
+% ----------------------------------------------------------
+
+% Time index
+\newcommand{\Tset}{\ensuremath{T}}
+
+% Cardinality operator
+\newcommand{\card}[1]{\left| #1 \right|}

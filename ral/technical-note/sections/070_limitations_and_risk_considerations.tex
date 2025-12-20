@@ -1,0 +1,62 @@
+% ----------------------------------------------------------
+% LIMITATIONS AND RISK CONSIDERATIONS
+% ----------------------------------------------------------
+\section{Limitations and Risk Considerations}
+
+The Readiness Adjustment Layer (RAL) is designed as a controlled mechanism for
+post-forecast adjustment under asymmetric cost and readiness constraints.
+However, its effectiveness and appropriateness depend on the quality of its
+inputs and the context in which it is applied. This section outlines key
+limitations and associated risks to inform responsible use.
+
+\subsection{Dependence on Loss Specification}
+
+RAL relies on a decision-oriented loss function to evaluate candidate adjustments.
+If the loss function does not accurately reflect operational priorities or cost
+asymmetry, the resulting adjustments may be misaligned with actual risk. In
+particular, miscalibration of under-forecasting penalties can lead to excessive
+over-preparation or insufficient mitigation of readiness failures.
+
+Loss specification is treated as an external responsibility; RAL does not infer,
+validate, or correct cost parameters.
+
+\subsection{Constraint Misconfiguration}
+
+Adjustment bounds play a central role in governing RAL behavior. Bounds that are
+too restrictive may prevent meaningful improvement, while overly permissive
+bounds may allow adjustments that exceed practical or organizational limits.
+Because RAL enforces but does not derive feasibility constraints, improper bound
+selection can undermine the intended safeguards of the mechanism.
+
+\subsection{Masking of Upstream Model Issues}
+
+As a post-forecast adjustment layer, RAL does not correct structural deficiencies
+in the underlying forecasting model. Persistent reliance on large or frequent
+adjustments may indicate model bias, regime change, or degraded predictive
+performance. Without appropriate monitoring, RAL could obscure these issues by
+compensating for upstream errors rather than prompting corrective action.
+
+\subsection{Context-Specific Validity}
+
+The benefits of RAL depend on the presence of asymmetric cost and limited
+executional flexibility. In environments where errors are symmetrically penalized
+or where corrective actions can be taken dynamically and costlessly, RAL may
+provide little or no benefit. Applying RAL outside its intended context risks
+introducing unnecessary complexity without corresponding operational value.
+
+\subsection{Interpretation and Governance Risk}
+
+Adjusted forecasts produced by RAL may be misinterpreted as improvements in
+predictive accuracy rather than as readiness-oriented modifications. Clear
+governance, documentation, and communication are required to ensure that
+stakeholders understand the purpose and limitations of the adjustment layer.
+Failure to maintain this distinction could lead to inappropriate reliance on RAL
+outputs or misaligned performance evaluation.
+
+\subsection{Audit and Oversight Considerations}
+
+Although RAL is deterministic and bounded, effective oversight depends on the
+availability of diagnostic outputs and adjustment rationale. Organizations
+deploying RAL should ensure that adjustment parameters, loss specifications, and
+before-and-after metrics are retained for audit and review. Absent such controls,
+the transparency benefits of the mechanism may be diminished.

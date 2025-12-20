@@ -1,0 +1,97 @@
+% ----------------------------------------------------------
+% ADJUSTMENT MECHANICS
+% ----------------------------------------------------------
+\section{Adjustment Mechanics}
+
+The Readiness Adjustment Layer (RAL) operates by evaluating a constrained set of
+candidate forecast adjustments and selecting the modification that yields the
+lowest decision-relevant loss under predefined readiness constraints. The
+mechanism is deterministic, bounded, and applied entirely downstream of forecast
+generation. This section describes the control logic governing the adjustment
+process, independent of any specific implementation.
+
+\subsection{Candidate Adjustment Set}
+
+Given a baseline forecast \(\yhat\) and a feasible adjustment set
+\(\deltaset = [\deltamin, \deltamax]\), RAL constructs a finite collection of
+candidate adjusted forecasts of the form
+\[
+\yhat^{(\delta)} = \yhat + \delta, \quad \delta \in \deltaset.
+\]
+The feasible set \(\deltaset\) is externally defined and reflects operational
+constraints such as buffer limits, capacity flexibility, or policy-imposed
+guardrails. RAL does not expand or relax these bounds under any circumstances.
+
+% ----------------------------------------------------------
+% FIGURE: RAL CONTROL ENVELOPE
+% ----------------------------------------------------------
+\input{figures/ral_control_envelope}
+
+Figure~\ref{fig:ral_control_envelope} illustrates the bounded feasibility
+envelope within which RAL operates. Candidate adjustments are evaluated only
+within this predefined region, ensuring that readiness modifications remain
+interpretable, auditable, and aligned with executional reality rather than
+unconstrained post-hoc tuning.
+
+The adjustment set may be evaluated at discrete resolution, but the choice of
+resolution does not alter the conceptual behavior of the mechanism: all candidate
+forecasts are bounded transformations of the original forecast.
+
+\subsection{Loss Evaluation}
+
+Each candidate adjusted forecast is evaluated using a decision-oriented loss
+function, typically the cost-weighted service loss \(\CWSL(\cdot)\). This loss
+function encodes asymmetric penalties associated with under- and over-forecasting
+and reflects the relative severity of readiness failures.
+
+Treating cost asymmetry as an explicit input to the decision rule—rather than as a
+model tuning artifact—aligns with established principles of cost-sensitive
+decision theory, in which costs are first-class objects governing optimal action
+selection rather than parameters to be optimized away \citep{elkan2001}.
+
+Loss evaluation is performed consistently across all candidates. RAL does not
+apply stochastic weighting, adaptive learning, or context-specific overrides
+during evaluation. As a result, identical inputs produce identical loss values and
+identical adjustment decisions.
+
+\subsection{Selection Rule}
+
+RAL selects the adjustment \(\delta^{*}\) that minimizes decision-relevant loss
+over the feasible set:
+\[
+\delta^{*}
+=
+\argmin_{\delta \in \deltaset}
+\CWSL(\yhat + \delta).
+\]
+The adjusted forecast is then defined as
+\[
+\yhatadj = \yhat + \delta^{*}.
+\]
+When multiple candidate adjustments yield equivalent loss values, RAL applies a
+consistent tie-breaking rule that favors minimal deviation from the baseline
+forecast. This preference preserves interpretability and limits unnecessary
+forecast distortion.
+
+\subsection{Control and Fallback Behavior}
+
+RAL enforces two explicit control conditions:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Boundedness:} All adjustments remain within the predefined
+    feasible set \(\deltaset\).
+    \item \textbf{Non-degradation:} If no candidate adjustment produces a loss
+    improvement relative to the baseline forecast, RAL defaults to the identity
+    transformation \(\yhatadj = \yhat\).
+\end{itemize}
+
+These controls ensure that RAL cannot introduce unbounded behavior, amplify model
+errors, or degrade performance under the specified loss function. The mechanism
+is therefore corrective rather than speculative, prioritizing robustness and
+operational safety over aggressive optimization.
+
+\subsection{Determinism and Auditability}
+
+The adjustment process is fully deterministic. Given identical forecasts,
+adjustment bounds, and loss parameters, RAL will always produce the same adjusted
+forecast and diagnostic outputs. This property supports reproducibility, audit
+replay, and post-hoc inspection of adjustment decisions.

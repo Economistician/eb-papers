@@ -1,0 +1,52 @@
+% ----------------------------------------------------------
+% OPERATIONAL MOTIVATION
+% ----------------------------------------------------------
+\section{Operational Motivation}
+
+Forecasting systems are typically evaluated using accuracy-oriented metrics that
+treat overestimation and underestimation symmetrically. While such measures are
+useful for model comparison, they often fail to reflect the operational reality
+in which forecast errors translate into uneven and irreversible consequences.
+This distinction between predictive accuracy and decision relevance is well
+established in the forecasting literature \citep{gneiting2011}.
+In many executional environments, under-forecasting leads to lost demand, service
+degradation, or capacity shortfalls that cannot be fully recovered, whereas
+over-forecasting may result in softer penalties such as idle capacity or
+temporary inefficiency. As a result, forecasts that appear adequate under
+symmetric error criteria may nonetheless expose the system to persistent
+readiness risk.
+
+This asymmetry creates a structural disconnect between predictive accuracy and
+operational sufficiency. Even well-calibrated or unbiased forecasts can produce
+systematically fragile outcomes when decision thresholds are tight or when
+response times are long relative to demand variability. In such settings, the
+cost of being unprepared often exceeds the cost of modest over-preparation,
+suggesting that post-forecast adjustments may be necessary to align forecasts
+with executional priorities.
+
+From a decision-science perspective, this fragility reflects sensitivity to
+implicit assumptions rather than model failure. Robust decision-making therefore
+requires explicit examination of how outcomes change under bounded variations
+in controllable assumptions, a principle emphasized in the sensitivity analysis
+literature \citep{saltelli2008}. In operational contexts, these assumptions often
+take the form of cost asymmetry, tolerance thresholds, or readiness constraints
+that are external to the forecasting model itself.
+
+Operational constraints further complicate the use of traditional forecasting
+approaches. In many organizations, forecasting models are developed, validated,
+and deployed on cadences that do not align with day-to-day operational decisions.
+Once a forecast has been generated, there may be limited opportunity to retrain
+models, incorporate new information, or alter upstream assumptions. However,
+decision-makers may still retain limited flexibility to adjust commitments,
+buffers, or resource allocations within predefined bounds. These realities
+motivate the need for a mechanism that operates downstream of forecasting while
+remaining upstream of execution.
+
+The Readiness Adjustment Layer addresses this gap by providing a controlled means
+of modifying forecast outputs in response to asymmetric cost and readiness
+considerations. By constraining adjustments within operationally feasible limits
+and evaluating them against a decision-oriented loss function, RAL enables
+forecasts to better support execution without undermining the integrity of the
+underlying predictive models. This approach emphasizes robustness and risk
+mitigation rather than maximal accuracy, reflecting the practical demands of
+operational decision-making.

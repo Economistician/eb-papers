@@ -1,0 +1,106 @@
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.95\textwidth,
+    height=0.42\textwidth,
+    xlabel={Forecast index / time},
+    ylabel={Quantity},
+    xmin=0, xmax=10,
+    ymin=0, ymax=12,
+    grid=both,
+    legend style={at={(0.02,0.98)},anchor=north west},
+    ticklabel style={font=\small},
+    label style={font=\small},
+    legend cell align={left},
+]
+
+% --- Baseline forecast (stylized curve) ---
+\addplot+[
+    mark=none,
+    thick,
+    solid
+]
+coordinates {
+    (0,3.0) (1,3.4) (2,3.8) (3,4.2) (4,4.6)
+    (5,5.0) (6,5.3) (7,5.6) (8,5.9) (9,6.1) (10,6.3)
+};
+\addlegendentry{Baseline forecast $\yhat$}
+
+% --- Lower bound ---
+\addplot+[
+    mark=none,
+    thick,
+    dashed,
+    red
+]
+coordinates {
+    (0,2.6) (1,3.0) (2,3.4) (3,3.8) (4,4.2)
+    (5,4.6) (6,4.9) (7,5.2) (8,5.5) (9,5.7) (10,5.9)
+};
+\addlegendentry{Lower bound $\yhat_{\min}$}
+
+% --- Upper bound ---
+\addplot+[
+    mark=none,
+    thick,
+    dashed,
+    brown
+]
+coordinates {
+    (0,3.6) (1,4.0) (2,4.4) (3,4.8) (4,5.2)
+    (5,5.6) (6,6.0) (7,6.3) (8,6.6) (9,6.8) (10,7.0)
+};
+\addlegendentry{Upper bound $\yhat_{\max}$}
+
+% --- Shaded feasibility envelope (requires \usepgfplotslibrary{fillbetween}) ---
+\addplot[name path=upper, draw=none]
+coordinates {
+    (0,3.6) (1,4.0) (2,4.4) (3,4.8) (4,5.2)
+    (5,5.6) (6,6.0) (7,6.3) (8,6.6) (9,6.8) (10,7.0)
+};
+\addplot[name path=lower, draw=none]
+coordinates {
+    (0,2.6) (1,3.0) (2,3.4) (3,3.8) (4,4.2)
+    (5,4.6) (6,4.9) (7,5.2) (8,5.5) (9,5.7) (10,5.9)
+};
+\addplot[
+    draw=none,
+    fill=gray,
+    fill opacity=0.12,
+] fill between[of=upper and lower];
+
+% --- Adjusted (readiness) forecast (solid black) ---
+\addplot+[
+    mark=none,
+    very thick,
+    black,
+    solid
+]
+coordinates {
+    (0,3.3) (1,3.7) (2,4.1) (3,4.5) (4,4.9)
+    (5,5.3) (6,5.7) (7,6.0) (8,6.3) (9,6.5) (10,6.7)
+};
+\addlegendentry{Adjusted forecast $\yhatadj$}
+
+% --- Annotation for "feasibility envelope" ---
+\node[anchor=west, font=\small]
+at (axis cs:6.2,7.55) {Feasibility envelope};
+
+% --- Annotation arrow to shaded region ---
+\draw[->, thick]
+(axis cs:6.1,7.35) -- (axis cs:6.4,6.3);
+
+\end{axis}
+\end{tikzpicture}
+\caption{
+Conceptual illustration of the Readiness Adjustment Layer (RAL) as a bounded
+control layer operating downstream of forecasting. RAL selects an adjusted
+forecast $\yhatadj$ within a pre-defined feasibility envelope (between
+$\yhat_{\min}$ and $\yhat_{\max}$) around the baseline forecast $\yhat$ by
+minimizing decision-relevant loss under asymmetric operational cost.
+If no improvement is available within the envelope, RAL defaults to the identity
+transformation $\yhatadj = \yhat$.
+}
+\label{fig:ral_control_envelope}
+\end{figure}

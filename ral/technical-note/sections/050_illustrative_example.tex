@@ -1,0 +1,63 @@
+% ----------------------------------------------------------
+% ILLUSTRATIVE EXAMPLE
+% ----------------------------------------------------------
+\section{Illustrative Example}
+
+This section provides a simplified example to illustrate how the Readiness
+Adjustment Layer (RAL) operates in practice. The example is intentionally
+synthetic and is not intended to represent any specific operational system.
+
+\subsection{Baseline Forecast and Constraints}
+
+Consider a single-period demand forecast with baseline value \(\yhat = 100\).
+Suppose the operational context permits limited upward or downward adjustment,
+with a feasible adjustment set defined as
+\[
+\deltaset = [-5, +10].
+\]
+Negative adjustments correspond to reducing preparedness, while positive
+adjustments increase readiness through additional capacity or buffer allocation.
+
+Assume realized demand is \(y = 108\), and that under-forecasting incurs a higher
+penalty than over-forecasting due to lost demand or service degradation.
+
+\subsection{Loss Evaluation}
+
+Let the decision-oriented loss function \(\CWSL(\cdot)\) impose asymmetric cost,
+with under-forecasting penalized more heavily than over-forecasting. Under this
+loss structure:
+\begin{itemize}[leftmargin=*]
+    \item The baseline forecast \(\yhat = 100\) results in under-forecasting and
+    incurs a relatively high loss.
+    \item Modest upward adjustments reduce under-readiness and lower the
+    associated penalty.
+    \item Excessive upward adjustments increase over-preparation cost without
+    additional benefit.
+\end{itemize}
+
+RAL evaluates candidate adjusted forecasts \(\yhat + \delta\) for
+\(\delta \in \deltaset\) and computes the corresponding loss for each candidate.
+
+\subsection{Selected Adjustment}
+
+Suppose the loss-minimizing adjustment is \(\delta^{*} = +6\), yielding an adjusted
+forecast \(\yhatadj = 106\). This adjustment reduces under-forecasting while
+remaining within the allowable bounds.
+
+If no adjustment within \(\deltaset\) produced a loss improvement relative to the
+baseline, RAL would instead select the identity transformation
+\(\yhatadj = \yhat\).
+
+\subsection{Interpretation}
+
+This example highlights several key properties of RAL:
+\begin{itemize}[leftmargin=*]
+    \item The adjustment is driven by asymmetric cost rather than point accuracy.
+    \item The selected adjustment is bounded and operationally interpretable.
+    \item The mechanism prioritizes readiness improvement while avoiding
+    unnecessary forecast distortion.
+\end{itemize}
+
+The example demonstrates how RAL modifies forecasts only when doing so improves
+decision-relevant outcomes under the specified loss and constraints, reinforcing
+its role as a controlled post-forecast adjustment layer.

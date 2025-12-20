@@ -1,0 +1,51 @@
+% ----------------------------------------------------------
+% USE CASES
+% ----------------------------------------------------------
+\section{Use Cases}
+
+The Readiness Adjustment Layer (RAL) is intended for operational environments
+where forecasts directly inform decisions with asymmetric cost and limited
+opportunity for upstream model revision. This section outlines representative
+use cases where a post-forecast adjustment mechanism provides practical value.
+
+\subsection{Capacity and Resource Planning}
+
+In capacity-constrained systems—such as staffing, production, or logistics—under-
+forecasting demand can result in service failures or unmet demand that cannot be
+recovered after the fact. Over-forecasting, by contrast, may lead to idle
+resources or temporary inefficiency. RAL enables modest, bounded adjustments to
+baseline forecasts that reduce under-readiness risk while respecting operational
+constraints on over-preparation.
+
+\subsection{Inventory and Buffer Management}
+
+Inventory planning often involves explicit buffer limits and asymmetric holding
+versus stockout costs. When forecasting models are calibrated for long-term
+accuracy, short-term readiness may still be insufficient under volatile demand.
+RAL allows forecasts to be adjusted within predefined buffer ranges to better
+align with stockout risk tolerance without altering the underlying demand model.
+
+\subsection{Service-Level–Driven Operations}
+
+In environments governed by service-level agreements or internal reliability
+targets, the cost of falling below a readiness threshold can far exceed the cost
+of exceeding it. RAL provides a structured mechanism for adjusting forecasts to
+prioritize service reliability while maintaining transparency around the
+magnitude and rationale of adjustments.
+
+\subsection{Operational Decision Pipelines}
+
+Many organizations operate decision pipelines in which forecasting, planning, and
+execution are handled by distinct systems or teams. Once forecasts are published,
+downstream operators may have limited authority to alter inputs but retain
+discretion over buffers, contingencies, or safety margins. RAL formalizes this
+discretion into a consistent, auditable process that bridges forecasting outputs
+and executional requirements.
+
+\subsection{When RAL Is Not Appropriate}
+
+RAL is not intended for environments where forecast errors are symmetrically
+penalized, where adjustments can be made continuously and costlessly at execution
+time, or where upstream models can be readily retrained to incorporate changing
+conditions. In such cases, traditional forecasting or adaptive modeling
+approaches may be more appropriate.
