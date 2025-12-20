@@ -1,138 +1,82 @@
-# Cost-Weighted Service Loss (CWSL) — Long-Form Technical Paper  
-**Electric Barometer Research Series — Paper No. 01**  
+# Electric Barometer – Research Papers
 
 [![License: BSD-3](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE)
 
----
+This repository contains the formal research papers and technical notes
+associated with the Electric Barometer forecasting evaluation framework.
 
-## Overview
+Electric Barometer is a decision-oriented system for evaluating operational
+forecasts under asymmetric cost, readiness constraints, and managerial
+actionability. The work emphasizes when forecasts are fit for deployment,
+not merely when they are statistically accurate.
 
-This repository hosts the long-form technical paper introducing  
-**Cost-Weighted Service Loss (CWSL)** — a demand-normalized, asymmetric forecast  
-evaluation metric designed for high-frequency, high-variance operational environments.  
-CWSL directly incorporates the *directionality* of forecast error and the *operational  
-cost asymmetry* between:
 
-- **Shortfalls** (under-forecasting)
-- **Overbuild** (over-forecasting)
+## Core Frameworks
 
-Unlike symmetric metrics (RMSE, MAPE, wMAPE), CWSL is grounded in operational impact  
-rather than abstract statistical deviation.
+The research program is organized around a set of related but distinct
+conceptual frameworks:
 
-This work is part of the **Electric Barometer Research Series**, an evolving framework  
-for readiness-centric forecasting, asymmetric-loss metrics, and operational analytics.
+- Forecast Readiness Framework (FRF)  
+  A governance and evaluation framework for determining when forecasts are
+  operationally deployable.
 
----
+- Cost-Weighted Service Loss (CWSL)  
+  A loss formulation encoding asymmetric operational costs of over- and
+  under-forecasting.
 
-## Motivation
+- Readiness Adjustment Layer (RAL)  
+  A structural layer for adapting forecast outputs based on operational
+  readiness signals.
 
-Traditional accuracy measures mask the difference between:
+- Derived Metrics and Constructs  
+  Including NSL, UD, HR@τ, and related measures supporting readiness-based
+  evaluation.
 
-- A 10-unit *over-forecast* during slow hours  
-- A 10-unit *under-forecast* during peak throughput
-
-Operationally, these are not remotely equivalent.
-
-CWSL formalizes this asymmetry and provides a metric that aligns evaluation with  
-**actual service readiness**, not statistical aesthetics.
-
----
 
 ## Repository Structure
 
-```yaml
-eb-papers/
-│
-├── main.tex # Master LaTeX document
-├── references.bib # Bibliography for the paper
-│
-├── sections/ # Ordered chapter-level LaTeX includes
-│ ├── 000_frontmatter.tex
-│ ├── 010_introduction.tex
-│ ├── 020_related_work.tex
-│ ├── 030_contributions.tex
-│ ├── 040_operational_motivation.tex
-│ ├── 050_cwsl_methodology.tex
-│ ├── 060_illustrative_example.tex
-│ ├── 070_managerial_implications.tex
-│ ├── 080_applications_across_industries.tex
-│ ├── 090_conclusion.tex
-│ └── 100_future_research.tex
-│
-├── macros/ # Reusable LaTeX commands/macros
-│ └── commands.tex
-│
-├── figures/ # TikZ diagrams and figure .tex includes
-│ └── 040_asymmetry_cost_curve.tex
-│
-└── tables/ # Tables included via \input{}
-└── 060_intervals_example_table.tex
-```
+Each top-level directory corresponds to a named construct or framework
+(e.g., FRF, CWSL, RAL).
+
+Within each construct, papers are organized by artifact type:
+
+- paper/  
+  Canonical or journal-oriented manuscripts defining the framework.
+
+- technical-notes/  
+  Supporting technical analyses, derivations, sensitivity studies, and
+  extensions.
+
+- business-notes/  
+  Practitioner- or executive-facing summaries focused on operational and
+  managerial implications.
 
 
----
+## Scope and Intent
 
-## Intellectual Contribution
+This repository serves as the authoritative record of the Electric Barometer
+research program.
 
-This paper establishes:
+It includes conceptual frameworks, formal loss constructions, and technical
+extensions, but does not aim to provide end-user tutorials or implementation
+guides. Code implementations and applied examples are maintained separately.
 
-### **1. The CWSL Metric**
-A penalty-weighted, demand-normalized performance measure that embeds explicit  
-shortfall and overbuild cost parameters.
 
-### **2. Diagnostic Readiness Metrics**
-Including:
-- No-Shortfall Level (NSL)  
-- Hit Rate within Tolerance (HR@τ)  
-- Underbuild Depth (UD)  
-- Symmetric comparators (wMAPE)
+## Status and Maturity
 
-### **3. A Conceptual Framework for Operational Asymmetry**
-Grounded in high-throughput, high-penalty environments (e.g., QSR, supermarkets, call centers).
+Papers and notes within this repository vary in maturity, ranging from
+conceptual framing to formalized technical analysis.
 
-### **4. A Pathway Toward Readiness-Based Forecasting**
-CWSL forms the backbone of the forthcoming **Electric Barometer** forecasting paradigm.
+Each paper or note includes its own README describing scope, status, and
+intended audience.
 
----
 
-## Compilation
+## Ownership and Contact
 
-### **Overleaf**
-This project is fully Overleaf-compatible.  
-Simply open the project and click **Recompile**.
+Electric Barometer is an independent research program.
 
-### **Local Compilation**
-Requires a modern TeX distribution:
+For inquiries related to the research, collaboration, or licensing,
+please contact:
 
-```bash
-pdflatex main.tex
-bibtex main
-pdflatex main.tex
-pdflatex main.tex
-```
-
----
-
-## License
-
-This paper is the foundation of a broader system of research and open-source tooling:
-
-- **Electric Barometer (Core Framework)**
-Forecast-readiness modeling, asymmetric loss, and demand-conditioning engines.
-
-- **EB-Metrics**
-A standardized library of readiness-based metrics (CWSL, CWLL, UD, NSL, etc.).
-
-- **EB-Adapters**
-Wrappers and adapters for XGBoost, CatBoost, LightGBM, Prophet, and custom models.
-
-- **EB-Examples**
-Tutorials, sample notebooks, and live use-cases in QSR, retail, and logistics.
-
----
-
-This repository uses the **BSD 3-Clause License**, chosen for:
-
-- Broad commercial permissiveness
-- Academic reproducibility
-- Maximum adoption potential
+Kyle Corrie
+kcorrie@economistician.com
