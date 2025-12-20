@@ -1,108 +1,84 @@
-# Cost-Weighted Service Loss (CWSL) — Long-Form Technical Paper  
-**Electric Barometer Research Series**  
-Author: **Kyle Corrie** (kcorrie@economistician.com)
+# Cost-Weighted Service Loss (CWSL) – Technical Note
 
-![License: BSD-3](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)
-[![Overleaf](https://img.shields.io/badge/Overleaf-Project-green?logo=overleaf)](https://www.o)
-[![PDF](https://img.shields.io/badge/Paper-PDF-red)](https://github.com/Economistician/eb-papers/releases/latest)
+This directory contains a technical note formalizing the **Cost-Weighted Service Loss (CWSL)**
+metric within the Electric Barometer evaluation framework.
 
----
-
-## Overview
-
-This repository contains the long-form technical paper introducing  
-**Cost-Weighted Service Loss (CWSL)** — a demand-normalized, asymmetric forecast  
-evaluation metric designed for high-frequency operational environments  
-(e.g., QSR, retail, logistics).
-
-CWSL generalizes wMAPE by incorporating explicit penalties for:
-
-- **Shortfalls** (under-forecasting)  
-- **Overbuild** (over-forecasting)  
-- **Operational asymmetry** between the two  
-
-The metric is designed to align forecast evaluation with *real operational cost*,  
-not abstract statistical error.
-
-This paper is part of the **Electric Barometer** ecosystem — a suite of tools,  
-metrics, and modeling frameworks developed for modern operational forecasting.
+CWSL quantifies asymmetric operational loss arising from forecast error by
+explicitly weighting underbuild and overbuild according to their relative
+economic impact.
 
 ---
 
-## Repository Structure
+## Purpose
 
-```yaml
-eb-papers/
-│
-├── main.tex # Master LaTeX document
-├── references.bib # Bibliography for the paper
-│
-├── sections/ # Ordered section inputs for the paper
-│ ├── 000_frontmatter.tex
-│ ├── 010_introduction.tex
-│ ├── 020_related_work.tex
-│ ├── 030_contributions.tex
-│ ├── 040_operational_motivation.tex
-│ ├── 050_cwsl_methodology.tex
-│ ├── 060_illustrative_example.tex
-│ ├── 070_managerial_implications.tex
-│ ├── 080_applications_across_industries.tex
-│ ├── 090_conclusion.tex
-│ └── 100_future_research.tex
-│
-├── figures/ # TikZ figures or PDFs/images included in the paper
-│ └── 040_asymmetry_cost_curve.tex
-│
-├── tables/ # Any formal table .tex includes
-│ └── 060_intervals_example_table.tex
-│
-└── macros/ # Custom LaTeX commands
-└── commands.tex
-```
+The purpose of this technical note is to define Cost-Weighted Service Loss (CWSL)
+as an interpretable loss formulation that reflects the asymmetric consequences
+of forecast error in operational settings.
+
+This note exists to formalize CWSL as a normalized loss metric suitable for
+readiness-aware evaluation and comparison of forecasting systems.
 
 ---
 
-## Compilation
+## Relationship to Core Frameworks
 
-The paper is written in standard LaTeX and can be compiled using:
+Cost-Weighted Service Loss (CWSL) is a core evaluative construct within the
+Electric Barometer ecosystem.
 
-### **In Overleaf**
-Click **Recompile**  
-(Overleaf Git Integration is enabled — changes sync automatically.)
+It is primarily used to:
+- Encode asymmetric penalties for underbuild and overbuild
+- Translate forecast error into operationally meaningful loss
+- Support readiness-oriented evaluation and comparison
+- Serve as a foundational component for derived diagnostics such as FRS and CWSL-R
 
-### **Locally (CLI)**
-Requires:
+CWSL operates alongside, but does not replace:
+- Governance and deployment criteria defined in FRF
+- Binary and threshold-based reliability metrics (e.g., NSL, HR@τ)
 
-- TeX Live 2022+  
-- `natbib`  
-- `tikz`  
-- `booktabs`
+---
 
-Compile with:
+## Scope and Non-Scope
 
-```bash
+**In scope:**
+- Formal definition of Cost-Weighted Service Loss
+- Interpretation as a normalized, asymmetric loss metric
+- Structural properties and operational meaning
+- Illustrative examples, use cases, and limitations
+
+**Out of scope:**
+- Sensitivity and calibration of cost ratios (see CWSL-R)
+- Readiness governance and deployment decisions (see FRF)
+- Implementation details or empirical estimation
+
+---
+
+## Status and Maturity
+
+This technical note is maintained as a formal supporting artifact within the
+Electric Barometer series.
+
+Its contents may evolve as asymmetric cost modeling and readiness evaluation
+practices are refined.
+
+---
+
+## Contents
+
+The technical note includes:
+- Conceptual overview and operational motivation for CWSL
+- Formal loss definition and notation
+- Structural properties and interpretation
+- Illustrative examples and use cases
+- Limitations and boundary conditions
+
+Refer to the paper itself for detailed exposition.
+
+---
+
+## Build Instructions
+
+To compile the technical note:
+
 pdflatex main.tex
-bibtex main
+bibtex references
 pdflatex main.tex
-pdflatex main.tex
-```
-
----
-
-## Purpose of This Paper
-
-This long-form paper:
-
-1. Introduces and formalizes the CWSL metric
-2. Connects operational asymmetry to forecast evaluation
-3. Derives diagnostic submetrics (NSL, UD, Hit Rate)
-4. Demonstrates applied value through illustrative examples
-5. Provides guidance for selecting penalty parameters
-6. Shows cross-industry use cases
-7. Establishes the foundation for the broader Electric Barometer framework
-
----
-
-## License
-
-This repository uses the **BSD 3-Clause License**, consistent with the Electric Barometer ecosystem.

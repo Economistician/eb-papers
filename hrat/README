@@ -1,0 +1,82 @@
+# Hit Rate at Threshold (HR@τ) – Technical Note
+
+This directory contains a technical note formalizing the **Hit Rate at Threshold (HR@τ)**
+construct within the Electric Barometer evaluation framework.
+
+HR@τ is introduced as a **threshold-based reliability metric** for assessing the
+frequency with which forecasts satisfy a predefined operational criterion.
+
+---
+
+## Purpose
+
+The purpose of this technical note is to define Hit Rate at Threshold (HR@τ) as a
+probabilistic reliability measure indicating the proportion of forecast instances
+that meet or exceed an operationally meaningful threshold.
+
+This note exists to formalize HR@τ as a frequency-based performance indicator,
+distinct from magnitude-based loss or depth measures.
+
+---
+
+## Relationship to Core Frameworks
+
+Hit Rate at Threshold (HR@τ) is a derived construct within the Electric Barometer
+ecosystem.
+
+It is primarily used to:
+- Quantify reliability with respect to operational thresholds
+- Evaluate consistency of forecast performance across time or scenarios
+- Complement binary coverage metrics such as No-Shortfall Level (NSL)
+- Support readiness-aware evaluation alongside CWSL and FRF
+
+HR@τ measures frequency of success, not severity of failure.
+
+---
+
+## Scope and Non-Scope
+
+**In scope:**
+- Definition of HR@τ as a threshold-based hit rate
+- Interpretation as a probabilistic reliability metric
+- Structural properties and operational meaning
+- Use cases for readiness and deployment assessment
+
+**Out of scope:**
+- Magnitude of forecast error or loss (see CWSL)
+- Shortfall severity or depth (see UD)
+- Binary coverage at interval level (see NSL)
+- Governance criteria for deployment readiness (see FRF)
+
+---
+
+## Status and Maturity
+
+This technical note is maintained as a formal supporting artifact within the
+Electric Barometer series.
+
+Its contents may evolve as operational thresholds and evaluation regimes are
+further refined.
+
+---
+
+## Contents
+
+The technical note includes:
+- Conceptual overview and motivation for HR@τ
+- Formal definition and notation
+- Structural properties and interpretation
+- Illustrative examples and use cases
+- Limitations and boundary conditions
+
+Refer to the paper itself for detailed exposition.
+
+---
+
+## Build Instructions
+
+To compile the technical note:
+
+pdflatex main.tex
+bibtex references
+pdflatex main.tex
