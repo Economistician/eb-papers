@@ -11,6 +11,13 @@ actionability. The work emphasizes when forecasts are fit for deployment,
 not merely when they are statistically accurate.
 
 
+## PDFs (Latest Release)
+
+Download the latest Electric Barometer papers and technical notes here:
+
+https://github.com/Economistician/eb-papers/releases/latest
+
+
 ## Core Frameworks
 
 The research program is organized around a set of related but distinct
@@ -78,5 +85,5 @@ Electric Barometer is an independent research program.
 For inquiries related to the research, collaboration, or licensing,
 please contact:
 
-Kyle Corrie
+Kyle Corrie  
 kcorrie@economistician.com
