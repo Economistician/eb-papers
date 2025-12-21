@@ -1,43 +1,83 @@
-name: Build CWSL PDF
+name: Build EB PDFs (Release Assets)
 
 on:
   push:
-    branches: [ "main" ]
-    tags: [ "v*" ]
-  pull_request:
-    branches: [ "main" ]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  build-latex:
+  build-and-release:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # --- Technical Notes ---
+          - id: TN-CWSL
+            working_directory: cwsl/technical-notes
+            base_name: ElectricBarometer_TN_CWSL
+
+          - id: TN-CWSLR
+            working_directory: cwslr/technical-notes
+            base_name: ElectricBarometer_TN_CWSLR
+
+          - id: TN-FRS
+            working_directory: frs/technical-notes
+            base_name: ElectricBarometer_TN_FRS
+
+          - id: TN-HRAT
+            working_directory: hrat/technical-notes
+            base_name: ElectricBarometer_TN_HRAT
+
+          - id: TN-NSL
+            working_directory: nsl/technical-notes
+            base_name: ElectricBarometer_TN_NSL
+
+          - id: TN-RAL
+            working_directory: ral/technical-notes
+            base_name: ElectricBarometer_TN_RAL
+
+          - id: TN-UD
+            working_directory: ud/technical-notes
+            base_name: ElectricBarometer_TN_UD
+
+          # --- Paper ---
+          - id: PAPER-FRF
+            working_directory: frf/paper
+            base_name: ElectricBarometer_PAPER_FRF
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Compile LaTeX (cwsl long-form paper)
+      - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         with:
-          # We are *inside* cwsl/long-form/paper when compiling
           root_file: main.tex
-          working_directory: cwsl/long-form/paper
+          working_directory: ${{ matrix.working_directory }}
 
-      - name: Rename output PDF
+      - name: Prepare versioned PDF
+        shell: bash
         run: |
-          mkdir -p cwsl/versions
-          mv cwsl/long-form/paper/main.pdf \
-             cwsl/versions/ElectricBarometer_WP01_CWSL_TechnicalPaper_2025.pdf
+          set -euo pipefail
+          TAG="${GITHUB_REF_NAME}"  # e.g., v1.2.0
 
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: cwsl-paper-pdf
-          path: cwsl/versions/ElectricBarometer_WP01_CWSL_TechnicalPaper_2025.pdf
+          mkdir -p release
+          src="${{ matrix.working_directory }}/main.pdf"
+          out="release/${{ matrix.base_name }}_${TAG}.pdf"
 
-      - name: Attach PDF to GitHub Release (on tags)
-        if: startsWith(github.ref, 'refs/tags/')
+          mv "$src" "$out"
+          echo "Prepared: $out"
+
+      - name: Attach PDF to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: cwsl/versions/ElectricBarometer_WP01_CWSL_TechnicalPaper_2025.pdf
+          files: release/*.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
