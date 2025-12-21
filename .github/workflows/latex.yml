@@ -58,6 +58,10 @@ jobs:
 
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
+        env:
+          # Technical notes often do \input{010_overview} while files live in ./sections/
+          # This tells LaTeX to also search ./sections (and keeps "." first).
+          TEXINPUTS: ".:./sections/:"
         with:
           root_file: main.tex
           working_directory: ${{ matrix.working_directory }}
