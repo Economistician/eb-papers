@@ -1,0 +1,107 @@
+% ----------------------------------------------------------
+% OVERVIEW
+% ----------------------------------------------------------
+\section{Overview}
+\label{sec:overview}
+
+Hit Rate within Tolerance (\HRtau{}) evaluates forecast performance by measuring
+the fraction of intervals whose absolute error falls within an acceptable band
+of width \(\tau\).
+Unlike loss-based metrics that aggregate error magnitude, \HRtau{} encodes a
+binary notion of operational success: whether a forecast is ``close enough''
+to be considered usable in practice.
+
+The interpretability of \HRtau{} makes it attractive in operational settings,
+but its meaning depends entirely on how the tolerance parameter \(\tau\) is
+specified.
+A small \(\tau\) enforces strict precision and penalizes even modest deviations,
+while a large \(\tau\) admits substantial error without consequence.
+As a result, \HRtau{} is not a self-contained metric: it is an evaluation
+functional whose behavior is governed by an externally chosen acceptability
+band.
+
+This technical note addresses a practical and often overlooked question:
+\emph{how should the tolerance \(\tau\) be selected and governed in readiness
+evaluation?}
+In many applications, \(\tau\) is fixed heuristically, borrowed from convention,
+or chosen without reference to historical forecast behavior.
+Such choices can materially affect reported performance, model comparisons, and
+downstream readiness conclusions.
+
+We argue that tolerance selection should be treated as a calibration problem,
+not a formatting choice.
+Just as asymmetric cost ratios require governance when using \CWSL{}, tolerance
+bands require principled specification when using \HRtau{}.
+Without such governance, hit-rate metrics risk becoming either overly punitive
+or trivially permissive, undermining their role in readiness assessment.
+
+\subsection{Scope and non-goals}
+\label{subsec:scope}
+
+This note assumes familiarity with the definition and interpretation of
+\HRtau{}.
+We do not propose \HRtau{} as a replacement for loss-based metrics, nor do we
+advocate optimizing forecasts to maximize hit rate.
+Instead, we treat \HRtau{} as a diagnostic and evaluative primitive whose utility
+depends on disciplined tolerance calibration.
+
+The methods presented here:
+\begin{itemize}[leftmargin=*]
+    \item require \emph{no exogenous data}, relying only on historical
+          \((y, \hat{y})\) pairs,
+    \item impose \emph{no model assumptions} and apply uniformly across model
+          classes,
+    \item are \emph{deterministic} given inputs and a specified candidate grid,
+    \item produce diagnostics intended for transparent reporting and governance.
+\end{itemize}
+
+The goal is not to define a universal ``correct'' tolerance, but to provide
+defensible, auditable mechanisms for selecting \(\tau\) in a way that reflects
+observed forecast behavior and operational expectations.
+
+\subsection{Contributions}
+\label{subsec:contributions}
+
+This note introduces a sensitivity- and calibration-oriented framework for
+tolerance selection in hit-rate evaluation:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Response-surface framing.}
+    We analyze \HRtau{} as a function of the tolerance parameter, highlighting
+    that the relevant object of interest is the curve \(\HR(\tau)\), not a
+    single-point estimate.
+
+    \item \textbf{Grid-based sensitivity analysis.}
+    We formalize evaluation of \HRtau{} across a candidate tolerance grid to
+    expose regions of stability, fragility, and diminishing returns.
+
+    \item \textbf{Data-driven tolerance calibration.}
+    We present three principled selection rules for \(\tau\), based solely on
+    historical residuals:
+    (i) target hit-rate (quantile-based) calibration,
+    (ii) knee detection at diminishing returns, and
+    (iii) utility maximization trading coverage against tolerance width.
+
+    \item \textbf{Entity-level extensions and safeguards.}
+    We extend tolerance calibration to heterogeneous entities and introduce
+    governance mechanisms such as minimum sample requirements, global caps, and
+    diagnostic reporting to prevent tolerance inflation or overfitting.
+\end{enumerate}
+
+\subsection{Organization of the note}
+\label{subsec:organization}
+
+Section~\ref{sec:operational_problem} motivates tolerance selection as an
+operational decision rather than a cosmetic parameter choice.
+Section~\ref{sec:hrtau_response_surface} frames \HRtau{} as a response surface
+over \(\tau\).
+Section~\ref{sec:sensitivity_analysis} presents grid-based sensitivity analysis.
+Sections~\ref{sec:target_hit_rate_calibration} through
+\ref{sec:utility_based_calibration} introduce alternative calibration rules.
+Section~\ref{sec:entity_level_heterogeneity} extends the approach to entity-level
+tolerances, and Section~\ref{sec:governance_and_diagnostics} discusses governance
+and reporting.
+Section~\ref{sec:limitations} outlines limitations and non-goals, and
+Section~\ref{sec:relationship_to_readiness} situates tolerance calibration within
+the broader Forecast Readiness Framework.
+Section~\ref{sec:conclusion} concludes.

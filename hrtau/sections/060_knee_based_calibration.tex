@@ -1,0 +1,101 @@
+% ----------------------------------------------------------
+% ENTITY-LEVEL TOLERANCE AND SAFEGUARDS
+% ----------------------------------------------------------
+\section{Entity-Level Tolerance and Safeguards}
+\label{sec:entity_level}
+
+Operational systems often exhibit heterogeneous error behavior across entities.
+Products, locations, services, or demand segments may differ substantially in
+their intrinsic volatility, signal-to-noise ratio, or operational tolerance for
+forecast deviation.
+Applying a single global tolerance $\tauv$ in such settings can obscure
+systematic differences and mask localized readiness risks.
+This section extends tolerance calibration to the entity level while introducing
+explicit safeguards to preserve interpretability and governance.
+
+\subsection{Motivation for entity-specific tolerance}
+\label{subsec:entity_motivation}
+
+Let $\entity \in I$ index entities such as items, stores, or service classes.
+Historical residuals frequently reveal persistent differences in dispersion
+across entities.
+Some entities exhibit tight, stable error distributions, while others experience
+broader variability due to demand intermittency, substitution effects, or
+exogenous shocks.
+
+Allowing entity-specific tolerances $\taui$ enables readiness evaluation to
+reflect these differences.
+Under a global tolerance, a volatile entity may appear perpetually ``not ready,''
+while a stable entity may be evaluated too leniently.
+Entity-level calibration therefore improves diagnostic fidelity by aligning
+tolerance bands with observed error structure.
+
+However, unconstrained entity-level tolerance selection risks normalizing poor
+forecast performance.
+Without safeguards, high-variance entities may receive inflated tolerances that
+redefine readiness downward rather than improving forecasting behavior.
+The objective is thus not maximal flexibility, but controlled heterogeneity.
+
+\subsection{Entity-level calibration rule}
+\label{subsec:entity_rule}
+
+For each entity $\entity$, we apply the same calibration rules described in
+Section~\ref{sec:calibration} to the subset of residuals associated with that
+entity.
+Given a minimum sample requirement $\nmin$, we compute
+\[
+    \taustari
+    \in
+    \arg\max_{\tauv \in \TauGrid}
+    \mathcal{C}_{\entity}(\tauv),
+\]
+where $\mathcal{C}_{\entity}(\tauv)$ denotes a chosen calibration criterion
+(e.g., target hit rate, knee-point, or utility) evaluated using only observations
+for entity $\entity$.
+
+Entities with fewer than $\nmin$ valid observations are excluded from
+entity-level calibration and assigned no entity-specific tolerance.
+This constraint prevents unstable estimates driven by sparse data and makes the
+calibration behavior explicit.
+
+\subsection{Global caps and guardrails}
+\label{subsec:entity_safeguards}
+
+Even when sufficient data are available, entity-level calibration can yield
+excessively large tolerances for entities with persistent forecast dispersion.
+To prevent tolerance inflation and preserve cross-entity comparability, we
+introduce optional global safeguards.
+
+A common approach is to cap entity-level tolerances by a global reference value
+$\taustar$ derived from the full dataset:
+\[
+    \taustari \leftarrow \min(\taustari, \taustar).
+\]
+More generally, caps may be defined using high quantiles of the empirical
+distribution of entity-level tolerances or through domain-specific maximum
+acceptable error thresholds.
+
+Lower bounds may also be imposed to avoid pathological contraction of tolerance
+bands in low-variance regimes:
+\[
+    \taustari \ge \taufloor.
+\]
+Together, these guards ensure that entity-level calibration refines evaluation
+without undermining system-wide readiness standards.
+
+\subsection{Interpretation and reporting}
+\label{subsec:entity_interpretation}
+
+Entity-level tolerances should be reported alongside diagnostics including sample
+size, achieved hit rate, calibration rule used, and any applied caps or floors.
+These diagnostics are essential for distinguishing meaningful heterogeneity from
+noise-driven variation.
+
+Importantly, entity-level tolerance calibration is intended primarily as a
+\emph{diagnostic and governance tool}, not as a universal deployment default.
+In many production environments, a hybrid strategy—global tolerance with
+entity-level overrides for well-supported cases—offers the best balance between
+fidelity, comparability, and operational discipline.
+
+The next section formalizes governance workflows and diagnostic practices that
+support responsible use of tolerance calibration in readiness assessment.

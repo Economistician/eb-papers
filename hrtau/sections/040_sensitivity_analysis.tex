@@ -1,0 +1,91 @@
+% ----------------------------------------------------------
+% GRID-BASED SENSITIVITY ANALYSIS FOR HR@τ
+% ----------------------------------------------------------
+\section{Grid-Based Sensitivity Analysis for HR@\(\tau\)}
+\label{sec:sensitivity_analysis}
+
+To operationalize the response-surface view of \HRtau{}, we evaluate the metric
+across a finite, user-specified grid of tolerance values
+\[
+    \TauGrid = \{\tau_1, \tau_2, \ldots, \tau_K\}.
+\]
+Rather than fixing a single acceptability band a priori, this approach exposes
+how readiness conclusions vary as the tolerance threshold changes, enabling
+explicit robustness and stability checks.
+
+This framing aligns with established principles of sensitivity analysis, which
+emphasize understanding how conclusions depend on uncertain assumptions rather
+than optimizing parameters in isolation \citep{saltelli2008}.
+Here, the uncertain assumption is not a model parameter but the definition of
+what constitutes an operationally acceptable error.
+
+\subsection{Candidate tolerance grid construction}
+\label{subsec:tau_grid_construction}
+
+The tolerance grid $\TauGrid$ should span the range of error magnitudes considered
+plausibly acceptable for the application domain.
+In practice, $\TauGrid$ is often constructed from empirical quantiles of the
+absolute error distribution, for example from the $0^{\text{th}}$ to
+$99^{\text{th}}$ percentile, or as a fixed-width grid over a bounded interval.
+
+The methods discussed here impose no restrictions on spacing or resolution.
+Determinism is ensured as long as the grid is fixed and applied consistently.
+As with cost-ratio grids, the tolerance grid should be treated as a governed
+artifact, recorded alongside evaluation outputs to ensure reproducibility and
+auditability of readiness assessments.
+
+\subsection{Evaluating the HR@\(\tau\) sensitivity curve}
+\label{subsec:hrtau_sensitivity_curve}
+
+For each $\tau_k \in \TauGrid$, we compute $\HRtau(\tau_k)$ using identical data
+and normalization.
+The resulting set
+\[
+    \{(\tau_k, \HRtau(\tau_k))\}_{k=1}^{K}
+\]
+defines a discrete approximation to the continuous response surface described in
+Section~\ref{sec:response_surface}.
+
+The sensitivity curve provides substantially more information than reporting
+\HRtau{} at a single tolerance.
+In particular, it allows practitioners to:
+\begin{itemize}[leftmargin=*]
+    \item identify tolerance ranges where readiness conclusions are stable,
+    \item detect sharp transitions where small changes in $\tauv$ yield large
+          increases in hit rate,
+    \item compare forecasting approaches under identical acceptability stress
+          tests.
+\end{itemize}
+
+Because the curve is computed solely from historical residuals, it reflects
+realized forecast behavior rather than model-specific assumptions.
+
+\subsection{Stability diagnostics and interpretability}
+\label{subsec:hrtau_stability}
+
+Flat regions of the $\HRoftau{}$ curve indicate that increasing tolerance yields
+little additional coverage, suggesting that readiness conclusions are insensitive
+to the precise choice of $\tauv$ within that range.
+Conversely, steep regions signal concentrations of error mass near the tolerance
+boundary, where readiness claims are fragile and highly dependent on threshold
+selection.
+
+These diagnostics are particularly important when tolerance thresholds are used
+to justify operational commitments.
+If readiness appears acceptable only within a narrow tolerance window, the
+evaluation should be treated with caution.
+Grid-based sensitivity analysis makes such fragility explicit and supports
+transparent communication of risk.
+
+\subsection{Role of sensitivity analysis in tolerance calibration}
+\label{subsec:tau_sensitivity_role}
+
+Sensitivity analysis does not prescribe a single tolerance value.
+Instead, it establishes the context within which calibration rules can be applied.
+By inspecting the $\HRoftau{}$ surface, practitioners can ensure that any selected
+reference tolerance lies in a region that is interpretable, stable, and aligned
+with operational expectations.
+
+In the following section, we introduce deterministic, data-driven calibration
+rules for selecting reference tolerances from the sensitivity curve, formalizing
+readiness standards without relying on ad hoc thresholding.

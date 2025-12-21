@@ -1,0 +1,95 @@
+% ----------------------------------------------------------
+% TOLERANCE CALIBRATION RULES
+% ----------------------------------------------------------
+\section{Tolerance Calibration Rules}
+\label{sec:tolerance_calibration}
+
+Framing HR@\(\tau\) as a response surface clarifies that tolerance-based evaluation
+does not yield a single, canonical value.
+Practical deployment therefore requires a governed rule for selecting a
+\emph{reference tolerance} at which readiness is assessed and reported.
+
+This section presents three principled, data-driven tolerance calibration rules.
+Each rule operates solely on historical residuals, imposes no model assumptions,
+and is deterministic given inputs and a specified tolerance grid.
+Importantly, these rules do not estimate a ``true'' tolerance; rather, they define
+explicit, auditable conventions for choosing \(\tau\) under different operational
+objectives.
+This framing follows the broader principle that evaluation criteria should be
+treated as first-class decision constructs, rather than tuned parameters
+\citep{elkan2001}.
+
+\subsection{Target hit-rate calibration}
+\label{subsec:target_hit_rate}
+
+The most direct approach specifies a target hit rate \(\hstar\), representing an
+explicit readiness standard.
+The reference tolerance is chosen as the corresponding quantile of absolute
+forecast errors:
+\[
+    \taustar = Q\!\left(|e|, \hstar\right).
+\]
+This rule answers the question:
+\emph{What tolerance is required to achieve a desired level of coverage?}
+
+Target hit-rate calibration is highly interpretable and aligns naturally with
+service-level definitions.
+However, it does not account for the shape of the HR@\(\tau\) response surface and
+may select tolerances in regions where readiness conclusions are sensitive to
+small changes in \(\tau\).
+
+\subsection{Knee-based calibration}
+\label{subsec:knee_calibration}
+
+An alternative approach selects \(\taustar\) at a point of diminishing returns in
+the HR@\(\tau\) response surface.
+Operationally, this corresponds to a tolerance beyond which additional widening
+produces minimal gains in hit rate.
+
+Knee-based calibration emphasizes stability rather than coverage targets.
+It is particularly useful when explicit readiness standards are unavailable, or
+when robustness to tolerance mis-specification is prioritized over absolute hit
+rates.
+
+\subsection{Utility-based calibration}
+\label{subsec:utility_calibration}
+
+Utility-based calibration introduces an explicit tradeoff between coverage and
+tolerance width.
+A simple utility function takes the form
+\[
+    \Utility(\tauv) = \HR(\tauv) - \lambdau \cdot \left(\frac{\tauv}{\taumax}\right),
+\]
+where \(\lambdau\) governs the penalty applied to wider tolerances.
+The selected tolerance maximizes \(\Utility(\tauv)\) over the candidate grid.
+
+This approach makes preferences explicit and tunable, but requires careful
+governance of the penalty parameter to avoid implicit bias toward overly narrow
+or overly permissive tolerances.
+
+\subsection{Comparison of calibration rules}
+\label{subsec:calibration_comparison}
+
+The three calibration rules are best understood as complementary readiness
+primitives rather than competing estimators:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Target hit-rate} defines an explicit readiness standard
+    (\(\hstar\)) and selects \(\taustar\) to meet that coverage level.
+
+    \item \textbf{Knee detection} selects a stability-oriented reference tolerance
+    at diminishing returns on the HR@\(\tau\) response surface.
+
+    \item \textbf{Utility maximization} makes the coverage--tolerance tradeoff
+    explicit by introducing a governed penalty \(\lambdau\) on tolerance width.
+\end{itemize}
+
+Together, these calibration rules provide a structured vocabulary for tolerance
+selection.
+They enable readiness assessment to be grounded in explicit assumptions, rather
+than implicit defaults, and support consistent reporting and governance across
+models, entities, and time periods.
+
+The next section extends tolerance calibration to heterogeneous settings by
+allowing entity-level tolerances while introducing safeguards against noise,
+instability, and tolerance inflation.

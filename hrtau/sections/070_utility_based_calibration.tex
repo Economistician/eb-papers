@@ -1,0 +1,103 @@
+% ----------------------------------------------------------
+% GOVERNANCE, DIAGNOSTICS, AND REPORTING
+% ----------------------------------------------------------
+\section{Governance, Diagnostics, and Reporting}
+\label{sec:governance}
+
+Tolerance calibration directly shapes how forecast readiness is defined,
+measured, and communicated.
+As such, HR@$\tau$ cannot be treated as a purely technical artifact.
+This section outlines governance principles and diagnostic practices that ensure
+tolerance calibration supports consistent, interpretable, and auditable readiness
+assessment.
+
+\subsection{Tolerance as a governed artifact}
+\label{subsec:tau_governance}
+
+The tolerance parameter $\tauv$ defines the boundary between acceptable and
+unacceptable forecast deviation.
+Once calibrated, it establishes a readiness standard that influences model
+selection, monitoring, and escalation decisions.
+For this reason, $\tauv$ should be treated as a governed artifact rather than an
+implicit byproduct of analysis.
+
+At minimum, any deployed tolerance should be accompanied by:
+\begin{itemize}[leftmargin=*]
+    \item the calibration rule used (e.g., target hit-rate, knee, utility),
+    \item the candidate grid $\TauGrid$ over which calibration was performed,
+    \item the calibration dataset and sample size,
+    \item any applied floors, caps, or exclusions.
+\end{itemize}
+
+Recording this information ensures that readiness assessments are reproducible
+and that changes in tolerance standards can be traced and reviewed over time.
+
+\subsection{Core diagnostics}
+\label{subsec:tau_diagnostics}
+
+Tolerance calibration naturally produces diagnostics that support governance and
+interpretation.
+Key diagnostics include:
+\begin{itemize}[leftmargin=*]
+    \item the achieved hit rate $\HRtau(\taustar)$ on the calibration window,
+    \item sensitivity of $\HRtau(\tauv)$ around $\taustar$,
+    \item the location of $\taustar$ relative to $\taufloor$ and $\taucap$,
+    \item the effective sample size used in calibration.
+\end{itemize}
+
+These diagnostics allow practitioners to distinguish between robust readiness
+standards and fragile thresholds that are sensitive to small changes in error
+distribution.
+A tolerance that lies in a flat region of the response surface is more defensible
+than one chosen near a sharp inflection.
+
+\subsection{Entity-level reporting}
+\label{subsec:entity_reporting}
+
+When entity-level tolerances are used, reporting requirements become more
+stringent.
+Entity-specific tolerances $\taustari$ should always be presented alongside:
+\begin{itemize}[leftmargin=*]
+    \item the number of observations used for calibration,
+    \item the selected calibration rule and parameters,
+    \item any global caps or floors applied,
+    \item comparison to the global tolerance $\taustar$.
+\end{itemize}
+
+Absent this context, entity-level tolerances risk being misinterpreted as
+performance endorsements rather than diagnostic signals.
+Transparent reporting ensures that heterogeneity is understood as an empirical
+property of the system, not an excuse for degraded readiness.
+
+\subsection{Change management and review cadence}
+\label{subsec:change_management}
+
+Tolerance calibration should not be updated opportunistically.
+Changes to $\tauv$ or $\taustari$ redefine readiness standards and therefore
+require explicit review.
+A governed process should specify:
+\begin{itemize}[leftmargin=*]
+    \item the conditions under which recalibration is permitted,
+    \item the evaluation windows used for recalibration,
+    \item approval or review checkpoints for tolerance changes.
+\end{itemize}
+
+In stable environments, tolerances may remain fixed for extended periods.
+In rapidly evolving regimes, scheduled recalibration may be appropriate.
+In all cases, tolerance drift should be monitored and justified rather than
+implicitly accepted.
+
+\subsection{Role in readiness assessment}
+\label{subsec:role_in_readiness}
+
+Within the Forecast Readiness Framework, HR@$\tau$ serves as a gatekeeping metric.
+It determines whether forecasts satisfy minimum alignment requirements before
+more nuanced performance metrics are considered.
+Governance of $\tauv$ therefore directly governs what it means for a forecast to
+be considered ``ready.''
+
+By pairing tolerance calibration with explicit diagnostics and reporting
+standards, organizations can ensure that readiness assessments remain stable,
+defensible, and aligned with operational intent.
+The next section discusses limitations and non-goals of tolerance-based readiness
+metrics, clarifying what HR@$\tau$ is—and is not—designed to capture.

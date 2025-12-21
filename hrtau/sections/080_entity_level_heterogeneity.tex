@@ -1,0 +1,91 @@
+% ----------------------------------------------------------
+% ENTITY-LEVEL TOLERANCE AND SAFEGUARDS
+% ----------------------------------------------------------
+\section{Entity-Level Tolerance and Safeguards}
+\label{sec:entity_level}
+
+Operational readiness tolerance is rarely uniform across all entities.
+Products, locations, services, or demand segments may differ substantially in
+their acceptable deviation from forecast targets.
+A single global tolerance $\tauv$ can therefore obscure systematic differences
+in readiness behavior and mask localized operational risk.
+
+This section extends tolerance calibration to the entity level while emphasizing
+that entity-specific tolerances are primarily a \emph{diagnostic} instrument,
+not a default deployment choice.
+
+\subsection{Motivation for entity-specific tolerance}
+\label{subsec:entity_motivation}
+
+Let $\entity \in I$ index entities such as items, stores, or service classes.
+Historical residual distributions often exhibit persistent differences across
+entities.
+For example, high-volume or mission-critical entities may require tighter
+tolerance bands to maintain readiness, while low-volume or flexible entities
+may tolerate wider deviations without operational consequence.
+
+Allowing entity-specific tolerances $\taui$ enables HR@$\tau$ evaluation to
+reflect these systematic differences rather than forcing all entities into a
+single readiness standard.
+However, unconstrained entity-level calibration risks encoding noise rather than
+structure, particularly for sparse or volatile entities.
+
+\subsection{Entity-level calibration rules}
+\label{subsec:entity_calibration}
+
+For each entity $\entity$, tolerance calibration can be performed using the same
+principles introduced at the global level, applied to the entity-specific
+absolute error distribution.
+Given a candidate grid $\TauGrid$ and sufficient observations, we select
+\[
+    \taustari \in \TauGrid
+\]
+according to a governed rule such as target hit-rate, knee detection, or utility
+maximization.
+
+Entities with fewer than $\nmin$ valid observations are excluded from
+entity-level calibration and assigned no entity-specific tolerance.
+This requirement prevents unstable estimates driven by small samples and makes
+the scope of calibration explicit.
+
+\subsection{Global caps and guardrails}
+\label{subsec:entity_guards}
+
+Even with sufficient data, entity-level calibration can yield excessively large
+tolerances when historical errors are highly dispersed.
+To prevent tolerance inflation and loss of interpretability, global safeguards
+should be applied.
+
+A common strategy is to cap entity-level tolerances relative to a global
+reference:
+\[
+    \taui \leftarrow \min(\taustari, \taucap),
+\]
+where $\taucap$ may be defined as the globally calibrated tolerance $\taustar$
+or a high quantile of the entity-level tolerance distribution.
+
+Additional safeguards may include:
+\begin{itemize}[leftmargin=*]
+    \item minimum and maximum allowable tolerance bounds,
+    \item monotonicity constraints across hierarchical levels,
+    \item exclusion of entities with unstable or multimodal error distributions.
+\end{itemize}
+
+\subsection{Interpretation and appropriate use}
+\label{subsec:entity_interpretation}
+
+Entity-level tolerances should be interpreted as signals of readiness
+heterogeneity rather than as prescriptive operational targets.
+Large $\taui$ values indicate entities whose historical forecasts frequently
+violate tight readiness standards, highlighting candidates for model improvement,
+segmentation, or operational review.
+
+Entity-level calibration is therefore best viewed as a diagnostic refinement
+layer.
+In many deployments, a hybrid approach—global tolerance calibration with
+entity-level overrides applied selectively—provides the strongest balance
+between fidelity, stability, and governance.
+
+The next section consolidates these ideas by discussing governance practices,
+diagnostics, and reporting conventions that support responsible use of tolerance
+calibration in production environments.

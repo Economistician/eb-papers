@@ -18,41 +18,47 @@ Download the latest Electric Barometer papers and technical notes here:
 https://github.com/Economistician/eb-papers/releases/latest
 
 
-## Core Frameworks
+## Core Frameworks and Metrics
 
 The research program is organized around a set of related but distinct
-conceptual frameworks:
+conceptual frameworks and governed evaluation primitives:
 
 - Forecast Readiness Framework (FRF)  
-  A governance and evaluation framework for determining when forecasts are
-  operationally deployable.
+  A decision-oriented governance framework for determining whether forecasting
+  systems are fit for operational deployment under asymmetric error cost.
 
 - Cost-Weighted Service Loss (CWSL)  
-  A loss formulation encoding asymmetric operational costs of over- and
-  under-forecasting.
+  An asymmetric loss formulation measuring the effective fraction of operational
+  throughput lost due to forecast–demand misalignment.
 
 - Readiness Adjustment Layer (RAL)  
-  A structural layer for adapting forecast outputs based on operational
-  readiness signals.
+  A deterministic, post-forecast control layer that applies bounded adjustments
+  to mitigate readiness risk without retraining forecasting models.
 
-- Derived Metrics and Constructs  
-  Including NSL, UD, HR@τ, and related measures supporting readiness-based
-  evaluation.
+- Reliability and Severity Diagnostics  
+  Including NSL (No-Shortfall Level), HR@τ (Hit Rate within Tolerance),
+  Underbuild Depth (UD), and related constructs supporting readiness-based
+  evaluation and governance.
+
+- Sensitivity and Calibration Analyses  
+  Technical notes addressing tolerance selection, cost-ratio calibration,
+  response-surface analysis, and entity-level heterogeneity within the
+  Forecast Readiness Framework.
 
 
 ## Repository Structure
 
-Each top-level directory corresponds to a named construct or framework
-(e.g., FRF, CWSL, RAL).
+Each top-level directory corresponds to a named construct, framework,
+or technical note (e.g., FRF, CWSL, HR@τ).
 
-Within each construct, papers are organized by artifact type:
+Within each construct, artifacts are organized by type:
 
 - paper/  
-  Canonical or journal-oriented manuscripts defining the framework.
+  Canonical or journal-oriented manuscripts defining core frameworks.
 
 - technical-notes/  
-  Supporting technical analyses, derivations, sensitivity studies, and
-  extensions.
+  Supporting technical analyses, derivations, sensitivity studies, calibration
+  procedures, and governance extensions.
 
 - business-notes/  
   Practitioner- or executive-facing summaries focused on operational and
@@ -61,21 +67,22 @@ Within each construct, papers are organized by artifact type:
 
 ## Scope and Intent
 
-This repository serves as the authoritative record of the Electric Barometer
-research program.
+This repository serves as the authoritative archival record of the
+Electric Barometer research program.
 
-It includes conceptual frameworks, formal loss constructions, and technical
-extensions, but does not aim to provide end-user tutorials or implementation
-guides. Code implementations and applied examples are maintained separately.
+It includes conceptual frameworks, formal loss constructions, diagnostic
+metrics, and calibration methodologies, but does not aim to provide end-user
+tutorials or implementation guides. Code implementations and applied examples
+are maintained separately.
 
 
 ## Status and Maturity
 
 Papers and notes within this repository vary in maturity, ranging from
-conceptual framing to formalized technical analysis.
+conceptual framing to fully formalized technical analysis.
 
-Each paper or note includes its own README describing scope, status, and
-intended audience.
+Each paper or technical note includes its own README describing scope,
+assumptions, status, and intended audience.
 
 
 ## Ownership and Contact

@@ -1,0 +1,91 @@
+% ----------------------------------------------------------
+% OPERATIONAL PROBLEM
+% ----------------------------------------------------------
+\section{Tolerance as an Operational Decision}
+\label{sec:operational_problem}
+
+Tolerance-based metrics such as \HRtau{} evaluate forecast performance by
+counting the fraction of observations whose absolute error falls within an
+acceptable band.
+While simple to compute and easy to interpret, the practical meaning of
+\HRtau{} depends entirely on the choice of the tolerance parameter $\tauv$.
+Despite this dependence, $\tauv$ is often selected informally or treated as an
+arbitrary constant.
+
+In many operational settings, tolerance thresholds are chosen based on
+convention (e.g., ``within one unit'' or ``within 10\%''), borrowed from prior
+analyses, or tuned implicitly to produce desired hit rates.
+Such practices obscure the role of tolerance as a policy decision rather than a
+statistical artifact.
+Once forecasts are used to drive production, staffing, or service commitments,
+the choice of $\tauv$ directly determines what constitutes acceptable
+performance.
+
+Crucially, $\tauv$ is not a modeling hyperparameter in the usual sense.
+It does not affect how forecasts are generated, nor does it alter their
+statistical fit to observed data.
+Instead, $\tauv$ encodes an \emph{operational acceptability standard}: the maximum
+deviation from realized demand that can be tolerated without triggering
+material consequences.
+As such, specifying $\tauv$ is a governance decision that shapes readiness
+assessment and downstream decision-making.
+This perspective aligns with established work on forecast evaluation, which
+emphasizes that performance metrics must be interpreted relative to the loss or
+decision structure induced by their downstream use \citep{gneiting2011}.
+
+\subsection{Consequences of mis-specifying tolerance}
+\label{subsec:mis_specification}
+
+Mis-specification of $\tauv$ can materially distort evaluation outcomes.
+When $\tauv$ is set too narrowly, small and operationally insignificant errors
+are counted as failures, exaggerating forecast volatility and penalizing
+otherwise adequate models.
+When $\tauv$ is set too broadly, large errors are absorbed into the tolerance
+band, masking readiness risks and creating a false sense of stability.
+
+Because \HRtau{} aggregates binary hit events, these effects are nonlinear.
+Small changes in $\tauv$ can produce abrupt changes in hit rate, particularly
+when error distributions are concentrated near the tolerance boundary.
+As a result, model rankings and readiness conclusions may depend more on the
+chosen tolerance than on intrinsic forecast quality.
+
+\subsection{Why optimization is the wrong framing}
+\label{subsec:why_not_optimization}
+
+It may be tempting to select $\tauv$ by optimizing \HRtau{} directly, choosing
+the tolerance that achieves a target hit rate or maximizes apparent coverage.
+This framing is misleading.
+Increasing $\tauv$ monotonically increases hit rate, making unconstrained
+optimization trivial and operationally meaningless.
+
+Even when forecasting models themselves are trained with asymmetric or
+quantile-based loss functions, the evaluation tolerance $\tauv$ remains a
+distinct governance choice.
+It determines how forecast error is judged after predictions are produced, not
+how predictions are learned.
+
+The appropriate question is therefore not
+``Which $\tauv$ maximizes \HRtau{}?''
+but rather
+``Which tolerance reflects a defensible boundary between acceptable and
+unacceptable error given historical behavior?''
+
+\subsection{Toward governed tolerance selection}
+\label{subsec:governed_tolerance}
+
+From an operational perspective, tolerance calibration should make acceptability
+standards explicit, inspectable, and auditable.
+A governed approach to tolerance selection should:
+\begin{itemize}[leftmargin=*]
+    \item expose how hit rates vary across plausible tolerance values,
+    \item avoid tolerance inflation driven by noise or convenience,
+    \item rely only on historical forecast errors,
+    \item support consistent application across entities and time periods.
+\end{itemize}
+
+These requirements motivate a sensitivity- and calibration-based treatment of
+$\tauv$, in which \HRtau{} is evaluated across a candidate tolerance grid and
+selection rules are defined in terms of observable error structure rather than
+numerical maximization.
+The next sections formalize this perspective by framing \HRtau{} as a response
+surface over tolerance and introducing governed calibration mechanisms.

@@ -1,0 +1,34 @@
+% ----------------------------------------------------------
+% CONCLUSION
+% ----------------------------------------------------------
+\section{Conclusion}
+\label{sec:conclusion}
+
+HR@$\tau$ provides a direct and interpretable measure of forecast readiness by
+explicitly encoding tolerance for error.
+However, without principled selection of the tolerance parameter, readiness
+assessment risks becoming arbitrary, unstable, or vulnerable to post hoc
+adjustment.
+This technical note reframes tolerance selection as a governed calibration
+problem rather than a modeling choice.
+
+By treating HR@$\tau$ as a response surface over tolerance, we introduce a
+systematic framework for sensitivity analysis and deterministic calibration.
+Quantile-based targets, knee detection, and utility-based rules provide
+complementary mechanisms for selecting $\tau$ based on observed forecast
+behavior, operational preferences, and governance constraints.
+Entity-level extensions and safeguards further support responsible application
+in heterogeneous settings.
+
+Together with cost-ratio calibration for \CWSL{}, tolerance calibration defines
+the evaluation envelope within which readiness is assessed.
+These calibration primitives operate upstream of metric computation and ensure
+that readiness metrics are applied within a consistent, auditable, and
+operationally meaningful context.
+
+The result is a readiness evaluation framework that separates measurement from
+assumption, supports transparent governance, and aligns forecast assessment with
+real operational tolerance.
+As part of the broader Forecast Readiness Framework, calibrated HR@$\tau$ enables
+forecast evaluation that is not only accurate, but decision-aligned and fit for
+deployment.

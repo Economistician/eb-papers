@@ -1,0 +1,104 @@
+% ----------------------------------------------------------
+% GOVERNANCE, DIAGNOSTICS, AND REPORTING
+% ----------------------------------------------------------
+\section{Governance, Diagnostics, and Reporting}
+\label{sec:governance}
+
+Tolerance calibration plays a foundational role in readiness evaluation.
+Because HR@$\tau$ directly defines what constitutes an acceptable deviation
+between forecast and realization, the choice of $\tau$ determines the evaluation
+context within which readiness is assessed.
+As such, tolerance calibration must be governed with the same care as other
+operational assumptions, rather than treated as an incidental technical detail.
+
+This section outlines governance principles and diagnostics that support
+transparent, stable, and auditable use of HR@$\tau$ in production environments.
+
+\subsection{Separation of calibration and evaluation}
+\label{subsec:separation}
+
+A core governance principle is the strict separation between
+\emph{calibration} and \emph{evaluation}.
+Tolerance calibration determines the reference band $\taustar$ within which
+forecast performance is assessed; it does not alter the forecasts themselves
+nor adapt the metric to favor a particular model ex post.
+
+Calibration must therefore be performed on a fixed historical window and held
+constant when evaluating candidate models or future forecasts.
+This separation preserves comparability across models, entities, and time
+periods, and prevents circular evaluation in which the tolerance adapts to the
+model under inspection.
+
+\subsection{Required diagnostic outputs}
+\label{subsec:diagnostics}
+
+Every calibrated tolerance should be accompanied by a minimal set of diagnostic
+artifacts.
+At a minimum, reporting should include:
+\begin{itemize}[leftmargin=*]
+    \item the candidate grid $\TauGrid$ used for calibration,
+    \item the selected tolerance $\taustar$ (or $\taustari$),
+    \item the achieved hit rate $\HR(\taustar)$ on the calibration window,
+    \item the number of valid observations used in calibration,
+    \item any applied floors, caps, or exclusions.
+\end{itemize}
+
+When knee-based or utility-based selection rules are used, additional diagnostics
+such as local slope estimates or utility curves should be retained.
+These diagnostics ensure that the selected tolerance can be inspected and
+justified independently of the calibration procedure itself.
+
+\subsection{Stability and sensitivity checks}
+\label{subsec:stability_checks}
+
+Tolerance calibration should not be interpreted as a point estimate.
+Instead, practitioners should assess whether the selected $\taustar$ lies in a
+region where HR@$\tau$ is locally stable.
+
+Flat regions of the response surface indicate robustness: moderate changes in
+$\tau$ do not materially affect readiness conclusions.
+Conversely, steep regions signal fragility, where small changes in tolerance
+produce large swings in hit rate.
+In such cases, broader reporting or more conservative tolerance selection may be
+warranted.
+
+These stability considerations are particularly important when tolerances are
+used as contractual thresholds, service-level objectives, or escalation triggers.
+
+\subsection{Entity-level reporting and safeguards}
+\label{subsec:entity_reporting}
+
+When entity-level tolerances are computed, governance requirements become more
+stringent.
+Entity-level outputs should always be reported alongside:
+\begin{itemize}[leftmargin=*]
+    \item entity-specific sample sizes,
+    \item achieved hit rates at $\taustari$,
+    \item any global caps or overrides applied,
+    \item the corresponding global reference tolerance $\taustar$.
+\end{itemize}
+
+This contextual information is essential for distinguishing meaningful readiness
+heterogeneity from noise-driven variation.
+Absent such diagnostics, entity-level tolerances risk being misinterpreted as
+prescriptive targets rather than descriptive indicators.
+
+\subsection{Auditability and lifecycle management}
+\label{subsec:auditability}
+
+Tolerance calibration should be treated as a governed artifact with a defined
+lifecycle.
+Calibration inputs, rules, and outputs should be versioned, timestamped, and
+recomputed only when material changes occur in demand behavior, forecast systems,
+or operational objectives.
+
+In regulated or high-stakes environments, the ability to reconstruct the
+calibration decision—given the historical data and declared rules—is essential.
+HR@$\tau$ calibration is therefore designed to be fully deterministic and
+reproducible, supporting retrospective audit and forward-looking governance.
+
+Taken together, these practices ensure that tolerance calibration strengthens
+readiness assessment rather than obscuring it.
+In the next section, we situate HR@$\tau$ calibration within the broader
+Forecast Readiness Framework and clarify its role alongside other readiness
+primitives.

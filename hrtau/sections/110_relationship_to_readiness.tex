@@ -1,0 +1,58 @@
+% ----------------------------------------------------------
+% RELATIONSHIP TO FORECAST READINESS
+% ----------------------------------------------------------
+\section{Relationship to Forecast Readiness}
+\label{sec:relationship_to_readiness}
+
+Within the Forecast Readiness Framework (FRF), readiness is defined by the degree
+to which forecasts align with operational tolerance, risk posture, and decision
+consequences.
+Accuracy alone is insufficient: readiness depends on whether forecast errors
+fall within acceptable bounds and whether deviations beyond those bounds are
+manageable.
+
+HR@$\tau$ formalizes this notion by introducing an explicit tolerance parameter
+$\tau$ that defines what constitutes an acceptable forecast deviation.
+For a fixed tolerance, HR@$\tau$ measures the fraction of forecasts whose errors
+lie within operational limits.
+However, without principled calibration of $\tau$, readiness assessment becomes
+ambiguous and potentially inconsistent across entities, horizons, or evaluation
+cycles.
+
+Tolerance calibration addresses this gap by transforming HR@$\tau$ from a
+descriptive statistic into a governed readiness construct.
+By selecting $\tau$ using transparent, data-driven rules, the evaluation
+environment itself becomes explicit and auditable.
+This separation between calibration and evaluation preserves interpretability
+and prevents post hoc adjustment of tolerance to favor particular models or
+outcomes.
+
+From a readiness perspective, calibrated tolerance defines the \emph{acceptance
+envelope} within which forecast performance is judged.
+Together with cost-ratio calibration for \CWSL{}, tolerance calibration determines
+the evaluation space over which readiness is assessed.
+These calibration steps operate upstream of metric computation and ensure that
+subsequent scores reflect consistent operational assumptions.
+
+Entity-level tolerance calibration further exposes structural heterogeneity in
+readiness.
+Entities with narrow calibrated tolerances exhibit low error tolerance and
+require precise forecasting to maintain readiness, while entities with broader
+tolerances may absorb larger deviations without material impact.
+Importantly, these differences are diagnostic signals rather than prescriptions;
+they inform segmentation, investigation, and governance decisions rather than
+mandating entity-specific deployment behavior.
+
+Within FRF, HR@$\tau$ calibration operates alongside other readiness primitives
+such as cost-weighted loss (\CWSL{}), shortfall avoidance (NSL), and loss depth
+(UD).
+Each primitive captures a distinct aspect of operational risk.
+Tolerance calibration specifies \emph{whether} errors are acceptable, while
+cost-weighted metrics quantify \emph{how costly} unacceptable errors are when
+they occur.
+
+In this sense, HR@$\tau$ calibration is not a tuning convenience but a readiness
+primitive.
+It defines the tolerance boundary against which forecasts are evaluated,
+supporting consistent, explainable, and decision-aligned readiness assessment
+across models, entities, and time horizons.

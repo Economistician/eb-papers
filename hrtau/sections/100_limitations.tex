@@ -1,0 +1,92 @@
+% ----------------------------------------------------------
+% LIMITATIONS AND NON-GOALS
+% ----------------------------------------------------------
+\section{Limitations and Non-Goals}
+\label{sec:limitations}
+
+The tolerance calibration methods presented in this note are designed to support
+transparent, governed readiness evaluation.
+They are intentionally constrained in scope.
+This section clarifies what HR@$\tau$ calibration does \emph{not} attempt to do
+and outlines limitations that should be considered when deploying these methods
+in practice.
+
+\subsection{Not a forecasting objective}
+\label{subsec:not_objective}
+
+HR@$\tau$ and its calibration rules are evaluation constructs, not training
+objectives.
+They are not intended to replace loss functions used during model estimation,
+nor to serve as direct optimization targets.
+In particular, calibrating $\tau$ does not imply that forecasts should be
+trained to maximize hit rate within a tolerance band.
+
+Using HR@$\tau$ calibration as a training objective risks collapsing readiness
+evaluation into a form of implicit over-smoothing, where forecasts are biased
+toward tolerance compliance rather than operational alignment.
+The methods in this note assume that forecasting models are trained independently
+and evaluated within a fixed, governed tolerance context.
+
+\subsection{Dependence on historical behavior}
+\label{subsec:historical_dependence}
+
+All calibration rules described here rely exclusively on historical forecast
+errors.
+As a result, calibrated tolerances reflect past system behavior and error
+distributions.
+When demand regimes, forecasting methods, or operational constraints change
+materially, previously calibrated tolerances may become stale.
+
+This limitation is not unique to HR@$\tau$, but it underscores the importance of
+treating tolerance calibration as a periodic, versioned process rather than a
+one-time decision.
+Recalibration should be triggered by substantive changes in forecast dynamics,
+not by short-term performance fluctuations.
+
+\subsection{Sensitivity to grid specification}
+\label{subsec:grid_sensitivity}
+
+Grid-based calibration inherits sensitivity to the choice of candidate tolerance
+set $\TauGrid$.
+While the methods are deterministic for a fixed grid, different grids can yield
+different calibrated tolerances, particularly in regions where the response
+surface is steep.
+
+For this reason, the grid itself must be governed and reported alongside results.
+The methods presented here do not attempt to infer a continuous optimum or to
+adaptively refine the grid; such extensions may be appropriate in some settings
+but would introduce additional complexity and assumptions beyond the scope of
+this note.
+
+\subsection{Interpretation under sparse data}
+\label{subsec:sparse_data}
+
+Entity-level tolerance calibration is especially sensitive to sample size.
+When the number of observations per entity is small, calibrated tolerances may
+reflect noise rather than structural readiness differences.
+Minimum sample thresholds and global caps mitigate this risk but do not eliminate
+it entirely.
+
+Consequently, entity-level HR@$\tau$ calibration should be interpreted primarily
+as a diagnostic signal.
+Its outputs should inform investigation and segmentation decisions rather than be
+applied mechanically or universally.
+
+\subsection{What HR@$\tau$ does not capture}
+\label{subsec:not_capture}
+
+HR@$\tau$ captures whether forecast errors fall within an acceptable band, but it
+does not encode the magnitude of errors outside that band.
+Two forecasts with identical hit rates may differ substantially in the severity
+of their misses.
+
+For this reason, HR@$\tau$ is not a substitute for magnitude-sensitive metrics
+such as CWSL, NSL, or UD.
+Within the Forecast Readiness Framework, tolerance-based metrics must be
+interpreted alongside cost-weighted and depth-sensitive measures to form a
+complete readiness assessment.
+
+Taken together, these limitations reinforce the intended role of HR@$\tau$:
+a governed, interpretable readiness primitive that defines tolerance boundaries,
+not a standalone measure of forecast quality or a replacement for operational
+loss modeling.
