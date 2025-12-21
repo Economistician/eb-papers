@@ -65,7 +65,7 @@ jobs:
           root_file: main.tex
           working_directory: ${{ matrix.working_directory }}
 
-      - name: Create versioned PDF file
+      - name: Create versioned + latest PDF files
         shell: bash
         run: |
           set -euo pipefail
@@ -73,10 +73,15 @@ jobs:
 
           mkdir -p out
           src="${{ matrix.working_directory }}/main.pdf"
-          out="out/${{ matrix.base_name }}_${TAG}.pdf"
 
-          mv "$src" "$out"
-          echo "Built: $out"
+          versioned="out/${{ matrix.base_name }}_${TAG}.pdf"
+          latest="out/${{ matrix.base_name }}_latest.pdf"
+
+          mv "$src" "$versioned"
+          cp "$versioned" "$latest"
+
+          echo "Built: $versioned"
+          echo "Built: $latest"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
