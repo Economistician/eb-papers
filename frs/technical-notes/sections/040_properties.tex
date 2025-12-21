@@ -26,8 +26,8 @@ across forecasting systems.
 \begin{itemize}
     \item Increasing \NSL{} increases \FRS.
     \item Increasing \CWSL{} (and therefore \CWSLscaled{}) decreases \FRS.
-    \item With identical \NSL{}, the forecast with lower \CWSL{} has the higher \FRS.
-    \item With identical \CWSL{}, the forecast with higher \NSL{} has the higher \FRS.
+    \item With identical \NSL{}, the forecast with lower \CWSLscaled{} has the higher \FRS.
+    \item With identical \CWSLscaled{}, the forecast with higher \NSL{} has the higher \FRS.
 \end{itemize}
 
 These relationships ensure that \FRS{} respects intuitive operational
@@ -47,7 +47,7 @@ preferences: reliability is rewarded, and cost exposure is penalized.
 This structural asymmetry reflects real operational priorities, where shortfalls
 create significantly higher service and cost risk.
 
-\input{figures/040_frs_sensitivity}
+\input{figures/frs_sensitivity}
 
 \subsection{Smoothness and Stability}
 
@@ -60,7 +60,7 @@ step function, \FRS{} exhibits the following behaviors:
     \item Small forecast adjustments that do not change shortfall occurrence
     produce smooth changes in \FRS.
     \item Structural shifts (such as systematic underforecasting) induce
-    predictable, interpretable shifts in both \NSL{} and \CWSL{}, resulting in
+    predictable, interpretable shifts in both \NSL{} and \CWSLscaled{}, resulting in
     corresponding changes in \FRS.
 \end{itemize}
 
@@ -71,7 +71,7 @@ step function, \FRS{} exhibits the following behaviors:
 \begin{itemize}
     \item \textbf{Underforecast bias} reduces \NSL{} and increases \CWSL{},
     resulting in sharp decreases in \FRS.
-    \item \textbf{Overforecast bias} preserves \NSL{} but increases \CWSL{},
+    \item \textbf{Overforecast bias} preserves \NSL{} but increases \CWSLscaled{},
     reducing \FRS{} more gradually.
 \end{itemize}
 
