@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  build-and-release:
+  build-pdfs:
     runs-on: ubuntu-latest
 
     strategy:
@@ -59,27 +59,50 @@ jobs:
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         env:
-          # Technical notes often do \input{010_overview} while files live in ./sections/
-          # This tells LaTeX to also search ./sections (and keeps "." first).
+          # Technical notes do \input{010_overview} but files live in ./sections/
           TEXINPUTS: ".:./sections/:"
         with:
           root_file: main.tex
           working_directory: ${{ matrix.working_directory }}
 
-      - name: Prepare versioned PDF
+      - name: Create versioned PDF file
         shell: bash
         run: |
           set -euo pipefail
-          TAG="${GITHUB_REF_NAME}"  # e.g., v1.2.0
+          TAG="${GITHUB_REF_NAME}"  # e.g., v0.2.1
 
-          mkdir -p release
+          mkdir -p out
           src="${{ matrix.working_directory }}/main.pdf"
-          out="release/${{ matrix.base_name }}_${TAG}.pdf"
+          out="out/${{ matrix.base_name }}_${TAG}.pdf"
 
           mv "$src" "$out"
-          echo "Prepared: $out"
+          echo "Built: $out"
 
-      - name: Attach PDF to GitHub Release
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.id }}
+          path: out/*.pdf
+
+  attach-to-release:
+    runs-on: ubuntu-latest
+    needs: [build-pdfs]
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+
+      - name: Collect PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release
+          find dist -type f -name "*.pdf" -print -exec cp {} release/ \;
+          ls -la release
+
+      - name: Attach PDFs to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: release/*.pdf
