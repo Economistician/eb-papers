@@ -1,4 +1,4 @@
-# Electric Barometer – Research Papers
+# Electric Barometer Research Papers (`eb-papers`)
 
 [![License: BSD-3](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE)
 
