@@ -8,8 +8,13 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: eb-papers-release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build-pdfs:
+    name: Build PDFs (${{ matrix.id }})
     runs-on: ubuntu-latest
 
     strategy:
@@ -17,44 +22,44 @@ jobs:
       matrix:
         include:
           # --- Technical Notes ---
-          - id: TN-CWSL
+          - id: TN_CWSL
             working_directory: cwsl/technical-notes
             base_name: ElectricBarometer_TN_CWSL
 
-          - id: TN-CWSLR
+          - id: TN_CWSLR
             working_directory: cwslr/technical-notes
             base_name: ElectricBarometer_TN_CWSLR
 
-          - id: TN-FRS
+          - id: TN_FRS
             working_directory: frs/technical-notes
             base_name: ElectricBarometer_TN_FRS
 
-          - id: TN-HRAT
+          - id: TN_HRAT
             working_directory: hrat/technical-notes
             base_name: ElectricBarometer_TN_HRAT
 
-          - id: TN-HRTAU
+          - id: TN_HRTAU
             working_directory: hrtau
             base_name: ElectricBarometer_TN_HRTAU
 
-          - id: TN-NSL
+          - id: TN_NSL
             working_directory: nsl/technical-notes
             base_name: ElectricBarometer_TN_NSL
 
-          - id: TN-RAL
+          - id: TN_RAL
             working_directory: ral/technical-notes
             base_name: ElectricBarometer_TN_RAL
 
-          - id: TN-UD
+          - id: TN_UD
             working_directory: ud/technical-notes
             base_name: ElectricBarometer_TN_UD
 
           # --- Papers ---
-          - id: PAPER-FRF
+          - id: PAPER_FRF
             working_directory: frf/paper
             base_name: ElectricBarometer_PAPER_FRF
 
-          - id: PAPER-LTOR
+          - id: PAPER_LTOR
             working_directory: ltor/paper
             base_name: ElectricBarometer_PAPER_LTOR
 
@@ -67,8 +72,8 @@ jobs:
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         env:
-          # Technical notes do \input{010_overview} but files live in ./sections/
-          TEXINPUTS: ".:./sections/:"
+          # Allow \input{...} to resolve files located in <doc-root>/sections/
+          TEXINPUTS: ".:${{ github.workspace }}/${{ matrix.working_directory }}/sections/:"
         with:
           root_file: main.tex
           working_directory: ${{ matrix.working_directory }}
@@ -77,10 +82,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           TAG="${GITHUB_REF_NAME}"  # e.g., v0.2.1
+          src="${{ matrix.working_directory }}/main.pdf"
 
           mkdir -p out
-          src="${{ matrix.working_directory }}/main.pdf"
 
           versioned="out/${{ matrix.base_name }}_${TAG}.pdf"
           latest="out/${{ matrix.base_name }}_latest.pdf"
@@ -95,9 +101,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.id }}
-          path: out/*.pdf
+          path: out/
 
   attach-to-release:
+    name: Attach PDFs to Release
     runs-on: ubuntu-latest
     needs: [build-pdfs]
 
@@ -111,8 +118,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          shopt -s nullglob
+
           mkdir -p release
           find dist -type f -name "*.pdf" -print -exec cp {} release/ \;
+
           ls -la release
 
       - name: Attach PDFs to GitHub Release
