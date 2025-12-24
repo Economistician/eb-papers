@@ -1,0 +1,64 @@
+% ----------------------------------------------------------
+% FLOW DIAGRAM: LTO Readiness-Centric Production Control
+% ----------------------------------------------------------
+
+\begin{figure}[htbp]
+\centering
+
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[
+    node distance=1.2cm and 1.6cm,
+    font=\scriptsize,
+    box/.style={
+        draw,
+        rectangle,
+        rounded corners,
+        align=center,
+        text width=3.1cm,
+        minimum height=1.0cm,
+        inner sep=4pt
+    },
+    arrow/.style={->, thick}
+]
+
+% ----------------------------------------------------------
+% NODES
+% ----------------------------------------------------------
+
+\node[box] (forecast) {Raw Forecasts\\(Any Model)};
+\node[box, below=of forecast] (context) {\LTO{} Context\\(\ltoOn{}, \ltoPhase{})};
+
+\node[box, right=of forecast] (ral) {Readiness Adjustment Layer\\(\RAL{})};
+\node[box, right=of ral] (evaluation) {Asymmetry-Aware\\Evaluation\\(\CWSL{}, \NSL{})};
+\node[box, right=of evaluation] (selection) {Forecast Selection};
+
+\node[box, below=of selection] (production) {Intraday Production\\Decisions};
+
+% ----------------------------------------------------------
+% ARROWS
+% ----------------------------------------------------------
+
+\draw[arrow] (forecast) -- (ral);
+\draw[arrow] (context) -- (ral);
+
+\draw[arrow] (ral) -- (evaluation);
+\draw[arrow] (evaluation) -- (selection);
+\draw[arrow] (selection) -- (production);
+
+% ----------------------------------------------------------
+% ANNOTATIONS
+% ----------------------------------------------------------
+
+\node[above=2pt of ral] {\footnotesize Readiness Modulation};
+\node[above=2pt of evaluation] {\footnotesize Loss-Based Scoring};
+
+\end{tikzpicture}%
+}
+
+\caption{Readiness-centric production control under \LTO{} conditions in the Electric Barometer framework.
+\LTO{} activation enters the system as contextual information that degrades forecast readiness via the
+Readiness Adjustment Layer (\RAL{}), rather than as a demand uplift. Forecasts are evaluated under
+asymmetry-aware loss and selected to minimize expected operational harm before being translated
+into intraday production actions.}
+\label{fig:lto-readiness-flow}
+\end{figure}

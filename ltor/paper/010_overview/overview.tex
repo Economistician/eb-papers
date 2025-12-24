@@ -1,0 +1,80 @@
+% ----------------------------------------------------------
+% OVERVIEW
+% ----------------------------------------------------------
+
+\section{Overview}
+\label{sec:overview}
+
+Limited-Time Offers (LTOs) are intentionally disruptive. In quick-service restaurant (QSR)
+operations, they are deployed to shift guest behavior, stimulate incremental traffic, and refresh
+menu engagement. The operational consequence of this disruption is predictable: LTO periods
+systematically degrade forecast reliability. Launch effects, substitution dynamics, execution
+variance across stores, and supply constraints together create a regime in which classical notions of
+forecast ``accuracy'' become unstable and operationally misleading.
+
+Rather than framing this degradation as a modeling deficiency to be corrected, this paper treats
+LTO handling in production management as a readiness and governance problem. The relevant
+question is not whether promotional lift or incremental transactions can be predicted precisely, but
+whether the operational system can remain stable, explainable, and economically disciplined when
+such predictions fail. Electric Barometer adopts this perspective by treating LTOs as exogenous
+readiness shocks: events that reliably increase uncertainty and error asymmetry, regardless of the
+magnitude of realized lift.
+
+A central design principle is separation of concerns. Long-horizon planning problems—such as
+procurement of specialized ingredients (e.g., buns, proteins, packaging)—may require explicit LTO
+demand estimates and scenario-based buffers. Intraday production control, however, is a distinct
+decision loop: it is fast, partially reversible, and continuously informed by realized demand.
+Electric Barometer therefore does not depend on promotional lift models to govern production
+behavior. Instead, it modulates forecast trust through the Readiness Adjustment Layer (\RAL{}) and
+shapes decision-making through asymmetry-aware readiness primitives such as cost-weighted and
+shortfall-sensitive evaluation.
+
+\subsection{Contributions}
+\label{subsec:contributions}
+
+This paper makes the following contributions within the Electric Barometer Series:
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Reframing of LTO forecasting.} We formalize LTO periods as planned regime shifts in
+  which predictive accuracy is structurally degraded and should not be treated as the primary
+  operational objective.
+
+  \item \textbf{Separation of planning and control.} We propose a clean division between
+  supply-planning forecasts (used for ordering and long-lead decisions) and intraday
+  production-control decisions (governed by readiness, uncertainty, and asymmetric loss).
+
+  \item \textbf{Readiness-centric LTO integration.} We define how LTO activation enters the
+  production management pipeline as an exogenous context signal that reduces readiness via
+  the Readiness Adjustment Layer, rather than as a demand uplift coefficient.
+
+  \item \textbf{Asymmetry-driven production behavior.} We show how governed asymmetric evaluation
+  (e.g., via \CWSL{} and shortfall-sensitive primitives) can increase preparedness during hyped LTO
+  windows without requiring accurate hype prediction.
+\end{enumerate}
+
+\subsection{Scope and non-goals}
+\label{subsec:scope-nongoals}
+
+This paper clarifies what Electric Barometer does \emph{not} attempt to do:
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item We do not propose a universal model for predicting LTO lift, hype, or marketing response.
+  \item We do not treat LTO demand estimates as authoritative inputs to intraday production control.
+  \item We do not optimize forecasts to appear accurate during regime change at the expense of
+  operational stability.
+\end{enumerate}
+
+Instead, we present an architecture and vocabulary for operating safely under known instability,
+where decision quality is defined by operational consequence rather than symmetric error.
+
+\subsection{Organization of the paper}
+\label{subsec:organization}
+
+Section~\ref{sec:background-problem} summarizes why \LTOs{} destabilize classical evaluation and
+production heuristics. Section~\ref{sec:regime-shifts} formalizes \LTOs{} as regime shifts and
+outlines their operational failure modes. Section~\ref{sec:separation} details the
+separation-of-concerns architecture between planning and control. Section~\ref{sec:ral} introduces
+the role of the Readiness Adjustment Layer under promotional stress. Section~\ref{sec:asymmetry}
+presents asymmetry-aware readiness primitives and their implications for production selection.
+Section~\ref{sec:intraday-loop} describes an implementable intraday control loop.
+Sections~\ref{sec:governance}--\ref{sec:patterns} discuss governance, reporting, and common
+deployment patterns. Section~\ref{sec:limitations} documents limitations and non-goals, and
+Section~\ref{sec:conclusion} concludes.

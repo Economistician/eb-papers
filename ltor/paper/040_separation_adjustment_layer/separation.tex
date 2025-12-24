@@ -1,0 +1,88 @@
+% ----------------------------------------------------------
+% SEPARATION OF CONCERNS
+% ----------------------------------------------------------
+
+\section{Separation of Concerns: Planning versus Control}
+\label{sec:separation}
+
+Effective production management under \LTOs{} requires a clear separation between decision
+problems that operate on fundamentally different time scales, information sets, and reversibility
+constraints. Conflating these problems into a single forecasting objective forces fragile assumptions
+to propagate across the system. Electric Barometer instead enforces a separation of concerns between
+\emph{planning} decisions and \emph{control} decisions, each governed by distinct principles.
+
+\subsection{Supply planning and long-horizon decisions}
+\label{subsec:supply-planning}
+
+Supply planning addresses long-horizon, largely irreversible decisions such as procurement of
+specialized ingredients, packaging, and distribution capacity. These decisions are made prior to
+\LTO{} launch, often weeks in advance, and must account for lead times, minimum order quantities,
+and contractual constraints. In this context, explicit \LTO{} demand modeling is both appropriate
+and necessary. Scenario analysis, uplift assumptions, and conservative buffers are legitimate tools
+for managing the risk of under-supply.
+
+Crucially, the objective of supply planning is not intraday service optimization but feasibility.
+Ordering too little may preclude execution entirely, while ordering too much primarily affects
+inventory carrying cost and waste. As such, planning models may reasonably encode promotional
+beliefs, marketing expectations, and worst-case contingencies. These beliefs are inherently
+speculative, but they are acceptable at this stage because decisions cannot be deferred.
+
+\subsection{Intraday production control}
+\label{subsec:intraday-control}
+
+Intraday production control operates under a different set of constraints. Decisions are made at
+high frequency, are partially reversible, and are continuously informed by realized demand signals.
+The objective is to balance service protection against waste while responding to unfolding
+conditions in near real time.
+
+In this regime, coupling production decisions directly to speculative \LTO{} demand forecasts is
+hazardous. Errors in promotional lift estimation can translate immediately into stockouts or excess
+production, and corrective action may arrive too late to prevent service degradation. Moreover,
+the availability of real-time sales data reduces the marginal value of prior demand beliefs, shifting
+the emphasis toward responsiveness and robustness.
+
+Electric Barometer is explicitly designed for this control loop. It does not attempt to plan inventory
+or pre-commit production quantities. Instead, it governs how forecasts are \emph{used} in the face
+of uncertainty, determining which forecast signals are trusted and how aggressively they are acted
+upon.
+
+\subsection{Why decoupling matters during \LTOs{}}
+\label{subsec:decoupling-importance}
+
+During \LTO{} periods, the divergence between planning and control objectives becomes most
+pronounced. Supply planning must commit in advance under uncertainty, while intraday control
+must adapt quickly as uncertainty resolves. When these layers are coupled through a single demand
+forecast, errors and overconfidence propagate across the entire decision chain.
+
+By decoupling the two, Electric Barometer allows each layer to fail safely. Supply planning forecasts
+may overestimate or underestimate promotional lift without destabilizing intraday execution.
+Conversely, intraday production control can remain conservative and adaptive even if upstream
+assumptions prove incorrect. This decoupling preserves operational stability and simplifies
+postmortem analysis by isolating the source of failure.
+
+\subsection{Interface between planning and control}
+\label{subsec:planning-control-interface}
+
+The interface between planning and control is deliberately narrow. Rather than passing expected
+\LTO{} demand levels into production control, the planning layer provides context and constraints:
+ingredient availability, maximum feasible throughput, and known limitations. The control layer
+then operates within these bounds, guided by realized demand and readiness signals.
+
+In Electric Barometer, \LTO{} activation enters the control loop only as a contextual indicator that
+alters forecast trust and risk posture. This signal is consumed by the \RAL{}, which modulates
+readiness in response to planned instability without embedding specific demand beliefs. The result
+is a control system that is aware of promotional context yet insulated from speculative lift
+assumptions.
+
+\subsection{Implications for system design}
+\label{subsec:separation-implications}
+
+This separation-of-concerns architecture has direct implications for system design and governance.
+Forecast accuracy metrics, promotional modeling, and scenario planning remain valuable tools, but
+they are confined to decision layers where their assumptions are appropriate. Intraday production
+decisions, by contrast, are governed by readiness, uncertainty, and asymmetric loss.
+
+By enforcing this separation, Electric Barometer aligns each decision layer with its true operational
+objective. In the sections that follow, we formalize how \LTO{} context is incorporated into the
+control layer through readiness adjustment and asymmetry-aware evaluation, completing the
+architecture for robust production management under planned regime shifts.

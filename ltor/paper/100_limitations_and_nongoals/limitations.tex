@@ -1,0 +1,76 @@
+% ----------------------------------------------------------
+% LIMITATIONS AND NON-GOALS
+% ----------------------------------------------------------
+
+\section{Limitations and Non-Goals}
+\label{sec:limitations}
+
+Electric Barometer’s treatment of \LTOs{} is intentionally constrained. The framework prioritizes
+operational robustness, interpretability, and governance over predictive expressiveness. This
+section delineates the boundaries of the proposed approach and consolidates its principal
+limitations and non-goals, in order to prevent misinterpretation or inappropriate extension.
+
+\subsection{Not a promotional demand forecasting framework}
+\label{subsec:not-demand-forecasting}
+
+Electric Barometer does not attempt to forecast \LTO{} demand uplift, hype intensity, or marketing
+effectiveness. It does not ingest promotional spend, creative attributes, or campaign metadata as
+drivers of intraday production decisions. While such modeling may be appropriate for strategic
+planning, procurement, or menu design, it lies outside the scope of the readiness-centric control
+problem addressed here.
+
+This exclusion is deliberate. Incorporating speculative promotional predictors into the intraday
+control loop would couple production decisions to assumptions that are difficult to validate in real
+time and prone to failure under heterogeneous execution.
+
+\subsection{Not an optimization of forecast accuracy}
+\label{subsec:not-accuracy-optimization}
+
+The framework does not seek to maximize forecast accuracy during \LTO{} periods. It explicitly
+accepts that forecast accuracy is structurally degraded under planned regime shifts, and treats this
+degradation as a design premise rather than a deficiency to be corrected.
+
+Accordingly, Electric Barometer evaluates forecasts in terms of readiness and operational loss,
+rather than symmetric error magnitude. Forecasts that are numerically less accurate may therefore
+be preferred if they yield safer outcomes under asymmetric risk. Accuracy metrics remain useful as
+diagnostic tools, but they do not govern production behavior.
+
+\subsection{Dependence on governed assumptions}
+\label{subsec:assumption-dependence}
+
+Readiness adjustment and asymmetric loss evaluation depend on explicit, governed assumptions
+about risk posture and operational tolerance. These assumptions must be specified, reviewed, and
+maintained deliberately. Poorly chosen or implicit assumptions can result in behavior that is either
+overly conservative or insufficiently protective.
+
+This dependence reflects an unavoidable property of operational systems: policy choices must be
+encoded somewhere. Electric Barometer’s contribution is to surface these choices as inspectable and
+auditable artifacts, rather than embedding them implicitly in model structure or training objectives.
+
+\subsection{Limits of reversibility}
+\label{subsec:reversibility-limits}
+
+The intraday control loop assumes partial reversibility of production decisions. While this assumption
+holds in many QSR contexts, it may not apply uniformly across all products, preparation methods, or
+operational constraints. Items with extremely short shelf lives or rigid preparation requirements may
+necessitate simplified control policies or more conservative readiness postures.
+
+Electric Barometer does not eliminate irreversibility; it operates within it. Where reversibility is
+limited, readiness degradation and loss asymmetry should be calibrated accordingly.
+
+\subsection{Summary of non-goals}
+\label{subsec:non-goals-summary}
+
+For clarity, the principal non-goals of this work are summarized as follows:
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item We do not provide a method for estimating \LTO{} demand uplift or promotional response.
+  \item We do not propose training forecasting models to optimize readiness or loss metrics.
+  \item We do not collapse supply planning and intraday production control into a single predictive
+  system.
+  \item We do not claim that readiness-centric control improves forecast accuracy.
+\end{enumerate}
+
+These constraints define the intended scope of Electric Barometer’s \LTO{} handling. Within this
+scope, the framework provides a disciplined and auditable approach to managing production risk
+during planned instability. The following section concludes by summarizing the broader implications
+of this approach for operational forecasting and production management.

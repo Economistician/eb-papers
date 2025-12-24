@@ -1,0 +1,79 @@
+% ----------------------------------------------------------
+% CASE PATTERNS AND FAILURE MODES
+% ----------------------------------------------------------
+
+\section{Case Patterns and Failure Modes}
+\label{sec:patterns}
+
+The abstract principles described in prior sections manifest in recognizable operational patterns
+during \LTO{} deployments. Examining these patterns clarifies both the failure modes of traditional
+forecast-centric systems and the stabilizing effects of a readiness-centric approach. This section
+summarizes common behaviors observed in practice and situates Electric Barometer’s design choices
+relative to these outcomes.
+
+\subsection{Pattern 1: Belief-driven overcommitment}
+\label{subsec:belief-overcommitment}
+
+A frequent failure mode during \LTO{} launches is belief-driven overcommitment. In this pattern,
+production plans are scaled aggressively based on a single promotional lift estimate, often derived
+from historical analogs or marketing expectations. When realized demand underperforms these
+assumptions, stores are left with excess production, elevated waste, and reduced flexibility for
+later dayparts.
+
+This failure mode arises from coupling production decisions directly to speculative demand beliefs.
+Forecast accuracy metrics may indicate success \emph{ex ante}, yet operational outcomes deteriorate
+when assumptions fail. Electric Barometer avoids this pattern by refusing to treat uplift estimates as
+authoritative inputs to intraday control, instead favoring readiness-adjusted conservatism.
+
+\subsection{Pattern 2: Accuracy chasing under instability}
+\label{subsec:accuracy-chasing}
+
+Another common pattern is reactive accuracy chasing. When early \LTO{} performance diverges from
+expectations, forecasting systems are rapidly retuned or manually overridden in an attempt to
+restore numerical accuracy. These interventions often lag realized demand and amplify volatility,
+resulting in oscillatory production behavior.
+
+Electric Barometer mitigates this failure mode by shifting the objective away from point accuracy.
+Because readiness degradation is expected during \LTO{} regimes, forecast misses are not treated as
+exceptions requiring immediate correction. Instead, asymmetric loss and readiness posture govern
+selection, allowing production behavior to remain stable while uncertainty resolves naturally.
+
+\subsection{Pattern 3: Late-day shortfall and irreversibility}
+\label{subsec:late-day-shortfall}
+
+A particularly costly failure mode occurs when conservative production early in the day is not
+revisited under rising demand, leading to late-day shortfalls. In traditional systems, reluctance to
+adjust forecasts upward without strong confidence can delay corrective action until it is too late to
+recover service.
+
+Under Electric Barometer, this pattern is addressed through the intraday control loop. Readiness
+adjustment biases early decisions toward protection against shortfall, while continuous ingestion of
+realized demand allows selection to shift as empirical evidence accumulates. This combination
+reduces the likelihood of irreversible late-day service failures.
+
+\subsection{Pattern 4: Postmortem misattribution}
+\label{subsec:postmortem-misattribution}
+
+Postmortems following \LTO{} underperformance frequently attribute poor outcomes to forecasting
+inaccuracy alone. This narrow framing obscures whether decisions were reasonable given the risk
+environment and often leads to unnecessary model complexity or ad hoc overrides in subsequent
+promotions.
+
+Electric Barometer reframes postmortems around decision quality. By making readiness posture and
+loss asymmetry explicit, it becomes possible to assess whether outcomes reflected appropriate risk
+management rather than predictive failure. This distinction supports more constructive learning and
+avoids repeated cycles of reactive model tuning.
+
+\subsection{Summary of contrasting behaviors}
+\label{subsec:pattern-summary}
+
+Table~\ref{tab:pattern-summary} summarizes the contrast between traditional forecast-centric
+approaches and the readiness-centric patterns encouraged by Electric Barometer during \LTO{}
+periods.
+
+\input{tables/pattern_summary}
+
+These patterns illustrate how Electric Barometer alters system behavior not by improving
+predictive accuracy during \LTOs{}, but by changing how uncertainty is governed. The following
+section discusses limitations and non-goals, clarifying the scope within which these design choices
+are intended to operate.

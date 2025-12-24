@@ -1,0 +1,86 @@
+% ----------------------------------------------------------
+% GOVERNANCE AND REPORTING
+% ----------------------------------------------------------
+
+\section{Governance and Reporting}
+\label{sec:governance}
+
+Because \LTO{} periods deliberately alter risk posture and decision behavior, their integration into
+production management must be governed explicitly. Without clear governance, readiness adjustment
+and asymmetric selection risk being misinterpreted as ad hoc conservatism or model instability.
+Electric Barometer therefore treats all readiness- and loss-related assumptions as first-class,
+auditable artifacts rather than implicit system behavior.
+
+\subsection{Governed contextual signals}
+\label{subsec:governed-context}
+
+All contextual signals that influence readiness must be declared, versioned, and inspectable. In the
+case of \LTOs{}, this includes activation indicators (\ltoOn{}), phase labels (\ltoPhase{}), and any
+rules governing their temporal extent. These signals define when and how readiness is degraded and
+must be managed through the same governance processes as other operational parameters.
+
+By externalizing \LTO{} context, Electric Barometer ensures that promotional effects are not
+silently embedded in model behavior. This separation enables consistent application across stores,
+dayparts, and promotions, and simplifies review when readiness assumptions change.
+
+\subsection{Readiness policies and lifecycle}
+\label{subsec:readiness-lifecycle}
+
+Readiness adjustment policies should have an explicit lifecycle. The degree of readiness degradation
+associated with \LTO{} launch, sustain, and wind-down phases must be specified in advance and
+revisited periodically. Changes to these policies redefine operational risk posture and therefore
+require review and approval. This emphasis on explicit assumptions and robustness over point
+optimality aligns with established principles of sensitivity analysis and model governance
+\citep{saltelli2008}.
+
+Importantly, readiness policies are not tuned opportunistically in response to short-term outcomes.
+They are calibrated based on historical behavior, operational tolerance, and governance objectives,
+and then held fixed during evaluation and execution. This separation preserves interpretability and
+prevents post hoc rationalization of performance.
+
+\subsection{Loss asymmetry governance}
+\label{subsec:loss-governance}
+
+Asymmetric loss parameters (\cu{}, \co{}) encode explicit tradeoffs between service protection and
+waste. During \LTO{} periods, these parameters often differ from steady-state values, reflecting the
+heightened cost of shortfall. Because these weights directly influence production behavior, they must
+be governed with the same rigor as readiness policies.
+
+Governance artifacts should record the chosen cost ratios, their justification, and the contexts in
+which they apply. This documentation enables postmortem analysis to distinguish between deliberate
+risk posture and unintended consequences, and ensures that changes in loss asymmetry are deliberate
+rather than emergent.
+
+\subsection{Reporting and diagnostics}
+\label{subsec:reporting-diagnostics}
+
+Effective governance requires transparent reporting. For each \LTO{}, reporting should include:
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item the period of \LTO{} activation and associated readiness posture,
+  \item the loss asymmetry parameters applied during the promotion,
+  \item summary diagnostics of forecast selection behavior under readiness adjustment, and
+  \item observed service and waste outcomes relative to steady-state baselines.
+\end{enumerate}
+
+These diagnostics allow stakeholders to assess whether readiness adjustment and asymmetric
+selection behaved as intended, independent of whether forecasts were numerically accurate.
+
+\subsection{Postmortems and continuous improvement}
+\label{subsec:postmortems}
+
+Postmortem analysis under Electric Barometer focuses on decision quality rather than forecast error
+alone. When outcomes deviate from expectations during \LTO{} periods, the primary questions are:
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+  \item Were readiness policies appropriate given the risk environment?
+  \item Were loss asymmetries aligned with operational priorities?
+  \item Did the intraday control loop respond coherently to realized demand signals?
+\end{itemize}
+
+This framing avoids the reflexive conclusion that forecasting models must be improved whenever
+outcomes are unfavorable. Instead, it supports targeted refinement of readiness and governance
+assumptions, reinforcing the principle that operational robustness, not numerical accuracy, is the
+ultimate objective.
+
+In the next section, we examine common deployment patterns and failure modes observed when
+managing \LTO{} periods, illustrating how the Electric Barometer approach differs from traditional
+forecast-centric systems.

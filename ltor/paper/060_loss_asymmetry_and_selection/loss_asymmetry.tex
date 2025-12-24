@@ -1,0 +1,83 @@
+% ----------------------------------------------------------
+% LOSS ASYMMETRY AND FORECAST SELECTION
+% ----------------------------------------------------------
+
+\section{Loss Asymmetry and Forecast Selection}
+\label{sec:asymmetry}
+
+Forecast selection in operational environments should reflect not only expected deviation from
+realized demand, but the asymmetric consequences of being wrong. During \LTOs{}, these asymmetries
+intensify: the cost of under-producing during peak promotional windows often exceeds the cost of
+over-producing by a wide margin. Electric Barometer encodes this reality explicitly through
+asymmetry-aware evaluation and selection, ensuring that production behavior aligns with operational
+risk rather than numerical accuracy.
+
+\subsection{Asymmetric loss as an operational primitive}
+\label{subsec:asymmetric-loss}
+
+Traditional accuracy metrics implicitly assume symmetry: over- and under-forecasting are penalized
+equally. This assumption is rarely valid in production management, and it is especially brittle
+during \LTO{} periods. Stockouts during promotional peaks can result in immediate revenue loss,
+queue buildup, brand damage, and guest dissatisfaction, while moderate over-production may be
+absorbed through holding buffers, reallocation, or controlled waste. Asymmetric loss has long been
+recognized as essential for decision-aligned learning and evaluation \citep{elkan2001}.
+
+Electric Barometer addresses this imbalance using asymmetric loss primitives, most notably
+\CWSL{}. By weighting under-forecasting and over-forecasting differently via cost parameters
+\cu{} and \co{}, \CWSL{} translates forecast error into an estimate of expected operational loss
+rather than abstract deviation. This framing ensures that forecast evaluation is grounded in
+decision consequence.
+
+\subsection{Readiness-adjusted loss evaluation}
+\label{subsec:readiness-adjusted-loss}
+
+The influence of asymmetric loss is modulated by readiness. When the \RAL{} indicates degraded
+readiness—such as during active \LTO{} launch phases—loss asymmetry becomes more decisive in
+forecast selection. In effect, readiness adjustment amplifies the penalty associated with operationally
+dangerous errors without altering the forecasts themselves.
+
+Formally, readiness-adjusted evaluation can be viewed as applying asymmetric loss under a
+context-dependent risk posture. Forecasts that appear similar under symmetric accuracy metrics
+may diverge sharply once evaluated under \CWSL{} in a low-readiness environment. This divergence
+guides Electric Barometer toward forecasts that better protect service and throughput during
+high-risk periods.
+
+\subsection{Selection over aggregation}
+\label{subsec:selection-over-aggregation}
+
+A key design choice in Electric Barometer is the emphasis on selection rather than aggregation.
+Instead of averaging forecasts or blending models to improve point accuracy, the system evaluates
+candidate forecasts under readiness-adjusted loss and selects the option that minimizes expected
+operational harm.
+
+This approach is particularly important during \LTO{} regimes, where averaging can dilute
+protective bias and obscure downside risk. Selection preserves interpretability—each decision can
+be traced to a specific forecast and evaluation context—and avoids overconfidence induced by
+ensemble smoothing.
+
+\subsection{Implications for production behavior}
+\label{subsec:production-implications}
+
+Asymmetry-aware selection produces concrete and intuitive effects on production behavior during
+\LTO{} periods. Forecasts that err conservatively on the side of over-preparation are favored during
+high-risk windows, increasing buffer availability and reducing the likelihood of service failure.
+As uncertainty resolves and readiness recovers, selection pressure relaxes, allowing production to
+tighten without abrupt regime changes.
+
+Importantly, these effects arise without explicit demand uplift modeling. Production quantities
+increase not because the system believes demand will be higher, but because the cost of being short
+is higher. This distinction preserves robustness when promotional outcomes diverge from
+expectations.
+
+\subsection{Explainability and governance}
+\label{subsec:asymmetry-governance}
+
+Encoding asymmetry at the evaluation and selection stage improves explainability and governance.
+Decisions can be justified in terms of explicit cost tradeoffs and readiness context rather than opaque
+model internals. Postmortem analysis can distinguish between forecast misspecification and
+appropriate risk posture, clarifying whether outcomes reflect modeling gaps or intentional
+conservatism.
+
+In the next section, we integrate readiness adjustment and asymmetric selection into an intraday
+control loop, demonstrating how Electric Barometer operationalizes these principles in real-time
+production management under \LTO{} conditions.

@@ -1,0 +1,90 @@
+% ----------------------------------------------------------
+% INTRADAY CONTROL LOOP
+% ----------------------------------------------------------
+
+\section{Intraday Control Loop}
+\label{sec:intraday-loop}
+
+Intraday production management is a closed-loop control problem. Decisions are made repeatedly
+over short horizons, informed by realized demand signals and constrained by operational capacity.
+Under \LTOs{}, this loop must operate in an environment of elevated uncertainty, where forecasts are
+known to be less reliable but service risk is higher. Electric Barometer operationalizes readiness
+adjustment and asymmetry-aware selection within a disciplined intraday control loop designed to
+respond safely to unfolding conditions.
+
+\subsection{Control loop structure}
+\label{subsec:control-structure}
+
+At each intraday decision point, the control loop proceeds through a fixed sequence:
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Signal ingestion.} Observe realized sales velocity, queue conditions, and any
+  relevant operational indicators available at time $t$.
+  \item \textbf{Context evaluation.} Determine active contextual signals, including \LTO{}
+  activation (\ltoOn{}) and phase (\ltoPhase{}), along with any binding capacity or supply
+  constraints.
+  \item \textbf{Readiness adjustment.} Apply the \RAL{} to modulate forecast trust based on the
+  current context, yielding a readiness posture appropriate to the risk environment.
+  \item \textbf{Forecast evaluation and selection.} Evaluate candidate forecasts under
+  readiness-adjusted asymmetric loss (e.g., \CWSL{}), and select the forecast that minimizes
+  expected operational loss.
+  \item \textbf{Production action.} Translate the selected forecast into a production target
+  \qprod{}, subject to feasibility and capacity constraints.
+\end{enumerate}
+
+This structure ensures that contextual risk influences decisions before production commitments are
+made, while preserving a clear separation between observation, evaluation, and action.
+
+\subsection{Role of realized demand}
+\label{subsec:realized-demand}
+
+Realized demand plays a central role in the intraday loop. As sales accumulate, uncertainty about
+actual demand resolves naturally, reducing reliance on prior beliefs. Electric Barometer leverages
+this resolution by allowing realized signals to dominate decision-making as the day progresses,
+particularly during sustained \LTO{} periods.
+
+Crucially, realized demand is not used to retroactively justify earlier assumptions about promotional
+lift. Instead, it serves as a corrective signal that interacts with readiness and loss asymmetry to
+update production behavior incrementally. This avoids abrupt shifts and reduces the risk of
+overreaction to early noise.
+
+\subsection{Partial reversibility and pacing}
+\label{subsec:reversibility}
+
+Intraday production decisions are partially reversible. Over-production can sometimes be mitigated
+through holding buffers, reallocation across channels, or controlled waste, while under-production
+during peak windows is often irreversible. Electric Barometer accounts for this asymmetry by
+pacing production adjustments over time rather than committing to large, belief-driven jumps.
+
+During \LTO{} launch phases, readiness-adjusted selection favors conservative ramps that protect
+against shortfall. As empirical demand signals stabilize, production targets can be tightened
+gradually, reflecting improved confidence without abandoning caution.
+
+\subsection{Failure modes avoided}
+\label{subsec:failure-modes}
+
+The intraday control loop is explicitly designed to avoid common failure modes observed during
+promotional periods:
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Belief lock-in.} Production does not hinge on a single promotional lift estimate that
+  must be defended throughout the day.
+  \item \textbf{Overreaction to noise.} Early demand spikes do not immediately trigger aggressive
+  scaling absent readiness-aware evaluation.
+  \item \textbf{Delayed correction.} Conservative bias during high-risk windows reduces the
+  likelihood of late-day stockouts that cannot be recovered.
+\end{enumerate}
+
+By structuring decisions around readiness and loss rather than point accuracy, Electric Barometer
+maintains stability even when forecasts miss materially.
+
+\subsection{Operational interpretability}
+\label{subsec:intraday-interpretability}
+
+An important property of the intraday control loop is interpretability. Each production decision can
+be explained in terms of observable signals, contextual readiness, and explicit cost asymmetry.
+Operators are not asked to trust opaque promotional models; instead, they are guided by a system
+that behaves predictably under known risk conditions.
+
+This interpretability supports operational adoption and governance, enabling teams to understand
+why production was increased or constrained during \LTO{} periods. In the next section, we discuss
+how these decisions are governed, monitored, and audited to ensure consistent behavior across
+promotions and time.

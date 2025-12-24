@@ -1,0 +1,80 @@
+% ----------------------------------------------------------
+% BACKGROUND AND PROBLEM STATEMENT
+% ----------------------------------------------------------
+
+\section{Background and Problem Statement}
+\label{sec:background-problem}
+
+Forecasting systems in QSR environments are traditionally evaluated and tuned under an implicit
+assumption of regime stability. Historical demand patterns, seasonal structure, and recent trends
+are treated as informative priors for near-term behavior, and forecast quality is primarily assessed
+through symmetric accuracy metrics. Within this paradigm, deviations between forecast and
+realized demand are interpreted as modeling failures, to be corrected through additional features,
+segmentation, or algorithmic complexity.
+
+Limited-Time Offers (\LTOs{}) violate these assumptions by design. They introduce deliberate,
+time-bounded perturbations to the demand-generating process, often accompanied by marketing
+activity, menu novelty, and operational constraints. The resulting demand behavior exhibits launch
+effects, rapid nonstationarity, substitution across menu items, and heterogeneous execution across
+stores and dayparts. Observationally, these effects manifest as abrupt shifts in level, variance, and
+error asymmetry relative to steady-state demand.
+
+\subsection{The classical response: demand uplift modeling}
+\label{subsec:classical-response}
+
+The dominant analytical response to \LTOs{} has been to treat them as a forecasting problem. In this
+view, the task is to estimate incremental demand attributable to the promotion by incorporating
+additional explanatory variables such as marketing spend, promotional calendars, product novelty
+indicators, or historical analogs. Forecasts are then adjusted upward to reflect expected lift, and
+production plans are derived directly from these adjusted predictions.
+
+While this approach is conceptually appealing, it embeds several fragile assumptions. It presumes
+that promotional lift is both estimable and sufficiently stable to be operationalized at fine temporal
+and spatial granularity. In practice, realized lift depends on execution quality, local conditions,
+substitution effects, and supply availability, many of which are unobserved or only partially
+observable at decision time. As a result, demand estimates are treated as authoritative inputs to
+production control despite being derived from highly uncertain premises.
+
+These assumptions are especially problematic in intraday production contexts, where decisions are
+made rapidly, partially reversible, and continuously updated as demand unfolds. In such settings,
+errors in promotional uplift estimation propagate directly into waste, stockouts, and service
+degradation.
+
+\subsection{Accuracy as a misaligned objective}
+\label{subsec:accuracy-misalignment}
+
+A deeper issue lies in the objective function itself. Classical forecasting workflows equate forecast
+quality with numerical accuracy, implicitly assuming that smaller errors correspond to better
+operational outcomes. As noted by \citet{gneiting2011}, forecast evaluation is inseparable from the
+decision context in which forecasts are used. Under \LTO{} conditions, this equivalence breaks down.
+Forecast errors become asymmetric in consequence: under-forecasting during peak promotional
+windows may result in immediate stockouts and lost transactions, while comparable over-forecasting
+may incur manageable waste or reallocation costs.
+
+From an operational perspective, the relevant question is therefore not whether a forecast minimizes
+expected error magnitude, but whether it minimizes expected operational loss given the current risk
+environment. During \LTO{} periods, forecast accuracy is structurally degraded, while the cost of
+error is simultaneously amplified and skewed. Treating these regimes as standard forecasting
+problems forces systems to optimize toward metrics that are misaligned with the true decision
+stakes.
+
+\subsection{Problem statement}
+\label{subsec:problem-statement}
+
+The core problem addressed in this paper is not how to predict \LTO{} demand more accurately, but
+how to govern production decisions when forecast reliability is known \emph{ex ante} to be reduced.
+Specifically, we seek an approach that:
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item acknowledges \LTOs{} as planned sources of instability rather than anomalies to be smoothed
+  away,
+  \item decouples intraday production control from speculative promotional lift estimates,
+  \item incorporates asymmetric operational consequences directly into forecast evaluation and
+  selection, and
+  \item remains explainable, auditable, and robust under forecast misspecification.
+\end{enumerate}
+
+Electric Barometer addresses this problem by reframing \LTO{} handling as a readiness and risk
+governance challenge. Rather than attempting to restore predictive accuracy through increasingly
+complex demand models, it modulates forecast trust and decision behavior in response to known
+regime shifts. The following sections formalize this perspective and describe how \LTOs{} are
+integrated into a readiness-centric production management architecture.

@@ -1,0 +1,93 @@
+% ----------------------------------------------------------
+% LTOS AS REGIME SHIFTS
+% ----------------------------------------------------------
+
+\section{\LTOs{} as Regime Shifts}
+\label{sec:regime-shifts}
+
+From an operational forecasting perspective, \LTOs{} are best understood not as incremental demand
+features but as temporary regime shifts in the demand-generating process. Unlike routine variation
+driven by seasonality or trend, \LTOs{} introduce coordinated, time-bounded changes to guest
+behavior, menu composition, and operational execution. These changes alter not only the level of
+demand, but also its variance, structure, and sensitivity to error.
+
+A regime shift, in this context, is characterized by a breakdown in the assumptions under which
+historical forecast calibration remains valid. Error distributions observed during steady-state
+periods no longer reliably describe future outcomes once an \LTO{} is active. As a result, both
+point forecasts and their associated uncertainty estimates become misaligned with realized
+behavior.
+
+\subsection{Characteristics of \LTO{}-driven regimes}
+\label{subsec:lto-characteristics}
+
+Several properties distinguish \LTO{} regimes from steady-state demand environments:
+
+\begin{enumerate}[leftmargin=*, itemsep=2pt]
+  \item \textbf{Abrupt onset.} \LTO{} launches create discrete discontinuities rather than gradual
+  transitions, invalidating local smoothness assumptions commonly exploited by forecasting
+  models.
+  
+  \item \textbf{Nonstationary variance.} Demand volatility typically increases during launch and
+  early sustain phases, with variance evolving over the course of the promotion rather than
+  remaining constant.
+  
+  \item \textbf{Asymmetric error consequences.} The operational cost of under-forecasting often
+  rises sharply during promotional peaks, while over-forecasting costs may remain bounded.
+  
+  \item \textbf{Substitution and cannibalization.} Incremental sales attributable to an \LTO{} are
+  frequently offset by declines in adjacent menu items, obscuring true demand signals at the
+  item level.
+  
+  \item \textbf{Heterogeneous execution.} Store-level compliance, staffing, and supply availability
+  vary widely, producing uneven realization of promotional intent.
+\end{enumerate}
+
+These properties jointly imply that \LTO{} periods are not well modeled as simple covariate shifts
+or additive demand adjustments. Instead, they represent structural breaks in the relationship
+between historical data and near-term outcomes.
+
+\subsection{Why historical calibration fails under \LTOs{}}
+\label{subsec:calibration-failure}
+
+Most forecasting systems rely, implicitly or explicitly, on the stability of residual behavior. Model
+selection, parameter tuning, and uncertainty estimation are all calibrated using historical
+forecast--actual pairs assumed to be representative of future conditions. When an \LTO{} is
+introduced, this assumption fails in predictable ways.
+
+Residual distributions widen, skew, and often become multimodal as launch dynamics interact with
+local execution constraints. Forecasts that were well-calibrated under steady-state conditions may
+remain numerically reasonable yet become operationally fragile. Importantly, this degradation is
+not a signal of poor modeling practice; it is a consequence of applying steady-state assumptions
+to a non-steady-state regime.
+
+Attempting to ``fix'' this mismatch by injecting promotional lift estimates into the forecasting model
+does not resolve the underlying instability. It merely replaces one set of assumptions with another,
+often less observable and harder to audit.
+
+\subsection{Planned instability as a first-class concept}
+\label{subsec:planned-instability}
+
+A defining feature of \LTOs{} is that their destabilizing effect is intentional. Unlike weather shocks,
+supply disruptions, or system outages, \LTO{}-driven regime shifts are planned in advance and
+explicitly designed to perturb demand. This makes them neither anomalies nor noise, but
+first-class operational events.
+
+Electric Barometer treats this planned instability as an explicit contextual signal rather than an
+implicit modeling challenge. The activation of an \LTO{} conveys reliable information about the
+forecasting environment: variance is expected to increase, historical calibration is expected to
+weaken, and the asymmetry of error costs is expected to intensify. These facts hold regardless of
+whether the realized promotional lift is large, moderate, or negligible.
+
+\subsection{Implications for production management}
+\label{subsec:regime-implications}
+
+Recognizing \LTOs{} as regime shifts has direct implications for production management. During
+such periods, the objective of forecasting systems should shift from precision toward robustness.
+The relevant decision is not which forecast best predicts demand, but which forecast choice leads
+to the most resilient operational outcome given elevated uncertainty and skewed risk.
+
+This perspective motivates the readiness-centric approach developed in subsequent sections.
+Rather than embedding \LTO{} effects directly into demand predictions, Electric Barometer
+responds to regime shifts by adjusting forecast trust through the \RAL{} and shaping decision
+selection through asymmetry-aware readiness primitives. In doing so, it preserves operational
+stability without requiring accurate prediction of promotional outcomes.

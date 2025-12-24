@@ -1,0 +1,99 @@
+% ----------------------------------------------------------
+% READINESS ADJUSTMENT LAYER
+% ----------------------------------------------------------
+
+\section{The Readiness Adjustment Layer}
+\label{sec:ral}
+
+The Readiness Adjustment Layer (\RAL{}) formalizes how contextual instability alters the degree to
+which forecasts should be trusted for operational decision-making. Rather than modifying demand
+predictions directly, \RAL{} operates upstream of evaluation and selection, adjusting the effective
+readiness of forecasts in response to known risk conditions. In the context of \LTOs{}, \RAL{}
+provides the mechanism by which planned regime shifts influence intraday production behavior
+without introducing speculative demand assumptions.
+
+\input{figures/lto_readiness_flow}
+
+\subsection{Purpose and positioning of the \RAL{}}
+\label{subsec:ral-purpose}
+
+Within the Electric Barometer architecture, \RAL{} sits between raw forecast generation and
+readiness-aware evaluation. Its role is not to correct forecasts, improve accuracy, or estimate
+demand uplift. Instead, it answers a narrower operational question:
+
+\begin{quote}
+\emph{Given current operating conditions, how much confidence should be placed in any forecast,
+regardless of how it was produced?}
+\end{quote}
+
+This distinction is critical during \LTO{} periods. Forecasts may remain numerically reasonable yet
+become operationally fragile due to increased variance, structural breaks, or execution
+heterogeneity. \RAL{} captures this fragility explicitly, allowing downstream decision logic to
+respond conservatively when trust is degraded.
+
+\subsection{\LTOs{} as exogenous readiness shocks}
+\label{subsec:lto-readiness-shocks}
+
+As formalized in Section~\ref{sec:regime-shifts}, Electric Barometer treats \LTO{} activation as an
+exogenous readiness shock. The presence of an active \LTO{} conveys reliable information about the
+forecasting environment independent of any realized demand signal: uncertainty is elevated,
+historical calibration is weakened, and the cost of error is likely to be asymmetric.
+
+Formally, \LTO{} context enters the system through a binary or categorical indicator (e.g.,
+\ltoOn{} or \ltoPhase{}), which is consumed by the \RAL{} rather than by the forecasting model
+itself. This design ensures that the system responds to the \emph{existence} of planned instability
+without embedding assumptions about its magnitude. Whether the promotion ultimately drives
+substantial lift or negligible change, the readiness posture during the launch window reflects the
+known increase in risk.
+
+\subsection{Readiness modulation rather than demand adjustment}
+\label{subsec:readiness-modulation}
+
+A central design principle of \RAL{} is that readiness modulation is preferable to demand
+adjustment under uncertainty. Adjusting demand forecasts upward to reflect expected \LTO{} lift
+requires committing to a specific belief about future behavior; when that belief is wrong, the error
+propagates directly into production decisions.
+
+By contrast, readiness modulation alters how forecasts are evaluated and acted upon. Reduced
+readiness during \LTO{} periods may manifest as increased tolerance for forecast dispersion,
+heightened sensitivity to downside risk, or more conservative selection among candidate forecasts.
+These responses increase preparedness without asserting that demand will increase by any
+particular amount.
+
+\subsection{Interaction with asymmetry-aware evaluation}
+\label{subsec:ral-asymmetry}
+
+The impact of \RAL{} is realized through its interaction with asymmetry-aware readiness primitives.
+When readiness is reduced, downstream metrics such as \CWSL{} and \NSL{} exert greater influence
+on forecast selection and decision support. In effect, \RAL{} amplifies the operational consequences
+of error during high-risk periods without altering the underlying forecasts.
+
+During hyped \LTO{} windows, this interaction biases production behavior toward shortfall
+avoidance and service protection, particularly in peak dayparts. Importantly, this bias emerges from
+governed loss asymmetry rather than from hard-coded demand uplift factors, preserving
+explainability and auditability.
+
+\subsection{Temporal dynamics of readiness}
+\label{subsec:ral-temporal}
+
+Readiness adjustment need not be static over the life of an \LTO{}. Launch, sustain, and wind-down
+phases often exhibit distinct risk profiles. Early launch periods may warrant aggressive readiness
+degradation due to uncertainty and execution variance, while later phases may allow partial
+recovery as empirical demand signals accumulate.
+
+The \RAL{} accommodates these dynamics by allowing readiness modulation to depend on phase-level
+context (\ltoPhase{}) or elapsed time since activation. Such modulation remains rule-based and
+transparent, avoiding adaptive behavior that could obscure governance or complicate postmortem
+analysis.
+
+\subsection{Role of \RAL{} in production management}
+\label{subsec:ral-role}
+
+By construction, \RAL{} does not attempt to predict demand, allocate inventory, or schedule
+production. Its sole function is to ensure that forecast usage reflects the current risk environment.
+In doing so, it enables Electric Barometer to operate effectively during periods when forecasts are
+known \emph{ex ante} to be least reliable.
+
+In the following section, we show how readiness-adjusted forecasts are evaluated and selected using
+asymmetry-aware loss primitives, completing the mechanism by which \LTO{} context influences
+intraday production decisions without relying on promotional demand models.
