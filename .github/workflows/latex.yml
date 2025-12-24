@@ -49,10 +49,14 @@ jobs:
             working_directory: ud/technical-notes
             base_name: ElectricBarometer_TN_UD
 
-          # --- Paper ---
+          # --- Papers ---
           - id: PAPER-FRF
             working_directory: frf/paper
             base_name: ElectricBarometer_PAPER_FRF
+
+          - id: PAPER-LTOR
+            working_directory: paper/ltor
+            base_name: ElectricBarometer_PAPER_LTOR
 
     steps:
       - name: Check out repository
