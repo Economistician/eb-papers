@@ -55,7 +55,7 @@ jobs:
             base_name: ElectricBarometer_PAPER_FRF
 
           - id: PAPER-LTOR
-            working_directory: paper/ltor
+            working_directory: ltor/paper
             base_name: ElectricBarometer_PAPER_LTOR
 
     steps:
