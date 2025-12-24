@@ -1,99 +1,89 @@
-# Electric Barometer Research Papers (`eb-papers`)
+# Electric Barometer · Papers (`eb-papers`)
 
 ![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)
 [![Build PDFs](https://github.com/Economistician/eb-papers/actions/workflows/latex.yml/badge.svg)](https://github.com/Economistician/eb-papers/actions/workflows/latex.yml)
 [![Latest Release](https://img.shields.io/github/v/release/Economistician/eb-papers)](https://github.com/Economistician/eb-papers/releases)
 [![Cite this repository](https://img.shields.io/badge/Cite-CFF-yellow.svg)](https://github.com/Economistician/eb-papers/blob/main/CITATION.cff)
 
-This repository contains the formal research papers and technical notes
-associated with the Electric Barometer forecasting evaluation framework.
+A research series defining the Forecast Readiness Framework (FRF) for evaluating forecast performance in operational systems under asymmetric error cost.
 
-Electric Barometer is a decision-oriented system for evaluating operational
-forecasts under asymmetric cost, readiness constraints, and managerial
-actionability. The work emphasizes when forecasts are fit for deployment,
-not merely when they are statistically accurate.
+---
 
+## Overview
 
-## PDFs (Latest Release)
+The Electric Barometer Papers repository is the authoritative research home of the Forecast Readiness Framework (FRF). It contains a structured series of formal papers and technical notes that define, motivate, and extend a unified approach to evaluating forecast performance in operational systems where forecast errors carry asymmetric and context-dependent costs.
 
-Download the latest Electric Barometer papers and technical notes here:
+Rather than treating forecasting accuracy as a purely statistical problem, the work in this repository focuses on forecast readiness: the degree to which a forecast supports effective operational decision-making under real-world constraints. The Forecast Readiness Framework formalizes this perspective by introducing cost-aware evaluation principles, readiness diagnostics, and supporting theoretical constructs designed for high-frequency, demand-driven environments.
 
-https://github.com/Economistician/eb-papers/releases/latest
+The repository includes:
 
+- **Framework papers** that establish the conceptual and methodological foundations of FRF
+- **Metric definitions** such as Cost-Weighted Service Loss (CWSL) and Forecast Readiness Score (FRS)
+- **Supporting diagnostics and adjustment layers** (e.g., RAL, NSL, UD, HR@τ)
+- **Technical notes** that develop specific components, edge cases, and extensions
 
-## Core Frameworks and Metrics
+All documents are written as self-contained research artifacts and are compiled reproducibly via automated workflows. While the work is motivated by operational forecasting contexts (such as production and service systems), the framework and methods are intended to generalize to any setting where forecast errors translate asymmetrically into operational cost or risk.
 
-The research program is organized around a set of related but distinct
-conceptual frameworks and governed evaluation primitives:
+---
 
-- Forecast Readiness Framework (FRF)  
-  A decision-oriented governance framework for determining whether forecasting
-  systems are fit for operational deployment under asymmetric error cost.
+## Role in the Electric Barometer Ecosystem
 
-- Cost-Weighted Service Loss (CWSL)  
-  An asymmetric loss formulation measuring the effective fraction of operational
-  throughput lost due to forecast–demand misalignment.
+`eb-papers` defines the theoretical and methodological foundation of the Electric Barometer ecosystem. It is intentionally research-focused and contains no production code.
 
-- Readiness Adjustment Layer (RAL)  
-  A deterministic, post-forecast control layer that applies bounded adjustments
-  to mitigate readiness risk without retraining forecasting models.
+The papers and technical notes in `eb-papers` formally specify the concepts, metrics, and evaluation frameworks that are implemented operationally in companion repositories. In particular:
 
-- Reliability and Severity Diagnostics  
-  Including NSL (No-Shortfall Level), HR@τ (Hit Rate within Tolerance),
-  Underbuild Depth (UD), and related constructs supporting readiness-based
-  evaluation and governance.
+- Forecast Readiness Framework (FRF) is defined and motivated here
+- Metrics such as Cost-Weighted Service Loss (CWSL) and Forecast Readiness Score (FRS) are introduced mathematically in this repository and implemented in `eb-metrics`
+- Evaluation logic, aggregation, and orchestration are implemented in `eb-evaluation`
+- Feature engineering and panel construction live in `eb-features`
+- Model integration and interface normalization are handled in `eb-adapters`
 
-- Sensitivity and Calibration Analyses  
-  Technical notes addressing tolerance selection, cost-ratio calibration,
-  response-surface analysis, and entity-level heterogeneity within the
-  Forecast Readiness Framework.
+This separation ensures that theoretical definitions remain stable, auditable, and citable, while implementation details can evolve independently in code-focused repositories. Readers interested in practical application should consult the relevant implementation repositories, while citations of conceptual definitions should reference the appropriate paper in this repository.
 
+---
 
 ## Repository Structure
 
-Each top-level directory corresponds to a named construct, framework,
-or technical note (e.g., FRF, CWSL, HR@τ).
+This repository is organized around **research artifacts**, not executable code. Each top-level directory corresponds to a formal paper or a set of closely related technical notes within the Forecast Readiness Framework (FRF).
 
-Within each construct, artifacts are organized by type:
+At a high level, the structure follows a consistent pattern:
 
-- paper/  
-  Canonical or journal-oriented manuscripts defining core frameworks.
+- **Framework papers**  
+  Directories containing full-length papers that establish core concepts and unifying theory (e.g., the Forecast Readiness Framework itself).
 
-- technical-notes/  
-  Supporting technical analyses, derivations, sensitivity studies, calibration
-  procedures, and governance extensions.
+- **Technical notes**  
+  Focused documents that define individual metrics, diagnostics, or supporting constructs. These notes develop specific components of the framework in greater mathematical or operational detail.
 
-- business-notes/  
-  Practitioner- or executive-facing summaries focused on operational and
-  managerial implications.
+- **Document substructure**  
+  Within each paper or note:
+  - `main.tex` serves as the compilation entry point
+  - Section files are organized under `sections/`
+  - Figures, tables, and bibliographic assets are colocated with the document
 
+All documents are written to be self-contained and independently citable. Automated workflows compile each paper or note into versioned PDF artifacts, which are attached to tagged GitHub releases.
 
-## Scope and Intent
+This structure is intentionally stable: theoretical definitions and methodological rationale live here, while executable implementations reside in companion repositories within the Electric Barometer ecosystem.
 
-This repository serves as the authoritative archival record of the
-Electric Barometer research program.
+---
 
-It includes conceptual frameworks, formal loss constructions, diagnostic
-metrics, and calibration methodologies, but does not aim to provide end-user
-tutorials or implementation guides. Code implementations and applied examples
-are maintained separately.
+## How to Cite
 
+If you use material from this repository, please cite it appropriately based on what you reference.
 
-## Status and Maturity
+- **Framework-level concepts or the repository as a whole**  
+  Cite the *Forecast Readiness Framework (FRF)* paper, which serves as the unifying reference for this research series.
 
-Papers and notes within this repository vary in maturity, ranging from
-conceptual framing to fully formalized technical analysis.
+- **Specific metrics, diagnostics, or technical constructs**  
+  Cite the corresponding paper or technical note directly (e.g., CWSL, FRS, RAL).
 
-Each paper or technical note includes its own README describing scope,
-assumptions, status, and intended audience.
+Citation metadata for the repository is provided in [`CITATION.cff`](./CITATION.cff).  
+Each paper is intended to be self-contained and citable as an independent research artifact.
 
+When in doubt, cite the most specific paper that defines the concept you are using.
 
-## Ownership and Contact
+---
 
-Electric Barometer is an independent research program.
+## License
 
-For inquiries related to the research, collaboration, or licensing,
-please contact:
-
-Kyle Corrie  
-kcorrie@economistician.com
+BSD 3-Clause License.  
+© 2025 Kyle Corrie.
