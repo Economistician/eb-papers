@@ -1,6 +1,9 @@
 # Electric Barometer Research Papers (`eb-papers`)
 
-[![License: BSD-3](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE)
+![License: BSD-3-Clause](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)
+[![Build PDFs](https://github.com/Economistician/eb-papers/actions/workflows/latex.yml/badge.svg)](https://github.com/Economistician/eb-papers/actions/workflows/latex.yml)
+[![Latest Release](https://img.shields.io/github/v/release/Economistician/eb-papers)](https://github.com/Economistician/eb-papers/releases)
+[![Cite this repository](https://img.shields.io/badge/Cite-CFF-yellow.svg)](https://github.com/Economistician/eb-papers/blob/main/CITATION.cff)
 
 This repository contains the formal research papers and technical notes
 associated with the Electric Barometer forecasting evaluation framework.
