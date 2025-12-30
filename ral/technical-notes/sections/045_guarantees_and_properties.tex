@@ -61,6 +61,41 @@ same ordering holds for the adjusted forecasts \(\yhatadj_i \le \yhatadj_j\).
 This property supports interpretability and prevents rank-order inversions that
 could complicate downstream decision logic.
 
+\subsection{Segment-Conditioned Policies and Fallback Guarantees}
+
+RAL may be deployed using segment-conditioned adjustment policies, in which
+distinct adjustment parameters are specified for predefined segments (e.g.,
+interfaces, regions, or asset classes), typically subject to minimum data volume
+or tail-risk criteria defined during offline policy construction. Segment
+conditioning allows RAL to reflect localized operational risk profiles while
+preserving global behavioral guarantees.
+
+Segment-conditioned behavior is governed by three design constraints.
+
+First, segment overrides are explicitly sparse. Only a limited subset of segments
+are permitted to deviate from global adjustment parameters, typically subject to
+minimum data volume or tail-risk criteria defined during offline policy
+construction. This constraint prevents uncontrolled policy fragmentation and
+limits the surface area of operational complexity.
+
+Second, deterministic fallback behavior is guaranteed. For any segment lacking a
+specific override, or for any previously unseen segment, RAL defaults
+deterministically to the global adjustment policy. As a result, the adjusted
+forecast remains well-defined for all inputs, independent of segmentation
+coverage.
+
+Third, segment-conditioned policies remain bounded and reviewable. All segment-
+level parameters are drawn from the same feasible adjustment space as the global
+policy, and no segment may introduce adjustments outside approved bounds. The
+full policy—including global parameters and segment overrides—can therefore be
+represented as a finite, auditable artifact.
+
+Importantly, segment-conditioned RAL policies are \emph{artifacts}, not models.
+They encode decisions produced by an offline tuning process but do not learn,
+adapt, or evolve during application. This distinction preserves the determinism,
+auditability, and governance properties of RAL while allowing controlled
+heterogeneity where operationally justified.
+
 \subsection{Conditional Properties}
 
 Certain properties of RAL hold only under specific assumptions:

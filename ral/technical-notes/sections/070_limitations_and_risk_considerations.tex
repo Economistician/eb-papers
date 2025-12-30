@@ -60,3 +60,29 @@ availability of diagnostic outputs and adjustment rationale. Organizations
 deploying RAL should ensure that adjustment parameters, loss specifications, and
 before-and-after metrics are retained for audit and review. Absent such controls,
 the transparency benefits of the mechanism may be diminished.
+
+\subsection{Guardrails as First-Class Design Objects}
+
+RAL incorporates explicit guardrails—such as feasibility bounds, hard caps, and
+identity fallback behavior—not as defensive afterthoughts, but as first-class
+design objects. These guardrails constrain the adjustment space by construction
+and ensure that readiness modifications remain operationally safe, interpretable,
+and reviewable.
+
+A key implication of this design is that guardrails may be activated rarely or
+not at all in well-calibrated deployments. The absence of guardrail activation
+(e.g., no forecasts exceeding imposed caps) should not be interpreted as
+redundancy or ineffectiveness. Rather, it indicates that the adjustment policy is
+operating within its intended feasibility envelope.
+
+From a governance perspective, the distinction between capped and uncapped
+behavior is itself informative. Guardrails define the outer boundary of allowable
+action, while diagnostics on guardrail activation provide assurance that these
+boundaries are respected in practice. RAL therefore favors conservative,
+controlled behavior over aggressive optimization, prioritizing safety and
+auditability even when such constraints produce no observable effect on adjusted
+outputs.
+
+This conservative posture reinforces the role of RAL as a readiness control
+mechanism rather than an unconstrained performance enhancer, and aligns with
+organizational requirements for accountability and operational risk management.

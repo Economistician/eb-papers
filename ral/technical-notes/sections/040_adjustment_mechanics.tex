@@ -37,6 +37,49 @@ The adjustment set may be evaluated at discrete resolution, but the choice of
 resolution does not alter the conceptual behavior of the mechanism: all candidate
 forecasts are bounded transformations of the original forecast.
 
+\subsection{Structured Adjustment Policies}
+\label{subsec:structured_adjustment_policies}
+
+While the adjustment set \(\deltaset\) is often expressed as a simple bounded
+interval, operational feasibility constraints are frequently encoded not as
+continuous ranges but as discrete policy rules. RAL does not require candidate
+adjustments to be uniformly distributed or homogeneous across the forecast space.
+Instead, the feasible set may be \emph{structured} according to predefined policy
+rules that partition the forecast domain into regions of differing operational
+risk.
+
+In such cases, the candidate adjustment set is implicitly defined by a policy
+artifact that specifies both:
+\begin{itemize}[leftmargin=*]
+    \item threshold boundaries that delineate forecast risk regions, and
+    \item region-specific adjustment magnitudes permitted within each region.
+\end{itemize}
+
+For example, a piecewise policy may define distinct adjustment behavior for
+baseline forecasts in low-, medium-, and high-risk regimes, such that
+\[
+\yhatadj
+=
+\begin{cases}
+\yhat, & \yhat < \tau_{\text{mid}} \\
+\yhat + \delta_{\text{mid}}, & \tau_{\text{mid}} \le \yhat < \tau_{\text{high}} \\
+\yhat + \delta_{\text{high}}, & \yhat \ge \tau_{\text{high}},
+\end{cases}
+\]
+where \(\tau_{\text{mid}}\) and \(\tau_{\text{high}}\) are externally specified
+thresholds and \(\delta_{\text{mid}}, \delta_{\text{high}} \in \deltaset\).
+
+Importantly, these structured policies do not alter the fundamental decision
+logic of RAL. They simply define the candidate set over which loss is evaluated.
+Thresholds and region-specific adjustments are treated as fixed policy inputs,
+not learned parameters, preserving determinism and auditability.
+
+This formulation allows RAL to express operationally meaningful control behavior
+(e.g., heightened conservatism near capacity limits) while maintaining the core
+principle that \emph{all adjustments remain bounded, explicit, and loss-governed}.
+The selection rule, fallback behavior, and loss evaluation process remain
+unchanged.
+
 \subsection{Loss Evaluation}
 
 Each candidate adjusted forecast is evaluated using a decision-oriented loss
