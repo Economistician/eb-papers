@@ -39,7 +39,7 @@ jobs:
             base_name: ElectricBarometer_TN_HRAT
 
           - id: TN_HRTAU
-            working_directory: hrtau
+            working_directory: hrtau/technical-notes
             base_name: ElectricBarometer_TN_HRTAU
 
           - id: TN_NSL
