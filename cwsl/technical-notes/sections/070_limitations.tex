@@ -10,9 +10,11 @@ considered when applying the metric or comparing models across settings.
 \subsection{Dependence on Cost Weights}
 
 Because \CWSL{} relies on user-specified penalty weights \((\cui, \coi)\),
-interpretability depends on selecting values that accurately reflect the true
-operational trade-offs. If cost weights are misaligned with system priorities,
-the resulting \CWSL{} values may misrepresent risk or readiness.
+interpretability depends on selecting values that reflect the operational
+priorities assumed by the evaluation. These weights encode policy or planning
+preferences rather than objective or universally correct economic costs. If
+cost weights are misaligned with system priorities, the resulting \CWSL{}
+values may misrepresent relative risk or readiness.
 
 Accordingly:
 \begin{itemize}
@@ -34,7 +36,7 @@ may benefit from complementary diagnostics that characterize error distribution.
 not distinguish how often errors occur. Two forecasts may produce identical
 \CWSL{} values despite very different shortfall frequencies. For this reason,
 \CWSL{} is often interpreted alongside frequency-based measures (e.g.,
-No–Shortfall Level).
+No--Shortfall Level).
 
 \subsection{Lack of Temporal Differentiation}
 
@@ -49,6 +51,15 @@ Although normalization by realized demand improves comparability, entities with
 extremely small volumes may exhibit unstable or highly variable \CWSL{} values.
 Entity-level smoothing, segmentation, or minimum-volume thresholds may be needed
 for robust comparison.
+
+\subsection{Dependence on Data Admissibility and Evaluation Scope}
+
+\CWSL{} assumes that the evaluated observations are valid, comparable, and
+representative of the operational context of interest. Inclusion of inadmissible
+intervals—such as periods affected by outages, closures, censored demand, or
+data quality issues—may distort the resulting metric values. Defining the
+appropriate evaluation scope and ensuring data admissibility are therefore
+prerequisites for meaningful interpretation of \CWSL{}.
 
 \subsection{Appropriate Role Within a Broader Evaluation Framework}
 

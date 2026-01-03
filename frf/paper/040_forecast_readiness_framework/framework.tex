@@ -9,21 +9,23 @@ forecasts therefore requires a framework that distinguishes among the dimensions
 matter for operational readiness.
 
 The \emph{Forecast Readiness Framework} (FRF) formalizes this perspective by decomposing
-readiness into a small set of complementary diagnostic dimensions. Each dimension captures a
-distinct aspect of how forecast error affects execution, and no single dimension is sufficient on
-its own. Together, these diagnostics provide a structured basis for assessing whether a forecast is
-fit for deployment in environments where under-forecasting and over-forecasting have asymmetric
-cost.
+readiness into a small set of complementary diagnostic dimensions, together with governed
+assumptions and decision rules that determine how those diagnostics are interpreted in practice.
+Each dimension captures a distinct aspect of how forecast error affects execution, and no single
+dimension is sufficient on its own. Together, these components provide a structured and auditable
+basis for assessing whether a forecast is fit for deployment in environments where under-forecasting
+and over-forecasting have asymmetric cost.
 
 \subsection{Readiness as a Multi-Dimensional Construct}
 
 Forecast readiness is defined here as the degree to which a forecast reliably supports operational
-execution under asymmetric error cost. This definition emphasizes deployment suitability rather
-than numerical precision. A forecast may achieve low average error while still failing to meet
-readiness requirements if its errors are concentrated in the wrong direction, occur too frequently,
-or exceed the system’s ability to absorb deviations.
+execution under asymmetric error cost and stated tolerance assumptions. This definition emphasizes
+deployment suitability rather than numerical precision. A forecast may achieve low average error
+while still failing to meet readiness requirements if its errors are concentrated in the wrong
+direction, occur too frequently, exceed the system’s ability to absorb deviations, or expose the
+operation to unacceptable economic risk.
 
-Within FRF, readiness is decomposed into four primary dimensions:
+Within FRF, readiness is decomposed into four primary diagnostic dimensions:
 \begin{enumerate}
     \item \textbf{Service reliability}: how often the forecast avoids shortfalls entirely.
     \item \textbf{Failure severity}: how large shortfalls are when they occur.
@@ -32,16 +34,20 @@ Within FRF, readiness is decomposed into four primary dimensions:
     \item \textbf{Economic consequence}: the cost-weighted impact of directional forecast error.
 \end{enumerate}
 
+These dimensions are evaluated under explicitly governed assumptions, including cost asymmetry,
+tolerance thresholds, and admissibility rules, which are treated as part of the evaluation contract
+rather than free modeling parameters.
+
 Figure~\ref{fig:frf_overview} summarizes the structure of the \FRF\ and the relationship between
 its diagnostic dimensions, the economic axis of evaluation, and the composite readiness signal
-used to support deployment and governance decisions.
+used to support deployment, monitoring, and governance decisions.
 
 \input{figures/frf_overview}
 
 Each dimension captures information that is obscured when performance is summarized by a
 single symmetric metric. For example, two forecasts with similar average error may differ sharply
 in the frequency of shortfalls, the depth of those shortfalls, or the economic burden they impose
-during peak intervals. FRF is designed to make these distinctions explicit.
+during peak intervals. FRF is designed to make these distinctions explicit and actionable.
 
 \subsection{Diagnostic Components of the Framework}
 
@@ -66,39 +72,40 @@ directional forecast error using asymmetric penalties for shortfalls and overbui
 the result by realized demand. CWSL provides a cost-aligned measure of how forecast error
 translates into effective operational loss under a specified penalty structure.
 
-Each of these diagnostics isolates a distinct behavioral property of forecast error. None is intended
-to stand alone, and each addresses a failure mode that symmetric accuracy measures systematically
-obscure.
+Each diagnostic admits both a raw form and a governed form, in which cost asymmetry and
+tolerance assumptions are selected through sensitivity analysis and calibration procedures rather
+than fixed heuristics. None of these diagnostics is intended to stand alone; each addresses a
+distinct failure mode that symmetric accuracy measures systematically obscure.
 
 \subsection{CWSL as the Economic Axis of Readiness}
 
 Among the diagnostic components, CWSL plays a central role by providing an explicit economic
-lens on forecast performance. Whereas NSL, UD, and \HRtau describe the structure and
-frequency of error, CWSL translates that structure into cost-weighted consequence. This makes
-CWSL the primary axis along which asymmetric operational risk is expressed within the framework.
+lens on forecast performance. Whereas NSL, UD, and \HRtau describe the structure and frequency
+of error, CWSL translates that structure into cost-weighted consequence. This makes CWSL the
+primary axis along which asymmetric operational risk is expressed within the framework.
 
-Importantly, CWSL does not replace the other diagnostics. Two forecasts may exhibit similar
-cost-weighted loss while differing substantially in the frequency or severity of shortfalls, leading
-to different operational responses. Conversely, forecasts with similar reliability profiles may
-produce very different economic impact depending on the depth and timing of errors. FRF
-therefore treats CWSL as foundational but not sufficient, embedding it within a broader diagnostic
-context.
+Crucially, the cost asymmetry underlying CWSL is treated as a governed evaluation assumption.
+Sensitivity analysis and calibration procedures are used to inspect how readiness assessments vary
+across plausible cost ratios and to select reference values that balance historical underbuild and
+overbuild exposure. This prevents evaluation outcomes from being driven by implicit or unstable
+cost assumptions and supports transparent comparison across models and entities.
 
 \subsection{Framework Interpretation and Use}
 
 The Forecast Readiness Framework is intended to support evaluation, comparison, and governance
 of forecasting systems rather than optimization alone. By examining multiple dimensions of
-readiness simultaneously, practitioners can identify why a forecast fails to support execution,
-distinguish among competing failure modes, and select models whose error structure aligns with
-operational priorities.
+readiness under explicit assumptions, practitioners can identify why a forecast fails to support
+execution, distinguish among competing failure modes, and select models whose error structure
+aligns with operational priorities.
 
 At an aggregate level, the framework supports comparison across models, items, locations, or
-time periods using a consistent set of diagnostics. At a diagnostic level, it highlights whether poor
-performance arises from frequent shortfalls, severe shortfalls, instability relative to tolerance, or
-misalignment between error structure and cost asymmetry. This decomposition is essential for
-targeted intervention, model refinement, and informed trade-offs between service reliability and
-efficiency.
+time periods using a consistent and auditable evaluation contract. At a diagnostic level, it
+highlights whether poor performance arises from frequent shortfalls, severe shortfalls, instability
+relative to tolerance, or misalignment between error structure and economic asymmetry. These
+diagnostics may be synthesized into a composite readiness signal and, where appropriate, passed
+through adjustment layers that enforce feasibility constraints without altering the underlying
+forecast.
 
-By reframing forecast evaluation around readiness rather than numerical accuracy alone, the
-Forecast Readiness Framework provides a principled and operationally grounded basis for assessing
-forecast performance in asymmetric environments.
+By reframing forecast evaluation around governed readiness rather than numerical accuracy alone,
+the Forecast Readiness Framework provides a principled and operationally grounded basis for
+assessing forecast performance in asymmetric environments.

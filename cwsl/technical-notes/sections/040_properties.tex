@@ -66,3 +66,13 @@ resulting in higher accumulated shortfall cost. Model~B exhibits balanced errors
 resulting in substantially lower cost exposure despite comparable RMSE or MAE.
 This demonstrates that \CWSL{} distinguishes operationally risky forecasts even
 when symmetric metrics do not.
+
+\subsection{Evaluation Versus Decision Optimality}
+
+\CWSL{} ranks forecasts according to their expected cost-weighted deviation under
+a specified asymmetric penalty structure. While lower \CWSL{} values indicate
+reduced exposure to directional forecast error, they do not, by themselves,
+guarantee superior realized outcomes in operational settings where actions are
+discrete, constrained, or governed by external policies. As a result, forecasts
+with similar \CWSL{} values may yield different operational performance depending
+on how forecast outputs are translated into execution decisions.

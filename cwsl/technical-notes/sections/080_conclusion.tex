@@ -8,7 +8,7 @@ approach to evaluating forecast performance in environments where the
 consequences of under- and overforecasting differ meaningfully. By applying
 explicit penalty weights to shortfall and overbuild magnitudes and normalizing
 by realized demand, \CWSL{} quantifies the effective fraction of throughput
-“lost’’ due to misalignment between forecasted and actual values. This
+``lost`` due to misalignment between forecasted and actual values. This
 interpretation makes the metric especially useful in high-frequency,
 readiness-oriented contexts where service reliability and cost exposure must be
 managed jointly.
@@ -17,9 +17,15 @@ managed jointly.
 \emph{cost of error} rather than its purely numerical magnitude. As a result, it
 provides insight into operational risk that may remain hidden when evaluation
 relies solely on RMSE, MAE, or related measures. When paired with
-frequency-based diagnostics, distributional analysis, and readiness-focused
-metrics, \CWSL{} helps create a richer and more actionable understanding of
-forecasting system performance.
+frequency-based diagnostics and distributional analysis, \CWSL{} supports a
+more complete assessment of forecasting system performance by highlighting
+directional cost exposure under explicit assumptions.
+
+Importantly, \CWSL{} is intended as a stable, interpretable metric for asymmetric
+forecast evaluation rather than a prescriptive decision rule. Its primary role
+is to inform model comparison and diagnostic analysis under fixed downstream
+assumptions, serving as an input to broader planning or execution processes
+rather than a substitute for them.
 
 As organizations increasingly rely on automated forecasting for production,
 staffing, logistics, replenishment, and energy management, metrics such as

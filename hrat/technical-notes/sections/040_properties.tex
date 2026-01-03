@@ -16,7 +16,9 @@ HR@\(\tau\) values; smaller values impose stricter requirements and reduce the h
 rate. Interpretation of HR@\(\tau\) therefore depends on the operational meaning
 of \(\tau\), which may vary across domains or entities. Selecting an appropriate
 tolerance is critical for ensuring that the metric reflects true operational
-capability rather than an artifact of parameter choice.
+capability rather than an artifact of parameter choice. Importantly, \(\tau\)
+encodes an assumed operational tolerance for evaluation and is not a quantity to
+be optimized or learned from the evaluation data itself.
 
 \subsection{Sensitivity to the Error Distribution}
 HR@\(\tau\) depends on the frequency with which absolute forecast errors fall

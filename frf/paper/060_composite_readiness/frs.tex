@@ -6,35 +6,38 @@ overall readiness. Practitioners must determine whether a forecast is sufficient
 support execution, compare competing models, and monitor changes in readiness over time.
 Relying on individual diagnostics in isolation can obscure trade-offs among reliability, severity,
 stability, and economic consequence. For this reason, the \FRF\ includes a composite measure,
-the \emph{Forecast Readiness Score} (\FRS), designed to support deployment-level decisions.
+the \emph{Forecast Readiness Score} (\FRS), designed to support deployment-level evaluation
+and governance decisions.
 
 The \FRS\ synthesizes information from the diagnostic components of the framework, anchoring
 the composite on the economic axis provided by \CWSL\ while incorporating complementary
-signals of service reliability and failure behavior. Conceptually, the \FRS\ reflects the extent to
-which a forecast both limits cost-weighted operational loss and avoids readiness-critical failure
-modes. In this sense, the \FRS\ does not replace individual diagnostics; rather, it aggregates them
-in a manner that preserves their operational interpretation.
+signals of service reliability, failure severity, and tolerance stability. Conceptually, the \FRS\
+reflects the extent to which a forecast both limits cost-weighted operational loss and avoids
+readiness-critical failure modes. In this sense, the \FRS\ does not replace individual diagnostics;
+rather, it aggregates them in a manner that preserves their operational interpretation and
+supports consistent comparison across models, entities, and time periods.
 
-A defining characteristic of the \FRS\ is its asymmetry. Because \CWSL\ already encodes the
-directional cost of forecast error, the composite score inherits sensitivity to under-forecasting
-risk. Reliability-related diagnostics such as \NSL\ and severity-related measures such as \UD\
-further modulate the score by penalizing forecasts that achieve low cost-weighted loss only by
+A defining characteristic of the \FRS\ is its asymmetry. Because \CWSL\ encodes the directional
+cost of forecast error, the composite score inherits sensitivity to under-forecasting risk.
+Reliability-related diagnostics such as \NSL\ and severity-related measures such as \UD\ further
+modulate the score by penalizing forecasts that achieve low cost-weighted loss only by
 concentrating risk in infrequent but severe shortfalls. Stability relative to tolerance, as captured
 by \HRtau, ensures that forecasts whose deviations are frequently absorbed by the operational
 system are distinguished from those that require frequent intervention.
 
-The \FRS\ is intended to be interpreted as a readiness indicator rather than a loss function to be
-minimized. Higher values correspond to forecasts that are more consistently aligned with
-operational requirements under the specified asymmetry assumptions. Because the \FRS\
-combines multiple diagnostics, its value should be interpreted in conjunction with the underlying
-components when diagnosing failure modes or guiding model improvement. A change in the
-\FRS\ may reflect deterioration in service reliability, increased failure severity, reduced tolerance
-stability, or a shift in the economic alignment of forecast error.
+The \FRS\ is intended to be interpreted as an evaluative readiness indicator rather than as a loss
+function to be minimized or an objective to be optimized. Higher values correspond to forecasts
+that are more consistently aligned with operational requirements under explicitly governed cost
+and tolerance assumptions. Because the \FRS\ aggregates multiple diagnostics, its value should
+be interpreted alongside the underlying components when diagnosing failure modes or guiding
+model refinement. A change in the \FRS\ may reflect deterioration in service reliability, increased
+failure severity, reduced tolerance stability, or a shift in the economic alignment of forecast error.
 
-The construction of the \FRS\ admits a formal specification that synthesizes the diagnostic
-components of the framework while preserving their operational interpretation. In governance settings,
-the score can be used to define acceptance thresholds, trigger review or retraining processes,
-and communicate readiness to stakeholders who require a concise but meaningful summary of
-forecast performance. By embedding economic consequence within a broader diagnostic
-structure, the \FRS\ enables decision-makers to balance service reliability and efficiency in a
-principled and transparent manner.
+In governance and deployment settings, the \FRS\ may be used to define acceptance thresholds,
+trigger review or retraining processes, and communicate readiness to stakeholders who require a
+concise but meaningful summary of forecast performance. Where appropriate, composite
+readiness signals may be passed through post-evaluation adjustment layers that enforce feasibility
+or policy constraints without altering the underlying forecast or diagnostic measurements. By
+embedding economic consequence within a broader diagnostic and governance structure, the
+\FRS\ enables decision-makers to balance service reliability and efficiency in a principled,
+transparent, and auditable manner.
