@@ -1,0 +1,118 @@
+% ==========================================================
+% 050_classification.tex
+% Demand Quantization Compatibility (DQC)
+% ==========================================================
+
+\section{DQC Classification}
+\label{sec:dqc_classification}
+
+This section formalizes the Demand Quantization Compatibility (\DQC{}) classification.
+\DQC{} is a structural diagnostic that determines how realized demand should be
+interpreted for the purposes of tolerance evaluation and readiness governance.
+It does not estimate a latent data-generating process; rather, it assigns each
+evaluated series to a discrete structural regime based on observable behavior.
+
+\subsection{Classification Objective}
+
+The objective of \DQC{} classification is to determine whether tolerance-based
+measures and readiness interventions may be interpreted directly in raw units, or
+whether they must instead respect an underlying demand grid or set of attainable
+values. This determination is a prerequisite for valid governance and cannot be
+inferred from forecast performance alone.
+
+\subsection{Classification Taxonomy}
+
+Each demand series is assigned to exactly one of the following mutually exclusive
+classes:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Continuous-Like}
+  \item \textbf{Quantized}
+  \item \textbf{Piecewise-Packed}
+\end{itemize}
+
+These classes are not ordered by quality or desirability. Each represents a
+distinct structural regime with different implications for tolerance interpretation,
+forecast snapping, and readiness policy.
+
+\subsection{Continuous-Like}
+
+If neither quantized nor piecewise-packed criteria are met, demand is classified as
+\emph{continuous-like} at the evaluation resolution.
+
+This classification does not assert true continuity of the underlying process.
+Rather, it asserts that discretization effects are negligible for the purposes of
+readiness interpretation and governance. In this regime, tolerance-based diagnostics
+and readiness adjustments may be interpreted directly in raw units without
+structural risk.
+
+\subsection{Quantized}
+
+A series is classified as \emph{quantized} when a single candidate grid unit
+$\Delta^{\ast}$ explains the majority of nonzero observations and off-grid dispersion
+is sufficiently small.
+
+Formally, quantized behavior is declared when:
+\begin{itemize}[leftmargin=1.5em]
+  \item The best multiple-rate alignment $\rho(\Delta^{\ast})$ exceeds a prescribed
+        threshold, and
+  \item Normalized off-grid dispersion falls below its corresponding tolerance.
+\end{itemize}
+
+This pattern indicates that demand increments occur in fixed quanta, even if
+occasional deviations arise from noise or aggregation. In this regime, tolerance
+and readiness must be interpreted in grid units rather than raw units, and forecast
+snapping is required for governance validity.
+
+\subsection{Piecewise-Packed}
+
+Some operational processes do not adhere to a single minimal unit but instead
+exhibit concentration on a small set of discrete attainable values (e.g., pack
+sizes, batch outputs, or menu bundles).
+
+A series is classified as \emph{piecewise-packed} when:
+\begin{itemize}[leftmargin=1.5em]
+  \item Alignment to any single grid unit is weak or ambiguous, but
+  \item A small number of distinct values explain a large share of total demand mass.
+\end{itemize}
+
+Piecewise-packed demand is structurally discrete but not reducible to a single
+quantum. In this regime, snapping to a single grid is insufficient. Governance must
+treat tolerance and readiness in terms of discrete attainable values rather than
+continuous proximity.
+
+\subsection{Determinism and Tie-Breaking}
+
+\DQC{} classification is fully deterministic and rule-based. Given identical inputs
+and thresholds, the same demand series will always receive the same classification.
+
+When multiple candidate grid units satisfy alignment criteria, \DQC{} applies a
+stable tie-breaking rule that favors:
+\begin{enumerate}
+  \item Smaller grid units (finer resolution), and
+  \item Lower off-grid dispersion.
+\end{enumerate}
+
+This ensures reproducibility, auditability, and stability under repeated evaluation,
+and prevents threshold jitter from inducing policy instability.
+
+\subsection{Classification as Governance Input}
+
+The output of \DQC{} classification consists of:
+\begin{itemize}[leftmargin=1.5em]
+  \item The assigned structural class,
+  \item The detected grid unit (when applicable),
+  \item Supporting evidence metrics.
+\end{itemize}
+
+These outputs are consumed directly by the governance layer to determine:
+\begin{itemize}[leftmargin=1.5em]
+  \item Whether forecast snapping is required,
+  \item How tolerance $\tau$ should be interpreted,
+  \item Which Forecast Primitive Compatibility (FPC) evaluation
+        (raw or snapped) is authoritative.
+\end{itemize}
+
+\DQC{} classifications are not performance metrics and are not subject to
+optimization. They exist solely to constrain downstream evaluation and policy,
+ensuring that readiness decisions are grounded in an admissible structural
+interpretation of demand.

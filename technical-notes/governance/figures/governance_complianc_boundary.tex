@@ -1,0 +1,89 @@
+% ==========================================================
+% figures/governance_compliance_boundary.tex
+% Final: horizontal guide line from DQC down-flow to annotation
+% ==========================================================
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  box/.style={draw, rounded corners, align=center, inner sep=6pt, minimum width=5.2cm},
+  wide/.style={draw, rounded corners, align=center, inner sep=7pt, minimum width=9.0cm}
+]
+
+% ----------------------------------------------------------
+% Diagnostics (vertically spaced)
+% ----------------------------------------------------------
+\node[box] (dqc) at (-4.5,  2.9)
+  {Demand Quantization\\Compatibility (\DQC{})};
+
+\node[box] (fpc) at ( 4.5,  2.9)
+  {Forecast Primitive\\Compatibility (\FPC{})};
+
+% ----------------------------------------------------------
+% Conditioning arrow
+% ----------------------------------------------------------
+\draw[->, thick] (dqc.east) -- (fpc.west);
+
+% ----------------------------------------------------------
+% Governance
+% ----------------------------------------------------------
+\node[wide] (gov) at (0, 0.0)
+  {Governance Decision Contract\\\texttt{GovernanceDecision}};
+
+% Define two "ports" on the top edge of the Governance box
+\path (gov.north west) -- (gov.north east)
+  coordinate[pos=0.25] (gov_in_left)
+  coordinate[pos=0.75] (gov_in_right);
+
+% ----------------------------------------------------------
+% Execution
+% ----------------------------------------------------------
+\node[box] (exec) at (0, -2.3)
+  {Execution / Control / Automation};
+
+% ----------------------------------------------------------
+% Arrows into Governance (straight down)
+% ----------------------------------------------------------
+\draw[->, thick] (dqc.south) -- ++(0,-1.25) -- (gov_in_left);
+\draw[->, thick] (fpc.south) -- ++(0,-1.25) -- (gov_in_right);
+
+\draw[->, thick] (gov.south) -- (exec.north);
+
+% ----------------------------------------------------------
+% Conditioning annotation + perfectly horizontal guide line
+% ----------------------------------------------------------
+% Anchor point on the DQC down-flow
+\coordinate (dqc_drop) at ($(dqc.south)+(0,-0.6)$);
+
+% TikZ can't use "y coordinate of ..." directly; use a projection trick:
+% create a point at x=0 with y matching dqc_drop
+\coordinate (condlabel_pos) at ($(0,0)!(dqc_drop)!(0,1)$);
+\node[font=\small\itshape] (condlabel) at (condlabel_pos)
+  {FPC evaluated within DQC-admissible space};
+
+% Horizontal guide line
+\draw[thin] (dqc_drop) -- (condlabel.west);
+
+% ----------------------------------------------------------
+% Dashed compliance boundary
+% ----------------------------------------------------------
+\draw[dashed, rounded corners]
+  ([xshift=-12pt,yshift=12pt]gov.north west) rectangle
+  ([xshift=12pt,yshift=-12pt]gov.south east);
+
+\node[font=\small\itshape] at (0, 0.70)
+  {Compliance boundary};
+
+\end{tikzpicture}
+
+\caption{
+Governance as a compliance boundary within the Electric Barometer framework.
+Demand Quantization Compatibility (\DQC{}) establishes the admissible representation in which
+Forecast Primitive Compatibility (\FPC{}) is evaluated.
+Governance deterministically composes these signals into a single
+\texttt{GovernanceDecision}, which defines the compliance boundary between
+diagnostic evaluation and operational execution.
+}
+\label{fig:governance_compliance_boundary}
+\end{figure}

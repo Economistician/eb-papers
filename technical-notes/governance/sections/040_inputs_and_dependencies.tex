@@ -1,0 +1,102 @@
+% ==========================================================
+% 040_inputs_and_dependencies.tex
+% Inputs and Dependencies
+% ==========================================================
+
+\section{Inputs and Dependencies}
+\label{sec:governance_inputs_dependencies}
+
+Governance in the Electric Barometer framework is intentionally narrow in what it
+accepts as input and intentionally strict in what it depends upon. This section
+defines the admissible inputs to the Governance layer, clarifies its upstream
+dependencies, and explicitly documents what information is excluded by design.
+
+\subsection{Required Inputs}
+
+Governance consumes only structured diagnostic artifacts produced upstream. All
+inputs must be observable, versioned, and attributable to a specific evaluation
+context.
+
+The required inputs are:
+
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Demand Quantization Compatibility (\DQC{}) output}, including:
+  \begin{itemize}
+    \item the assigned demand-structure class,
+    \item the detected grid unit (if applicable),
+    \item and supporting evidence signals.
+  \end{itemize}
+
+  \item \textbf{Forecast Primitive Compatibility (\FPC{}) diagnostics}, evaluated
+  in the admissible unit system determined by \DQC{}:
+  \begin{itemize}
+    \item raw-unit diagnostics when demand is continuous-like,
+    \item snapped-unit diagnostics when demand is quantized or piecewise-packed.
+  \end{itemize}
+
+  \item \textbf{Governance parameters and thresholds}, supplied explicitly or via
+  a named policy preset, including:
+  \begin{itemize}
+    \item DQC classification thresholds,
+    \item FPC compatibility thresholds,
+    \item readiness adjustment constraints.
+  \end{itemize}
+\end{itemize}
+
+All inputs must be present and internally consistent. Governance does not infer,
+approximate, or backfill missing diagnostics.
+
+\subsection{Upstream Diagnostic Dependencies}
+
+Governance depends on upstream diagnostics only through their declared outputs,
+not through their internal mechanics.
+
+Specifically:
+\begin{itemize}[leftmargin=1.5em]
+  \item Governance depends on \DQC{} to resolve the admissible representation and
+        unit system for interpretation.
+  \item Governance depends on \FPC{} to assess whether readiness adjustment is
+        structurally coherent under that representation.
+\end{itemize}
+
+Governance does not recompute, reinterpret, or partially apply upstream logic.
+It treats diagnostic outputs as authoritative contracts, not as advisory signals.
+
+\subsection{Explicit Non-Dependencies}
+
+Equally important are the inputs that Governance explicitly does \emph{not}
+consume. These exclusions are deliberate and non-negotiable.
+
+Governance does \textbf{not} depend on:
+\begin{itemize}[leftmargin=1.5em]
+  \item model identifiers, architectures, or training procedures,
+  \item feature definitions or data preprocessing pipelines,
+  \item forecast accuracy metrics, cost summaries, or service-level outcomes,
+  \item optimization objectives, loss functions, or learned parameters,
+  \item exploratory analyses or analyst judgment.
+\end{itemize}
+
+Governance is therefore isolated from optimization and learning loops by design.
+It neither tunes thresholds based on performance nor adapts its behavior in
+response to downstream outcomes. All policy logic is fixed, declarative, and
+version-controlled.
+
+This isolation ensures that governance decisions remain structurally grounded,
+auditable, and stable over time, and that responsibility for policy outcomes
+cannot be obscured by adaptive behavior or implicit feedback mechanisms.
+
+\subsection{Failure on Missing or Invalid Inputs}
+
+When required diagnostics are missing, inconsistent, or evaluated in an
+inadmissible unit system, Governance fails explicitly.
+
+It does not:
+\begin{itemize}[leftmargin=1.5em]
+  \item degrade gracefully,
+  \item substitute alternative diagnostics,
+  \item or infer intent from partial information.
+\end{itemize}
+
+This failure mode is intentional. Governance prefers explicit non-decision over
+silent policy drift, ensuring that unresolved structural ambiguity is surfaced
+to the owning organization rather than embedded into automated control.

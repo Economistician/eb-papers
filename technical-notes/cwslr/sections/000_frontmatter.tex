@@ -1,0 +1,24 @@
+% ==========================================================
+% 000_frontmatter.tex
+% FRONTMATTER (Cost Ratio Sensitivity Technical Note)
+% ==========================================================
+
+\begin{abstract}
+Cost-Weighted Service Loss (CWSL) evaluates forecast performance under asymmetric
+penalties for underbuild and overbuild, parameterized by a cost ratio
+$R = c_u / c_o$. While CWSL provides a flexible and interpretable metric, its
+practical use depends critically on how the cost ratio $R$ is specified.
+In operational settings, $R$ is often selected heuristically or treated as
+fixed, despite substantial uncertainty and heterogeneity in cost asymmetry
+across entities and regimes.
+
+This technical note formalizes a sensitivity- and calibration-oriented treatment
+of the cost ratio in asymmetric forecast evaluation. We analyze CWSL as a
+function of $R$, introduce grid-based sensitivity analysis to assess robustness
+to cost assumptions, and present deterministic, data-driven methods for
+selecting $R$ based on historical imbalance between underbuild and overbuild
+costs. Extensions to entity-level calibration and practical governance
+considerations are discussed. The methods require no exogenous data, impose no
+model assumptions, and are designed to support transparent, auditable deployment
+within the Forecast Readiness Framework.
+\end{abstract}

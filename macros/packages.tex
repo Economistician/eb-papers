@@ -1,0 +1,85 @@
+% ==========================================================
+% macros/packages.tex
+% Electric Barometer (EB) — Global Packages
+%
+% Intent:
+% - Centralize shared package imports and common configuration.
+% - Keep ordering consistent across documents.
+% - This file includes hyperref LAST. Do not load additional packages after
+%   inputting this file in your main.tex.
+% ==========================================================
+
+% ----------------------------------------------------------
+% Core typography & encoding
+% ----------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% ----------------------------------------------------------
+% Page layout
+% ----------------------------------------------------------
+\usepackage[margin=1in]{geometry}
+
+% ----------------------------------------------------------
+% Mathematics
+% ----------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+% ----------------------------------------------------------
+% Tables & figures
+% ----------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+% Common utilities used across notes/papers
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+% Table helpers (used in some notes)
+\usepackage{adjustbox}
+\usepackage{tabularx}
+
+% ----------------------------------------------------------
+% TikZ & PGFPlots (standardized across EB)
+% ----------------------------------------------------------
+\usepackage{tikz}
+\usetikzlibrary{
+  arrows.meta,
+  positioning,
+  shapes.geometric,
+  fit,
+  calc,
+  backgrounds,
+  intersections
+}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{
+  groupplots,
+  fillbetween
+}
+
+% ----------------------------------------------------------
+% Formatting utilities (used in multiple notes/papers)
+% ----------------------------------------------------------
+\usepackage{framed}
+\usepackage{setspace}
+
+% ----------------------------------------------------------
+% Citations
+% ----------------------------------------------------------
+\usepackage[authoryear,round]{natbib}
+
+% ----------------------------------------------------------
+% Microtypography
+% ----------------------------------------------------------
+\usepackage{microtype}
+
+% ----------------------------------------------------------
+% Hyperlinks (MUST be loaded last)
+% ----------------------------------------------------------
+\usepackage[hidelinks]{hyperref}

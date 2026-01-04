@@ -1,0 +1,93 @@
+% ==========================================================
+% 020_scope_and_nongoals.tex
+% Scope and Non-Goals
+% ==========================================================
+
+\section{Scope and Non-Goals}
+\label{sec:governance_scope_nongoals}
+
+Governance in the Electric Barometer framework is intentionally narrow in scope
+and deliberately restrictive in function. Its role is not to generate insight,
+improve forecasts, or explore tradeoffs, but to issue an authoritative operational
+decision based on upstream diagnostics.
+
+This section defines the precise responsibilities of Governance and explicitly
+documents the capabilities it excludes. These boundaries are essential to
+prevent misuse, scope creep, and interpretive ambiguity.
+
+\subsection{Scope}
+
+Governance operates as the terminal decision layer in the Electric Barometer
+stack. Within this role, its responsibilities are limited to the following:
+
+\begin{itemize}
+  \item \textbf{Decision closure.}  
+  Governance maps a fixed set of diagnostic inputs and thresholds to exactly one
+  authoritative policy outcome. It exists to close the decision surface, not to
+  explore it.
+
+  \item \textbf{Enforcement of admissible representation.}  
+  Governance determines which unit system (raw or snapped) is authoritative for
+  interpretation, based on upstream \DQC{} classification, and enforces that
+  choice consistently across diagnostics and policy.
+
+  \item \textbf{Policy declaration.}  
+  Governance emits an explicit, structured decision artifact specifying:
+  \begin{itemize}
+    \item tolerance interpretation semantics,
+    \item readiness adjustment allowability,
+    \item and a governance status suitable for downstream control systems.
+  \end{itemize}
+
+  \item \textbf{Exclusivity and consistency.}  
+  Governance enforces exclusivity across diagnostic interpretations:
+  exactly one \FPC{} assessment governs allowability, and raw and snapped
+  reasoning are never mixed.
+
+  \item \textbf{Auditability and accountability.}  
+  Governance decisions are deterministic, threshold-driven, and traceable to
+  observable inputs. Each decision can be reviewed, reproduced, and justified
+  without reliance on model internals or subjective judgment.
+\end{itemize}
+
+Governance operates per entity, per evaluation context, and per decision window.
+It does not pool, smooth, or aggregate decisions across entities unless such
+aggregation is explicitly performed downstream.
+
+\subsection{Non-Goals}
+
+Equally important are the capabilities Governance explicitly excludes. Governance
+does \textbf{not} attempt to:
+
+\begin{itemize}
+  \item \textbf{Optimize outcomes.}  
+  Governance does not optimize cost, service level, or accuracy. It does not
+  select policies based on objective functions or tradeoff curves.
+
+  \item \textbf{Learn or adapt.}  
+  Governance contains no learning, adaptation, or stateful behavior. All logic
+  is deterministic and driven solely by current inputs and declared thresholds.
+
+  \item \textbf{Reinterpret diagnostics.}  
+  Governance does not reweight, smooth, or reinterpret \DQC{} or \FPC{} outputs.
+  It consumes them exactly as produced and applies fixed decision rules.
+
+  \item \textbf{Override upstream conclusions.}  
+  Governance cannot override a snapping requirement, tolerance interpretation,
+  or incompatibility determination. Manual or discretionary overrides are
+  explicitly out of scope.
+
+  \item \textbf{Act as a monitoring or analytics layer.}  
+  Governance is not a dashboard, reporting system, or exploratory analytics
+  tool. Its outputs are prescriptive, not descriptive.
+
+  \item \textbf{Guarantee downstream performance.}  
+  A permissive governance decision does not guarantee improved outcomes, nor
+  does a restrictive decision imply poor forecasting quality. Governance
+  addresses admissibility, not success.
+\end{itemize}
+
+By maintaining this strict scope, Governance preserves the separation of
+concerns that underpins the Electric Barometer framework. Diagnostics diagnose,
+Governance decides, and downstream systems execute—each within a clearly defined
+and enforceable boundary.

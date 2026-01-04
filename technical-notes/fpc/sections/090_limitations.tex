@@ -1,0 +1,68 @@
+% ==========================================================
+% 090_limitations.tex
+% Forecast Primitive Compatibility (FPC)
+% ==========================================================
+
+\section{Limitations and Extensions}
+
+While \FPC{} provides a principled mechanism for diagnosing structural mismatch between demand
+processes and forecast primitives, it is subject to several limitations that should be made explicit.
+These limitations do not undermine the utility of \FPC{}, but they define the conditions under which
+its classifications should be interpreted and revisited.
+
+\subsection{Dependence on Evaluation Horizon}
+
+\FPC{} classifications are conditional on the evaluation window over which diagnostics are computed.
+Short horizons may fail to expose structural intermittency or may overweight transient effects such
+as promotions, outages, or atypical demand bursts. Conversely, overly long horizons may obscure
+regime shifts or recent operational changes.
+
+As with other \FRF{} diagnostics, \FPC{} should be recomputed periodically and interpreted in the
+context of known temporal changes in demand behavior.
+
+\subsection{Sensitivity to Diagnostic Resolution}
+
+The signals informing \FPC{} depend on the resolution at which demand is observed and forecasts are
+evaluated. Aggregation can mask discreteness and intermittency, potentially producing a
+\Compatible{} classification for demand that would appear \Incompatible{} at finer resolution.
+Similarly, very fine-grained evaluation may exaggerate intermittency for processes that are
+operationally smooth at decision-relevant timescales.
+
+Compatibility should therefore be assessed at the resolution at which decisions are made, and
+re-evaluated if that resolution changes.
+
+\subsection{Primitive-Specific Scope}
+
+This technical note focuses on the compatibility of point forecasting primitives augmented by
+scale-based readiness adjustment. \FPC{} does not directly assess compatibility with alternative
+primitives such as quantile forecasts, discrete distributions, or state-based decision rules.
+Demand streams classified as \Incompatible{} with point forecasts may be well served by such
+alternatives, but evaluating their suitability requires separate analysis.
+
+Extending \FPC{} to other primitives is a natural direction for future work, but doing so requires
+careful articulation of the assumptions encoded by those representations.
+
+\subsection{Thresholds and Formalization}
+
+Although \FPC{} is deterministic, its classification relies on qualitative patterns rather than
+fixed numeric thresholds. This design choice prioritizes interpretability and auditability, but it
+also introduces judgment in borderline cases. Practitioners may wish to formalize internal
+guidelines for classification based on their risk tolerance and operational context.
+
+Such formalization should be treated as an implementation detail rather than a change to the core
+concept.
+
+\subsection{Extensions}
+
+Several extensions of \FPC{} are possible. These include:
+\begin{itemize}[leftmargin=1.5em]
+  \item Explicit confidence or stability measures for compatibility classification.
+  \item Integration with automated policy engines that enforce readiness gating.
+  \item Generalization to multi-primitive environments where different representations coexist.
+\end{itemize}
+
+These extensions are outside the scope of the present note but illustrate how \FPC{} can evolve as a
+governance construct within broader decision systems.
+
+By acknowledging these limitations, \FPC{} remains a focused diagnostic tool rather than an
+overgeneralized solution, preserving its role as a safeguard for readiness evaluation.

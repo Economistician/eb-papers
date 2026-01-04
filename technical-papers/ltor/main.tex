@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+
+% ==========================================================
+% GLOBAL PACKAGES + CONFIG (EB)
+% ==========================================================
+\input{../../macros/packages.tex}
+
+% ==========================================================
+% CUSTOM MACROS (shared notation)
+% ==========================================================
+\input{../../macros/commands.tex}
+
+% ==========================================================
+% STYLE LAYER (EB)
+% ==========================================================
+\input{../../macros/style.tex}
+
+% ==========================================================
+% PDF METADATA
+% ==========================================================
+\EBPdfMeta
+  {Managing Limited-Time Offers under Forecast Uncertainty: A Readiness-Centric Approach to Production Management}
+  {Kyle Corrie}
+
+% ==========================================================
+% DOCUMENT
+% ==========================================================
+\begin{document}
+
+% ==========================================================
+% FRONTMATTER
+% ==========================================================
+\input{000_frontmatter/title}
+\maketitle
+
+\input{000_frontmatter/abstract}
+
+% ==========================================================
+% MAIN CONTENT
+% ==========================================================
+\input{010_overview/overview}
+\input{020_background_and_problem/background}
+\input{030_ltos_as_regime_shifts/regime_shifts}
+\input{040_separation_adjustment_layer/separation}
+\input{050_readiness_adjustment_layer/readiness}
+\input{060_loss_asymmetry_and_selection/loss_asymmetry}
+\input{070_intraday_control_loop/intraday_control}
+\input{080_governance_and_reporting/governance}
+\input{090_case_patterns_and_failure_modes/case_patterns}
+\input{100_limitations_and_nongoals/limitations}
+\input{110_conclusion/conclusion}
+
+% ==========================================================
+% REFERENCES
+% ==========================================================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

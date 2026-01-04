@@ -1,0 +1,37 @@
+% ==========================================================
+% macros/style.tex
+% Electric Barometer — Style Layer (v1)
+% ----------------------------------------------------------
+% Scope (v1):
+%   - PDF metadata only
+%
+% Notes:
+%   - Assumes hyperref is already loaded via macros/packages.tex
+%   - This file should NOT load packages.
+% ==========================================================
+
+% ----------------------------------------------------------
+% PDF METADATA (canonical helper)
+% ----------------------------------------------------------
+% Usage:
+%   \EBPdfMeta{<pdftitle>}{<pdfauthor>}{<pdfsubject>}{<pdfkeywords>}
+%
+% Examples:
+%   \EBPdfMeta
+%     {Cost-Weighted Service Loss (CWSL): An Asymmetric Cost Metric for Forecast Evaluation}
+%     {Kyle Corrie}
+%     {Technical Note — Electric Barometer Series}
+%     {Electric Barometer, Forecast Readiness Framework, CWSL, asymmetric loss}
+%
+\newcommand{\EBPdfMeta}[4]{%
+  \hypersetup{%
+    pdftitle={#1},%
+    pdfauthor={#2},%
+    pdfsubject={#3},%
+    pdfkeywords={#4},%
+    colorlinks=true,%
+    linkcolor=blue,%
+    citecolor=blue,%
+    urlcolor=blue%
+  }%
+}

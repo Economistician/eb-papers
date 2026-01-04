@@ -1,0 +1,106 @@
+% ==========================================================
+% 080_interpretive_boundaries_and_misuse.tex
+% Governance — Electric Barometer
+% ==========================================================
+
+\section{Interpretive Boundaries and Common Misuse}
+\label{sec:governance_interpretive_boundaries}
+
+Governance in the Electric Barometer framework is designed to \emph{close}
+decision space, not expand it. Because it produces authoritative, categorical
+policy outcomes, it is particularly susceptible to misuse if treated as an
+advisory signal, a performance summary, or a negotiable recommendation.
+
+This section establishes explicit interpretive boundaries for governance outputs
+and documents common failure modes that arise when those boundaries are violated.
+
+\subsection{Governance Is Not a Performance Metric}
+
+Governance outcomes are not measures of forecast quality, operational success,
+or economic efficiency. A restrictive or prohibitive governance decision does
+not imply poor modeling, suboptimal forecasting, or inadequate performance.
+
+Instead, governance decisions reflect \emph{structural admissibility}: whether a
+given class of actions is well-defined under the diagnosed demand structure and
+forecast primitive behavior. Treating governance outcomes as performance scores
+constitutes a category error.
+
+\subsection{Governance Is Not an Optimization Target}
+
+Governance outputs are not objectives to be maximized, minimized, or tuned
+against. Attempts to adjust diagnostics, thresholds, or representations for the
+purpose of achieving a more permissive governance status undermine the purpose
+of the framework.
+
+Governance exists to constrain optimization, not to be optimized itself. When a
+governance decision is unfavorable, the appropriate response is representational
+or procedural change—not threshold manipulation.
+
+\subsection{Governance Is Not Advisory}
+
+Governance decisions are \emph{authoritative}. Downstream systems may not treat
+them as suggestions, confidence indicators, or contextual inputs.
+
+Partial adoption (e.g., accepting unit semantics but ignoring readiness
+constraints) or selective override (e.g., honoring permissive cases while
+bypassing restrictive ones) breaks the decision contract and invalidates the
+audit trail.
+
+\subsection{No Circumvention via Diagnostic Mixing}
+
+A common and explicitly prohibited misuse pattern is \emph{semantic laundering}
+(sometimes referred to as \emph{diagnostic laundering}): the attempt to bypass
+governance constraints by selectively reinterpreting, mixing, or substituting
+diagnostic contexts after a governance decision has been issued.
+
+Typical examples include:
+\begin{itemize}[leftmargin=1.5em]
+  \item using raw-unit diagnostics when snapped diagnostics are authoritative,
+  \item appealing to exploratory or non-governing metrics after governance
+        disallows adjustment,
+  \item combining outputs from different evaluation resolutions to justify action.
+\end{itemize}
+
+Semantic laundering creates the illusion of admissibility by reintroducing
+interpretations that governance has explicitly ruled out. Such practices are
+governance violations, not analytical refinements.
+
+\subsection{Governance Is Not a Modeling Prescription}
+
+Governance does not mandate specific forecasting models, loss functions, or
+architectures. A disallowed readiness policy does not imply that the underlying
+forecast is invalid or that a particular modeling paradigm is required.
+
+Modeling decisions remain outside the scope of governance. Governance constrains
+\emph{actionability}, not \emph{representation choice}.
+
+\subsection{Separation from Human Override}
+
+Human judgment may motivate reevaluation, reclassification, or explicit policy
+change, but it may not silently override governance outputs.
+
+Any deviation from a governance decision must be:
+\begin{itemize}[leftmargin=1.5em]
+  \item explicit,
+  \item documented,
+  \item versioned, and
+  \item traceable to revised inputs or thresholds.
+\end{itemize}
+
+This separation preserves auditability, accountability, and institutional
+memory.
+
+\subsection{Intended Use}
+
+Proper use of governance consists of:
+\begin{itemize}[leftmargin=1.5em]
+  \item Consuming the governance decision artifact as authoritative,
+  \item Enforcing declared unit systems, tolerance semantics, and readiness
+        constraints,
+  \item Failing explicitly when required diagnostic inputs are missing,
+  \item Triggering upstream reevaluation rather than downstream circumvention.
+\end{itemize}
+
+By enforcing these boundaries, governance ensures that operational decisions are
+not merely data-informed, but structurally valid, auditable, and accountable by
+design.

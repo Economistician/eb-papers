@@ -1,0 +1,99 @@
+% ==========================================================
+% 090_limitations.tex
+% Demand Quantization Compatibility (DQC)
+% ==========================================================
+
+\section{Limitations}
+\label{sec:dqc_limitations}
+
+Demand Quantization Compatibility (DQC) is intentionally designed as a
+\emph{structural diagnostic}, not as a complete characterization of demand
+behavior. As such, it carries several limitations that should be understood
+when interpreting its outputs or integrating it into broader decision systems.
+
+\subsection{Heuristic Nature of Grid Detection}
+
+DQC infers demand granularity from observed realizations using empirical
+signals such as multiple-rate concentration and off-grid dispersion. While
+these diagnostics are robust in common operational settings, they are not
+guaranteed to recover the true generative process.
+
+In particular:
+\begin{itemize}
+  \item Finite samples may obscure the true grid,
+  \item Mixed demand regimes may produce ambiguous signals,
+  \item Rare but valid off-grid observations may distort dispersion metrics.
+\end{itemize}
+
+DQC therefore prioritizes conservative classification over exact grid recovery.
+
+\subsection{Sensitivity to Sample Size and Horizon}
+
+Quantization diagnostics require sufficient nonzero observations to be
+meaningful. Very short evaluation windows, sparse demand streams, or extreme
+intermittency can reduce the reliability of granularity inference.
+
+When sample support is weak, DQC may:
+\begin{itemize}
+  \item Default to continuous-like classifications,
+  \item Flag marginal states that defer policy decisions,
+  \item Require downstream governance safeguards.
+\end{itemize}
+
+These outcomes are intentional and reflect epistemic uncertainty rather than
+model failure.
+
+\subsection{Stationarity Assumptions}
+
+DQC implicitly assumes that demand quantization structure is stable over the
+evaluation window. Temporal regime shifts—such as changes in packaging, order
+policy, or measurement units—can violate this assumption.
+
+DQC does not currently:
+\begin{itemize}
+  \item Detect structural breaks in granularity,
+  \item Model time-varying grids,
+  \item Attribute changes to operational causes.
+\end{itemize}
+
+Such extensions are explicitly out of scope for the present formulation.
+
+\subsection{No Performance or Cost Awareness}
+
+DQC deliberately ignores cost asymmetry, service targets, and forecast
+performance. A quantized demand process may still be well served by certain
+forecasting approaches or readiness strategies under specific objectives.
+
+DQC answers only:
+\begin{quote}
+\emph{Is continuous interpretation structurally admissible here?}
+\end{quote}
+
+It does not answer whether a particular decision is economically optimal or
+desirable.
+
+\subsection{Not a Replacement for Domain Knowledge}
+
+While DQC provides an auditable, data-driven signal, it cannot substitute for
+operational context. Known packaging rules, contractual constraints, or system
+design decisions may define granularity more reliably than empirical inference.
+
+In such cases, DQC should be treated as:
+\begin{itemize}
+  \item A consistency check,
+  \item A guardrail against misuse of continuous diagnostics,
+  \item A supplement to documented process knowledge.
+\end{itemize}
+
+\subsection{Role Within the Electric Barometer Stack}
+
+These limitations are mitigated by design through composition:
+\begin{itemize}
+  \item Governance prevents inappropriate use of DQC outputs,
+  \item FPC contextualizes quantization effects within forecast behavior,
+  \item Threshold tuning allows conservative or permissive stances as needed.
+\end{itemize}
+
+DQC is most effective when used as intended: a narrow, structural diagnostic
+within a layered readiness evaluation framework, not as a standalone decision
+engine.

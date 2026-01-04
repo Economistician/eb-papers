@@ -1,0 +1,83 @@
+% ==========================================================
+% 020_scope_and_nongoals.tex
+% Demand Quantization Compatibility (DQC)
+% ==========================================================
+
+\section{Scope and Non-Goals}
+\label{sec:dqc_scope_nongoals}
+
+Demand Quantization Compatibility (DQC) is intentionally narrow in scope. It is
+designed to answer a specific structural question about realized demand and to
+support governance decisions downstream. To avoid misuse and over-extension, we
+explicitly state what DQC \emph{does} and \emph{does not} attempt to do.
+
+\subsection{Scope}
+
+DQC operates strictly on a realized demand series at a fixed evaluation
+resolution. Within this setting, its responsibilities are limited to the
+following:
+
+\begin{itemize}
+  \item \textbf{Structural classification of demand support.}  
+  DQC determines whether realized demand behaves as continuous-like, strongly
+  quantized, or piecewise-packed at the resolution under consideration.
+
+  \item \textbf{Granularity detection.}  
+  When demand is classified as quantized or packed, DQC detects a
+  representative grid unit (granularity) that characterizes the dominant
+  support of the demand distribution.
+
+  \item \textbf{Governance signaling.}  
+  DQC produces an interpretable diagnostic artifact that downstream systems can
+  use to:
+  \begin{itemize}
+    \item require or waive snap-to-grid behavior,
+    \item interpret tolerance parameters in raw units or grid units,
+    \item ensure consistent evaluation semantics across entities and time.
+  \end{itemize}
+
+  \item \textbf{Auditability and stability.}  
+  DQC outputs are deterministic, threshold-driven, and auditable. Thresholds may
+  be tuned explicitly, but the diagnostic logic itself remains stable.
+\end{itemize}
+
+DQC is designed to be evaluated independently per entity, per hierarchy level,
+and per evaluation window, enabling heterogeneous demand structures to coexist
+within a single operational system.
+
+\subsection{Non-Goals}
+
+Equally important are the capabilities DQC \emph{explicitly excludes}. DQC does
+\textbf{not} attempt to:
+
+\begin{itemize}
+  \item \textbf{Measure forecast quality.}  
+  DQC does not evaluate forecast accuracy, bias, cost, or service outcomes. It
+  operates solely on realized demand and is agnostic to forecast values.
+
+  \item \textbf{Optimize thresholds or grids.}  
+  DQC does not search for an optimal granularity or tune itself to improve
+  downstream metrics. Any thresholds used are governance parameters, not learned
+  quantities.
+
+  \item \textbf{Replace modeling or transformation choices.}  
+  DQC does not recommend specific forecasting models, transformations, or data
+  preprocessing steps. It merely constrains how evaluation results should be
+  interpreted.
+
+  \item \textbf{Guarantee downstream performance.}  
+  A continuous-like DQC classification does not imply that readiness adjustment
+  will be effective, nor does a quantized classification imply that snapping will
+  improve outcomes. These judgments belong to FPC and subsequent governance
+  layers.
+
+  \item \textbf{Act as a universal statistical test.}  
+  DQC is not a general-purpose test for discreteness, intermittency, or
+  zero-inflation. It is a pragmatic, operational diagnostic tailored to readiness
+  evaluation semantics.
+\end{itemize}
+
+By maintaining this narrow scope, DQC avoids conflating structural diagnosis with
+performance assessment. Its role is to ensure that downstream metrics and
+policies are applied in a space that is consistent with the observed demand
+process, nothing more and nothing less.

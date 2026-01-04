@@ -1,0 +1,102 @@
+% ==========================================================
+% 080_interpretive_boundaries_and_misuse.tex
+% Demand Quantization Compatibility (DQC)
+% ==========================================================
+
+\section{Interpretive Boundaries and Common Misuse}
+\label{sec:interpretive_boundaries_and_misuse}
+
+Having established the role of \DQC{} in governance and policy gating, we now
+clarify the interpretive boundaries and common forms of misuse that \DQC{} is
+designed to prevent. Because its output is categorical and governance-oriented,
+\DQC{} is susceptible to misinterpretation if treated as a performance signal,
+data quality metric, or modeling recommendation. This section delineates the
+intended scope of \DQC{} and documents failure modes that arise when those
+boundaries are violated.
+
+\subsection{DQC Is Not a Performance Metric}
+
+A \DQC{} classification does not measure forecast accuracy, service quality, or
+operational efficiency. It reflects only the structural support of realized
+demand at the evaluation resolution.
+
+A demand series classified as \emph{quantized} or \emph{piecewise-packed} is not
+inherently problematic, difficult, or undesirable. Likewise, a
+\emph{continuous-like} classification does not imply favorable readiness
+outcomes. \DQC{} is orthogonal to performance and must not be interpreted as a
+judgment on forecasting quality or operational success.
+
+\subsection{DQC Is Not a Data Quality Diagnostic}
+
+\DQC{} does not assess data cleanliness, measurement error, or reporting
+fidelity. Discrete or packed demand structures often arise from legitimate
+operational constraints such as batching, menu design, capacity limits, or
+ordering rules.
+
+Treating quantization signals as evidence of data defects or preprocessing
+errors constitutes misuse. \DQC{} assumes that observed demand reflects the
+operational reality faced by decision systems and evaluates only whether that
+reality admits continuous interpretation.
+
+\subsection{DQC Is Not a Modeling Prescription}
+
+\DQC{} does not recommend specific forecasting models or primitives. While a
+quantized or packed classification may motivate the exploration of discrete,
+hurdle, or state-based approaches, model selection and specification remain
+outside the scope of this diagnostic.
+
+The role of \DQC{} is to determine whether downstream evaluation and readiness
+mechanisms are structurally admissible under a given representation. It signals
+when a representational change may be necessary, but it does not dictate how
+that change should be implemented.
+
+\subsection{Snapping Is Not an Accuracy Improvement}
+
+Because snapping enforces representational coherence between forecasts and
+realized demand, it is sometimes misinterpreted as an accuracy-improving
+transformation. This interpretation is incorrect.
+
+Snapping does not improve predictive accuracy, reduce error, or enhance model
+skill. It may increase apparent hit rates or reduce reported error solely by
+eliminating structurally impossible values. These effects reflect compliance
+with demand support, not improved forecasting performance.
+
+\subsection{Conditional and Context-Dependent Interpretation}
+
+\DQC{} classifications are conditional on evaluation resolution, aggregation
+level, and operational context. Changes in cadence, batching policy, menu
+structure, or demand aggregation may alter observable quantization behavior and
+warrant re-evaluation.
+
+As a result, \DQC{} classifications should be treated as context-specific
+governance signals rather than permanent attributes of an entity. Stability over
+time increases confidence in the diagnosis, but absence of stability does not
+invalidate the construct.
+
+\subsection{Separation from Policy Authority}
+
+\DQC{} does not itself authorize or prohibit readiness actions. Its role is
+limited to determining admissible representations and unit systems.
+
+Policy decisions are made only by the governance layer, which composes \DQC{}
+with Forecast Primitive Compatibility (\FPC{}) and applies explicit decision
+rules. Using \DQC{} classifications directly as action triggers—without
+governance mediation—breaks the separation of concerns that underpins
+auditability, accountability, and stability in the Electric Barometer framework.
+
+\subsection{Intended Use}
+
+Proper use of \DQC{} consists of:
+\begin{itemize}
+  \item Determining whether demand may be interpreted in raw units or must respect
+        a discrete support.
+  \item Enforcing snapping and tolerance semantics as governance obligations.
+  \item Constraining downstream diagnostics and readiness evaluation to
+        structurally admissible spaces.
+  \item Preventing misinterpretation of discretization effects as forecast error.
+\end{itemize}
+
+By enforcing these interpretive boundaries, \DQC{} protects readiness evaluation
+from representational misuse and ensures that downstream governance decisions
+operate on structurally valid foundations. Its value lies not in evaluating
+performance, but in preserving the admissibility of evaluation itself.

@@ -1,0 +1,46 @@
+% ==========================================================
+% 010_overview.tex
+% Forecast Primitive Compatibility (FPC)
+% ==========================================================
+
+\section{Overview}
+
+Forecast readiness evaluation assumes not only that forecast errors can be measured, but that the
+\emph{forecast primitive} used to generate those errors is structurally appropriate for the demand
+process under consideration. In many operational settings, this assumption is violated. Commodity
+streams may be discrete, intermittent, or piecewise, exhibiting long runs of zero demand punctuated
+by bursty arrivals at specific quanta (e.g., counts and bundles). Under such behavior, conventional
+point forecasting---even when evaluated with asymmetric cost metrics---can produce persistent
+under-coverage and deep shortfalls that do not respond meaningfully to incremental tuning.
+
+The Forecast Readiness Framework (\FRF{}) provides a family of diagnostics for asymmetric operational
+risk, including cost-weighted loss (\CWSL{}), coverage-oriented measures (\NSL{}), conditional shortfall
+severity (\UD{}), and tolerance-based hit rates (\HRtau{}). These metrics characterize \emph{how} a
+forecast fails, but they do not by themselves determine whether a class of readiness interventions is
+\emph{valid}. In practice, practitioners often apply additional levers---global scale adjustments,
+buffer policies, or readiness adjustment layers (\RAL{})---to improve service coverage. When the demand
+process is compatible with the forecast primitive, such interventions can increase coverage and
+reduce readiness loss in a controlled manner. When it is not, the same interventions may yield
+negligible gains in coverage while inflating surplus, degrading tolerance metrics, and producing
+governance signals that are difficult to interpret or defend.
+
+This technical note introduces \emph{Forecast Primitive Compatibility} (\FPC{}) as a derived,
+auditable classification that diagnoses structural mismatch between a demand process and a forecast
+primitive. \FPC{} is not a performance metric and is not intended as an optimization objective.
+Rather, it is a governance construct that consumes observable \FRF{} diagnostics to determine whether
+a forecast primitive admits meaningful readiness improvement under admissible interventions. The
+central premise is simple: if coverage and tolerance do not respond to readiness levers in a
+predictable way, the appropriate conclusion is not ``tune harder,'' but ``change the primitive.''
+
+We formalize the notion of forecast primitives and the structural assumptions they implicitly encode,
+identify observable incompatibility signals (including weak responsiveness of \NSL{} to \RAL{}, flat
+tolerance response curves under \HRtau{}, high conditional shortfall depth \UD{}, and rapid escalation of
+\CWSL{} under increasing cost asymmetry), and propose a deterministic compatibility taxonomy:
+\Compatible, \Marginal, and \Incompatible. We then outline the governance implications of \FPC{} for
+readiness policy gating, cost-ratio calibration, and model selection.
+
+The goal of \FPC{} is to prevent the misuse of readiness interventions in regimes where they are
+structurally ineffective, to make limitations explicit and defensible, and to direct attention toward
+appropriate alternative primitives (e.g., discrete, hurdle, quantile, or state-based approaches) when
+necessary. In doing so, \FPC{} completes the readiness evaluation stack by introducing an explicit
+governance boundary that constrains when readiness interventions are structurally admissible.

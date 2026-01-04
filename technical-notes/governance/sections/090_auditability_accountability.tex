@@ -1,0 +1,121 @@
+% ==========================================================
+% 090_auditability_and_accountability.tex
+% Governance — Electric Barometer
+% ==========================================================
+
+\section{Auditability and Accountability}
+\label{sec:governance_auditability_accountability}
+
+A core objective of governance in the Electric Barometer framework is to ensure
+that readiness decisions are not only structurally valid, but also
+\emph{auditable, accountable, and defensible} over time. Governance is therefore
+designed as a deterministic, traceable system whose outputs can be inspected,
+reproduced, and reviewed independently of the forecasting models or operational
+actors that consume them.
+
+This section describes how auditability and accountability are enforced by
+construction, rather than retrofitted through logging or oversight processes.
+
+\subsection{Deterministic Decision Reproduction}
+
+Governance decisions are fully deterministic. Given:
+\begin{itemize}[leftmargin=1.5em]
+  \item the realized demand series,
+  \item the required diagnostic signals (\DQC{} and \FPC{}),
+  \item and a fixed set of governance thresholds,
+\end{itemize}
+the governance system will always produce the same decision artifact.
+
+There is no randomness, adaptive learning, or hidden state in governance logic.
+This property enables exact replay of historical decisions and eliminates
+ambiguity about why a particular readiness action was allowed or disallowed at a
+given point in time.
+
+\subsection{Explicit Traceability of Decisions}
+
+Every governance outcome is accompanied by an explicit reasoning trace embedded
+in the \texttt{GovernanceDecision} artifact. This trace links:
+\begin{itemize}[leftmargin=1.5em]
+  \item observed demand structure (\DQC{}),
+  \item the governing \FPC{} classification,
+  \item unit system and snapping requirements,
+  \item tolerance interpretation rules,
+  \item and the resulting readiness policy.
+\end{itemize}
+
+As a result, no governance decision relies on implicit assumptions, undocumented
+heuristics, or post-hoc interpretation. Each outcome can be traced directly to
+observable inputs and declared rules.
+
+\subsection{Separation of Responsibility}
+
+Accountability in Electric Barometer is enforced through strict separation of
+responsibilities:
+\begin{itemize}[leftmargin=1.5em]
+  \item Diagnostics (\DQC{}, \FPC{}) describe structure and responsiveness.
+  \item Governance determines admissibility and policy.
+  \item Downstream systems execute actions subject to governance constraints.
+\end{itemize}
+
+No single component is permitted to both diagnose and authorize action. This
+separation ensures that errors in modeling, estimation, or interpretation cannot
+silently propagate into operational control without crossing an explicit
+governance boundary.
+
+\subsection{Prevention of Silent Policy Drift}
+
+A common failure mode in operational systems is \emph{policy drift}: gradual,
+untracked changes in how metrics, tolerances, or adjustments are interpreted
+across time, teams, or systems.
+
+The governance layer prevents such drift by:
+\begin{itemize}[leftmargin=1.5em]
+  \item declaring a single authoritative unit system,
+  \item enforcing exclusive use of raw or snapped diagnostics,
+  \item emitting explicit readiness allowability decisions.
+\end{itemize}
+
+Any change in governance behavior must occur through a versioned change to
+diagnostic definitions or threshold parameters, making policy evolution visible
+and reviewable.
+
+\subsection{Accountability Without Model Introspection}
+
+Governance accountability does not depend on inspecting forecasting model
+internals, training data, or estimation procedures. Decisions are justified
+solely on the basis of observable behavior and declared rules.
+
+This design choice allows governance to:
+\begin{itemize}[leftmargin=1.5em]
+  \item remain model-agnostic,
+  \item apply consistently across heterogeneous forecasting stacks,
+  \item support external audit and review without proprietary disclosure.
+\end{itemize}
+
+Accountability is therefore attached to decisions and policy authority, not to
+models or individual contributors.
+
+\subsection{Governance as a Risk Control Mechanism}
+
+By enforcing auditability and accountability, governance functions as a formal
+risk control layer within Electric Barometer. It ensures that readiness decisions
+are:
+\begin{itemize}[leftmargin=1.5em]
+  \item structurally admissible,
+  \item consistently interpreted,
+  \item and defensible under retrospective scrutiny.
+\end{itemize}
+
+This capability is essential in environments where automated or semi-automated
+control decisions carry financial, operational, or reputational risk.
+
+\subsection{Summary}
+
+Auditability and accountability in Electric Barometer are not achieved through
+after-the-fact reporting, but through architectural constraint. By enforcing
+determinism, traceability, and separation of authority, the governance layer
+ensures that readiness decisions can be understood, reproduced, and defended
+long after they are made.
+
+In this way, governance transforms structural diagnostics into operationally
+responsible decision-making.

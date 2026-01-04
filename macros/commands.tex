@@ -1,0 +1,282 @@
+% ==========================================================
+% EB-PAPERS: CANONICAL MACROS / COMMANDS
+% Forecast Readiness Framework (FRF) / Electric Barometer
+% ==========================================================
+% Goals:
+% - One meaning per symbol.
+% - Shared across all papers/notes/briefs.
+% - Backwards-compatible aliases.
+% - Avoid redefinition errors via \providecommand.
+% ==========================================================
+
+% ----------------------------------------------------------
+% Core framework / artifacts
+% ----------------------------------------------------------
+\providecommand{\FRF}{\ensuremath{\mathrm{FRF}}}
+\providecommand{\FRS}{\ensuremath{\mathrm{FRS}}}
+
+\providecommand{\FPC}{\ensuremath{\mathrm{FPC}}}
+\providecommand{\DQC}{\ensuremath{\mathrm{DQC}}}
+\providecommand{\Governance}{\ensuremath{\mathrm{Governance}}}
+\providecommand{\GovernanceDecision}{\ensuremath{\mathrm{GovernanceDecision}}}
+
+\providecommand{\RAL}{\ensuremath{\mathrm{RAL}}}
+
+% Limited-Time Offers
+\providecommand{\LTO}{\ensuremath{\mathrm{LTO}}}
+\providecommand{\LTOs}{\ensuremath{\mathrm{LTOs}}}
+
+% ----------------------------------------------------------
+% Core metrics (upright math)
+% ----------------------------------------------------------
+\providecommand{\CWSL}{\ensuremath{\mathrm{CWSL}}}
+\providecommand{\CWSLR}{\ensuremath{\mathrm{CWSLR}}} % named artifact in prose
+\providecommand{\NSL}{\ensuremath{\mathrm{NSL}}}
+\providecommand{\UD}{\ensuremath{\mathrm{UD}}}
+\providecommand{\HR}{\ensuremath{\mathrm{HR}}}
+\providecommand{\HRtau}{\ensuremath{\mathrm{HR}@\tau}}
+
+% FRS sub-terms
+\providecommand{\CWSLscaled}{\ensuremath{\mathrm{CWSL}_{\mathrm{scaled}}}}
+\providecommand{\CWSLmax}{\ensuremath{\mathrm{CWSL}_{\max}}}
+
+% Legacy HR macro names
+\providecommand{\HRAT}{\ensuremath{\mathrm{HR@\tau}}}
+\providecommand{\tauTol}{\ensuremath{\tau}}
+\providecommand{\tauop}{\ensuremath{\tau}}
+
+% ----------------------------------------------------------
+% Indexing and sets
+% ----------------------------------------------------------
+\providecommand{\Iset}{\ensuremath{I}}
+\providecommand{\Tset}{\ensuremath{T}}
+
+\providecommand{\entity}{\ensuremath{i}}
+\providecommand{\timeindex}{\ensuremath{t}}
+
+% Back-compat index shorthands
+\providecommand{\iidx}{\entity}
+\providecommand{\tidx}{\timeindex}
+
+% Summation shorthand
+\providecommand{\sumit}{\ensuremath{\sum_{\entity \in \Iset} \sum_{\timeindex \in \Tset}}}
+
+% Optional sizes / counts
+\providecommand{\Tsize}{\ensuremath{|\Tset|}}
+\providecommand{\nobs}{\ensuremath{N}}
+
+% ----------------------------------------------------------
+% Forecast / demand notation
+% ----------------------------------------------------------
+\providecommand{\y}{\ensuremath{y}}
+\providecommand{\yhat}{\ensuremath{\hat{y}}}
+
+\providecommand{\yit}{\ensuremath{y_{\entity\timeindex}}}
+\providecommand{\yhatit}{\ensuremath{\hat{y}_{\entity\timeindex}}}
+
+% Common residuals / errors
+\providecommand{\errit}{\ensuremath{e_{\entity\timeindex}}}
+\providecommand{\resit}{\errit} % alias
+\providecommand{\absit}{\ensuremath{\left|\yhatit - \yit\right|}}
+\providecommand{\abserrit}{\absit} % alias
+
+% Explicit residual definition macro (optional)
+\providecommand{\resdef}{\ensuremath{\errit = \yit - \yhatit}}
+
+% ----------------------------------------------------------
+% Shortfall / overbuild decomposition
+% ----------------------------------------------------------
+\providecommand{\shortfall}{\ensuremath{s}}
+\providecommand{\overbuild}{\ensuremath{o}}
+
+\providecommand{\sit}{\ensuremath{s_{\entity\timeindex}}}
+\providecommand{\oit}{\ensuremath{o_{\entity\timeindex}}}
+
+% Positive-part operator (canonical name)
+\providecommand{\pospart}[1]{\left(#1\right)_{+}}
+
+% Explicit decompositions
+\providecommand{\shortfalldef}{\ensuremath{\sit = \pospart{\yit - \yhatit}}}
+\providecommand{\overbuilddef}{\ensuremath{\oit = \pospart{\yhatit - \yit}}}
+
+% Back-compat convenience symbols used in some notes
+\providecommand{\sdepth}{\shortfall} % UD paper convenience
+
+% ----------------------------------------------------------
+% Indicators / expectations / operators
+% ----------------------------------------------------------
+% Canonical indicator: \Ind{event}
+\providecommand{\Ind}{\ensuremath{\mathbb{I}}}
+\providecommand{\indicator}[1]{\ensuremath{\mathbf{1}\{#1\}}} % prose-friendly alternative
+
+% If you want function-style indicator without braces: \Ind\!(event)
+% Keep as \Ind and let authors decide.
+\providecommand{\E}{\ensuremath{\mathbb{E}}}
+
+\providecommand{\abs}[1]{\left|#1\right|}
+\providecommand{\card}[1]{\left|#1\right|}
+
+% ----------------------------------------------------------
+% Cost parameters + cost ratio calibration (CWSLR note)
+% ----------------------------------------------------------
+% IMPORTANT: Canonical costs are subscripted (c_u, c_o). This avoids
+% collisions with superscript variants.
+\providecommand{\cu}{\ensuremath{c_u}}
+\providecommand{\co}{\ensuremath{c_o}}
+
+% Entity-specific costs
+\providecommand{\cui}{\ensuremath{c_{u,\entity}}}
+\providecommand{\coi}{\ensuremath{c_{o,\entity}}}
+
+% Cost ratio
+\providecommand{\R}{\ensuremath{R}}
+\providecommand{\Ri}{\ensuremath{R_{\entity}}}
+\providecommand{\Rdef}{\ensuremath{R = \cu/\co}}
+
+% Aggregate under/over cost functions (used in calibration prose)
+\providecommand{\UnderCost}{\ensuremath{\mathrm{UnderCost}}}
+\providecommand{\OverCost}{\ensuremath{\mathrm{OverCost}}}
+
+% Candidate grid
+\providecommand{\Rgrid}{\ensuremath{\mathcal{R}}}
+
+% Calibrated selections
+\providecommand{\Rstar}{\ensuremath{R^{\ast}}}
+\providecommand{\Rist}{\ensuremath{R^{\ast}_{\entity}}}
+
+% CWSL as a function of R (notation)
+\providecommand{\CWSLofR}{\ensuremath{\CWSL(\R)}}
+\providecommand{\CWSLofRi}{\ensuremath{\CWSL(\Ri)}}
+
+% Balance-based selection operator (kept as a macro because you used it)
+\providecommand{\Rbalance}{%
+\ensuremath{%
+\arg\min_{\R \in \Rgrid}\left|\UnderCost(\R) - \OverCost(\R)\right|%
+}%
+}
+
+% Back-compat (older notes used superscripts c^u / c^o)
+\providecommand{\cuSup}{\ensuremath{c^{u}}}
+\providecommand{\coSup}{\ensuremath{c^{o}}}
+\providecommand{\cuiSup}{\ensuremath{c^{u}_{\entity}}}
+\providecommand{\coiSup}{\ensuremath{c^{o}_{\entity}}}
+
+% ----------------------------------------------------------
+% HR@tau scanning / calibration (HRtau note)
+% ----------------------------------------------------------
+\providecommand{\tauval}{\ensuremath{\tau}}
+\providecommand{\tauv}{\tauval}
+\providecommand{\taui}{\ensuremath{\tau_{\entity}}}
+
+% Candidate tolerance grid
+\providecommand{\TauGrid}{\ensuremath{\mathcal{T}}}
+
+% Calibrated tolerances
+\providecommand{\taustar}{\ensuremath{\tau^{\ast}}}
+\providecommand{\taustari}{\ensuremath{\tau^{\ast}_{\entity}}}
+
+% Target hit-rate (if used)
+\providecommand{\hstar}{\ensuremath{h^{\ast}}}
+
+% Hit indicator definition helpers
+\providecommand{\Hitit}{\ensuremath{h_{\entity\timeindex}}}
+\providecommand{\HitDef}{\ensuremath{\Hitit = \Ind\!\left(\absit \le \tauval\right)}}
+
+% HR as a function of tau
+\providecommand{\HRoftau}{\ensuremath{\HR(\tauval)}}
+\providecommand{\HRtauoftau}{\ensuremath{\HRtau(\tauval)}}
+
+% Optional utility selection helpers
+\providecommand{\lambdau}{\ensuremath{\lambda}}
+\providecommand{\taumax}{\ensuremath{\tau_{\max}}}
+\providecommand{\Utility}{\ensuremath{\mathcal{U}}}
+\providecommand{\UtilityDef}{\ensuremath{\Utility(\tauval) = \HR(\tauval) - \lambdau \cdot (\tauval/\taumax)}}
+
+% Governance guards
+\providecommand{\taufloor}{\ensuremath{\tau_{\min}}}
+\providecommand{\taucap}{\ensuremath{\tau_{\mathrm{cap}}}}
+\providecommand{\nmin}{\ensuremath{n_{\min}}}
+
+% ----------------------------------------------------------
+% DQC / snapping / quantization (DQC note)
+% ----------------------------------------------------------
+\providecommand{\gunit}{\ensuremath{g}}
+\providecommand{\guniti}{\ensuremath{g_{\entity}}}
+
+\providecommand{\ygrid}{\ensuremath{\tilde{y}}}
+\providecommand{\ygridit}{\ensuremath{\tilde{y}_{\entity\timeindex}}}
+
+\providecommand{\yhatgrid}{\ensuremath{\tilde{\hat{y}}}}
+\providecommand{\yhatgridit}{\ensuremath{\tilde{\hat{y}}_{\entity\timeindex}}}
+
+\providecommand{\snap}{\ensuremath{\mathcal{S}}}
+\providecommand{\snaphatdef}{\ensuremath{\yhatgridit = \snap_{\gunit}\!\left(\yhatit\right)}}
+\providecommand{\snapydef}{\ensuremath{\ygridit = \snap_{\gunit}\!\left(\yit\right)}}
+
+\providecommand{\residit}{\ensuremath{r_{\entity\timeindex}}}
+\providecommand{\residdef}{\ensuremath{\residit = \yit - \ygridit}}
+
+\providecommand{\MAD}{\ensuremath{\mathrm{MAD}}}
+\providecommand{\IQR}{\ensuremath{\mathrm{IQR}}}
+
+\providecommand{\multirate}{\ensuremath{\rho}}
+\providecommand{\multiratei}{\ensuremath{\rho_{\entity}}}
+
+\providecommand{\DeltaStar}{\ensuremath{\Delta^{\ast}}}
+
+\providecommand{\Pset}{\ensuremath{\mathcal{P}}}
+\providecommand{\packunit}{\ensuremath{p}}
+\providecommand{\packuniti}{\ensuremath{p_{\entity}}}
+
+% DQC classes
+\providecommand{\ContinuousLike}{\textsc{Continuous-like}}
+\providecommand{\Quantized}{\textsc{Quantized}}
+\providecommand{\PiecewisePacked}{\textsc{Piecewise-packed}}
+
+% FPC classes
+\providecommand{\Compatible}{\textsc{Compatible}}
+\providecommand{\Marginal}{\textsc{Marginal}}
+\providecommand{\Incompatible}{\textsc{Incompatible}}
+
+% ----------------------------------------------------------
+% RAL shorthands used in notes
+% ----------------------------------------------------------
+\providecommand{\alphaadj}{\ensuremath{\alpha}}
+\providecommand{\yhatadjit}{\ensuremath{\hat{y}^{(\alphaadj)}_{\entity\timeindex}}}
+\providecommand{\yhatadjdef}{\ensuremath{\yhatadjit = (1+\alphaadj)\,\yhatit}}
+
+\providecommand{\dNSL}{\ensuremath{\Delta \NSL}}
+\providecommand{\dHRtau}{\ensuremath{\Delta \HRtau}}
+\providecommand{\dCWSL}{\ensuremath{\Delta \CWSL}}
+
+% ----------------------------------------------------------
+% Governance policy handles
+% ----------------------------------------------------------
+\providecommand{\TauPolicy}{\ensuremath{\mathrm{TauPolicy}}}
+\providecommand{\RALPolicy}{\ensuremath{\mathrm{RALPolicy}}}
+\providecommand{\UnitPolicy}{\ensuremath{\mathrm{UnitPolicy}}}
+
+\providecommand{\GovernanceStatus}{\ensuremath{\mathrm{GovernanceStatus}}}
+\providecommand{\Green}{\textsc{Green}}
+\providecommand{\Yellow}{\textsc{Yellow}}
+\providecommand{\Red}{\textsc{Red}}
+
+\providecommand{\RawUnits}{\textsc{Raw}}
+\providecommand{\SnappedUnits}{\textsc{Snapped}}
+
+% ----------------------------------------------------------
+% LTO paper specifics
+% ----------------------------------------------------------
+\providecommand{\ltoOn}{\ensuremath{z_{\timeindex}}}
+\providecommand{\ltoPhase}{\ensuremath{\phi_{\timeindex}}}
+\providecommand{\qprod}{\ensuremath{\mathrm{QP}}}
+
+% ----------------------------------------------------------
+% Prose shorthands
+% ----------------------------------------------------------
+\providecommand{\ie}{i.e.\ }
+\providecommand{\eg}{e.g.\ }
+
+% ==========================================================
+% END
+% ==========================================================

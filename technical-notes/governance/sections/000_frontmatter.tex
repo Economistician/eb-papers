@@ -1,0 +1,27 @@
+% ==========================================================
+% 000_frontmatter.tex
+% FRONTMATTER (Forecast Governance Technical Note)
+% ==========================================================
+
+\begin{abstract}
+Operational forecasting systems increasingly embed evaluation diagnostics directly
+into downstream decisions, policy gates, and automated readiness interventions.
+In such settings, it is not sufficient to compute cost-aware error or service
+metrics. One must also establish that both the \emph{units of interpretation} and
+the \emph{forecast primitive itself} are structurally admissible for the observed
+demand process.
+
+This technical note introduces \emph{Forecast Governance} as a deterministic,
+auditable decision contract that composes two companion diagnostics:
+\emph{Demand Quantization Compatibility (DQC)}, which determines whether evaluation
+and control must respect a discrete demand representation, and
+\emph{Forecast Primitive Compatibility (FPC)}, which determines whether readiness
+adjustment constitutes a valid control lever under that representation.
+
+Governance produces a single authoritative artifact—the
+\texttt{GovernanceDecision}—that specifies representation requirements, tolerance
+semantics, readiness allowability, and compliance status with explicit rationale.
+Forecast Governance is not a performance metric and is not an optimization
+objective. It is a policy layer designed to ensure that evaluation semantics are
+well-defined before downstream optimization, selection, or control is attempted.
+\end{abstract}

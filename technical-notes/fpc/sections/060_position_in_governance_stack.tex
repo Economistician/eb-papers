@@ -1,0 +1,67 @@
+% ==========================================================
+% 060_companion_diagnostics_and_governance.tex
+% Forecast Primitive Compatibility (FPC)
+% ==========================================================
+
+\section{Companion Diagnostics and Governance}
+
+Forecast Primitive Compatibility (\FPC{}) is not a standalone decision mechanism. It is designed
+to operate as an intermediate structural diagnostic within a layered governance stack that separates
+measurement validity, primitive responsiveness, and policy authority. This section clarifies the
+relationship between \FPC{}, Demand Quantization Compatibility (\DQC{}), and Forecast Governance,
+and delineates the boundaries of responsibility among these components.
+
+\subsection{Relationship to Demand Quantization Compatibility}
+
+\FPC{} presumes that forecast evaluation and readiness diagnostics are interpreted in an admissible
+unit system. Determination of that unit system is explicitly out of scope for \FPC{} and is delegated
+to Demand Quantization Compatibility (\DQC{}).
+
+\DQC{} characterizes the structural support of realized demand and determines whether evaluation and
+control should be interpreted in raw units or in grid-aligned (snapped) units. \FPC{} does not infer
+demand quantization, estimate granularity, or impose snapping behavior. Instead, \FPC{} operates
+conditionally on the evaluation space determined upstream by \DQC{}.
+
+As a consequence, \FPC{} classifications are meaningful only with respect to a fixed unit system.
+A forecast primitive may appear weakly responsive or unstable if evaluated in an ill-posed
+coordinate system, even if it is structurally compatible when interpreted on an appropriate grid.
+Conversely, a primitive that is incompatible under a valid unit system remains incompatible
+regardless of tuning or adjustment.
+
+\subsection{Relationship to Forecast Governance}
+
+\FPC{} does not itself authorize, prohibit, or condition readiness interventions. Its output is a
+structural classification of whether a forecast primitive admits meaningful responsiveness to
+admissible readiness adjustment. Final policy decisions are the responsibility of the governance
+layer.
+
+Forecast Governance composes \FPC{} with \DQC{} to produce a single, authoritative decision
+artifact. In this composition, \FPC{} supplies evidence regarding primitive responsiveness, while
+\DQC{} supplies evidence regarding admissible evaluation units. Governance resolves these inputs
+into explicit policy outcomes, including tolerance interpretation rules, snapping requirements,
+readiness-adjustment allowability, and categorical status.
+
+A \textit{Compatible} \FPC{} classification therefore indicates that readiness adjustment is
+structurally meaningful in principle, not that it is unconditionally permitted. Likewise, a
+\textit{Marginal} or \textit{Incompatible} classification constrains governance decisions but does
+not itself constitute a policy ruling. Governance is the only layer that binds diagnostic evidence
+to enforceable decisions.
+
+\subsection{Position in the Forecast Readiness Framework}
+
+Within the Forecast Readiness Framework (\FRF{}), \FPC{} occupies a distinct intermediate position
+between metric evaluation and policy enforcement. The conceptual flow may be summarized as:
+\[
+\text{Forecast Output} \;\rightarrow\; \text{\FRF{} Metrics} \;\rightarrow\; \FPC{} \;\rightarrow\;
+\text{Governance Decision}.
+\]
+
+In this stack, \FPC{} serves as a governance boundary that constrains continued optimization,
+calibration, or readiness adjustment within a forecast primitive when empirical diagnostics
+indicate that such interventions are ineffective or ill-posed. By enforcing this boundary, \FPC{}
+protects downstream decision systems from unproductive tuning and ensures that governance
+decisions are grounded in structural validity rather than metric behavior alone.
+
+By clearly separating unit-system admissibility (\DQC{}), primitive responsiveness (\FPC{}), and
+policy authority (Governance), the framework preserves auditability, interpretability, and stability
+across evolving operational contexts.

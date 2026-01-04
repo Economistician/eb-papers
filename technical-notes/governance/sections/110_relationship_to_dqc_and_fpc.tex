@@ -1,0 +1,102 @@
+% ==========================================================
+% 110_relationship_to_dqc_and_fpc.tex
+% Forecast Governance
+% ==========================================================
+
+\section{Relationship to DQC and FPC}
+\label{sec:relationship_to_dqc_and_fpc}
+
+Forecast Governance is not a standalone diagnostic. It is a compositional
+decision layer that derives its authority entirely from the disciplined use of
+two upstream constructs: Demand Quantization Compatibility (\DQC{}) and Forecast
+Primitive Compatibility (\FPC{}). Each addresses a distinct structural question,
+and Governance exists to bind their answers into a single, enforceable policy
+outcome.
+
+This section clarifies the respective roles of \DQC{} and \FPC{}, the ordering
+constraints between them, and the manner in which Governance composes—rather
+than replaces—their conclusions.
+
+\subsection{Distinct but Complementary Roles}
+
+\DQC{} and \FPC{} operate on different objects and answer different questions:
+
+\begin{itemize}
+  \item \textbf{\DQC{}:} Determines whether realized demand admits continuous
+        interpretation at the evaluation resolution, or whether evaluation and
+        control must respect a discrete support.
+  \item \textbf{\FPC{}:} Determines whether a given forecast primitive responds
+        meaningfully to admissible readiness adjustment under a fixed
+        representation.
+\end{itemize}
+
+Neither diagnostic is sufficient on its own to authorize readiness intervention.
+\DQC{} constrains the admissible unit system; \FPC{} constrains the admissible
+control lever. Governance is required to reconcile these constraints into a
+single policy decision.
+
+\subsection{Strict Ordering and Dependency}
+
+The relationship between \DQC{} and \FPC{} is strictly ordered and asymmetric:
+
+\begin{itemize}
+  \item \DQC{} must be evaluated first.
+  \item \FPC{} is evaluated only within the representation declared admissible
+        by \DQC{}.
+\end{itemize}
+
+This ordering is non-negotiable. Evaluating \FPC{} without first resolving demand
+quantization produces ambiguous or structurally invalid signals. Governance
+enforces this ordering by declaring a single authoritative coordinate system
+(raw or snapped) before any compatibility assessment is considered.
+
+\subsection{Governance as the Binding Layer}
+
+Governance does not reinterpret or override \DQC{} or \FPC{} outputs. Instead, it
+consumes them as fixed inputs and produces a closed decision artifact that
+specifies:
+
+\begin{itemize}
+  \item the governing representation (raw or grid-aligned),
+  \item the authoritative \FPC{} assessment,
+  \item the admissibility of readiness adjustment,
+  \item the interpretation and enforcement of tolerance semantics.
+\end{itemize}
+
+In this sense, Governance functions as a binding contract rather than a scoring
+mechanism. It closes the decision space defined by \DQC{} and \FPC{}, eliminating
+degrees of freedom that would otherwise allow inconsistent or opportunistic
+interpretation.
+
+\subsection{No Substitution or Collapsing}
+
+It is tempting to treat Governance as a higher-level diagnostic that subsumes
+\DQC{} and \FPC{}. This interpretation is incorrect.
+
+\begin{itemize}
+  \item \DQC{} cannot be inferred from \FPC{} behavior.
+  \item \FPC{} cannot resolve unit admissibility.
+  \item Governance cannot operate without both.
+\end{itemize}
+
+Each construct is intentionally narrow, and their separation is essential to
+auditability, accountability, and long-term stability. Governance exists
+precisely to preserve these separations while still enabling decisive action.
+
+\subsection{Compositional Integrity}
+
+Together, \DQC{}, \FPC{}, and Governance form a minimal but complete structural
+stack:
+
+\begin{center}
+\emph{Demand Structure} $\rightarrow$ \emph{Primitive Compatibility}
+$\rightarrow$ \emph{Policy Authority}
+\end{center}
+
+By maintaining strict boundaries between these layers and composing them
+deterministically, the Electric Barometer framework ensures that readiness
+decisions are not merely cost-aware or service-aware, but structurally admissible
+by construction.
+
+In this architecture, Governance is not the source of truth—it is the
+\emph{enforcer} of truths established upstream.

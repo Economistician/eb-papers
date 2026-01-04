@@ -1,0 +1,25 @@
+% ==========================================================
+% 000_frontmatter.tex
+% FRONTMATTER (HR@τ Tolerance Sensitivity Technical Note)
+% ==========================================================
+
+\begin{abstract}
+Hit Rate within Tolerance (\HRtau{}) measures the fraction of forecast intervals
+whose absolute error lies within an acceptability band \(\tau\). While \HRtau{}
+is simple and interpretable, its practical use depends critically on how the
+tolerance \(\tau\) is specified. In many deployments, \(\tau\) is chosen
+heuristically or fixed by convention, despite substantial heterogeneity in
+acceptable error across entities, operating regimes, and decision contexts.
+
+This technical note formalizes a sensitivity- and calibration-oriented treatment
+of tolerance selection for \HRtau{}. We analyze \HRtau{} as a function of
+\(\tau\), introduce grid-based sensitivity analysis to assess robustness to
+tolerance assumptions, and present three deterministic, data-driven calibration
+methods based on historical residuals: (i) target hit-rate (quantile-based)
+selection, (ii) knee detection at diminishing returns, and (iii) utility
+maximization trading coverage against tolerance width. Extensions to entity-level
+tolerances and governance safeguards (floors, caps, and minimum-sample rules) are
+discussed. The methods require no exogenous data, impose no model assumptions,
+and are designed to support transparent, auditable deployment within the Forecast
+Readiness Framework.
+\end{abstract}

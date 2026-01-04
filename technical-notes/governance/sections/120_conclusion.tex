@@ -1,0 +1,49 @@
+% ==========================================================
+% 120_conclusion.tex
+% Governance — Electric Barometer
+% ==========================================================
+
+\section{Conclusion}
+\label{sec:governance_conclusion}
+
+This technical note formalizes governance as the final and binding layer of the
+Electric Barometer framework. While Demand Quantization Compatibility (DQC) and
+Forecast Primitive Compatibility (FPC) diagnose structural properties of demand
+and forecast behavior, governance determines what actions are \emph{permitted},
+\emph{constrained}, or \emph{forbidden} as a result.
+
+By framing governance as a deterministic decision contract, the framework
+ensures that operational actions are not merely data-informed, but
+\emph{structurally admissible by design}. All downstream policies—unit
+interpretation, tolerance semantics, and readiness adjustment—are derived from
+explicit diagnostics and resolved into a single authoritative decision artifact.
+
+A central contribution of this framework is the enforcement of separation:
+\begin{itemize}[leftmargin=1.5em]
+  \item Structural diagnosis is separated from performance evaluation,
+  \item Evaluation is separated from optimization,
+  \item Optimization is separated from policy authority.
+\end{itemize}
+
+This separation prevents common failure modes in operational analytics, where
+implicit assumptions about continuity, tolerance, or adjustability are silently
+violated in pursuit of apparent gains. Governance makes those assumptions
+explicit, testable, and enforceable.
+
+Within Electric Barometer, governance is not an advisory overlay or reporting
+convenience. It is the mechanism by which accountability is assigned, audit
+trails are preserved, and unsafe decision pathways are closed. When governance
+restricts action, it does so deliberately—not as a reflection of model quality,
+but as a statement about structural validity.
+
+As forecasting systems increasingly automate control levers, incorporate
+asymmetric cost structures, and operate at finer temporal and operational
+granularity, such governance mechanisms become essential. Without them,
+organizations risk optimizing against ill-defined objectives in inadmissible
+spaces.
+
+In this sense, governance is not an optional extension of forecasting—it is its
+necessary conclusion. Before asking whether a decision improves performance, we
+must first ensure that the decision itself is well-defined, defensible, and
+accountable. The Electric Barometer governance framework exists to enforce that
+principle.

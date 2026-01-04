@@ -1,0 +1,113 @@
+% ==========================================================
+% 030_governance_contract.tex
+% Governance Contract
+% ==========================================================
+
+\section{The Governance Decision Contract}
+\label{sec:governance_decision_contract}
+
+Governance within the Electric Barometer framework is formalized as a
+\emph{decision contract}: a deterministic, auditable mapping from a fixed set of
+diagnostic inputs to a single authoritative policy outcome. This contract is
+intentionally explicit and intentionally restrictive. Its purpose is not to
+explore a decision space, but to close it.
+
+By construction, Governance does not optimize, infer, or adapt. It enforces
+structural admissibility by declaring what interpretations and actions are
+permitted given the observed properties of demand and forecast behavior.
+
+\subsection{Contract Inputs}
+
+The Governance Decision Contract consumes only the following categories of
+inputs:
+
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Realized demand series}
+  \[
+    \{\yit\}_{t \in \Tset}
+  \]
+  for a single entity $i$, used exclusively to determine demand structure via
+  Demand Quantization Compatibility (\DQC{}).
+
+  \item \textbf{Forecast Primitive Compatibility (\FPC{}) diagnostics}, computed
+  from observable forecast behavior under admissible representations:
+  \begin{itemize}
+    \item Raw-unit \FPC{} signals (when snapping is not required),
+    \item Snapped-unit \FPC{} signals (when required by \DQC{}).
+  \end{itemize}
+
+  \item \textbf{Governance parameters and thresholds}, supplied explicitly or via
+  a named policy preset, including:
+  \begin{itemize}
+    \item DQC classification thresholds,
+    \item FPC compatibility thresholds,
+    \item Readiness policy constraints.
+  \end{itemize}
+\end{enumerate}
+
+No other information is admissible. In particular, Governance does \emph{not}
+consume model identifiers, training metadata, feature definitions, or aggregate
+performance summaries beyond the diagnostic artifacts themselves.
+
+\subsection{Contract Output}
+
+The contract produces a single structured artifact, the
+\texttt{GovernanceDecision}. This artifact is the sole authoritative output of
+the Governance layer and contains:
+
+\begin{itemize}[leftmargin=*]
+  \item The assigned \DQC{} classification and detected grid unit (if applicable),
+  \item The authoritative \FPC{} classification used for policy evaluation,
+  \item A declaration of the governing unit system (raw or snapped),
+  \item An explicit snapping requirement flag,
+  \item A tolerance interpretation policy (raw-unit vs.\ grid-unit $\tau$),
+  \item A readiness adjustment policy
+        (\textsc{Allowed}, \textsc{Conditional}, or \textsc{Disallowed}),
+  \item A consolidated governance status indicator,
+  \item An ordered list of explicit reasoning statements supporting the decision.
+\end{itemize}
+
+This artifact is \emph{binding}. Downstream systems must consume it as-is and may
+not reconstruct, reinterpret, or partially override Governance logic.
+
+\subsection{Determinism, Exclusivity, and Accountability}
+
+A defining property of the Governance Decision Contract is
+\emph{exclusivity of authority}:
+
+\begin{itemize}[leftmargin=*]
+  \item Exactly one unit system governs interpretation (raw \emph{or} grid),
+  \item Exactly one \FPC{} assessment governs readiness allowability,
+  \item Exactly one readiness policy is declared.
+\end{itemize}
+
+Mixing raw and snapped reasoning within a single decision is explicitly
+disallowed. If snapping is required by \DQC{}, only snapped-unit \FPC{} signals
+are admissible for policy determination. Conversely, when demand is
+continuous-like, snapped diagnostics are ignored.
+
+Given identical inputs and parameters, the Governance Decision Contract must
+always return identical outputs. There is no randomness, statefulness, learning,
+or adaptive behavior. This determinism establishes clear accountability: every
+policy outcome is traceable to declared inputs, thresholds, and rules, and
+therefore to an identifiable Governance owner responsible for the decision.
+
+\subsection{Why a Contract}
+
+Framing Governance as a decision contract enforces several non-negotiable design
+principles:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Auditability:} every governance outcome is traceable to observable,
+        versioned inputs.
+  \item \textbf{Composability:} Governance layers cleanly on top of \DQC{} and
+        \FPC{} without redefining them.
+  \item \textbf{Accountability:} decision authority is centralized and explicit,
+        preventing implicit overrides or policy drift.
+  \item \textbf{Operational safety:} downstream systems are shielded from hidden
+        assumptions about units, tolerances, or admissibility.
+\end{itemize}
+
+In short, the Governance Decision Contract exists to ensure that readiness
+policies are not merely cost-aware or service-aware, but
+\emph{structurally admissible and enforceable by design}.

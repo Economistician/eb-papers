@@ -1,0 +1,141 @@
+% ==========================================================
+% 070_governance_implications.tex
+% Demand Quantization Compatibility (DQC)
+% ==========================================================
+
+\section{Governance and Policy Implications}
+\label{sec:dqc_governance_implications}
+
+Demand Quantization Compatibility (\DQC{}) is not a descriptive statistic or a data
+quality check; it is a \emph{governance primitive}. Its purpose is to determine which
+downstream evaluation, control, and adjustment actions are structurally admissible.
+
+This section outlines the concrete governance implications of \DQC{} classification
+and how it constrains permissible system behavior.
+
+\subsection{Authoritative Control of Representation}
+
+\DQC{} determines the authoritative representation in which demand, forecasts, and
+tolerances must be expressed.
+
+Once \DQC{} classifies a demand series as quantized or piecewise-packed:
+\begin{itemize}[leftmargin=1.5em]
+  \item Snapping becomes mandatory,
+  \item Raw-unit interpretation is no longer admissible,
+  \item Downstream diagnostics and policy logic must operate in a demand-congruent space.
+\end{itemize}
+
+This prevents representational drift in which different system components operate
+under incompatible assumptions about the attainable support of demand.
+
+\subsection{Snapping and Unit Interpretation}
+
+Snapping is a governance-controlled transformation that enforces structural coherence
+between forecasts, diagnostics, and realized demand. It is not an optional preprocessing
+step.
+
+\paragraph{What Snapping Is.}
+Snapping is the deterministic projection of forecasts (and, where relevant, tolerance
+bands) onto a demand-congruent support. Given a detected grid unit $\Delta^{\ast}$,
+a raw forecast $\yhatit$ is transformed into a snapped forecast $\tilde{y}_{it}$ such that:
+\[
+\tilde{y}_{it} \in \{ k \Delta^{\ast} : k \in \mathbb{Z}_{\ge 0} \},
+\]
+with $\tilde{y}_{it}$ chosen by a fixed rounding rule (e.g., nearest admissible value).
+Snapping alters \emph{representation}, not information: it enforces structural alignment.
+
+\paragraph{When Snapping Is Required.}
+Snapping requirements are determined exclusively by \DQC{} classification:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Continuous-like}: snapping is not required.
+  \item \textbf{Quantized}: snapping is required to the detected grid unit $\Delta^{\ast}$.
+  \item \textbf{Piecewise-packed}: snapping is required to the admissible value set implied
+        by the detected packing structure.
+\end{itemize}
+No downstream component may override this requirement. Applying readiness or tolerance
+logic in raw units when snapping is required constitutes a governance violation.
+
+\paragraph{Tolerance Semantics.}
+The authoritative interpretation and enforcement of tolerance semantics under DQC
+classification are defined in Section~\ref{sec:dqc_governance_implications:ToleranceCompliance}.
+
+\paragraph{Diagnostics Under Snapping.}
+When snapping is required, diagnostics must be recomputed in snapped space:
+\begin{itemize}[leftmargin=1.5em]
+  \item Raw-unit \FPC{} signals may be logged for exploratory purposes only.
+  \item Snapped-unit \FPC{} signals are authoritative for governance decisions.
+\end{itemize}
+Mixing raw and snapped diagnostics within a single governance decision is explicitly prohibited.
+
+\subsection{Interaction with Forecast Primitive Compatibility (FPC)}
+
+\DQC{} governs \emph{where} Forecast Primitive Compatibility (\FPC{}) is evaluated:
+\begin{itemize}[leftmargin=1.5em]
+  \item For continuous-like demand, \FPC{} is evaluated in raw units.
+  \item For quantized or piecewise-packed demand, \FPC{} must be evaluated in snapped space.
+\end{itemize}
+
+In the latter case, raw-space \FPC{} signals are explicitly subordinated. They may be inspected
+for exploratory analysis but cannot govern readiness policy. This separation ensures that readiness
+allowability is assessed against the true structural degrees of freedom of the demand process.
+
+\subsection{Readiness Adjustment Policy}
+
+Readiness adjustments such as scale-based policies (\eg \RAL{}) are sensitive to the unit system in
+which they are applied. \DQC{} constrains readiness policy as follows:
+\begin{itemize}[leftmargin=1.5em]
+  \item Adjustments applied in raw units are forbidden when demand is quantized or piecewise-packed.
+  \item Adjustments applied in snapped units are permitted only if snapped-space \FPC{} indicates
+        compatibility.
+\end{itemize}
+
+Thus, \DQC{} is a necessary (but not sufficient) condition for readiness intervention. It filters out
+structurally invalid adjustment pathways before performance metrics or cost tradeoffs are considered.
+
+\subsection{Tolerance Semantics and Compliance}
+\label{sec:dqc_governance_implications:ToleranceCompliance}
+
+Tolerance-based service metrics are often treated as tunable parameters. \DQC{} converts tolerance
+interpretation into a compliance obligation.
+
+When snapping is required:
+\begin{itemize}[leftmargin=1.5em]
+  \item $\tau$ must correspond to integer multiples of the detected grid unit (or admissible values),
+  \item Tolerances smaller than the demand increment are invalid by construction,
+  \item Reported hit rates must reflect realizable demand outcomes.
+\end{itemize}
+
+This prevents governance loopholes in which apparent service quality is achieved through structurally
+impossible tolerance settings.
+
+\subsection{Auditability and Policy Traceability}
+
+Because \DQC{} decisions are deterministic and threshold-driven, they provide a stable audit trail for
+governance outcomes. Each governance decision can be traced to:
+\begin{itemize}[leftmargin=1.5em]
+  \item Observed demand structure,
+  \item Explicit quantization thresholds,
+  \item A declared \DQC{} class.
+\end{itemize}
+
+This enables post hoc review of readiness decisions without reliance on opaque model internals or
+subjective judgment.
+
+\subsection{Failure Modes Without DQC}
+
+Absent \DQC{}, systems commonly exhibit the following pathologies:
+\begin{itemize}[leftmargin=1.5em]
+  \item Penalizing forecasts for unavoidable discretization effects,
+  \item Declaring readiness gains that are artifacts of unit mismatch,
+  \item Applying readiness adjustments that cannot be operationally realized.
+\end{itemize}
+
+\DQC{} eliminates these failure modes by enforcing structural coherence as a first-class governance
+constraint.
+
+\subsection{Summary}
+
+\DQC{} converts an often-implicit assumption---that demand behaves continuously---into an explicit,
+testable, and enforceable contract. In doing so, it anchors the governance layer of Electric Barometer,
+ensuring that all downstream decisions operate on structurally valid representations before any notion
+of accuracy, cost, or optimization is considered.

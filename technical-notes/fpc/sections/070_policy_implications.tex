@@ -1,0 +1,81 @@
+% ==========================================================
+% 070_governance_implications.tex
+% Forecast Primitive Compatibility (FPC)
+% ==========================================================
+
+\section{Governance and Policy Implications}
+
+The primary role of \FPC{} is to constrain and guide readiness policy. By diagnosing whether a
+forecast primitive is structurally compatible with observed demand behavior, \FPC{} establishes
+clear boundaries on which interventions are defensible and which are not. Building on the governance
+structure established in the previous section, this section describes how \FPC{} classifications are
+resolved into policy constraints and decision guidance, and outlines how \FPC{} should be used as a
+policy gate within the \FRF{}.
+
+\subsection{Policy Gating}
+
+Once a compatibility classification has been established, it should act as an explicit gate on the
+application of readiness interventions. In particular:
+\begin{itemize}[leftmargin=1.5em]
+  \item \Compatible{} entities admit the full range of readiness policies, including \RAL{},
+        asymmetric cost evaluation via \CWSL{}, and cost-ratio calibration.
+  \item \Marginal{} entities admit readiness intervention only with additional safeguards, such as
+        capped adjustment ranges, enhanced reporting, or periodic re-evaluation.
+  \item \Incompatible{} entities should not be subject to scale-based readiness adjustment or
+        cost-ratio tuning, as such interventions do not address the underlying source of readiness
+        failure.
+\end{itemize}
+
+This gating behavior prevents the misapplication of otherwise valid policies in regimes where they
+are structurally ineffective.
+
+\subsection{Implications for Cost-Asymmetry Governance}
+
+Cost-weighted evaluation assumes that trade-offs between underbuild and overbuild can be meaningfully
+managed through adjustment of asymmetry parameters. When a demand stream is \Compatible{}, this
+assumption holds: increasing $\R{}$ amplifies readiness risk in a controlled manner, and calibration
+procedures yield interpretable results.
+
+For \Incompatible{} entities, however, cost-weighted metrics can become misleading. Rapid escalation
+of \CWSL{} with increasing $\R{}$ reflects structural underbuild that cannot be mitigated by scale
+adjustment. In such cases, cost-ratio calibration may converge to extreme or counterintuitive values,
+and reporting cost-weighted loss without qualification obscures the true source of risk. \FPC{}
+therefore provides a principled basis for disabling or annotating asymmetric cost analysis when it is
+not governance-valid.
+
+\subsection{Model Comparison and Selection}
+
+Forecast comparison exercises implicitly assume that models share a compatible primitive. When this
+assumption is violated, relative performance rankings are unstable and often driven by artifacts of
+intermittency rather than substantive differences in readiness. \FPC{} identifies when such
+comparisons are inappropriate.
+
+For \Incompatible{} entities, model selection within a point-forecasting paradigm is unlikely to be
+informative. Governance processes should instead redirect effort toward alternative representations
+or decision rules. For \Marginal{} entities, comparisons may be reported but should be interpreted
+with caution and supplemented by structural diagnostics.
+
+\subsection{Reporting and Auditability}
+
+Because \FPC{} is derived from observable diagnostics, its classifications can be audited and
+reproduced. Governance reporting should include:
+\begin{itemize}[leftmargin=1.5em]
+  \item The underlying diagnostic signals informing classification.
+  \item The compatibility state assigned to each entity.
+  \item Any policy constraints imposed as a result of that classification.
+\end{itemize}
+
+Making these elements explicit supports transparent decision-making and prevents silent escalation
+of readiness interventions in incompatible regimes.
+
+\subsection{Role of Domain Knowledge}
+
+While \FPC{} does not depend on domain labeling, domain knowledge remains valuable for interpretation
+and validation. Observed alignment between \FPC{} classifications and known demand properties (e.g.,
+piecewise or bundle-driven items) increases confidence in governance decisions. However, policy
+enforcement should be based on observable behavior rather than manual flags, ensuring that
+compatibility judgments remain empirical and adaptive.
+
+By formalizing how compatibility constrains readiness policy, \FPC{} reinforces the governance
+orientation of the \FRF{} and protects operational decision systems from unproductive or misleading
+intervention.

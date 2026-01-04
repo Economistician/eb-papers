@@ -1,0 +1,69 @@
+% ==========================================================
+% 030_forecast_primitives.tex
+% Forecast Primitive Compatibility (FPC)
+% ==========================================================
+
+\section{Forecast Primitives and Structural Assumptions}
+
+A \emph{forecast primitive} refers to the fundamental representational form through which future
+demand is expressed and acted upon. Common primitives in operational settings include point
+forecasts, quantile forecasts, interval forecasts, discrete count distributions, and state- or
+event-based signals. Each primitive encodes implicit structural assumptions about the demand
+process, regardless of the model or algorithm used to produce it.
+
+This technical note focuses on the compatibility of \emph{point forecasting primitives}, optionally
+augmented by global scale or readiness adjustments, with observed demand behavior. Point forecasts
+are widely used due to their simplicity, interpretability, and ease of integration into downstream
+decision systems. However, their appropriateness depends critically on properties of the underlying
+process.
+
+\subsection{Implicit Assumptions of Point Forecasting}
+
+Point forecasts implicitly assume that demand is:
+\begin{itemize}[leftmargin=1.5em]
+  \item \emph{Continuous or approximately continuous}, such that deviations can be meaningfully
+        measured in magnitude.
+  \item \emph{Smooth or weakly intermittent}, with changes occurring gradually rather than as rare,
+        discrete jumps.
+  \item \emph{Scale-adjustable}, meaning that systematic bias can be mitigated through multiplicative
+        or additive adjustment.
+\end{itemize}
+
+Under these assumptions, global readiness interventions such as \RAL{} can improve coverage by
+inflating forecasts in a controlled manner, trading surplus for reduced shortfall. Asymmetric cost
+evaluation via \CWSL{} and tolerance-based interpretation via \HRtau{} remain meaningful, and
+incremental tuning produces predictable changes in readiness diagnostics.
+
+\subsection{Demand Processes that Violate Primitive Assumptions}
+
+Many operational demand streams violate one or more of the above assumptions. In particular,
+piecewise or count-driven commodities often exhibit:
+\begin{itemize}[leftmargin=1.5em]
+  \item \emph{Zero inflation}, with long stretches of no demand.
+  \item \emph{Bursty arrivals}, where demand appears in discrete quanta rather than continuously.
+  \item \emph{Discrete support}, reflecting bundle sizes, portion counts, or fixed serving units.
+\end{itemize}
+
+When such behavior is present, point forecasts tend to miss by construction: they underpredict during
+bursts and overpredict during idle periods. Global scale adjustments increase average forecast
+magnitude but do not align forecasts with event timing or discrete jumps. As a result, coverage
+metrics such as \NSL{} may improve slowly or not at all, tolerance-based metrics such as \HRtau{}
+remain flat across wide bands, and cost-weighted loss \CWSL{} escalates rapidly as asymmetry is
+increased.
+
+\subsection{Compatibility as a Structural Property}
+
+Forecast primitive compatibility is therefore a \emph{structural property} of the interaction
+between a demand process and a representational choice, not a property of a particular model
+instance. Two models producing point forecasts for the same demand stream share the same primitive
+and inherit its limitations, regardless of differences in training data, features, or algorithms.
+
+The role of \FPC{} is to make this structural dependency explicit. Rather than attributing persistent
+readiness failure to insufficient tuning or poor model selection, \FPC{} asks whether the forecast
+primitive itself admits meaningful improvement under admissible readiness interventions. When it
+does not, continued adjustment within the same primitive is unlikely to yield operational benefit,
+and alternative representations should be considered.
+
+By articulating the assumptions encoded by forecast primitives and the conditions under which they
+fail, \FPC{} provides the conceptual foundation for the diagnostic and governance procedures
+introduced in subsequent sections.

@@ -1,0 +1,79 @@
+% main.tex (revised)
+% ==========================================================
+% main.tex
+% Demand Quantization Compatibility (DQC)
+% Electric Barometer Series
+% ==========================================================
+
+\documentclass[11pt]{article}
+
+% ==========================================================
+% GLOBAL PACKAGES + CONFIG (EB)
+% ==========================================================
+\input{../../macros/packages.tex}
+
+% ==========================================================
+% CUSTOM MACROS (shared notation)
+% ==========================================================
+\input{../../macros/commands.tex}
+
+% ==========================================================
+% STYLE LAYER (EB)
+% ==========================================================
+\input{../../macros/style.tex}
+
+% ==========================================================
+% PDF METADATA
+% ==========================================================
+\EBPdfMeta
+  {Demand Quantization Compatibility (DQC): Establishing Admissible Units for Operational Evaluation and Control}
+  {Kyle Corrie}
+  {Technical Note --- Electric Barometer Series}
+  {Electric Barometer, Forecast Readiness Framework, DQC, demand quantization, admissible units, governance}
+
+% ==========================================================
+% TITLE BLOCK
+% ==========================================================
+\title{
+\textbf{Demand Quantization Compatibility (DQC):}\\[4pt]
+{\large Establishing Admissible Units for Operational Evaluation and Control}
+}
+
+\author{
+  Kyle Corrie\\[4pt]
+  \small Forecast Readiness Framework (FRF)\\
+  \small Electric Barometer Series
+}
+
+\date{January 2026\\[4pt]
+\small Technical Note --- Electric Barometer Series\\
+Version 1.0}
+
+% ==========================================================
+\begin{document}
+% ==========================================================
+
+\maketitle
+
+% ==========================================================
+% FRONTMATTER
+% ==========================================================
+\input{000_frontmatter}
+
+% ==========================================================
+% ORDERED SECTION INPUTS (Technical Note Schema)
+% ==========================================================
+\input{010_overview}
+\input{020_scope_and_nongoals}
+\input{030_quantization_model}
+\input{040_observable_signals}
+\input{050_classification}
+\input{060_position_in_governance_stack}
+\input{070_governance_implications}
+\input{080_interpretive_boundaries_and_misuse}
+\input{090_limitations}
+\input{100_conclusion}
+
+% ==========================================================
+\end{document}
+% ==========================================================

@@ -1,0 +1,62 @@
+% ==========================================================
+% 020_scope_and_nongoals.tex
+% Forecast Primitive Compatibility (FPC)
+% ==========================================================
+
+\section{Scope and Non-Goals}
+
+This technical note is concerned with diagnosing \emph{structural compatibility} between a demand
+process and a forecasting primitive within the context of readiness-oriented evaluation. The scope
+of \FPC{} is intentionally limited. It is designed to answer a narrow but operationally critical
+question: whether a given forecast primitive admits meaningful and defensible readiness improvement
+under admissible interventions such as asymmetric evaluation, tolerance-based interpretation, or
+global readiness adjustment.
+
+\subsection{Scope}
+
+Within this scope, \FPC{} is defined as a \emph{derived classification} that consumes observable
+outputs from the \FRF{} diagnostic stack, including \NSL{}, \UD{}, \HRtau{}, and \CWSL{}. These
+diagnostics are evaluated under baseline forecasts and under controlled readiness interventions
+(e.g., \RAL{} sweeps) to assess responsiveness. All evaluation assumes a fixed and admissible unit
+system, as determined upstream by Demand Quantization Compatibility (\DQC{}); selection or
+validation of the unit system itself is explicitly out of scope for \FPC{}.
+
+The classification produced by \FPC{} is intended to be:
+\begin{itemize}[leftmargin=1.5em]
+  \item Deterministic and auditable, relying only on observable quantities.
+  \item Model-agnostic, imposing no assumptions on how forecasts are generated.
+  \item Interpretable at an operational level, supporting governance decisions rather than
+        optimization.
+\end{itemize}
+
+\FPC{} applies at the level of an evaluated entity (e.g., item, store--item pair, workload stream)
+over a specified evaluation horizon. It is compatible with both single-entity and panel-based
+evaluation and does not require exogenous metadata or domain labeling, though such information may
+be used for interpretation or validation. Compatibility assessments are therefore conditional on
+the evaluation horizon, resolution, and admissible unit system in which diagnostics are interpreted.
+
+\subsection{Non-Goals}
+
+Several objectives are explicitly out of scope for \FPC{}.
+
+First, \FPC{} is not a performance metric. It does not measure forecast accuracy, readiness, or cost
+exposure, and it should not be compared numerically to metrics such as \CWSL{} or \NSL{}. Any attempt
+to optimize \FPC{} as a scalar objective is a category error.
+
+Second, \FPC{} does not prescribe alternative forecasting models or primitives. While incompatibility
+may motivate the use of discrete, hurdle, quantile, or state-based approaches, the selection,
+specification, and training of such models are beyond the scope of this note. \FPC{} identifies when
+a change in primitive is warranted; it does not dictate how that change should be implemented.
+
+Third, \FPC{} does not claim that incompatibility is permanent. Structural properties of demand may
+evolve over time due to changes in menu composition, pricing, promotions, or operational policy.
+Consequently, \FPC{} classifications are conditional on the evaluation window and should be revisited
+as underlying behavior changes.
+
+Finally, \FPC{} is not intended to replace domain judgment or experimentation. Rather, it provides a
+formal, empirical signal that constrains where further tuning or readiness intervention is likely to
+be productive. Human expertise remains essential for interpreting classifications and determining
+appropriate next steps.
+
+By clearly delineating these boundaries, \FPC{} is positioned as a governance construct that protects
+readiness evaluation from overreach while complementing the existing \FRF{} metric suite.

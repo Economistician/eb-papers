@@ -1,0 +1,88 @@
+% ==========================================================
+% 050_classification.tex
+% Forecast Primitive Compatibility (FPC)
+% ==========================================================
+
+\section{Compatibility Classification}
+
+The observable signals described in the previous section motivate a qualitative classification of
+forecast primitive compatibility. The purpose of this classification is not to score or rank demand
+streams, but to determine whether a given forecast primitive admits meaningful readiness improvement
+under admissible interventions. \FPC{} therefore produces a small set of interpretable compatibility
+states rather than a continuous metric.
+
+\subsection{Compatibility States}
+
+We define three compatibility classes:
+\begin{itemize}[leftmargin=1.5em]
+  \item \Compatible{}
+  \item \Marginal{}
+  \item \Incompatible{}
+\end{itemize}
+
+Each class corresponds to a characteristic pattern of response across \FRF{} diagnostics. The
+classification is intended to be deterministic and auditable, based on observable behavior rather
+than fitted parameters or statistical inference.
+
+\subsection{\Compatible{}}
+
+A demand stream is classified as \Compatible{} with a point forecasting primitive when readiness
+interventions produce predictable and defensible improvements. Typical characteristics include:
+\begin{itemize}[leftmargin=1.5em]
+  \item Baseline \NSL{} that is materially greater than zero.
+  \item Positive and meaningful $\dNSL{}$ under moderate \RAL{}.
+  \item A smooth and increasing \HRtau{} response as $\tauval$ grows.
+  \item Moderate \UD{}, indicating that shortfalls are not dominated by extreme events.
+  \item Gradual escalation of \CWSL{} as cost asymmetry $\R{}$ increases.
+\end{itemize}
+
+In this regime, coverage failures are primarily driven by scale or bias rather than timing or
+discreteness. Global readiness adjustment and cost-aware governance are therefore valid tools for
+improving operational readiness.
+
+\subsection{\Marginal{}}
+
+A demand stream is classified as \Marginal{} when some readiness improvement is achievable, but
+responses are weak, unstable, or accompanied by significant trade-offs. Common patterns include:
+\begin{itemize}[leftmargin=1.5em]
+  \item Low to moderate baseline \NSL{}.
+  \item Small or inconsistent $\dNSL{}$ under \RAL{}.
+  \item Modest increases in \HRtau{} only at large tolerance levels.
+  \item Elevated \UD{}, suggesting the presence of intermittent deep misses.
+  \item Noticeable curvature in \CWSL{} with increasing $\R{}$.
+\end{itemize}
+
+Marginal compatibility indicates mixed failure modes. Scale-based adjustment may yield incremental
+benefits, but such interventions should be applied cautiously and accompanied by explicit governance
+controls. Alternative primitives or hybrid approaches may be warranted, though incompatibility is
+not yet definitive.
+
+\subsection{\Incompatible{}}
+
+A demand stream is classified as \Incompatible{} when readiness diagnostics indicate structural
+misalignment with the forecast primitive. This regime is characterized by:
+\begin{itemize}[leftmargin=1.5em]
+  \item Persistently low \NSL{}, often near zero.
+  \item Negligible $\dNSL{}$ across a wide range of \RAL{} adjustments.
+  \item Flat \HRtau{} response even for large tolerance bands.
+  \item High \UD{} driven by infrequent but severe shortfalls.
+  \item Rapid escalation of \CWSL{} with increasing cost asymmetry.
+\end{itemize}
+
+In this regime, further tuning within the same primitive is unlikely to yield meaningful readiness
+improvement. Scale adjustment primarily inflates surplus without addressing the structural source of
+misses. For such entities, readiness policies predicated on point forecasting are not defensible, and
+continued optimization should be replaced by a change in representational approach.
+
+\subsection{Interpretation and Use}
+
+The \FPC{} classification should be interpreted as a governance signal rather than a performance
+judgment. A designation of \Incompatible{} does not imply that a demand stream is unimportant or
+unmanageable; rather, it indicates that the chosen forecast primitive is ill-suited to its behavior.
+Conversely, a \Compatible{} classification does not guarantee high readiness, only that readiness
+interventions are structurally valid.
+
+By collapsing complex diagnostic behavior into a small number of interpretable states, \FPC{}
+provides a practical mechanism for constraining readiness policy, preventing unproductive tuning,
+and directing attention toward appropriate modeling or decision alternatives. These classifications
+acquire operational meaning only when situated within the broader governance stack, described next.

@@ -1,0 +1,122 @@
+% ==========================================================
+% 100_failure_modes_without_governance.tex
+% Governance — Electric Barometer
+% ==========================================================
+
+\section{Failure Modes Without Governance}
+\label{sec:governance_failure_modes}
+
+Absent an explicit governance layer, operational forecasting systems frequently
+exhibit failure modes that are subtle, persistent, and difficult to diagnose.
+These failures rarely arise from incorrect forecasts or poor optimization, but
+from structural ambiguity about how diagnostics, units, and policies should be
+interpreted.
+
+This section documents the most common failure modes observed when governance is
+implicit, informal, or bypassed.
+
+% ----------------------------------------------------------
+% FIGURE: GOVERNANCE FAILURE MODES CONTRAST
+% ----------------------------------------------------------
+\input{figures/governance_failure_modes_contrast}
+
+\subsection{Unit Ambiguity and Silent Misinterpretation}
+
+Without governance, systems often lack a single authoritative unit system.
+Tolerance metrics, readiness adjustments, and diagnostic signals may be computed
+in incompatible spaces without detection.
+
+Common manifestations include:
+\begin{itemize}[leftmargin=1.5em]
+  \item Applying raw-unit tolerances to quantized demand,
+  \item Evaluating snapped forecasts against unsnapped diagnostics,
+  \item Mixing raw and grid-aligned interpretations within a single decision.
+\end{itemize}
+
+These inconsistencies can produce internally coherent metrics that are
+structurally meaningless, leading to false confidence in readiness assessments.
+
+\subsection{Illusory Performance Improvements}
+
+In the absence of governance constraints, apparent gains in service or accuracy
+may reflect representational artifacts rather than real operational improvement.
+
+Examples include:
+\begin{itemize}[leftmargin=1.5em]
+  \item Increased hit rates driven solely by tolerance choices smaller than the
+        realizable demand increment,
+  \item Reduced reported error achieved by snapping without explicit declaration,
+  \item Readiness uplift that inflates forecasts without expanding attainable
+        coverage.
+\end{itemize}
+
+Without governance, these effects are easily misinterpreted as successful
+optimization rather than structural compliance.
+
+\subsection{Improper Readiness Intervention}
+
+Scale-based readiness adjustments are particularly sensitive to structural
+misalignment. When applied without governance:
+\begin{itemize}[leftmargin=1.5em]
+  \item Adjustments may be applied in unit systems where they have no effect,
+  \item Policies may appear unstable or ineffective despite correct logic,
+  \item Operational interventions may be authorized that cannot be realized.
+\end{itemize}
+
+Such failures are often attributed incorrectly to forecasting error, parameter
+choice, or model inadequacy, rather than to missing structural constraints.
+
+\subsection{Metric Entanglement and Policy Drift}
+
+Without a governance contract, diagnostic metrics are frequently repurposed as
+decision rules. Over time, this leads to:
+\begin{itemize}[leftmargin=1.5em]
+  \item Threshold tuning to achieve desired outcomes,
+  \item Implicit policy encoded in metric interpretation,
+  \item Gradual drift in how readiness is defined and enforced.
+\end{itemize}
+
+Because these changes are rarely versioned or documented, policy evolution
+becomes opaque and unreviewable.
+
+\subsection{Non-Reproducible Decisions}
+
+In systems without deterministic governance logic, identical conditions may
+produce different readiness decisions depending on:
+\begin{itemize}[leftmargin=1.5em]
+  \item which diagnostics are inspected,
+  \item how unit conventions are interpreted,
+  \item or which signals are emphasized by individual operators.
+\end{itemize}
+
+This non-reproducibility undermines auditability, accountability, and trust in
+the decision process, particularly in automated or high-stakes environments.
+
+\subsection{Misattribution of Responsibility}
+
+When governance is implicit, responsibility for readiness outcomes becomes
+diffuse. Model developers, analysts, and operators may each assume that another
+layer is enforcing structural validity.
+
+This ambiguity leads to:
+\begin{itemize}[leftmargin=1.5em]
+  \item delayed detection of systemic issues,
+  \item defensive interpretation of metrics,
+  \item and difficulty assigning ownership for corrective action.
+\end{itemize}
+
+Explicit governance resolves this by declaring which decisions are authorized,
+and on what basis.
+
+\subsection{Summary}
+
+These failure modes share a common root: the absence of an explicit, authoritative
+decision layer that constrains interpretation before optimization.
+
+The governance framework of Electric Barometer exists precisely to eliminate
+these pathologies. By enforcing unit consistency, diagnostic exclusivity, and
+deterministic policy mapping, governance transforms readiness evaluation from an
+implicit, assumption-driven practice into a structurally grounded decision
+system. Future extensions may expand the diagnostic vocabulary, but the
+governance contract itself is intended to remain narrow, deterministic, and
+closed.

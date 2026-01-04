@@ -1,0 +1,65 @@
+% ==========================================================
+% 010_overview.tex
+% Overview
+% ==========================================================
+
+\section{Overview}
+\label{sec:governance_overview}
+
+Modern operational forecasting systems increasingly embed automated control
+levers, tolerance-based evaluation, and asymmetric cost tradeoffs directly into
+decision workflows. In such settings, analytic diagnostics alone are
+insufficient. What ultimately matters is not whether a forecast appears
+reasonable, but whether a downstream action is \emph{structurally admissible},
+\emph{policy-compliant}, and \emph{accountable}.
+
+Within the Electric Barometer framework, this responsibility is assigned to
+\emph{Governance}. Governance is the final decision layer that binds structural
+diagnostics into an authoritative operational outcome. It does not generate new
+signals, optimize objectives, or reinterpret performance. Instead, it resolves
+diagnostic inputs into a single, enforceable policy decision.
+
+This technical note formalizes governance as a deterministic \emph{decision
+contract}. Given a fixed set of diagnostic inputs and thresholds, governance
+produces exactly one authoritative artifact that specifies:
+\begin{itemize}[leftmargin=1.5em]
+  \item the admissible unit system for interpretation,
+  \item the authoritative tolerance semantics,
+  \item the allowability of readiness adjustment,
+  \item and an explicit governance status.
+\end{itemize}
+
+Governance consumes—but does not redefine—two upstream diagnostics:
+\begin{itemize}[leftmargin=1.5em]
+  \item \textbf{Demand Quantization Compatibility (DQC)}, which determines whether
+        realized demand admits continuous interpretation or requires discrete,
+        grid-aware semantics; and
+  \item \textbf{Forecast Primitive Compatibility (FPC)}, which determines whether
+        a forecast primitive can respond coherently to readiness adjustment under
+        admissible perturbations.
+\end{itemize}
+
+Crucially, governance does not average, negotiate, or arbitrate between these
+diagnostics. It enforces strict exclusivity: one unit system governs, one
+diagnostic interpretation is authoritative, and one readiness policy applies.
+When required inputs are missing or incompatible, governance fails explicitly
+rather than degrading silently.
+
+The purpose of this design is closure. Governance exists to \emph{terminate
+interpretation, not extend it}: once a \texttt{GovernanceDecision} is issued, no
+further diagnostic reasoning is admissible.
+
+By enforcing this closure, governance prevents common operational failure modes
+such as:
+\begin{itemize}[leftmargin=1.5em]
+  \item mixing raw and snapped evaluation semantics,
+  \item interpreting tolerances smaller than realizable demand increments,
+  \item applying readiness adjustments that cannot be operationally executed.
+\end{itemize}
+
+This note describes the governance contract, the structure of the decision
+artifact it emits, the deterministic logic by which decisions are made, and the
+interpretive boundaries that preserve accountability. Together with the DQC and
+FPC technical notes, it completes the Electric Barometer framework by ensuring
+that readiness decisions are not only cost-aware or service-aware, but
+\emph{structurally valid, auditable, and enforceable by design}.

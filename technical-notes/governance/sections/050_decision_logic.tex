@@ -1,0 +1,127 @@
+% ==========================================================
+% 050_decision_logic.tex
+% Decision Logic
+% ==========================================================
+
+\section{Decision Logic}
+\label{sec:governance_decision_logic}
+
+The governance decision logic is a deterministic composition of structural
+diagnostics. It maps admissible diagnostic inputs to a single, authoritative
+\texttt{GovernanceDecision} artifact without optimization, learning, or
+stochastic elements.
+
+This section describes the ordered decision logic that binds Demand Quantization
+Compatibility (\DQC{}) and Forecast Primitive Compatibility (\FPC{}) into an
+explicit governance outcome. The purpose of this logic is not to rank options,
+but to eliminate inadmissible interpretations and close the policy space.
+
+\subsection{Stage 1: Demand Structure Resolution}
+
+Governance begins by evaluating \DQC{} on the realized demand series
+$\{y_{it}\}_{t \in \Tset}$ for a single entity.
+
+This stage assigns exactly one demand structure class:
+\begin{itemize}[leftmargin=*]
+  \item \ContinuousLike,
+  \item \Quantized, or
+  \item \PiecewisePacked.
+\end{itemize}
+
+Based on this classification, Governance declares the authoritative
+\emph{representation and unit system} under which all downstream evaluation must
+occur.
+
+If demand is classified as \Quantized{} or \PiecewisePacked{}, Governance:
+\begin{itemize}[leftmargin=*]
+  \item declares snapping to the detected grid or admissible value set mandatory,
+  \item requires tolerance interpretation in grid-consistent units,
+  \item prohibits raw-unit evaluation for policy decisions.
+\end{itemize}
+
+If demand is classified as \ContinuousLike{}, Governance:
+\begin{itemize}[leftmargin=*]
+  \item declares raw-unit evaluation admissible,
+  \item waives snapping requirements.
+\end{itemize}
+
+This stage establishes the authoritative representation for all subsequent
+diagnostics. No downstream logic may override or reinterpret this declaration.
+
+\subsection{Stage 2: Forecast Primitive Compatibility Evaluation}
+
+Given the authoritative unit system declared by \DQC{}, Governance evaluates
+\FPC{} in exactly one admissible representation.
+
+\begin{itemize}[leftmargin=*]
+  \item If snapping is \emph{not} required, \FPC{} is evaluated using raw-unit
+        signals.
+  \item If snapping \emph{is} required, \FPC{} is evaluated using snapped,
+        grid-aligned signals.
+\end{itemize}
+
+Raw and snapped \FPC{} signals are never mixed. Exactly one \FPC{} evaluation is
+authoritative in any governance decision.
+
+The resulting \FPC{} classification assigns the forecast primitive to one of the
+following compatibility states:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Compatible},
+  \item \textbf{Marginal},
+  \item \textbf{Incompatible}.
+\end{itemize}
+
+This classification determines whether readiness adjustment is structurally
+admissible under the declared demand representation.
+
+\subsection{Stage 3: Policy Determination and Encoding}
+
+Governance maps the authoritative \FPC{} classification into an explicit policy
+bundle and encodes the result in the \texttt{GovernanceDecision} artifact.
+
+This mapping is deterministic:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Compatible} $\rightarrow$ readiness adjustment allowed,
+  \item \textbf{Marginal} $\rightarrow$ readiness adjustment allowed only under
+        explicit constraints,
+  \item \textbf{Incompatible} $\rightarrow$ readiness adjustment disallowed.
+\end{itemize}
+
+In addition, Governance encodes:
+\begin{itemize}[leftmargin=*]
+  \item the snapping requirement and governing unit system,
+  \item the authoritative tolerance interpretation policy,
+  \item a consolidated governance status indicator,
+  \item an ordered list of reasoning statements linking diagnostics to policy.
+\end{itemize}
+
+The traffic-light status is a summary signal for downstream systems and does not
+introduce additional logic beyond the explicitly declared policies.
+
+\subsection{No Fallbacks, Mixing, or Heuristics}
+
+Governance intentionally provides:
+\begin{itemize}[leftmargin=*]
+  \item no averaging between raw and snapped diagnostics,
+  \item no heuristic reconciliation of incompatible signals,
+  \item no implicit fallbacks or soft overrides.
+\end{itemize}
+
+If required inputs are unavailable (e.g., snapped \FPC{} signals when snapping is
+mandatory), Governance fails explicitly rather than degrading silently.
+
+\subsection{Determinism and Accountability}
+
+For fixed diagnostic inputs and governance thresholds, the decision logic always
+produces the same \texttt{GovernanceDecision}. This determinism ensures:
+\begin{itemize}[leftmargin=*]
+  \item auditability of historical decisions,
+  \item reproducibility across environments,
+  \item accountability for policy outcomes,
+  \item stable integration with automated control systems.
+\end{itemize}
+
+Governance behavior may change only through explicit, versioned updates to
+diagnostic definitions or policy thresholds. There is no hidden state, learning,
+or adaptive behavior within the decision logic itself.

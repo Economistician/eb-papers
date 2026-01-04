@@ -1,0 +1,75 @@
+% main.tex (revised)
+
+\documentclass[11pt]{article}
+
+% ==========================================================
+% GLOBAL PACKAGES + CONFIG (EB)
+% ==========================================================
+\input{../../macros/packages.tex}
+
+% ==========================================================
+% CUSTOM MACROS (shared notation)
+% ==========================================================
+\input{../../macros/commands.tex}
+
+% ==========================================================
+% STYLE LAYER (EB)
+% ==========================================================
+\input{../../macros/style.tex}
+
+% ==========================================================
+% PDF METADATA
+% ==========================================================
+\EBPdfMeta
+  {Underbuild Depth (UD): A Conditional Severity Metric for Forecast Shortfalls}
+  {Kyle Corrie}
+  {Technical Note --- Electric Barometer Series}
+  {Electric Barometer, Forecast Readiness Framework, Underbuild Depth, forecast shortfall severity}
+
+% ==========================================================
+% TITLE BLOCK
+% ==========================================================
+\title{
+\textbf{Underbuild Depth (UD):}\\[4pt]
+{\large A Conditional Severity Metric for Forecast Shortfalls}
+}
+
+\author{
+  Kyle Corrie\\[4pt]
+  \small Forecast Readiness Framework (FRF)\\
+  \small Electric Barometer Series
+}
+
+\date{January 2026\\[4pt]
+\small Technical Note --- Electric Barometer Series\\
+Version 1.1}
+
+% ==========================================================
+\begin{document}
+
+\maketitle
+
+% ==========================================================
+% FRONTMATTER
+% ==========================================================
+\input{000_frontmatter}
+
+% ==========================================================
+% ORDERED SECTION INPUTS (Technical Note Schema)
+% ==========================================================
+\input{sections/010_overview}
+\input{sections/020_definition}
+\input{sections/030_operational_motivation}
+\input{sections/040_properties}
+\input{sections/050_illustrative_example}
+\input{sections/060_use_cases}
+\input{sections/070_limitations}
+\input{sections/080_conclusion}
+
+% ==========================================================
+% REFERENCES
+% ==========================================================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

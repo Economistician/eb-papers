@@ -1,0 +1,103 @@
+% ==========================================================
+% 060_position_in_governance_stack.tex
+% Demand Quantization Compatibility (DQC)
+% ==========================================================
+
+\section{Position in the Governance Stack}
+\label{sec:dqc_position_governance_stack}
+
+Demand Quantization Compatibility (\DQC{}), Forecast Primitive Compatibility
+(\FPC{}), and Governance form a deliberately ordered decision stack. Each
+construct addresses a distinct question, and none is a substitute for another.
+
+This section clarifies their respective roles and the logic of their
+composition within the Electric Barometer Governance framework.
+
+\subsection{Distinct Questions, Distinct Layers}
+
+The three constructs answer fundamentally different questions:
+\begin{itemize}
+  \item \textbf{\DQC{}:} \emph{What is the structural support of realized demand?}
+  \item \textbf{\FPC{}:} \emph{Is a given forecast primitive structurally compatible
+        with that support under admissible readiness adjustment?}
+  \item \textbf{Governance:} \emph{Given both, what actions are permitted?}
+\end{itemize}
+
+\DQC{} is concerned exclusively with demand realization. \FPC{} is concerned with
+the behavior of a forecasting primitive under controlled perturbation.
+Governance is the policy layer that binds the two into enforceable decisions.
+
+\subsection{Why \DQC{} Precedes \FPC{}}
+
+\FPC{} diagnostics rely on tolerance-based signals (e.g.\ $\HRtau$, $\Delta \NSL$,
+$\Delta \CWSL$) whose interpretation depends critically on the unit system in
+which they are evaluated.
+
+Without first resolving whether demand is continuous-like or quantized, \FPC{}
+signals are ambiguous:
+\begin{itemize}
+  \item Apparent insensitivity may reflect discrete demand support rather than
+        primitive failure.
+  \item Apparent gains may be artifacts of tolerance choices smaller than the
+        realizable demand increment.
+\end{itemize}
+
+\DQC{} therefore precedes \FPC{} and determines the admissible space in which
+\FPC{} is evaluated. This ordering is non-negotiable.
+
+\subsection{Raw vs.\ Snapped \FPC{} as Separate Diagnostics}
+
+When demand is quantized or piecewise-packed, two distinct \FPC{} views may
+exist:
+\begin{itemize}
+  \item \emph{Raw \FPC{}}: evaluated in continuous units,
+  \item \emph{Snapped \FPC{}}: evaluated after snapping forecasts to the detected
+        demand support.
+\end{itemize}
+
+These diagnostics are not interchangeable. Governance treats them
+asymmetrically:
+\begin{itemize}
+  \item Raw \FPC{} is informational only when snapping is required.
+  \item Snapped \FPC{} is authoritative for readiness allowability.
+\end{itemize}
+
+This separation prevents Governance from being influenced by diagnostics that
+violate structural constraints.
+
+\subsection{Governance as the Binding Contract}
+
+Governance consumes \DQC{} and \FPC{} outputs and emits a single decision
+artifact. This artifact encodes:
+\begin{itemize}
+  \item Whether snapping is required,
+  \item How tolerances $\tau$ must be interpreted,
+  \item Whether readiness adjustment is allowed, constrained, or forbidden.
+\end{itemize}
+
+Neither \DQC{} nor \FPC{} makes policy decisions independently. Governance is the
+only layer permitted to do so.
+
+\subsection{Avoiding Metric Entanglement}
+
+A core design principle of Electric Barometer is the avoidance of metric
+entanglement. \DQC{} does not depend on cost, service targets, or optimization
+objectives. \FPC{} does not depend on assumptions about demand discretization.
+Governance is the only layer in which these concerns are reconciled.
+
+This separation ensures that:
+\begin{itemize}
+  \item Structural validity is assessed before performance,
+  \item Policy is enforced before optimization,
+  \item Metrics remain interpretable within their intended domain.
+\end{itemize}
+
+\subsection{Conceptual Summary}
+
+\DQC{} defines the admissible representation of demand.
+\FPC{} determines whether a readiness-adjusted forecast primitive behaves
+coherently within that representation.
+Governance binds these diagnoses into enforceable operational policy.
+
+Together, they transform readiness evaluation from an accuracy-centric exercise
+into a structurally grounded decision system.

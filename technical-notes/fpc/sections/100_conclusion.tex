@@ -1,0 +1,30 @@
+% ==========================================================
+% 100_conclusion.tex
+% Forecast Primitive Compatibility (FPC)
+% ==========================================================
+
+\section{Conclusion}
+
+Forecast readiness evaluation presumes not only that forecast error can be measured, but that the
+chosen forecast primitive is structurally appropriate for the demand process it represents. When
+this presumption fails, continued tuning, asymmetric evaluation, and readiness adjustment can
+produce misleading signals and unproductive governance behavior. \FPC{} addresses this gap by making
+structural compatibility explicit.
+
+By consuming observable diagnostics from the \FRF{}—including \NSL{}, \UD{}, \HRtau{}, and \CWSL{}—
+\FPC{} provides a deterministic, auditable classification of whether a point forecasting primitive
+admits meaningful readiness improvement under admissible interventions. In doing so, it reframes
+persistent readiness failure not as a modeling deficiency, but as evidence of representational
+mismatch.
+
+The introduction of \FPC{} completes the readiness evaluation stack. It supplies a principled stop
+condition that constrains when readiness policies such as global adjustment and cost-ratio
+calibration are valid, and when they are not. For demand streams classified as \Incompatible{},
+\FPC{} redirects attention toward alternative representations or decision rules better aligned with
+structural demand behavior.
+
+More broadly, \FPC{} reinforces the governance orientation of the Electric Barometer. Rather than
+encouraging perpetual optimization within a fixed paradigm, it emphasizes diagnostic clarity,
+methodological humility, and operational defensibility. In environments where demand behavior
+violates the assumptions of point forecasting, the most responsible decision is not to tune harder,
+but to change the primitive.

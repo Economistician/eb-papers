@@ -1,0 +1,60 @@
+% ==========================================================
+% 010_overview.tex
+% Demand Quantization Compatibility (DQC)
+% ==========================================================
+
+\section{Overview}
+\label{sec:dqc_overview}
+
+Operational demand streams frequently violate the implicit continuity
+assumptions embedded in common forecasting and evaluation pipelines. In many
+settings, realized demand arrives in \emph{discrete}, \emph{quantized}, or
+\emph{piecewise-packed} units driven by inventory constraints, packaging
+conventions, batching, or executional indivisibilities (e.g., items sold in
+fixed counts, cases, or bundles). When such structure is ignored, downstream
+metrics may exhibit pathological behavior: tolerance bands become unstable,
+hit-rate measures oscillate with minor threshold changes, and scale-based
+readiness adjustments appear ineffective or misleading despite apparently
+reasonable forecasts.
+
+\medskip
+\begin{framed}
+\noindent\textbf{Core Framing Question.}\;
+\emph{At the chosen evaluation resolution, does realized demand behave
+continuously, or does it exhibit a quantized or packed structure that requires
+grid-aware interpretation?}
+\end{framed}
+\medskip
+
+\emph{Demand Quantization Compatibility (DQC)} is introduced as a diagnostic and
+governance construct that explicitly addresses this question.
+
+DQC is not a performance metric and is not an optimization objective. It does not
+evaluate forecast accuracy, cost efficiency, or service quality. Instead, it
+classifies the \emph{structural form} of the realized demand process using
+observable properties of the demand series itself. Its sole purpose is to
+determine whether downstream evaluation and control mechanisms—particularly
+tolerance-based service metrics and readiness adjustments—must be interpreted in
+raw units or in snapped, grid-aligned units.
+
+Within the Forecast Readiness Framework (FRF), DQC plays a foundational role.
+Where Forecast Primitive Compatibility (FPC) diagnoses whether a given forecast
+\emph{primitive} can respond meaningfully to readiness intervention, DQC
+diagnoses whether the \emph{measurement space} in which that intervention is
+evaluated is structurally valid. A forecast primitive may be compatible in
+principle yet appear ineffective if evaluated against a demand process whose
+support is discretized relative to the tolerance or adjustment scale.
+
+Accordingly, DQC provides an upstream governance signal that answers three
+practical questions:
+\begin{enumerate}[label=(\roman*)]
+  \item Is demand sufficiently continuous-like to justify raw-unit evaluation?
+  \item If not, what grid (granularity) best characterizes realized demand?
+  \item Should tolerances and readiness adjustments be interpreted in grid units
+        rather than raw units?
+\end{enumerate}
+
+The remainder of this technical note formalizes these ideas. We define observable
+quantization signals, propose a deterministic compatibility taxonomy, and
+describe how DQC integrates with FRF diagnostics and governance without
+introducing new optimization targets or subjective tuning.

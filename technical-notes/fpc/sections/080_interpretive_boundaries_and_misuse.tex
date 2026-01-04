@@ -1,0 +1,73 @@
+% ==========================================================
+% 080_interpretive_boundaries_and_misuse.tex
+% Forecast Primitive Compatibility (FPC)
+% ==========================================================
+
+\section{Interpretive Boundaries and Common Misuse}
+
+Having established the role of \FPC{} in governance and policy gating, we now clarify the
+interpretive boundaries and common forms of misuse that \FPC{} is designed to prevent. Because its
+output is categorical and governance-oriented, \FPC{} is susceptible to misinterpretation if
+treated as a performance score, optimization target, or proxy for forecast quality. This section
+therefore establishes explicit interpretive boundaries and documents common forms of misuse that
+\FPC{} is designed to prevent.
+
+\subsection{Compatibility Is Not Performance}
+
+An \textit{FPC-Compatible} classification does not imply that a forecast is accurate, efficient, or
+operationally satisfactory. It indicates only that the forecast primitive admits meaningful
+responsiveness to admissible readiness adjustment under the observed demand behavior.
+
+Conversely, an \textit{FPC-Incompatible} classification does not imply poor modeling, low data
+quality, or operational irrelevance. It signals that the chosen forecast primitive is structurally
+misaligned with the demand process such that scale-based readiness intervention is ineffective or
+ill-posed. Compatibility is therefore orthogonal to forecast quality and must not be interpreted as
+a performance judgment.
+
+\subsection{Compatibility Is Not an Optimization Target}
+
+\FPC{} classifications are not quantities to be maximized, minimized, or tuned. Attempting to
+optimize diagnostics or adjustment policies in order to ``improve'' compatibility constitutes a
+category error.
+
+The purpose of \FPC{} is to determine whether further optimization within a given forecast
+primitive is structurally defensible at all. When incompatibility is observed, continued tuning,
+calibration, or adjustment within the same primitive is unlikely to yield meaningful readiness
+improvement. In such cases, the appropriate response is representational change rather than
+parameter refinement.
+
+\subsection{Conditional and Context-Dependent Interpretation}
+
+\FPC{} classifications are conditional on the evaluation horizon, resolution, and admissible unit
+system. Changes in aggregation level, operational cadence, or demand regime may alter observable
+diagnostic behavior and therefore warrant re-evaluation.
+
+As a result, compatibility classifications should be treated as time- and context-specific
+governance signals rather than permanent attributes of an entity. Stability over time increases
+confidence in the diagnosis, but absence of stability does not invalidate the construct. Periodic
+reassessment is expected in dynamic operational environments.
+
+\subsection{Separation from Policy Authority}
+
+As established in Section~6, \FPC{} does not authorize or prohibit readiness actions. Its role is
+limited to diagnosing primitive responsiveness.
+
+Using \FPC{} classifications directly as action triggers—without governance mediation—breaks the
+separation of concerns that underpins auditability and stability in the Forecast Readiness
+Framework. \FPC{} must therefore be consumed only as an input to governance, not as a standalone
+policy rule.
+
+\subsection{Intended Use}
+
+Proper use of \FPC{} consists of:
+\begin{itemize}
+    \item Diagnosing whether readiness adjustment within a forecast primitive is structurally
+    meaningful.
+    \item Constraining optimization and calibration workflows when incompatibility is detected.
+    \item Informing governance decisions regarding admissible readiness policies.
+    \item Redirecting analytical effort toward alternative primitives when warranted.
+\end{itemize}
+
+By enforcing these interpretive boundaries, \FPC{} functions as a safeguard against unproductive
+tuning, misapplied policy, and misleading evaluation. Its value lies not in ranking forecasts, but
+in preserving the structural validity of readiness decisions.

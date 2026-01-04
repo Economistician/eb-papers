@@ -1,0 +1,99 @@
+% ==========================================================
+% 040_observable_signals.tex
+% Demand Quantization Compatibility (DQC)
+% ==========================================================
+
+\section{Observable Signals}
+\label{sec:dqc_observable_signals}
+
+Demand Quantization Compatibility (DQC) is diagnosed entirely from observable
+properties of the realized demand series. No forecasting outputs, tuning
+parameters, or optimization artifacts are required. This section defines the
+signals used to detect quantized and packed support and explains their
+interpretation.
+
+\subsection{Candidate-Grid Alignment Rate}
+
+For a given candidate grid unit $\Delta$, define the alignment indicator
+\[
+  a_{it}(\Delta) = \Ind\!\left( \frac{\yit}{\Delta} \in \mathbb{Z}_{\ge 0} \right),
+\]
+where $\Ind(\cdot)$ is the indicator function.
+
+The \emph{multiple-rate alignment} for unit $\Delta$ is then
+\[
+  \rho(\Delta) = \frac{1}{|\mathcal{T}^{+}|}
+  \sum_{t \in \mathcal{T}^{+}} a_{it}(\Delta),
+\]
+where $\mathcal{T}^{+}$ denotes the set of time indices with nonzero demand.
+
+High values of $\rho(\Delta)$ indicate that demand lies predominantly on integer
+multiples of $\Delta$. DQC evaluates $\rho(\Delta)$ across a fixed set of
+candidate grid units and records the best-aligned unit and its associated rate.
+
+\subsection{Packed-Unit Detection}
+
+Quantized demand may arise from multiple operational pack sizes rather than a
+single minimal unit. To detect this structure, DQC evaluates whether realized
+demand concentrates on a small set of discrete values that collectively explain
+most of the mass.
+
+Operationally, this is captured by:
+\begin{itemize}
+  \item Counting distinct nonzero demand values.
+  \item Measuring the cumulative mass explained by the most frequent values.
+\end{itemize}
+
+If a small number of values account for a high fraction of demand mass and
+alignment with a single grid unit is weak, DQC classifies the series as
+\emph{piecewise-packed} rather than purely quantized.
+
+\subsection{Off-Grid Dispersion}
+
+Perfect alignment is rarely observed in practice due to measurement noise,
+aggregation artifacts, or operational exceptions. DQC therefore measures the
+dispersion of off-grid observations.
+
+Let $\tilde{\yit}$ denote the nearest grid-aligned value under the best-fitting
+$\Delta$, selected under a fixed rounding rule defined by governance. The
+off-grid deviation is
+\[
+  d_{it} = \yit - \tilde{\yit}.
+\]
+
+DQC summarizes dispersion using a robust statistic, such as the median absolute
+deviation (MAD), normalized by the grid unit:
+\[
+  \text{OffGridRatio} = \frac{\mathrm{MAD}(d_{it})}{\Delta}.
+\]
+
+Low values indicate tight clustering around grid points, reinforcing a
+quantization diagnosis even when exact alignment is imperfect.
+
+\subsection{Minimum Support Guardrails}
+
+To avoid pathological classifications driven by sparse data, DQC enforces a
+minimum number of nonzero observations before quantization signals are
+considered. If this requirement is not met, the series is treated as
+\emph{structurally indeterminate} and governed as continuous-like by default
+as a conservative placeholder, rather than as a positive declaration of
+continuous behavior.
+
+This guardrail ensures that DQC diagnoses meaningful support structure rather
+than artifacts of short or degenerate samples.
+
+\subsection{Signal Summary}
+
+Collectively, DQC relies on the following observable \emph{diagnostic signals},
+not performance metrics:
+\begin{itemize}
+  \item Best-aligned grid unit $\Delta^{\ast}$.
+  \item Multiple-rate alignment $\rho(\Delta^{\ast})$.
+  \item Evidence of multi-pack concentration.
+  \item Off-grid dispersion relative to $\Delta^{\ast}$.
+  \item Count of nonzero observations.
+\end{itemize}
+
+These signals are combined deterministically to produce a compatibility class,
+as described in the next section, and are not intended to be optimized,
+ranked, or interpreted as objective functions.

@@ -1,0 +1,79 @@
+% main.tex (revised)
+
+\documentclass[11pt]{article}
+
+% ==========================================================
+% GLOBAL PACKAGES + CONFIG (EB)
+% ==========================================================
+\input{../../macros/packages.tex}
+
+% ==========================================================
+% CUSTOM MACROS (shared notation)
+% ==========================================================
+\input{../../macros/commands.tex}
+
+% ==========================================================
+% STYLE LAYER (EB)
+% ==========================================================
+\input{../../macros/style.tex}
+
+% ==========================================================
+% PDF METADATA
+% ==========================================================
+\EBPdfMeta
+  {Tolerance Sensitivity and Calibration for HR@\tau}
+  {Kyle Corrie}
+  {Technical Note --- Electric Barometer Series}
+  {Electric Barometer, Forecast Readiness Framework, HR@tau, tolerance calibration, sensitivity analysis}
+
+% ==========================================================
+% TITLE BLOCK
+% ==========================================================
+\title{
+\textbf{Tolerance Sensitivity and Calibration for \HRtau{}}\\[4pt]
+{\large Governing Acceptability Bands in Forecast Readiness Evaluation}
+}
+
+\author{
+  Kyle Corrie\\[4pt]
+  \small Forecast Readiness Framework (FRF)\\
+  \small Electric Barometer Series
+}
+
+\date{January 2026\\[4pt]
+\small Technical Note --- Electric Barometer Series\\
+Version 1.1}
+
+% ==========================================================
+\begin{document}
+
+\maketitle
+
+% ==========================================================
+% FRONTMATTER
+% ==========================================================
+\input{000_frontmatter}
+
+% ==========================================================
+% ORDERED SECTION INPUTS (Technical Note Schema)
+% ==========================================================
+\input{010_overview}
+\input{020_operational_problem}
+\input{030_hrtau_response_surface}
+\input{040_sensitivity_analysis}
+\input{050_target_hit_rate_calibration}
+\input{060_knee_based_calibration}
+\input{070_utility_based_calibration}
+\input{080_entity_level_heterogeneity}
+\input{090_governance_and_diagnostics}
+\input{100_limitations}
+\input{110_relationship_to_readiness}
+\input{120_conclusion}
+
+% ==========================================================
+% REFERENCES
+% ==========================================================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

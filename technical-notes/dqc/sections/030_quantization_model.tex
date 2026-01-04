@@ -1,0 +1,111 @@
+% ==========================================================
+% 030_quantization_model.tex
+% Demand Quantization Compatibility (DQC)
+% ==========================================================
+
+\section{Quantization Model}
+\label{sec:dqc_quantization_model}
+
+Demand Quantization Compatibility (DQC) is grounded in a simple but critical
+observation: many operational demand streams do not occupy a continuous support
+at the evaluation resolution. Instead, realized demand often concentrates on a
+small number of discrete values induced by physical, commercial, or procedural
+constraints. This section formalizes the quantization model assumed by DQC and
+clarifies how it differs from generic discreteness or count-data assumptions.
+
+\subsection{Underlying Assumption}
+
+Let $\yit$ denote realized demand for entity $i$ at time $t$, evaluated at a
+fixed resolution (e.g., hourly, daily). DQC assumes that $\yit$ is drawn from
+one of the following structural regimes:
+
+\begin{enumerate}
+  \item \textbf{Continuous-like support}  
+  Demand occupies a dense subset of $\mathbb{R}_{\ge 0}$ at the evaluation
+  resolution. Small perturbations in forecasts can meaningfully change coverage
+  and service metrics.
+
+  \item \textbf{Quantized support}  
+  Demand lies predominantly on integer multiples of a single grid unit
+  $\Delta^{\ast} > 0$, selected from a finite candidate set, i.e.
+  \[
+    \yit \in \{0, \Delta^{\ast}, 2\Delta^{\ast}, 3\Delta^{\ast}, \dots\}
+  \]
+  with high empirical mass.
+
+  \item \textbf{Piecewise-packed support}  
+  Demand concentrates on a small set of discrete values that may correspond to
+  multiple pack sizes or composite units (e.g., bundles, case packs), not all of
+  which are integer multiples of a single minimal unit.
+\end{enumerate}
+
+DQC does not assume that demand is integer-valued, Poisson, or count-distributed.
+Instead, it models \emph{support geometry}: where realized values actually land
+relative to the evaluation resolution.
+
+\subsection{Grid-Induced Semantics}
+
+Quantization matters because many evaluation constructs implicitly assume local
+continuity. For example, tolerance-based metrics such as $\HRtau$ interpret
+$\tau$ as a small perturbation radius around forecasts. When demand is quantized,
+this interpretation breaks down:
+
+\begin{itemize}
+  \item Small changes in $\tau$ may have no effect until a grid boundary is
+  crossed.
+  \item Readiness adjustments may inflate forecasts without increasing hit-rate
+  or coverage.
+  \item Apparent metric smoothness may be an artifact of aggregation rather than
+  genuine responsiveness.
+\end{itemize}
+
+DQC therefore treats quantization as a \emph{semantic constraint} on evaluation,
+not merely a descriptive property of the data.
+
+\subsection{Candidate Grid Units}
+
+Rather than estimating an arbitrary real-valued grid, DQC evaluates demand
+support against a finite, interpretable set of candidate grid units:
+\[
+  \Delta \in \{\Delta_1, \Delta_2, \dots, \Delta_K\}
+\]
+where candidates are chosen to reflect plausible operational units (e.g.,
+1, 2, 4, 6, 8, 12, 16). These candidates are governance-defined parameters,
+not learned quantities.
+
+This design choice is deliberate:
+
+\begin{itemize}
+  \item It avoids overfitting granularity to noise.
+  \item It produces audit-friendly results that align with known business
+  constraints.
+  \item It ensures stability across evaluation windows.
+\end{itemize}
+
+For each candidate $\Delta$, DQC evaluates how much of the realized demand mass
+aligns with integer multiples of that unit.
+
+\subsection{Quantization vs.\ Intermittency}
+
+It is important to distinguish quantization from intermittency or sparsity.
+Zero-heavy demand may still be continuous-like once nonzero values are observed,
+and highly intermittent series may nevertheless be quantized when demand occurs.
+
+DQC explicitly conditions on a minimum number of nonzero observations to avoid
+classifying trivially sparse series as quantized by construction. This reinforces
+that DQC diagnoses \emph{support structure}, not frequency of demand.
+
+\subsection{Operational Interpretation}
+
+Under this model, quantization is not a flaw in the data—it is a property of the
+system being measured. DQC makes this property explicit so that downstream
+evaluation and governance logic can operate in a space that respects the true
+geometry of demand.
+
+\emph{The observable signals introduced next are intentionally chosen for
+determinism, auditability, and governance stability rather than statistical
+optimality. They are designed to support reproducible classification and
+policy enforcement under repeated evaluation.}
+
+In the next section, we describe the observable signals used to detect these
+structures in practice.

@@ -1,0 +1,123 @@
+% ==========================================================
+% 070_policy_semantics_and_constraints.tex
+% Governance — Electric Barometer
+% ==========================================================
+
+\section{Policy Semantics and Constraints}
+\label{sec:governance_policy_semantics_constraints}
+
+Governance in the Electric Barometer framework exists to impose
+\emph{semantic constraints} on downstream evaluation and control.
+It does not generate forecasts, optimize objectives, or propose actions.
+Instead, it determines which interpretations, transformations, and
+interventions are admissible given the diagnosed structure of demand
+and forecast behavior.
+
+This section defines the meaning of Governance policies and the
+constraints they impose on system behavior.
+
+\subsection{Authoritative Semantics}
+
+A Governance decision establishes the \emph{authoritative semantics}
+under which all downstream logic must operate. This includes:
+
+\begin{itemize}
+  \item the unit system in which quantities are interpreted,
+  \item the admissible representation of forecasts and demand,
+  \item the conditions under which readiness adjustment may occur.
+\end{itemize}
+
+Once issued, these semantics are binding. Downstream components are
+not permitted to reinterpret units, bypass transformations, or
+select alternative diagnostic views.
+
+\subsection{Representation Constraints}
+
+Governance constrains the representation of forecasts and diagnostics
+based on the resolved demand structure:
+
+\begin{itemize}
+  \item If demand is classified as \emph{continuous-like}, evaluation and
+        adjustment may occur in raw units.
+  \item If demand is classified as \emph{quantized} or
+        \emph{piecewise-packed}, snapping to an admissible support is
+        mandatory, and raw-unit interpretation is prohibited.
+\end{itemize}
+
+These constraints apply uniformly across diagnostics, tolerance
+interpretation, and readiness policy. Representation is not a local
+choice—it is a system-level obligation.
+
+\subsection{Tolerance Interpretation Constraints}
+
+Tolerance parameters are not free tuning knobs under Governance.
+Their interpretation is constrained by the admissible demand support:
+
+\begin{itemize}
+  \item Tolerances must be interpretable in the governing unit system.
+  \item Tolerances smaller than the minimum admissible demand increment
+        are invalid by construction.
+  \item Reported service metrics must correspond to realizable outcomes.
+\end{itemize}
+
+Governance prohibits tolerance configurations that produce
+structurally meaningless or misleading diagnostics, even if such
+configurations improve apparent performance metrics.
+
+\subsection{Readiness Adjustment Constraints}
+
+Readiness adjustment policies (e.g.\ scale-based interventions such as
+\RAL{}) are governed by explicit allowability rules:
+
+\begin{itemize}
+  \item Adjustment is forbidden if the governing \FPC{} classification
+        is incompatible.
+  \item Adjustment may be conditionally allowed under marginal
+        compatibility, subject to declared constraints.
+  \item Adjustment is permitted only when compatibility is affirmed
+        under the authoritative representation.
+\end{itemize}
+
+Governance does not prescribe how adjustments are computed. It
+determines only whether adjustment is admissible at all.
+
+\subsection{Prohibited Behaviors}
+
+The following behaviors constitute explicit governance violations:
+
+\begin{itemize}
+  \item mixing raw-unit and snapped diagnostics within a single decision,
+  \item applying readiness adjustments under a non-authoritative
+        representation,
+  \item interpreting tolerance metrics outside admissible units,
+  \item overriding governance outcomes with heuristic or discretionary logic.
+\end{itemize}
+
+Governance is designed to fail closed. If admissible conditions are
+not met, policy execution must halt rather than degrade silently.
+
+\subsection{Semantic Stability}
+
+Governance policies are intentionally stable over time. They may evolve
+only through explicit, versioned changes to diagnostic definitions,
+thresholds, or mapping logic.
+
+This stability ensures that changes in outcomes reflect changes in
+demand structure, forecast behavior, or declared policy—not drift in
+interpretation or semantics.
+
+\subsection{Role in the Decision Stack}
+
+Within the Electric Barometer stack, Governance serves as the final
+semantic gate. As formalized in the Governance Decision Contract
+(Section~\ref{sec:governance_decision_contract}), all policy semantics
+derive from a deterministic, exclusive mapping from diagnostics to
+authority—not from ad hoc logic or discretionary interpretation.
+
+Governance does not improve forecasts or optimize decisions.
+It ensures that any decision taken is \emph{well-defined}, admissible,
+and accountable under the structural realities diagnosed upstream.
+
+In doing so, Governance converts analytical signals into enforceable
+operational constraints and closes the decision loop defined by the
+contract.

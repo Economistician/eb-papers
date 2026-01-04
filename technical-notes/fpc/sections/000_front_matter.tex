@@ -1,0 +1,23 @@
+% ==========================================================
+% 000_frontmatter.tex
+% FRONTMATTER (FPC Technical Note)
+% ==========================================================
+
+\begin{abstract}
+Forecast Readiness Framework (FRF) metrics quantify operational readiness under
+asymmetric cost and service risk, but they do not guarantee that a given forecasting
+\emph{primitive} (e.g., point forecasts with global scale adjustment) is structurally appropriate
+for the underlying demand process. In practice, certain commodity streams exhibit discrete,
+intermittent, or piecewise behavior (e.g., bursty counts and zero-inflation) such that incremental
+tuning, cost-ratio selection, or readiness adjustment policies may yield only limited coverage gains.
+At the same time, these interventions can inflate surplus, destabilize tolerance metrics, or
+produce governance signals that are difficult to interpret or defend.
+
+This technical note introduces \emph{Forecast Primitive Compatibility (FPC)} as a derived,
+auditable classification that diagnoses structural mismatch between demand behavior and a forecast
+primitive. FPC is not a performance metric and is not intended as an optimization objective; rather,
+it is a readiness governance construct that consumes existing FRF diagnostics (e.g., \CWSL, \NSL,
+\UD, and hit-rate tolerance curves) to determine whether a class of readiness interventions is
+valid and defensible. We define observable incompatibility signals, propose a deterministic
+compatibility taxonomy, and describe governance implications for policy gating and model selection.
+\end{abstract}

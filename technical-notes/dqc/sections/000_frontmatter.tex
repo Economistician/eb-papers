@@ -1,0 +1,24 @@
+% ==========================================================
+% 000_frontmatter.tex
+% FRONTMATTER (DQC Technical Note)
+% ==========================================================
+
+\begin{abstract}
+Operational evaluation frameworks commonly assume that realized demand behaves as
+continuous-like at the chosen resolution, such that tolerance-based diagnostics (e.g., hit rates
+at tolerance $\tau$) and scale-based readiness adjustments (e.g., multiplicative uplift policies)
+admit stable interpretation in raw units. In practice, many commodity streams are inherently
+\emph{quantized}: demand arrives in discrete units, pack sizes, or piecewise-constant regimes,
+often producing heavy mass at a small set of attainable values. In such regimes, continuous-valued
+evaluation and control can become ill-posed. Small forecast perturbations may be observationally
+indistinguishable, tolerance thresholds can be miscalibrated, and readiness policies can appear
+unstable or misleading despite correct structural behavior in the appropriate units.
+
+This technical note introduces \emph{Demand Quantization Compatibility (DQC)} as a derived,
+auditable diagnostic that assesses whether a realized demand process is compatible with
+continuous-like interpretation at the evaluation resolution or instead requires a grid-aware
+unit system and representation (e.g., governance-controlled snapping). DQC is not a performance
+metric and is not an optimization objective. Rather, it is a governance construct that classifies
+demand structure, detects dominant grid granularity when present, and produces a stable basis for
+interpreting tolerances, service diagnostics, and readiness policies downstream.
+\end{abstract}

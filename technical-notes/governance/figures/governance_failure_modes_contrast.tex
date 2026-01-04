@@ -1,0 +1,126 @@
+\begin{figure}[htbp]
+\centering
+
+\begin{tikzpicture}[x=1cm,y=1cm]
+
+% ----------------------------------------------------------
+% Styles
+% ----------------------------------------------------------
+\tikzset{
+  box/.style={draw, rounded corners=3pt, align=center, inner sep=6pt, fill=white},
+  smallbox/.style={draw, rounded corners=3pt, align=center, inner sep=5pt, font=\small, fill=white},
+  title/.style={font=\small\bfseries, align=center},
+  halo/.style={font=\small, align=center, fill=white, inner sep=4pt},
+  punch/.style={fill=white, inner sep=2pt},
+  note/.style={font=\small, align=center},
+  arr/.style={->, thick},
+  badarr/.style={->, thick, dashed},
+}
+
+% ----------------------------------------------------------
+% Layout constants
+% ----------------------------------------------------------
+\def\panelW{7.2}
+\def\panelH{8.8}
+\def\xL{0.0}
+\def\xR{8.2}
+\def\yB{0.0}
+
+% ----------------------------------------------------------
+% Panel frames + titles
+% ----------------------------------------------------------
+\draw[draw, rounded corners=3pt] (\xL,\yB) rectangle ++(\panelW,\panelH);
+\draw[draw, rounded corners=3pt] (\xR,\yB) rectangle ++(\panelW,\panelH);
+
+\node[title] at (\xL+0.5*\panelW,\yB+\panelH+0.45) {Without Governance (Failure Mode)};
+\node[title] at (\xR+0.5*\panelW,\yB+\panelH+0.45) {With Governance (Decision Closure)};
+
+% ----------------------------------------------------------
+% LEFT PANEL (Failure Mode)
+% ----------------------------------------------------------
+\node[smallbox] (ldqc) at (\xL+2.0,\yB+7.6) {DQC\\(signal)};
+\node[smallbox] (lfpc) at (\xL+5.2,\yB+7.6) {FPC\\(signal)};
+
+\node[smallbox] (lraw) at (\xL+2.0,\yB+5.8) {Raw metrics\\\& tolerances};
+\node[smallbox] (lsnap) at (\xL+5.2,\yB+5.8) {Snapped metrics\\\& tolerances};
+
+\node[smallbox] (lheur) at (\xL+3.6,\yB+3.8) {Heuristic mixing\\``pick the best''};
+
+\begin{scope}[on background layer]
+  \draw[badarr] (lheur.west) to[out=150,in=180] (lraw.west);
+  \draw[badarr] (lheur.east) to[out=30,in=0] (lsnap.east);
+\end{scope}
+
+\node[smallbox] (lexec) at (\xL+3.6,\yB+1.0) {Execution / Control};
+
+\draw[arr] (lheur) -- (lexec);
+\node[halo] at (\xL+3.6,\yB+2.4)
+  {\emph{Semantic laundering}\\(diagnostic mixing to bypass constraints)};
+
+\draw[arr] (ldqc) -- (lraw);
+\draw[arr] (lfpc) -- (lsnap);
+\draw[badarr] (lraw) -- (lheur);
+\draw[badarr] (lsnap) -- (lheur);
+
+\node[note] at (\xL+3.6,\yB+0.4)
+  {\emph{Policy drift} / \emph{non-reproducible outcomes}};
+
+% ----------------------------------------------------------
+% RIGHT PANEL (Decision Closure)
+% ----------------------------------------------------------
+\begin{scope}[on background layer]
+  % Raised compliance boundary
+  \draw[draw, dashed, rounded corners=3pt]
+    (\xR+0.6,\yB+6.0) -- (\xR+0.6,\yB+3.8) --
+    (\xR+\panelW-0.6,\yB+3.8) -- (\xR+\panelW-0.6,\yB+6.0);
+  \draw[draw, dashed]
+    (\xR+0.6,\yB+6.0) -- (\xR+\panelW-0.6,\yB+6.0);
+
+  \node[punch] at (\xR+2.43,\yB+6.0) {\phantom{x}};
+  \node[punch] at (\xR+4.77,\yB+6.0) {\phantom{x}};
+\end{scope}
+
+\node[smallbox] (rdqc) at (\xR+2.0,\yB+7.6) {DQC\\(diagnostic)};
+\node[smallbox] (rfpc) at (\xR+5.2,\yB+7.6) {FPC\\(diagnostic)};
+
+\node[box] (rgov) at (\xR+3.6,\yB+4.8)
+  {Governance Decision Contract\\\texttt{GovernanceDecision}};
+
+\draw[arr] (rdqc.south) -- (rgov.155);
+\draw[arr] (rfpc.south) -- (rgov.25);
+
+\node[smallbox] (rexec) at (\xR+3.6,\yB+1.1)
+  {Execution / Control / Automation};
+
+\draw[arr] (rgov) -- (rexec);
+
+\node[halo] at (\xR+3.6,\yB+3.3)
+  {{\LARGE $\boldsymbol{\times}$}};
+
+\node[halo] at (\xR+3.6,\yB+2.45)
+  {No downstream reinterpretation\\or diagnostic substitution};
+
+\node[note] at (\xR+3.6,\yB+0.5)
+  {Deterministic \quad \textbullet \quad Traceable \quad \textbullet \quad Owned};
+
+% Label aligned with dashed boundary
+\node[halo, inner sep=6pt] at (\xR+3.6,\yB+6.0)
+  {\emph{compliance boundary}};
+
+\end{tikzpicture}
+
+\caption{
+Governance failure modes versus decision closure.
+\emph{Left:} In the absence of an explicit governance layer, Demand Quantization Compatibility (DQC)
+and Forecast Primitive Compatibility (FPC) are treated as advisory signals rather than authoritative
+constraints. Raw and snapped evaluation semantics coexist, enabling heuristic mixing and post-hoc
+reinterpretation (``semantic laundering'') that bypasses structural constraints and leads to policy drift
+and non-reproducible outcomes.
+\emph{Right:} With governance, DQC and FPC are consumed as diagnostics and deterministically composed
+into a single \texttt{GovernanceDecision}. This decision contract establishes a strict compliance boundary
+separating diagnostic evaluation from operational execution. Once issued, no downstream reinterpretation,
+diagnostic substitution, or heuristic override is admissible; execution proceeds only under the declared unit
+system, tolerance semantics, and readiness policy, ensuring determinism, traceability, and accountability.
+}
+\label{fig:governance_failure_modes_decision_closure}
+\end{figure}

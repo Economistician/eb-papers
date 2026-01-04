@@ -1,0 +1,81 @@
+% ==========================================================
+% 040_observable_signals.tex
+% Forecast Primitive Compatibility (FPC)
+% ==========================================================
+
+\section{Observable Signals of Incompatibility}
+
+\FPC{} is grounded entirely in observable behavior. It does not rely on demand annotations, causal
+models, or assumptions about the data-generating process beyond those implied by the forecast
+primitive itself. Instead, incompatibility is diagnosed through the joint behavior of existing
+\FRF{} diagnostics evaluated under baseline forecasts and under admissible readiness interventions.
+This section describes the primary observable signals that indicate structural mismatch between a
+demand process and a point forecasting primitive.
+
+\subsection{Persistent Low Coverage}
+
+A necessary condition for compatibility is that baseline coverage, as measured by \NSL{}, is
+meaningfully greater than zero. When \NSL{} remains persistently low across the evaluation horizon,
+the forecast primitive fails to meet realized demand in most intervals. While low coverage alone does
+not imply incompatibility, it establishes a baseline against which responsiveness must be assessed.
+
+In compatible regimes, low baseline coverage typically reflects systematic bias or under-scaling and
+can be mitigated through controlled adjustment. In incompatible regimes, low coverage is structural
+and persists regardless of adjustment magnitude.
+
+\subsection{Weak Responsiveness to Readiness Adjustment}
+
+A central diagnostic for \FPC{} is the responsiveness of coverage to readiness adjustment. Let
+\NSL{} denote baseline coverage and let $\NSL^{(\alpha)}$ denote coverage after applying a readiness
+adjustment \RAL{} with parameter $\alpha$. The change
+\[
+\dNSL{} = \NSL^{(\alpha)} - \NSL{}
+\]
+captures the effectiveness of scale-based intervention.
+
+When $\dNSL{}$ remains small across a wide range of $\alpha$, the demand process is effectively
+insensitive to scale adjustment. This behavior indicates that coverage failures are driven by timing,
+intermittency, or discreteness rather than magnitude, and that further adjustment will primarily
+inflate surplus without delivering readiness gains.
+
+\subsection{Flat Tolerance Response}
+
+Tolerance-based hit rates provide a complementary signal. For a tolerance band $\tauval$, the metric
+\HRtau{} measures the fraction of intervals in which forecast error lies within an acceptable range.
+In compatible regimes, increasing $\tauval$ yields a smooth and monotone increase in \HRtau{}, and
+moderate tolerance bands capture a substantial fraction of intervals.
+
+In incompatible regimes, \HRtau{} remains low even for large $\tauval$. Flat tolerance response
+indicates that errors are not small perturbations around realized demand but are instead dominated by
+large, discrete misses. This behavior is particularly indicative of zero-inflated or bursty demand
+processes.
+
+\subsection{High Conditional Shortfall Severity}
+
+Conditional severity metrics such as \UD{} reveal the depth of failures when they occur. High values
+of \UD{} combined with low shortfall frequency suggest that misses are infrequent but large. In such
+cases, scale-based adjustments may reduce the number of shortfalls marginally while leaving their
+depth largely unchanged, resulting in poor trade-offs between coverage and surplus.
+
+When high \UD{} coincides with weak responsiveness of \NSL{} and \HRtau{}, it provides strong evidence
+that the forecast primitive is misaligned with the structure of demand.
+
+\subsection{Rapid Escalation of Asymmetric Cost}
+
+Finally, incompatibility is often reflected in the curvature of cost-weighted loss as asymmetry
+increases. Under \CWSL{}, increasing the cost ratio $\R{}$ amplifies the penalty for underbuild. In
+compatible regimes, \CWSL{} typically increases smoothly with $\R{}$, reflecting controlled trade-offs
+between underbuild and overbuild.
+
+In incompatible regimes, \CWSL{} escalates rapidly as $\R{}$ increases, often without corresponding
+improvements in coverage. Such behavior indicates that underbuild dominates cost exposure in a manner
+that cannot be mitigated by scale adjustment, rendering cost-ratio calibration and asymmetric
+evaluation misleading from a governance perspective.
+
+\subsection{Joint Interpretation}
+
+No single signal is sufficient to diagnose incompatibility. \FPC{} is informed by the \emph{joint}
+behavior of these observables. Persistent low coverage, weak $\dNSL{}$, flat \HRtau{} response, high
+\UD{}, and rapid \CWSL{} escalation together constitute a robust empirical signature of structural
+mismatch. These signals are synthesized into a compatibility classification, described next, which
+provides the basis for constraining readiness policy through governance.

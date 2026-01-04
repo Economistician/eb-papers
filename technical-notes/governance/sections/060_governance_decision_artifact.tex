@@ -1,0 +1,138 @@
+% ==========================================================
+% 060_governance_decision_artifact.tex
+% Governance Decision Artifact
+% ==========================================================
+
+\section{The Governance Decision Artifact}
+\label{sec:governance_decision_artifact}
+
+The output of the Governance Decision Contract is a single, structured artifact:
+the \texttt{GovernanceDecision}. This artifact is the sole authoritative
+representation of governance intent within the Electric Barometer framework.
+All downstream systems—evaluation, control, reporting, and automation—must
+consume this artifact directly and must not infer or reconstruct governance
+decisions independently.
+
+The \texttt{GovernanceDecision} defines the \emph{compliance boundary} between
+diagnostic evaluation and operational execution: once it is issued, no further
+diagnostic reasoning or reinterpretation is admissible downstream.
+
+This section defines the contents, semantics, and obligations associated with
+the Governance Decision Artifact.
+
+\subsection{Artifact Role and Authority}
+
+The \texttt{GovernanceDecision} serves three simultaneous roles:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Interpretive authority:} it declares the admissible unit system
+        and evaluation semantics.
+  \item \textbf{Policy authority:} it determines whether readiness adjustment is
+        allowed, constrained, or forbidden.
+  \item \textbf{Audit record:} it provides an explicit, reviewable explanation
+        for every governance outcome.
+\end{itemize}
+
+Together, these roles establish the artifact as a formal control object rather
+than a mere interface. No downstream component is permitted to override,
+reinterpret, or partially apply its contents. Governance authority exists only
+at this boundary.
+
+Figure~\ref{fig:governance_compliance_boundary} illustrates this role: the
+\texttt{GovernanceDecision} defines a strict compliance boundary separating
+diagnostic evaluation from operational execution.
+
+\input{figures/governance_compliance_boundary}
+
+\subsection{Required Fields}
+
+A valid \texttt{GovernanceDecision} must contain the following fields:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Demand structure declaration}
+        \begin{itemize}
+          \item \DQC{} classification
+          \item Detected grid unit $\Delta^{\ast}$ (if applicable)
+        \end{itemize}
+
+  \item \textbf{Authoritative evaluation space}
+        \begin{itemize}
+          \item Governing unit system (raw or snapped)
+          \item Snapping requirement flag
+        \end{itemize}
+
+  \item \textbf{Compatibility determination}
+        \begin{itemize}
+          \item Authoritative \FPC{} classification
+          \item Identification of admissible \FPC{} view (raw vs.\ snapped)
+        \end{itemize}
+
+  \item \textbf{Tolerance interpretation policy}
+        \begin{itemize}
+          \item Interpretation of $\tau$ (raw-unit or grid-unit)
+          \item Validity constraints on tolerance magnitudes
+        \end{itemize}
+
+  \item \textbf{Readiness adjustment policy}
+        \begin{itemize}
+          \item Adjustment allowability
+                (\textsc{Allowed}, \textsc{Conditional}, or \textsc{Disallowed})
+          \item Applicable constraints or prerequisites
+        \end{itemize}
+
+  \item \textbf{Governance status indicator}
+        \begin{itemize}
+          \item Consolidated policy status (e.g.\ green / amber / red)
+        \end{itemize}
+
+  \item \textbf{Reasoning trace}
+        \begin{itemize}
+          \item Ordered, human-readable statements linking inputs to decisions
+        \end{itemize}
+\end{itemize}
+
+All fields are mandatory. Partial or underspecified artifacts are invalid by
+construction.
+
+\subsection{Semantic Guarantees}
+
+The Governance Decision Artifact provides the following guarantees:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Exclusivity:} exactly one unit system and one compatibility
+        assessment govern interpretation.
+  \item \textbf{Consistency:} tolerance semantics, diagnostics, and readiness
+        policy are mutually coherent.
+  \item \textbf{Determinism:} identical inputs and parameters yield identical
+        artifacts.
+  \item \textbf{Accountability:} every decision is attributable to declared
+        diagnostics, thresholds, and governance rules.
+\end{itemize}
+
+These guarantees prevent ambiguous interpretation, policy drift, and silent
+behavioral changes across the compliance boundary.
+
+\subsection{Downstream Obligations}
+
+Any system consuming a \texttt{GovernanceDecision} is obligated to:
+
+\begin{itemize}[leftmargin=*]
+  \item Apply evaluation and diagnostics only in the declared unit system,
+  \item Enforce snapping requirements exactly as specified,
+  \item Respect tolerance interpretation constraints,
+  \item Enable readiness adjustment only when explicitly allowed,
+  \item Surface governance status and reasoning when reporting outcomes.
+\end{itemize}
+
+Failure to comply with these obligations constitutes a governance violation,
+not a modeling or implementation error.
+
+\subsection{Why an Explicit Artifact}
+
+Encoding governance outcomes as a structured artifact—rather than implicit
+logic or scattered flags—serves a deliberate purpose. It ensures that
+interpretation, policy, execution, and accountability converge at a single,
+well-defined boundary.
+
+The \texttt{GovernanceDecision} exists so that no system must guess:
+\emph{what is allowed, how it should be interpreted, or why a decision was made}.
