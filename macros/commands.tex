@@ -322,6 +322,14 @@
 \providecommand{\CWSLscaled}[1][]{\ensuremath{\mathrm{CWSL}_{\mathrm{scaled}}}}
 \providecommand{\CWSLmax}[1][]{\ensuremath{\mathrm{CWSL}_{\max}}}
 
+% Random inserts
+\providecommand{\CWSL}[1][]{%
+  \ensuremath{\mathrm{CWSL}\if\relax\detokenize{#1}\relax\else\!\left(#1\right)\fi}%
+}
+\providecommand{\CWSLR}[1][]{%
+  \ensuremath{\mathrm{CWSLR}\if\relax\detokenize{#1}\relax\else\!\left(#1\right)\fi}%
+}
+
 
 % ==========================================================
 % END
