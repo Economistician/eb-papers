@@ -18,16 +18,11 @@
 % ==========================================================
 % PDF METADATA
 % ==========================================================
-% NOTE: \EBPdfMeta is defined in ../../macros/style.tex. In the EB stack it is
-% commonly a 3-argument helper (Title, Author, Keywords). Providing the third
-% argument prevents runaway-argument failures if the macro expects it.
+% NOTE: \EBPdfMeta is defined in ../../macros/style.tex. It expects 4 arguments:
+%   {Title}{Author}{Subject}{Keywords}
 %
-% IMPORTANT: Keep this call on a single paragraph (no blank lines inside any
-% macro argument). If you ever need line breaks, use % at end-of-line.
-%
-% ALSO IMPORTANT: Avoid LaTeX macros and unescaped special chars in PDF strings
-% (e.g., _, %, #). Prefer plain text in metadata.
-\EBPdfMeta{Managing Limited-Time Offers under Forecast Uncertainty: A Readiness-Centric Approach to Production Management}{Kyle Corrie}{limited-time offers, production management, operational forecasting, readiness, asymmetric loss, governance}
+% Keep all arguments single-paragraph; use % for line breaks if needed.
+\EBPdfMeta{Managing Limited-Time Offers under Forecast Uncertainty: A Readiness-Centric Approach to Production Management}{Kyle Corrie}{Forecasting / Operations Management}{limited-time offers, production management, operational forecasting, readiness, asymmetric loss, governance}
 
 % ==========================================================
 % DOCUMENT
