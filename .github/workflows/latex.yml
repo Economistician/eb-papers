@@ -23,44 +23,56 @@ jobs:
         include:
           # --- Technical Notes ---
           - id: TN_CWSL
-            working_directory: cwsl/technical-notes
+            working_directory: technical-notes/cwsl
             base_name: ElectricBarometer_TN_CWSL
 
           - id: TN_CWSLR
-            working_directory: cwslr/technical-notes
+            working_directory: technical-notes/cwslr
             base_name: ElectricBarometer_TN_CWSLR
 
+          - id: TN_DQC
+            working_directory: technical-notes/dqc
+            base_name: ElectricBarometer_TN_DQC
+
+          - id: TN_FPC
+            working_directory: technical-notes/fpc
+            base_name: ElectricBarometer_TN_FPC
+
           - id: TN_FRS
-            working_directory: frs/technical-notes
+            working_directory: technical-notes/frs
             base_name: ElectricBarometer_TN_FRS
 
+          - id: TN_GOVERNANCE
+            working_directory: technical-notes/governance
+            base_name: ElectricBarometer_TN_GOVERNANCE
+
           - id: TN_HRAT
-            working_directory: hrat/technical-notes
+            working_directory: technical-notes/hrat
             base_name: ElectricBarometer_TN_HRAT
 
           - id: TN_HRTAU
-            working_directory: hrtau/technical-notes
+            working_directory: technical-notes/hrtau
             base_name: ElectricBarometer_TN_HRTAU
 
           - id: TN_NSL
-            working_directory: nsl/technical-notes
+            working_directory: technical-notes/nsl
             base_name: ElectricBarometer_TN_NSL
 
           - id: TN_RAL
-            working_directory: ral/technical-notes
+            working_directory: technical-notes/ral
             base_name: ElectricBarometer_TN_RAL
 
           - id: TN_UD
-            working_directory: ud/technical-notes
+            working_directory: technical-notes/ud
             base_name: ElectricBarometer_TN_UD
 
-          # --- Papers ---
+          # --- Technical Papers ---
           - id: PAPER_FRF
-            working_directory: frf/paper
+            working_directory: technical-papers/frf
             base_name: ElectricBarometer_PAPER_FRF
 
           - id: PAPER_LTOR
-            working_directory: ltor/paper
+            working_directory: technical-papers/ltor
             base_name: ElectricBarometer_PAPER_LTOR
 
     steps:
@@ -72,8 +84,9 @@ jobs:
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         env:
-          # Allow \input{...} to resolve files located in <doc-root>/sections/
-          TEXINPUTS: ".:${{ github.workspace }}/${{ matrix.working_directory }}/sections/:"
+          # Single colon-delimited TEXINPUTS string (avoid YAML folding inserting spaces).
+          # Keep trailing ":" so TeX still searches its default paths.
+          TEXINPUTS: ".:${{ github.workspace }}:${{ github.workspace }}/macros:${{ github.workspace }}/${{ matrix.working_directory }}:${{ github.workspace }}/${{ matrix.working_directory }}/sections:${{ github.workspace }}/${{ matrix.working_directory }}/figures:${{ github.workspace }}/${{ matrix.working_directory }}/tables:"
         with:
           root_file: main.tex
           working_directory: ${{ matrix.working_directory }}
