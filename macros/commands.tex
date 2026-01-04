@@ -306,6 +306,23 @@
 \providecommand{\ie}{i.e.\ }
 \providecommand{\eg}{e.g.\ }
 
+% ----------------------------------------------------------
+% Core metrics (upright math)
+% ----------------------------------------------------------
+% Original: \providecommand{\CWSL}{\ensuremath{\mathrm{CWSL}}}
+% Updated to accept argument for usage like \CWSL(yhat)
+\providecommand{\CWSL}[1]{\ensuremath{\mathrm{CWSL}\!\left(#1\right)}}
+\providecommand{\CWSLR}[1]{\ensuremath{\mathrm{CWSLR}\!\left(#1\right)}} % named artifact in prose
+\providecommand{\NSL}[1][]{\ensuremath{\mathrm{NSL}}} % optional arg
+\providecommand{\UD}[1][]{\ensuremath{\mathrm{UD}}} % optional arg
+\providecommand{\HR}[1][]{\ensuremath{\mathrm{HR}}} % optional arg
+\providecommand{\HRtau}[1][]{\ensuremath{\mathrm{HR}@\tau}} % optional arg
+
+% FRS sub-terms
+\providecommand{\CWSLscaled}[1][]{\ensuremath{\mathrm{CWSL}_{\mathrm{scaled}}}}
+\providecommand{\CWSLmax}[1][]{\ensuremath{\mathrm{CWSL}_{\max}}}
+
+
 % ==========================================================
 % END
 % ==========================================================
