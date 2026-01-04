@@ -22,6 +22,9 @@
 
 \providecommand{\RAL}{\ensuremath{\mathrm{RAL}}}
 
+% Readiness primitives / governance vocabulary
+\providecommand{\ReadinessPrimitive}{\ensuremath{\mathrm{RP}}}
+
 % Limited-Time Offers
 \providecommand{\LTO}{\ensuremath{\mathrm{LTO}}}
 \providecommand{\LTOs}{\ensuremath{\mathrm{LTOs}}}
@@ -108,6 +111,10 @@
 % Canonical indicator: \Ind{event}
 \providecommand{\Ind}{\ensuremath{\mathbb{I}}}
 \providecommand{\indicator}[1]{\ensuremath{\mathbf{1}\{#1\}}} % prose-friendly alternative
+
+% Back-compat: some notes used \Indicator (capital I). Keep as an alias to the
+% canonical \Ind to avoid duplicate meanings.
+\providecommand{\Indicator}{\Ind}
 
 % If you want function-style indicator without braces: \Ind\!(event)
 % Keep as \Ind and let authors decide.
@@ -270,6 +277,13 @@
 \providecommand{\ltoOn}{\ensuremath{z_{\timeindex}}}
 \providecommand{\ltoPhase}{\ensuremath{\phi_{\timeindex}}}
 \providecommand{\qprod}{\ensuremath{\mathrm{QP}}}
+
+% ----------------------------------------------------------
+% Frontmatter helpers
+% ----------------------------------------------------------
+\providecommand{\keywords}[1]{%
+\par\noindent\textbf{Keywords: }#1\par
+}
 
 % ----------------------------------------------------------
 % Prose shorthands
