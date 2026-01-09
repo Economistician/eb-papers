@@ -66,6 +66,11 @@ jobs:
             working_directory: technical-notes/ud
             base_name: ElectricBarometer_TN_UD
 
+          # --- Business Briefs ---
+          - id: BB_FRF
+            working_directory: business-briefs/frf
+            base_name: ElectricBarometer_BB_FRF
+
           # --- Technical Papers ---
           - id: PAPER_FRF
             working_directory: technical-papers/frf

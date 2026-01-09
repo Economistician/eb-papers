@@ -1,0 +1,59 @@
+% main.tex — FRF Business Brief
+\documentclass[11pt]{article}
+
+% ==========================================================
+% GLOBAL PACKAGES + CONFIG (EB)
+% ==========================================================
+\input{../../macros/packages.tex}
+
+% ==========================================================
+% CUSTOM MACROS (shared notation)
+% ==========================================================
+\input{../../macros/commands.tex}
+
+% ==========================================================
+% STYLE LAYER (EB)
+% ==========================================================
+\input{../../macros/style.tex}
+
+% ==========================================================
+% PDF METADATA
+% ==========================================================
+\EBPdfMeta
+  {Why Forecast Accuracy Is Not Enough for Operations}
+  {Kyle Corrie}
+  {Business Brief — Electric Barometer}
+  {forecast readiness, operational forecasting, asymmetric cost, governance, Electric Barometer}
+
+% ==========================================================
+% TITLE BLOCK
+% ==========================================================
+\title{
+\textbf{Why Forecast Accuracy Is Not Enough for Operations}\\[6pt]
+{\large A Readiness-Based Framework for Operational Forecasting}
+}
+
+\author{
+  Kyle Corrie\\[4pt]
+  \small Electric Barometer
+}
+
+\date{
+January 2026
+}
+
+% ==========================================================
+\begin{document}
+
+\maketitle
+
+% ==========================================================
+% BUSINESS BRIEF SECTIONS
+% ==========================================================
+\input{sections/010_problem}
+\input{sections/020_core_insight}
+\input{sections/030_operational_change}
+\input{sections/040_business_impact}
+\input{sections/050_what_this_enables}
+
+\end{document}

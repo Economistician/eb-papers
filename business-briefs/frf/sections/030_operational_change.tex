@@ -1,0 +1,9 @@
+\section{What Changes Operationally}
+
+Adopting a readiness-based view of forecast evaluation changes how forecasts are approved, compared, and governed, without requiring changes to how forecasts are generated. Models are no longer selected solely on aggregate accuracy, but on whether their error patterns align with operational priorities and risk tolerance.
+
+In practice, this shifts evaluation from a single pass–fail accuracy threshold to a small set of readiness criteria. Forecasts are assessed on their ability to avoid service-critical shortfalls, limit the severity of failures when they occur, and remain stable within tolerable bounds. These criteria reflect how the operation actually absorbs deviation, rather than how closely predictions track demand on average.
+
+Importantly, this approach does not require retraining models, changing forecasting cadence, or redesigning downstream systems. The change occurs at the evaluation and deployment layer. Readiness criteria act as a gate, ensuring that only forecasts whose error structure is compatible with execution constraints are approved for operational use.
+
+This shift also enables clearer operational conversations. When a forecast underperforms, teams can identify whether the issue lies in frequent shortfalls, excessive failure severity, or instability relative to tolerance, rather than debating abstract accuracy improvements. As a result, interventions become more targeted, proportionate, and aligned with operational risk, improving both decision quality and organizational trust in forecasting systems.
