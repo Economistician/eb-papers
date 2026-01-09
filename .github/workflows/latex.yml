@@ -71,6 +71,10 @@ jobs:
             working_directory: business-briefs/frf
             base_name: ElectricBarometer_BB_FRF
 
+          - id: BB_CWSL
+            working_directory: business-briefs/cwsl
+            base_name: ElectricBarometer_BB_CWSL
+
           # --- Technical Papers ---
           - id: PAPER_FRF
             working_directory: technical-papers/frf

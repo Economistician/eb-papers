@@ -1,0 +1,9 @@
+\section*{Why Accuracy Metrics Miss This}
+
+Traditional accuracy metrics are designed to summarize forecast error, not to explain its consequences. By construction, they aggregate positive and negative deviations into a single measure of average performance. This makes them useful for comparing statistical fit, but poorly suited for understanding operational risk.
+
+Because symmetric metrics treat over-forecasting and under-forecasting as equivalent, they allow errors in one direction to offset errors in the other. A severe shortfall during a critical interval can be mathematically canceled by excess in less important periods. From a reporting perspective, the forecast appears stable. From an operational perspective, the damage has already been done.
+
+This aggregation effect is particularly misleading in high-frequency systems. Operational loss is often driven by a small number of shortfall events rather than by persistent average bias. When those events are rare but severe, symmetric metrics smooth them away, masking the very failures that dominate cost and disruption.
+
+As a result, organizations can observe steady improvements in reported accuracy while experiencing no corresponding improvement in service reliability or cost control. The metrics are not wrong; they are simply answering a different question. Accuracy metrics describe numerical proximity to demand, but they do not reveal how forecast error translates into operational loss. That gap is where directional cost goes unseen.

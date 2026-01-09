@@ -1,0 +1,9 @@
+\section*{The Core Insight: Forecast Error Has Directional Cost}
+
+Forecast error is not just a matter of how far a prediction is from reality. It is a matter of which side of reality the error falls on. In most operational environments, being short and being long do not impose equivalent consequences, even when the numerical deviation is the same.
+
+Under-forecasting creates immediate operational strain. It drives service failures, lost throughput, queue instability, and reactive recovery actions. These effects often cascade across intervals, amplifying their impact beyond the moment in which the error occurred. Over-forecasting, by contrast, typically results in excess capacity or inventory that can be absorbed with limited disruption.
+
+This directional imbalance means that the business experiences forecast error asymmetrically, regardless of how the error is reported. A forecast that is occasionally wrong in the costly direction can do more damage than one that is consistently imperfect but balanced. What matters operationally is not just how large errors are on average, but how often and how severely they occur where cost sensitivity is highest.
+
+The key insight is that forecast evaluation must reflect this reality. Treating all deviations as interchangeable obscures the true drivers of operational loss. A meaningful assessment of forecast performance must therefore account for the directional cost of error, rather than relying solely on symmetric notions of accuracy that do not align with how the business actually pays for being wrong.
