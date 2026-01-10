@@ -115,9 +115,9 @@ jobs:
             working_directory: business-briefs/ral
             base_name: ElectricBarometer_BB_RAL
 
-          - id: BB_LTO
-            working_directory: business-briefs/lto
-            base_name: ElectricBarometer_BB_LTO
+          - id: BB_LTOR
+            working_directory: business-briefs/ltor
+            base_name: ElectricBarometer_BB_LTOR
 
           # --- Technical Papers ---
           - id: PAPER_FRF
