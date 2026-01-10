@@ -1,0 +1,9 @@
+\section*{Why Unit Mismatch Breaks Evaluation}
+
+When forecasts and realized demand are expressed in incompatible unit systems, evaluation results become unstable and misleading. Small numerical differences may be treated as meaningful error even though they have no operational consequence, while larger discrepancies may be mischaracterized in magnitude or frequency.
+
+This mismatch distorts downstream diagnostics. Tolerance-based metrics may signal failure where none exists, reliability measures may fluctuate due to representation artifacts, and readiness scores may oscillate unpredictably as resolution changes. These effects are not reflections of forecast quality, but of unit incompatibility.
+
+Because these distortions occur upstream, they contaminate every metric that follows. Attempts to tune thresholds, rebalance costs, or adjust tolerance cannot correct a structurally invalid unit space. The evaluation pipeline becomes sensitive to representation choices rather than operational behavior.
+
+Without addressing unit compatibility explicitly, organizations may spend significant effort improving forecasts or metrics that are already misaligned with reality. The result is confusion, inconsistent conclusions, and erosion of confidence in evaluation outcomes.

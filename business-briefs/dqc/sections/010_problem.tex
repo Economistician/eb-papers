@@ -1,0 +1,9 @@
+\section*{The Problem: Evaluation Assumes Continuity}
+
+Forecast evaluation often proceeds under an implicit assumption: that demand varies continuously and can be meaningfully assessed at arbitrary resolution. This assumption is rarely stated, but it underlies the use of accuracy, tolerance, and readiness metrics throughout forecasting pipelines.
+
+In many operational settings, however, demand is not continuous. It is constrained by unit sizes, packaging rules, or discrete production increments. When forecasts are evaluated as if demand were infinitely divisible, the resulting metrics may no longer correspond to what operations can actually execute.
+
+This creates a structural mismatch between evaluation and reality. Forecasts may appear to underperform or overperform purely because they are assessed in a unit system that does not align with how demand is realized or fulfilled. The evaluation is not wrong in calculation, but it is ill-defined in interpretation.
+
+The core problem is that most evaluation frameworks do not ask whether the unit space itself is admissible. Without validating that assumption, performance metrics risk measuring artifacts of representation rather than meaningful operational behavior.

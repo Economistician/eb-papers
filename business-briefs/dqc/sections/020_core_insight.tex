@@ -1,0 +1,9 @@
+\section*{The Core Insight: Some Demand Is Structurally Discrete}
+
+Not all demand can be meaningfully expressed on a continuous scale. In many environments, demand is governed by indivisible units, fixed batch sizes, or packing constraints that impose a discrete structure on outcomes.
+
+The key insight is that forecast evaluation must respect this structure. When demand is quantized or packed, forecasts that differ only within a unit interval may be operationally equivalent, even though they appear different numerically. Treating these differences as meaningful error introduces noise rather than insight.
+
+Demand Quantization Compatibility recognizes that admissible evaluation depends on alignment between the forecast representation and the demand structure. Before asking how accurate a forecast is, it is necessary to ask whether the forecast is expressed in units that the operation can realize.
+
+By explicitly identifying when demand is continuous, quantized, or packed, DQC establishes whether standard evaluation metrics can be applied directly, must be adapted, or are invalid without adjustment. This shifts evaluation from a purely numerical exercise to a structurally grounded one.

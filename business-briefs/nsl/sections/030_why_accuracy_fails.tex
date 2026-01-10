@@ -1,0 +1,9 @@
+\section*{Why Magnitude-Based Metrics Miss This}
+
+Magnitude-based accuracy metrics summarize how far forecasts deviate from realized demand on average. By design, they compress many interval-level outcomes into a single aggregate measure. While this is useful for comparing overall fit, it obscures how forecast performance is distributed over time.
+
+This aggregation masks failure frequency. Repeated small shortfalls can be averaged away by surplus in other intervals, producing acceptable accuracy scores even as operational disruptions recur. Similarly, shortfalls that cluster in high-impact periods may appear no different from errors spread evenly across time, despite having far greater operational consequences.
+
+As a result, two forecasts with similar accuracy can behave very differently in practice. One may meet demand reliably with only occasional failures, while another may fall short frequently but by small amounts. From an operational standpoint, these differences are decisive. From the perspective of magnitude-based metrics, they are largely invisible.
+
+Because these metrics do not track the occurrence of shortfall events, they cannot answer a simple but critical question: how often does the forecast fail to meet demand? Without that visibility, organizations may interpret improving accuracy as improving reliability, even when the frequency of operational failures remains unchanged.

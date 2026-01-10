@@ -1,0 +1,59 @@
+% main.tex — CWSLR Business Brief
+\documentclass[11pt]{article}
+
+% ==========================================================
+% GLOBAL PACKAGES + CONFIG (EB)
+% ==========================================================
+\input{../../macros/packages.tex}
+
+% ==========================================================
+% CUSTOM MACROS (shared notation)
+% ==========================================================
+\input{../../macros/commands.tex}
+
+% ==========================================================
+% STYLE LAYER (EB)
+% ==========================================================
+\input{../../macros/style.tex}
+
+% ==========================================================
+% PDF METADATA
+% ==========================================================
+\EBPdfMeta
+  {Governing Cost Asymmetry in Forecast Evaluation}
+  {Kyle Corrie}
+  {Business Brief — Electric Barometer}
+  {cost ratio, asymmetric cost, CWSL, sensitivity analysis, calibration, governance, Electric Barometer}
+
+% ==========================================================
+% TITLE BLOCK
+% ==========================================================
+\title{
+\textbf{Governing Cost Asymmetry in Forecast Evaluation}\\[6pt]
+{\large Why the Cost Ratio Should Be Calibrated and Auditable}
+}
+
+\author{
+  Kyle Corrie\\[4pt]
+  \small Electric Barometer
+}
+
+\date{
+January 2026
+}
+
+% ==========================================================
+\begin{document}
+
+\maketitle
+
+% ==========================================================
+% BUSINESS BRIEF SECTIONS
+% ==========================================================
+\input{sections/010_problem}
+\input{sections/020_core_insight}
+\input{sections/030_sensitivity_grid}
+\input{sections/040_calibrated_default}
+\input{sections/050_what_this_enables}
+
+\end{document}

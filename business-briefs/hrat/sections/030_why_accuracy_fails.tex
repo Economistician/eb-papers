@@ -1,0 +1,9 @@
+\section*{Why Traditional Accuracy Metrics Miss This}
+
+Traditional accuracy metrics summarize error magnitude across all intervals, treating every deviation as equally significant. This approach obscures the distinction between tolerable noise and disruptive error.
+
+Small deviations that fall within operational tolerance are penalized alongside deviations that trigger corrective action. As a result, metrics exaggerate the importance of inconsequential error while failing to highlight how often forecasts actually require intervention.
+
+Because these metrics average across intervals, they also miss patterns of usability. A forecast that is consistently within tolerance but never exact may score poorly, while a forecast that alternates between precision and failure may appear comparable. From an operational standpoint, these behaviors are not equivalent.
+
+Accuracy metrics answer how close forecasts are numerically. They do not answer how often forecasts are sufficient to support execution. Without a tolerance-aware measure, organizations cannot distinguish between forecasts that are operationally dependable and those that merely look good on paper.

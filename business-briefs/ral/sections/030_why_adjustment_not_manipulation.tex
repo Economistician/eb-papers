@@ -1,0 +1,9 @@
+\section*{Why Adjustment Is Not Forecast Manipulation}
+
+Post-forecast adjustment is often viewed with skepticism, as if any modification undermines forecast integrity. This concern arises when adjustments are unconstrained, ad hoc, or optimized to improve apparent accuracy.
+
+RAL is deliberately designed to avoid these pitfalls. Adjustments are bounded within predefined feasibility limits, evaluated against a decision-oriented loss function, and applied deterministically. When no improvement is available within the allowed bounds, RAL defaults to the original forecast.
+
+Importantly, RAL does not attempt to improve predictive accuracy. It does not learn, adapt, or override the forecasting model. Instead, it acknowledges that decision risk is shaped by asymmetric cost and limited flexibility—factors external to the model itself.
+
+By constraining adjustment and making its logic explicit, RAL preserves the distinction between prediction and execution. The forecast remains the forecast; the adjustment reflects readiness policy, not model correction.

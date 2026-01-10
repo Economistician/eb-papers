@@ -1,0 +1,9 @@
+\section*{Why Average Error Misses This}
+
+Traditional accuracy metrics summarize forecast performance by averaging error across all intervals. In doing so, they combine periods of surplus, balance, and shortfall into a single measure of overall deviation. This aggregation obscures how error behaves conditionally when failures occur.
+
+Deep shortfalls are often diluted by surplus elsewhere. A forecast may appear well calibrated on average while still producing occasional but severe underbuilds. From a reporting perspective, these events are treated as statistical outliers. From an operational perspective, they are the moments that define system performance.
+
+Because accuracy metrics do not condition on failure, they cannot distinguish between forecasts that miss narrowly and those that miss catastrophically. Both contribute to error magnitude, but only one imposes disproportionate disruption. As a result, improvements in average accuracy may coexist with persistent exposure to severe operational failures.
+
+Without a diagnostic that isolates severity, organizations lack visibility into how fragile their forecasting systems truly are under stress. Average error answers how close forecasts are overall, but it does not answer how bad things get when forecasts fail.

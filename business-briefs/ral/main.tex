@@ -1,0 +1,59 @@
+% main.tex — RAL Business Brief
+\documentclass[11pt]{article}
+
+% ==========================================================
+% GLOBAL PACKAGES + CONFIG (EB)
+% ==========================================================
+\input{../../macros/packages.tex}
+
+% ==========================================================
+% CUSTOM MACROS (shared notation)
+% ==========================================================
+\input{../../macros/commands.tex}
+
+% ==========================================================
+% STYLE LAYER (EB)
+% ==========================================================
+\input{../../macros/style.tex}
+
+% ==========================================================
+% PDF METADATA
+% ==========================================================
+\EBPdfMeta
+  {Closing the Gap Between Forecasts and Execution}
+  {Kyle Corrie}
+  {Business Brief — Electric Barometer}
+  {readiness adjustment, execution control, asymmetric risk, RAL, Electric Barometer}
+
+% ==========================================================
+% TITLE BLOCK
+% ==========================================================
+\title{
+\textbf{Closing the Gap Between Forecasts and Execution}\\[6pt]
+{\large A Controlled Layer for Readiness-Aware Decisioning}
+}
+
+\author{
+  Kyle Corrie\\[4pt]
+  \small Electric Barometer
+}
+
+\date{
+January 2026
+}
+
+% ==========================================================
+\begin{document}
+
+\maketitle
+
+% ==========================================================
+% BUSINESS BRIEF SECTIONS
+% ==========================================================
+\input{sections/010_problem}
+\input{sections/020_core_insight}
+\input{sections/030_why_adjustment_not_manipulation}
+\input{sections/040_business_impact}
+\input{sections/050_where_it_fits}
+
+\end{document}

@@ -1,0 +1,59 @@
+% main.tex — HR@τ Business Brief
+\documentclass[11pt]{article}
+
+% ==========================================================
+% GLOBAL PACKAGES + CONFIG (EB)
+% ==========================================================
+\input{../../macros/packages.tex}
+
+% ==========================================================
+% CUSTOM MACROS (shared notation)
+% ==========================================================
+\input{../../macros/commands.tex}
+
+% ==========================================================
+% STYLE LAYER (EB)
+% ==========================================================
+\input{../../macros/style.tex}
+
+% ==========================================================
+% PDF METADATA
+% ==========================================================
+\EBPdfMeta
+  {When Forecast Accuracy Is Good Enough}
+  {Kyle Corrie}
+  {Business Brief — Electric Barometer}
+  {forecast tolerance, operational sufficiency, reliability, HR@tau, Electric Barometer}
+
+% ==========================================================
+% TITLE BLOCK
+% ==========================================================
+\title{
+\textbf{When Forecast Accuracy Is Good Enough}\\[6pt]
+{\large Measuring How Often Forecasts Support Stable Execution}
+}
+
+\author{
+  Kyle Corrie\\[4pt]
+  \small Electric Barometer
+}
+
+\date{
+January 2026
+}
+
+% ==========================================================
+\begin{document}
+
+\maketitle
+
+% ==========================================================
+% BUSINESS BRIEF SECTIONS
+% ==========================================================
+\input{sections/010_problem}
+\input{sections/020_core_insight}
+\input{sections/030_why_accuracy_fails}
+\input{sections/040_business_impact}
+\input{sections/050_where_it_fits}
+
+\end{document}

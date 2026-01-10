@@ -75,6 +75,50 @@ jobs:
             working_directory: business-briefs/cwsl
             base_name: ElectricBarometer_BB_CWSL
 
+          - id: BB_CWSLR
+            working_directory: business-briefs/cwslr
+            base_name: ElectricBarometer_BB_CWSLR
+
+          - id: BB_NSL
+            working_directory: business-briefs/nsl
+            base_name: ElectricBarometer_BB_NSL
+
+          - id: BB_UD
+            working_directory: business-briefs/ud
+            base_name: ElectricBarometer_BB_UD
+
+          - id: BB_FRS
+            working_directory: business-briefs/frs
+            base_name: ElectricBarometer_BB_FRS
+
+          - id: BB_HRAT
+            working_directory: business-briefs/hrat
+            base_name: ElectricBarometer_BB_HRAT
+
+          - id: BB_HRTAU
+            working_directory: business-briefs/hrtau
+            base_name: ElectricBarometer_BB_HRTAU
+
+          - id: BB_DQC
+            working_directory: business-briefs/dqc
+            base_name: ElectricBarometer_BB_DQC
+
+          - id: BB_FPC
+            working_directory: business-briefs/fpc
+            base_name: ElectricBarometer_BB_FPC
+
+          - id: BB_GOVERNANCE
+            working_directory: business-briefs/governance
+            base_name: ElectricBarometer_BB_GOVERNANCE
+
+          - id: BB_RAL
+            working_directory: business-briefs/ral
+            base_name: ElectricBarometer_BB_RAL
+
+          - id: BB_LTO
+            working_directory: business-briefs/lto
+            base_name: ElectricBarometer_BB_LTO
+
           # --- Technical Papers ---
           - id: PAPER_FRF
             working_directory: technical-papers/frf

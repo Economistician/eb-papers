@@ -1,0 +1,9 @@
+\section*{The Core Insight: Forecast Primitives Encode Structural Assumptions}
+
+Every forecast is expressed through a primitive representation. Whether a forecast is a point estimate, a distribution, or a state signal, that representation encodes assumptions about how demand behaves.
+
+Point forecasts implicitly assume that demand varies smoothly, that errors can be meaningfully adjusted in scale, and that incremental tuning will produce predictable changes in coverage and risk. When these assumptions hold, readiness interventions such as global adjustment and cost-aware evaluation are valid and effective.
+
+When they do not hold, tuning within the same primitive becomes increasingly unproductive. Coverage may respond weakly or not at all, tolerance metrics may remain flat, and cost exposure may escalate rapidly. These outcomes reflect not poor execution, but representational mismatch.
+
+Forecast Primitive Compatibility formalizes this insight. It asks whether the chosen forecast primitive admits meaningful readiness improvement under admissible interventions. If it does not, the correct conclusion is not to tune further, but to reconsider the representation itself.
