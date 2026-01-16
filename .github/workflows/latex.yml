@@ -34,6 +34,10 @@ jobs:
             working_directory: technical-notes/dqc
             base_name: ElectricBarometer_TN_DQC
 
+          - id: TN_FAS
+            working_directory: technical-notes/fas
+            base_name: ElectricBarometer_TN_FAS
+
           - id: TN_FPC
             working_directory: technical-notes/fpc
             base_name: ElectricBarometer_TN_FPC
