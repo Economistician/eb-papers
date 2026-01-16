@@ -1,0 +1,66 @@
+% ==========================================================
+% 080_role_in_frf.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{Role of FAS in the Forecast Readiness Framework}
+\label{sec:fas_role_frf}
+
+The Forecast Admissibility Surface is a foundational governance construct within
+the Forecast Readiness Framework (FRF). Its role is to determine, prior to
+advanced modeling and evaluation, which slices of the forecast domain are
+structurally admissible for participation in forecasting and readiness-control
+workflows.
+
+\subsection{Position in the FRF Lifecycle}
+
+Within the FRF lifecycle, FAS is applied after the generation of a simple
+baseline forecast and before the training or selection of higher-capacity model
+classes. The baseline forecast provides the minimal signal required to expose
+structural error anatomy, while avoiding the confounding effects of aggressive
+fitting or feature interaction.
+
+Once the admissibility surface is established, it is joined onto downstream
+artifacts and used to constrain subsequent stages of the framework. Slices
+classified as \Allowed\ proceed unimpeded through model training, evaluation, and
+governance. Slices classified as \Conditional\ are subject to restricted
+participation, while \Blocked\ slices are excluded entirely.
+
+\subsection{Relationship to Other FRF Diagnostics}
+
+FAS complements, but does not replace, other FRF diagnostics. Demand Quantization
+Compatibility (DQC) assesses whether realized demand admits stable interpretation
+at a given resolution. Forecast Primitive Compatibility (FPC) assesses whether a
+forecast primitive can respond coherently to readiness intervention. Governance
+policies and Readiness Adjustment Layers (RAL) determine how and when forecasts
+are adjusted.
+
+FAS operates orthogonally to these components. It does not evaluate measurement
+validity (DQC), responsiveness (FPC), or policy outcomes. Instead, it answers a
+more fundamental question: whether a slice should enter the forecasting and
+governance stack at all. A slice may pass DQC and FPC checks yet still be excluded
+by FAS due to structural hostility revealed by baseline error anatomy.
+
+\subsection{Constraint Propagation}
+
+Once established, the admissibility surface propagates constraints downstream in
+a deterministic manner. Training pipelines may skip or downweight \Blocked\
+slices. Evaluation metrics may exclude or flag \Conditional\ slices. Governance
+decisions and readiness adjustments may be suppressed or capped based on
+admissibility class.
+
+Crucially, these constraints are not embedded implicitly within models or
+metrics. They are enforced explicitly via the joined admissibility surface,
+preserving transparency and interpretability across the FRF.
+
+\subsection{Non-Substitutability}
+
+FAS is not a substitute for careful modeling, evaluation, or governance. It does
+not guarantee forecast quality, nor does it absolve downstream components from
+their respective responsibilities. Its sole function is to prevent structurally
+inadmissible slices from undermining the integrity of the forecasting system.
+
+By explicitly positioning FAS within the FRF, the framework acknowledges a
+critical operational reality: not all demand can or should be forecasted. Making
+this boundary explicit strengthens the coherence, stability, and credibility of
+the overall forecasting process.

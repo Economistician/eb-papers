@@ -1,0 +1,66 @@
+% ==========================================================
+% 070_thresholds_and_auditability.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{Thresholds, Determinism, and Auditability}
+\label{sec:fas_thresholds_auditability}
+
+Admissibility classification in the Forecast Admissibility Surface is governed by
+a fixed set of threshold parameters applied to baseline error anatomy. These
+thresholds define the boundary between \Allowed, \Conditional, and \Blocked\
+regions of the slice domain. While the specific numerical values of thresholds
+are domain-dependent, the manner in which they are applied is invariant.
+
+\subsection{Threshold Parameterization}
+
+FAS thresholds operate on three classes of observable signals: support size,
+spike frequency, and tail magnitude. Support thresholds guard against
+overinterpretation of sparse data, while spike and tail thresholds detect
+structural instability in baseline error behavior. Each threshold is expressed
+as a simple, interpretable condition (e.g., spike rate greater than or equal to a
+specified level).
+
+Thresholds are not learned, optimized, or adapted dynamically. They are selected
+as governance parameters based on operational tolerance for instability and
+risk. This design ensures that admissibility boundaries are explicit and
+understandable, rather than emergent artifacts of model fitting.
+
+\subsection{Deterministic Classification}
+
+Given a fixed dataset, baseline forecast, slice definition, and threshold
+configuration, FAS produces a unique admissibility surface. Classification rules
+are evaluated independently for each slice, and the resulting admissibility
+labels are fully determined by observed error anatomy.
+
+This determinism is essential for operational governance. Admissibility decisions
+must be reproducible across runs, environments, and stakeholders. Two analysts
+applying FAS to the same inputs must arrive at the same classification, and any
+change in outcome must be attributable to a documented change in data, slice
+definition, or threshold configuration.
+
+\subsection{Auditability and Traceability}
+
+To support auditability, FAS associates each admissibility surface with a stable
+representation of the threshold configuration used to produce it. Thresholds
+are serialized in a canonical form and accompanied by a compact fingerprint that
+uniquely identifies the configuration.
+
+This fingerprint enables downstream artifacts—such as forecast panels,
+evaluation reports, and governance decisions—to be traced back to the exact
+admissibility criteria in force at the time of generation. When classifications
+change, the cause can be unambiguously identified as a change in observed error
+anatomy or a deliberate governance update to thresholds.
+
+\subsection{Governance Implications}
+
+By externalizing admissibility boundaries as explicit thresholds, FAS separates
+structural decisions from modeling outcomes. Adjusting thresholds is a
+governance action, not a modeling one. Such changes should be rare, deliberate,
+and documented, reflecting shifts in operational risk tolerance or strategic
+objectives rather than short-term performance fluctuations.
+
+This separation reinforces the role of FAS as a governance primitive within the
+Forecast Readiness Framework: a stable, auditable gate that constrains where
+forecasting is permitted, independent of downstream optimization or evaluation
+concerns.

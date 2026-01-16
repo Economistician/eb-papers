@@ -1,0 +1,70 @@
+% ==========================================================
+% 030_slice_domains.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{Slice Domains and Admissibility Granularity}
+\label{sec:fas_slice_domains}
+
+The Forecast Admissibility Surface operates over a \emph{slice domain} that
+partitions the full forecast space into structurally distinct units of analysis.
+A slice is defined by a fixed set of keys—such as entity, time-of-day interval, or
+site—that jointly determine the granularity at which admissibility decisions are
+made. The choice of slice domain is consequential: admissibility is not an
+intrinsic property of a demand process in the abstract, but a property of that
+process \emph{at a particular resolution and conditioning}.
+
+Let $\Domain$ denote the full forecast domain under consideration, comprising all
+entities, sites, and time indices eligible for forecasting. FAS induces a
+partition of $\Domain$ into disjoint slices
+$\{\Slice_k\}_{k \in \SliceKeys}$, where each slice $\Slice_k$ corresponds to a
+unique realization of a slice key tuple. All admissibility decisions are made at
+the level of these slices.
+
+\subsection{Supported Slice Keys}
+
+FAS is agnostic to the specific choice of slice keys, provided that the resulting
+slices admit sufficient observational support for baseline error analysis. In
+practice, three slice granularities are commonly employed:
+
+\begin{itemize}
+  \item \textbf{Entity-level slices}, in which all observations for a given
+        forecast entity are aggregated across time and location.
+  \item \textbf{Entity-by-interval slices}, which condition admissibility on both
+        the forecast entity and the evaluation interval (e.g., half-hour of day),
+        allowing time-of-day–specific hostility to be detected.
+  \item \textbf{Site-by-entity-by-interval slices}, which further condition on
+        location, capturing localized executional or demand-driven pathologies.
+\end{itemize}
+
+These slice modes correspond to increasingly fine-grained admissibility surfaces.
+Coarser slices provide greater statistical support but may obscure localized
+instability, while finer slices offer greater specificity at the cost of reduced
+support.
+
+\subsection{Granularity and Support Tradeoffs}
+
+Admissibility classification is meaningful only insofar as each slice contains
+sufficient observational mass. Extremely fine slice definitions can produce
+spurious classifications driven by sampling noise rather than structural
+behavior. Conversely, overly coarse slices may average over heterogeneous regimes
+and falsely appear admissible.
+
+FAS therefore treats slice granularity as a governance choice rather than a
+learned parameter. Minimum support thresholds act as a conservative guardrail:
+slices with insufficient observations are not declared admissible, but instead
+classified as \Conditional to reflect uncertainty rather than hostility. This
+ensures that lack of data is not conflated with structural inadmissibility.
+
+\subsection{Joinability and Determinism}
+
+A defining property of the slice domain in FAS is \emph{joinability}. Each slice
+is defined using keys that exist natively in forecast panels, evaluation tables,
+and governance artifacts. As a result, the admissibility surface produced by FAS
+can be deterministically joined back onto downstream datasets at the same
+granularity, constraining training, evaluation, and readiness control without
+introducing ambiguity or additional state.
+
+By grounding admissibility in explicit slice domains, FAS ensures that decisions
+about where forecasting is permitted are transparent, reproducible, and
+consistent across the Forecast Readiness Framework.

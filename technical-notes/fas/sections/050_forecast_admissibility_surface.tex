@@ -1,0 +1,77 @@
+% ==========================================================
+% 050_forecast_admissibility_surface.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{The Forecast Admissibility Surface}
+\label{sec:fas_surface}
+
+The Forecast Admissibility Surface (FAS) formalizes admissibility as a
+deterministic classification over slice domains derived from baseline error
+anatomy. Rather than producing a scalar score or ranking, FAS defines a
+\emph{decision surface} that partitions the forecast domain into regions where
+forecasting and readiness control are permitted, constrained, or disallowed.
+
+Let $\Domain$ denote the forecast domain under consideration and let
+$\{\Slice_k\}_{k \in \SliceKeys}$ denote the partition of $\Domain$ induced by the
+chosen slice keys. FAS defines a mapping
+\[
+\FAS : \Slice_k \;\longrightarrow\; \{\Allowed, \Conditional, \Blocked\},
+\]
+where each slice is assigned exactly one admissibility class based on observable
+baseline error anatomy.
+
+\subsection{Partition of the Forecast Domain}
+
+The admissibility surface induces a three-way partition of the domain,
+\[
+\Domain = A \;\cup\; C \;\cup\; B,
+\]
+where $A$ denotes the set of \Allowed\ slices, $C$ the set of
+\Conditional\ slices, and $B$ the set of \Blocked\ slices. This partition is
+exhaustive and mutually exclusive: every slice belongs to exactly one region.
+
+Crucially, FAS does not impose a total ordering or notion of “degree” of
+admissibility. The surface is categorical by design. A slice is either admissible
+without restriction, admissible only under constrained conditions, or
+inadmissible for forecasting and control.
+
+\subsection{Deterministic Rule Closure}
+
+Admissibility classification is determined by a fixed set of thresholded rules
+applied to baseline error anatomy. These rules operate on support size, spike
+frequency, and tail magnitude, and are evaluated independently for each slice.
+Given a set of thresholds, the mapping from error anatomy to admissibility class
+is fully deterministic.
+
+This determinism is a central design principle. For a fixed dataset, baseline
+model, slice definition, and threshold configuration, FAS will always produce
+the same admissibility surface. No learned parameters, stochastic procedures, or
+optimization routines are involved. As a result, admissibility decisions are
+fully reproducible and auditable.
+
+\subsection{Surface Interpretation}
+
+The term \emph{surface} is used deliberately. FAS should be interpreted as a mask
+laid over the forecast domain that constrains downstream behavior. It does not
+modify forecasts directly, nor does it intervene in model training. Instead, it
+controls \emph{where} such activities are permitted to occur.
+
+Slices in the \Allowed\ region may flow freely through modeling, evaluation, and
+readiness-control pipelines. Slices in the \Conditional\ region may participate
+only under restricted or conservative rules. Slices in the \Blocked\ region are
+excluded from forecasting workflows entirely, preventing structurally hostile
+behavior from propagating downstream.
+
+\subsection{Non-Comparative Nature}
+
+FAS classifications are not comparative across slices. A slice classified as
+\Conditional\ is not “better” or “worse” than another slice in the same class,
+nor does the surface encode relative importance or priority. The admissibility
+surface answers a single governance question for each slice in isolation:
+\emph{Is forecasting structurally admissible here?}
+
+By framing admissibility as a deterministic surface rather than a score, FAS
+avoids conflating structural validity with performance evaluation. This
+separation preserves clarity of intent and ensures that admissibility decisions
+remain orthogonal to downstream optimization objectives.

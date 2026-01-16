@@ -1,0 +1,30 @@
+% ==========================================================
+% 110_conclusion.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{Conclusion}
+\label{sec:fas_conclusion}
+
+Not all demand is forecastable, and not all slices of a forecast domain admit
+stable learning, evaluation, or control. In operational systems, treating every
+slice as equally admissible introduces noise, instability, and false confidence
+that can undermine both analytic rigor and practical decision-making.
+
+The Forecast Admissibility Surface addresses this gap by providing a
+deterministic, slice-keyed governance construct that identifies where forecasting
+is structurally justified and where it is not. By grounding admissibility in
+baseline error anatomy, FAS exposes hostile regimes early in the forecasting
+pipeline, before modeling complexity obscures structural signals.
+
+Within the Forecast Readiness Framework, FAS complements existing diagnostics by
+answering a foundational question that is often left implicit: \emph{Should this
+slice be forecasted at all?} By making this decision explicit, auditable, and
+joinable, FAS strengthens downstream modeling, evaluation, and governance without
+introducing new optimization targets or subjective tuning.
+
+More broadly, FAS reinforces a core principle of production forecasting: analytic
+discipline begins not with better models, but with clear boundaries on where
+models are appropriate. By enforcing those boundaries, the Forecast Admissibility
+Surface contributes to more stable, interpretable, and trustworthy forecasting
+systems.

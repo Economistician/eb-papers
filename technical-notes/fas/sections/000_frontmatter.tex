@@ -1,0 +1,23 @@
+% ==========================================================
+% 000_frontmatter.tex
+% FRONTMATTER (FAS Technical Note)
+% ==========================================================
+
+\begin{abstract}
+Forecasting pipelines often assume that all slices of demand are equally amenable to learning,
+evaluation, and control once sufficient data and model sophistication are applied. In operational
+settings, however, this assumption frequently fails. Certain demand slices exhibit structural
+pathologies—such as extreme intermittency, unstable tail behavior, or recurrent spike-driven
+error—that render both model fitting and downstream readiness control unreliable, regardless of
+model class. Attempting to forecast such slices can introduce spurious confidence, inflate
+computational cost, and obscure genuine signal elsewhere in the system.
+
+This technical note introduces the \emph{Forecast Admissibility Surface (FAS)}, a deterministic,
+slice-keyed construct that partitions a forecast domain into admissible regions for modeling and
+control. FAS operates on baseline-derived error anatomy—such as spike frequency, tail magnitude,
+and support size—to classify each slice as \Allowed, \Conditional, or \Blocked prior to advanced
+model training. FAS is not a performance metric and does not select or tune forecasting models.
+Instead, it serves as an auditable pre-model gating mechanism that constrains where learning,
+evaluation, and readiness policies may be meaningfully applied within the Forecast Readiness
+Framework.
+\end{abstract}

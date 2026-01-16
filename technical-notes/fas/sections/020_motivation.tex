@@ -1,0 +1,57 @@
+% ==========================================================
+% 020_motivation.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{Motivation}
+\label{sec:fas_motivation}
+
+Modern forecasting systems often respond to poor predictive behavior by
+escalating modeling complexity: richer feature sets, non-linear learners,
+hierarchical pooling, or ensemble strategies. While such techniques can be
+effective in many regimes, they implicitly assume that the underlying demand
+slice is structurally amenable to learning and control. In operational settings,
+this assumption does not universally hold.
+
+Certain slices of the forecast domain exhibit properties that are fundamentally
+hostile to stable modeling. These include extreme intermittency with long runs of
+zeros, highly irregular support with insufficient observational mass, and error
+distributions dominated by infrequent but severe spikes. In such regimes,
+baseline forecasts already reveal instability: absolute errors are heavy-tailed,
+spike frequencies are elevated, and empirical performance varies erratically
+across adjacent time windows. Importantly, these behaviors persist across model
+classes, indicating that the issue is not one of model inadequacy but of slice
+structure.
+
+Without an explicit admissibility construct, forecasting pipelines treat all
+slices as equally eligible for learning. This leads to several undesirable
+outcomes. Models are trained on slices where signal is weak or nonexistent,
+inflating variance and computational cost. Evaluation metrics oscillate as a
+function of rare events rather than systematic behavior. Governance and
+readiness-control layers receive noisy or contradictory signals, making policy
+decisions appear unstable or arbitrary. In the worst cases, forecasts produced
+for such slices convey a false sense of precision while masking structural
+uncertainty.
+
+A common failure mode in these settings is the belief that additional data or
+longer training windows will eventually resolve instability. While increased
+support can be beneficial, many operational slices remain hostile even at scale.
+Demand may be driven by rare, exogenous events; executional constraints may
+truncate observable behavior; or production realities may impose sharp
+discontinuities that defeat smooth learning. In these cases, the act of
+forecasting itself becomes the source of error propagation rather than its
+remedy.
+
+The Forecast Admissibility Surface (FAS) is motivated by the need to distinguish
+between slices where forecasting effort is justified and slices where it is not.
+By examining baseline-derived error anatomy prior to advanced modeling, FAS
+provides a principled mechanism for identifying structural hostility early in
+the pipeline. This enables forecasting systems to allocate modeling capacity
+where it is likely to yield stable gains, while constraining or blocking slices
+where learning and control are inherently unreliable.
+
+In this sense, FAS formalizes a governance question that is often left implicit:
+\emph{Should this slice be forecasted at all?} By making this decision explicit,
+deterministic, and auditable, FAS reduces downstream noise, clarifies the
+interpretation of evaluation metrics, and strengthens the overall integrity of
+the Forecast Readiness Framework.

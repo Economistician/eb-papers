@@ -1,0 +1,70 @@
+% ==========================================================
+% 010_overview.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{Overview}
+\label{sec:fas_overview}
+
+Operational forecasting pipelines often proceed under the implicit assumption
+that all demand slices are amenable to learning, evaluation, and control once
+sufficient data and model sophistication are applied. In practice, this
+assumption frequently fails. Certain slices of demand—defined at the level of
+entity, entity-by-interval, or site-by-entity-by-interval—exhibit structural
+pathologies that render forecasting unstable or misleading regardless of model
+class. These pathologies may arise from extreme intermittency, insufficient
+support, heavy-tailed error distributions, or recurrent spike-driven behavior
+that dominates baseline error anatomy.
+
+When such slices are treated as fully admissible, downstream systems incur
+several risks: models overfit noise, evaluation metrics become erratic,
+governance signals fluctuate unpredictably, and readiness adjustments are
+applied in regimes where learning is neither reliable nor actionable. In these
+settings, additional modeling complexity does not resolve the issue; it merely
+obscures the underlying structural hostility of the slice.
+
+\medskip
+\begin{framed}
+\noindent\textbf{Core Framing Question.}\;
+\emph{Given a particular slice of the forecast domain, is this slice structurally
+admissible for learning, evaluation, and control, or does its observed error
+anatomy indicate that forecasting should be constrained or avoided altogether?}
+\end{framed}
+\medskip
+
+The \emph{Forecast Admissibility Surface (FAS)} is introduced as a deterministic,
+slice-keyed construct that explicitly answers this question.
+
+FAS is not a performance metric and is not an optimization objective. It does not
+rank models, tune hyperparameters, or estimate forecast quality. Instead, it
+classifies slices of the forecast domain into admissibility regions based on
+observable properties of baseline error anatomy, including support size, spike
+frequency, and tail magnitude. Its sole purpose is to determine \emph{where}
+forecasting and readiness control may be meaningfully applied, and where such
+efforts should be restricted or blocked entirely.
+
+Within the Forecast Readiness Framework (FRF), FAS occupies a deliberately
+upstream position. Whereas Demand Quantization Compatibility (DQC) assesses
+whether realized demand admits stable interpretation at a given resolution, and
+Forecast Primitive Compatibility (FPC) assesses whether a forecast primitive can
+respond coherently to intervention, FAS assesses whether a slice should
+participate in modeling and governance workflows at all. A slice may be
+quantization-compatible and primitive-compatible in principle, yet still be
+inadmissible for forecasting due to insufficient support or structurally hostile
+error behavior.
+
+Accordingly, FAS provides an upstream governance signal that answers three
+practical questions:
+\begin{enumerate}[label=(\roman*)]
+  \item Is this slice sufficiently well-behaved to permit unrestricted modeling?
+  \item If not, should forecasting be allowed only under constrained or
+        conditional rules?
+  \item In the most extreme cases, should this slice be excluded from forecasting
+        and readiness control entirely?
+\end{enumerate}
+
+The remainder of this technical note formalizes the Forecast Admissibility
+Surface. We define slice domains and baseline error anatomy, introduce a
+deterministic admissibility taxonomy, and describe how FAS integrates into the
+FRF without introducing new optimization targets, learned parameters, or
+subjective tuning.

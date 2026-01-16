@@ -1,0 +1,55 @@
+% ==========================================================
+% 100_production_implications.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{Implications for Production Management}
+\label{sec:fas_production_implications}
+
+The Forecast Admissibility Surface has direct implications for how forecasting
+outputs are interpreted and applied in operational production management
+settings. By explicitly distinguishing between admissible and inadmissible
+slices, FAS prevents structurally unstable behavior from propagating into
+planning, execution, and control decisions.
+
+\subsection{Preventing False Precision}
+
+In many production environments, forecasts are consumed as point estimates or
+narrow ranges that implicitly convey confidence. When applied to structurally
+hostile slices, such forecasts can create a false sense of precision, leading to
+overconfident staffing, procurement, or preparation decisions. FAS mitigates
+this risk by blocking or constraining forecasts in regimes where baseline error
+anatomy indicates that precision is illusory.
+
+\subsection{Targeted Use of Forecasting Capacity}
+
+Forecasting capacity—both computational and human—is finite. FAS enables systems
+to allocate this capacity where it is most likely to yield stable and actionable
+signal. By excluding \Blocked\ slices and flagging \Conditional\ slices for
+restricted handling, modeling effort can be focused on demand regimes that
+benefit meaningfully from learning and evaluation.
+
+\subsection{Operational Handling of Inadmissible Slices}
+
+Blocking a slice from forecasting does not imply that the corresponding
+operational process can be ignored. Rather, it signals that alternative handling
+mechanisms are required. These may include deterministic rules, manual planning,
+safety buffers, or exogenous overrides informed by domain expertise. FAS makes
+explicit where such non-forecast-based strategies are necessary.
+
+\subsection{Stability of Downstream Signals}
+
+By constraining forecasting to structurally admissible slices, FAS improves the
+stability of downstream metrics and governance signals. Evaluation diagnostics
+become less sensitive to rare extremes, readiness adjustments behave more
+consistently, and policy decisions are less likely to oscillate in response to
+pathological behavior. This stability is particularly important in production
+management contexts where frequent reversals erode trust in analytic systems.
+
+\subsection{Interpretive Discipline}
+
+Finally, FAS enforces interpretive discipline in production environments. It
+clarifies where forecasts should be trusted, where they should be treated with
+caution, and where they should not be used at all. By making these boundaries
+explicit and auditable, FAS supports more informed and resilient operational
+decision-making.

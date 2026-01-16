@@ -1,0 +1,69 @@
+% ==========================================================
+% 090_design_principles_and_nongoals.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{Design Principles and Non-Goals}
+\label{sec:fas_design_nongoals}
+
+The Forecast Admissibility Surface is intentionally narrow in scope. Its design
+reflects a deliberate separation between structural governance decisions and
+downstream modeling, evaluation, and optimization. This section articulates the
+core principles that guided the design of FAS and clarifies what FAS is not
+intended to do.
+
+\subsection{Design Principles}
+
+\paragraph{Determinism.}
+FAS produces the same admissibility surface whenever it is applied to the same
+inputs. There are no learned parameters, stochastic procedures, or adaptive
+mechanisms. This determinism is essential for reproducibility, governance, and
+auditability.
+
+\paragraph{Baseline-Centricity.}
+FAS relies exclusively on baseline-derived error anatomy. This ensures that
+admissibility decisions reflect structural properties of the slice rather than
+artifacts of model sophistication. Baseline models are used as probes, not as
+performance benchmarks.
+
+\paragraph{Slice-Local Decisions.}
+Each slice is evaluated independently. Admissibility is not comparative across
+slices, nor is it influenced by global rankings or resource allocation
+considerations. This preserves clarity of interpretation and avoids implicit
+prioritization.
+
+\paragraph{Conservatism Under Uncertainty.}
+When evidence is insufficient to support a definitive classification, FAS errs
+toward \Conditional\ rather than \Blocked. Lack of data is treated as uncertainty,
+not hostility.
+
+\paragraph{Joinability and Transparency.}
+Admissibility outcomes are produced at explicit slice keys and are designed to be
+joined deterministically onto downstream artifacts. All inputs and thresholds
+used to produce the surface are observable and inspectable.
+
+\subsection{Non-Goals}
+
+\paragraph{Not a Performance Metric.}
+FAS does not measure forecast accuracy, cost efficiency, or service quality. It
+does not rank slices or models and should not be interpreted as a proxy for
+forecast value.
+
+\paragraph{Not a Model Selector.}
+FAS does not choose between forecasting models, tune hyperparameters, or guide
+model architecture decisions. Such choices belong to downstream modeling and
+evaluation processes.
+
+\paragraph{Not an Optimization Objective.}
+FAS is not optimized, calibrated, or learned from data. There is no loss
+function, gradient, or target distribution associated with admissibility.
+
+\paragraph{Not a Substitute for Governance.}
+While FAS is a governance primitive, it does not replace broader governance
+policies, human judgment, or operational decision-making. Blocking a slice from
+forecasting does not resolve the underlying operational challenge; it merely
+prevents unstable forecasts from compounding it.
+
+By adhering to these principles and boundaries, FAS remains a focused and
+defensible component of the Forecast Readiness Framework, providing structural
+clarity without encroaching on downstream responsibilities.

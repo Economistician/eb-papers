@@ -1,0 +1,80 @@
+% ==========================================================
+% 060_admissibility_classes.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{Admissibility Classes}
+\label{sec:fas_classes}
+
+The Forecast Admissibility Surface partitions the slice domain into three
+qualitatively distinct admissibility classes: \Allowed, \Conditional, and
+\Blocked. These classes are categorical governance outcomes, not performance
+tiers. Each class encodes a different set of permissions and constraints for
+downstream forecasting, evaluation, and readiness control.
+
+\subsection{\Allowed\ Slices}
+\label{subsec:fas_allowed}
+
+Slices classified as \Allowed\ exhibit baseline error anatomy consistent with
+stable learning and control. Support size is sufficient, spike frequency is low,
+and tail behavior is bounded at levels that do not dominate aggregate error or
+operational risk. In these slices, baseline instability does not indicate
+structural hostility.
+
+For \Allowed\ slices, forecasting workflows may proceed without restriction.
+Advanced models may be trained, evaluated, and governed using the full suite of
+Forecast Readiness Framework diagnostics. Readiness adjustments and governance
+policies may be applied according to standard rules, with the expectation that
+learning signals and evaluation metrics will be interpretable and stable.
+
+\subsection{\Conditional\ Slices}
+\label{subsec:fas_conditional}
+
+Slices classified as \Conditional\ occupy an intermediate regime. They may
+exhibit elevated spike rates, heavier tails, or insufficient observational
+support, but do not cross thresholds associated with clear structural
+inadmissibility. In many cases, the \Conditional\ classification reflects
+uncertainty rather than demonstrated hostility.
+
+Forecasting may still be attempted for \Conditional\ slices, but only under
+constrained or conservative rules. Such constraints may include restricted model
+classes, limited training horizons, suppressed readiness adjustments, or
+heightened governance scrutiny. The purpose of the \Conditional\ class is not to
+prohibit forecasting, but to signal that downstream results should be interpreted
+with caution.
+
+Importantly, \Conditional\ is not a transient state to be automatically resolved
+through additional modeling effort. While some slices may migrate to \Allowed\
+as support increases or behavior stabilizes, others may remain perpetually
+conditional due to inherent variability.
+
+\subsection{\Blocked\ Slices}
+\label{subsec:fas_blocked}
+
+Slices classified as \Blocked\ exhibit baseline error anatomy that is
+fundamentally hostile to learning and control. These slices are characterized by
+high spike frequency, extreme tail magnitude, or other pathologies that dominate
+error behavior and overwhelm stable signal.
+
+For \Blocked\ slices, forecasting and readiness control are explicitly disallowed.
+Models trained on such slices are unlikely to generalize, evaluation metrics are
+dominated by rare events, and governance signals become erratic or misleading.
+Excluding these slices prevents structurally unstable behavior from contaminating
+downstream analyses and decision-making.
+
+Blocking is a governance decision, not a judgment of importance. A slice may be
+operationally critical yet structurally inadmissible for forecasting. In such
+cases, alternative handling—such as deterministic rules, manual planning, or
+exogenous overrides—must be employed outside the forecasting pipeline.
+
+\subsection{Class Stability and Interpretation}
+
+Admissibility classes are intended to be stable over time relative to the slice
+definition and threshold configuration. While classifications may evolve as new
+data becomes available or as slice granularity changes, frequent oscillation is
+indicative of a poorly chosen slice domain or overly sensitive thresholds rather
+than meaningful structural change.
+
+By separating \Allowed, \Conditional, and \Blocked\ slices, FAS provides a clear
+and interpretable governance signal that constrains forecasting behavior without
+conflating admissibility with performance, priority, or optimization outcomes.

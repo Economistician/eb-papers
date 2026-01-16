@@ -1,0 +1,77 @@
+% ==========================================================
+% 040_baseline_error_anatomy.tex
+% Forecast Admissibility Surface (FAS)
+% ==========================================================
+
+\section{Baseline Error Anatomy}
+\label{sec:fas_baseline_error_anatomy}
+
+The Forecast Admissibility Surface is derived from observable properties of
+baseline forecast error rather than from the performance of advanced or
+optimized models. This design choice is intentional. Baseline models provide a
+low-capacity, transparent reference that exposes structural characteristics of
+a demand slice without masking them through complex fitting or feature
+interaction. FAS relies on these baseline-derived signals to assess whether a
+slice is amenable to learning and control at all.
+
+Let $\yit$ denote realized demand and $\yhatit$ denote the corresponding baseline
+forecast for entity $\entity$ at time index $\timeindex$. FAS operates on the
+distribution of absolute error
+$\absit = \left|\yhatit - \yit\right|$ aggregated over each slice in the chosen
+domain. The resulting \emph{error anatomy} summarizes both the magnitude and the
+structure of baseline forecast deviations.
+
+\subsection{Support Size}
+
+The most fundamental prerequisite for admissibility is sufficient observational
+support. For each slice, FAS records the number of observations $n$ available for
+baseline error analysis. Slices with extremely limited support cannot be
+reliably characterized: apparent stability or instability may be an artifact of
+sampling rather than structure.
+
+Rather than attempting to infer hostility from sparse data, FAS treats low
+support conservatively. Slices failing to meet a minimum support threshold are
+classified as \Conditional, reflecting epistemic uncertainty rather than
+demonstrated inadmissibility. This prevents the exclusion of slices solely due to
+data scarcity while avoiding unwarranted confidence.
+
+\subsection{Spike Frequency}
+
+Operational demand often exhibits rare but severe deviations from baseline
+behavior, driven by exogenous shocks, executional anomalies, or bursty demand
+patterns. To capture this behavior, FAS computes the \emph{spike rate}: the
+fraction of observations in a slice for which absolute error exceeds a
+predefined spike threshold.
+
+High spike rates indicate that baseline forecasts routinely fail by large
+margins, even if average error appears moderate. Such slices are particularly
+hostile to stable learning, as infrequent extremes dominate both training loss
+and evaluation metrics. Spike frequency therefore serves as a primary signal of
+structural instability.
+
+\subsection{Tail Magnitude}
+
+In addition to spike frequency, FAS characterizes the severity of extreme errors
+via upper-tail quantiles of the absolute error distribution. Specifically, high
+quantiles (e.g., the $90^{\text{th}}$ or $95^{\text{th}}$ percentile) summarize
+the magnitude of errors encountered in the worst-performing regimes of a slice.
+
+Elevated tail magnitude signals that even when extreme events are rare, their
+impact is substantial. In such cases, forecasts may appear acceptable under
+average metrics while remaining operationally unsafe. Tail-based diagnostics
+therefore complement spike frequency by distinguishing between frequent moderate
+instability and infrequent but catastrophic failure.
+
+\subsection{Baseline-Centric Interpretation}
+
+It is important to emphasize that baseline error anatomy is not intended as a
+proxy for final forecast quality. A slice may exhibit poor baseline performance
+yet still be improved through modeling, while another may resist improvement
+entirely. FAS does not attempt to predict which outcome will occur. Instead, it
+uses baseline behavior as a \emph{structural probe}: if instability is already
+severe at low model capacity, the slice warrants heightened scrutiny or
+restriction before additional complexity is introduced.
+
+By grounding admissibility in baseline error anatomy, FAS ensures that decisions
+about where forecasting is allowed are driven by observable, interpretable
+signals rather than by optimistic assumptions about model capability.
