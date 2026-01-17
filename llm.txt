@@ -1,0 +1,102 @@
+REPOSITORY: eb-papers
+
+ROLE
+This repository contains the formal research, technical notes, and mathematical
+foundations of the Electric Barometer (EB) framework.
+
+It serves as the authoritative theoretical and conceptual reference for EB,
+including definitions, proofs, derivations, and design motivation.
+
+This repository defines WHY concepts exist and HOW they are formally justified.
+It does not define executable behavior or system policy.
+
+---
+
+PRIMARY RESPONSIBILITIES
+
+- Maintain formal technical papers and notes (LaTeX sources and figures) for:
+  - Forecast Readiness Framework (FRF)
+  - metric definitions and properties (FRS, NSL, UD, HR@τ, CWSL, CWSLR, etc.)
+  - admissibility, compatibility, and governance theory (FAS, DQC, FPC, RAL)
+- Provide mathematical clarity, rigor, and justification for EB concepts
+- Serve as a stable reference for terminology, notation, and conceptual scope
+- Document design intent, assumptions, and limitations explicitly
+
+---
+
+NON-RESPONSIBILITIES (STRICT)
+
+This repository MUST NOT:
+
+- Be treated as an executable specification
+- Define runtime behavior, defaults, or system policy
+- Override or contradict implemented code
+- Implicitly mandate that all theoretical constructs be implemented
+- Encode engineering constraints or production decisions
+- Serve as a source of truth for pipeline ordering or execution semantics
+
+---
+
+CORE INVARIANTS
+
+- Papers describe theory, not enforcement.
+  Mathematical definitions and results explain what is possible or desirable,
+  not what is automatically executed in code.
+
+- Concepts may be idealized or abstract.
+  Papers may intentionally omit engineering constraints, performance tradeoffs,
+  or implementation details.
+
+- Optionality is explicit.
+  The presence of a concept in a paper does not imply it must exist in all
+  pipelines or code paths.
+
+- Versioned evolution is expected.
+  Papers may evolve independently of code; implementation may lag, subset,
+  or specialize the theory.
+
+---
+
+SYSTEM RELATIONSHIP
+
+- This repository defers to `eb-integration/llm.system.txt` for:
+  - canonical system worldview
+  - pipeline ordering
+  - governance and adjustment invariants
+
+- Executable truth lives in code repositories:
+  - eb-contracts (schemas and semantics)
+  - eb-metrics (metric implementations)
+  - eb-evaluation (diagnostics and governance artifacts)
+  - eb-optimization (parameter tuning)
+  - electric-barometer (workflow orchestration)
+
+- If a paper conflicts with code or system law, the paper is explanatory,
+  not authoritative.
+
+---
+
+ALLOWED CHANGES
+
+- Adding new papers or technical notes
+- Revising mathematical formulations or exposition
+- Clarifying assumptions, notation, and scope
+- Deprecating or superseding prior theoretical constructs (explicitly)
+
+---
+
+DISALLOWED CHANGES
+
+- Treating theoretical equations as required runtime behavior
+- Retroactively redefining implemented semantics without code changes
+- Using papers to justify silent behavior changes in code
+- Collapsing exploratory or speculative sections into policy
+
+---
+
+INTERPRETATION RULE
+
+If a question is about conceptual meaning, theoretical justification,
+or formal properties, this repository is authoritative.
+If a question is about implementation, execution, governance, or behavior,
+this repository is not authoritative.
