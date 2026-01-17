@@ -10,6 +10,12 @@ including definitions, proofs, derivations, and design motivation.
 This repository defines WHY concepts exist and HOW they are formally justified.
 It does not define executable behavior or system policy.
 
+STYLE
+- Inherits ecosystem-wide style and linting rules from
+  eb-integration/tooling/llm.style.txt via shared tooling.
+- LaTeX, figures, and paper-specific formatting may introduce additional
+  conventions, but must not conflict with system law or implemented semantics.
+
 ---
 
 PRIMARY RESPONSIBILITIES
