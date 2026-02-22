@@ -43,10 +43,10 @@ a longstanding recognition in forecasting and decision theory that the economic
 impact of overforecasting and underforecasting differs materially across
 applications \citep{granger1969}.
 \[
-\CWSL = 
+\CWSL =
 \frac{
-\sum_{t=1}^T 
-\left( 
+\sum_{t=1}^T
+\left(
     \cu \, \pospart{y_t - \hat{y}_t}
     +
     \co \, \pospart{\hat{y}_t - y_t}
@@ -64,7 +64,7 @@ economically meaningful deviations.
 Because \NSL{} lies in \([0,1]\) but \CWSL{} may exceed 1, the cost term is scaled
 to the unit interval to ensure comparability:
 \[
-\CWSLscaled 
+\CWSLscaled
     = \min\!\left( 1, \frac{\CWSL}{\CWSLmax} \right),
 \]
 where \(\CWSLmax > 0\) is a user–selected upper bound representing the largest

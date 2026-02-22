@@ -18,16 +18,16 @@ resolution. Within this setting, its responsibilities are limited to the
 following:
 
 \begin{itemize}
-  \item \textbf{Structural classification of demand support.}  
+  \item \textbf{Structural classification of demand support.}
   DQC determines whether realized demand behaves as continuous-like, strongly
   quantized, or piecewise-packed at the resolution under consideration.
 
-  \item \textbf{Granularity detection.}  
+  \item \textbf{Granularity detection.}
   When demand is classified as quantized or packed, DQC detects a
   representative grid unit (granularity) that characterizes the dominant
   support of the demand distribution.
 
-  \item \textbf{Governance signaling.}  
+  \item \textbf{Governance signaling.}
   DQC produces an interpretable diagnostic artifact that downstream systems can
   use to:
   \begin{itemize}
@@ -36,7 +36,7 @@ following:
     \item ensure consistent evaluation semantics across entities and time.
   \end{itemize}
 
-  \item \textbf{Auditability and stability.}  
+  \item \textbf{Auditability and stability.}
   DQC outputs are deterministic, threshold-driven, and auditable. Thresholds may
   be tuned explicitly, but the diagnostic logic itself remains stable.
 \end{itemize}
@@ -51,27 +51,27 @@ Equally important are the capabilities DQC \emph{explicitly excludes}. DQC does
 \textbf{not} attempt to:
 
 \begin{itemize}
-  \item \textbf{Measure forecast quality.}  
+  \item \textbf{Measure forecast quality.}
   DQC does not evaluate forecast accuracy, bias, cost, or service outcomes. It
   operates solely on realized demand and is agnostic to forecast values.
 
-  \item \textbf{Optimize thresholds or grids.}  
+  \item \textbf{Optimize thresholds or grids.}
   DQC does not search for an optimal granularity or tune itself to improve
   downstream metrics. Any thresholds used are governance parameters, not learned
   quantities.
 
-  \item \textbf{Replace modeling or transformation choices.}  
+  \item \textbf{Replace modeling or transformation choices.}
   DQC does not recommend specific forecasting models, transformations, or data
   preprocessing steps. It merely constrains how evaluation results should be
   interpreted.
 
-  \item \textbf{Guarantee downstream performance.}  
+  \item \textbf{Guarantee downstream performance.}
   A continuous-like DQC classification does not imply that readiness adjustment
   will be effective, nor does a quantized classification imply that snapping will
   improve outcomes. These judgments belong to FPC and subsequent governance
   layers.
 
-  \item \textbf{Act as a universal statistical test.}  
+  \item \textbf{Act as a universal statistical test.}
   DQC is not a general-purpose test for discreteness, intermittency, or
   zero-inflation. It is a pragmatic, operational diagnostic tailored to readiness
   evaluation semantics.

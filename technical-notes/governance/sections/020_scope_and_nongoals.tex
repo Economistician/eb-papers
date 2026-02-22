@@ -21,17 +21,17 @@ Governance operates as the terminal decision layer in the Electric Barometer
 stack. Within this role, its responsibilities are limited to the following:
 
 \begin{itemize}
-  \item \textbf{Decision closure.}  
+  \item \textbf{Decision closure.}
   Governance maps a fixed set of diagnostic inputs and thresholds to exactly one
   authoritative policy outcome. It exists to close the decision surface, not to
   explore it.
 
-  \item \textbf{Enforcement of admissible representation.}  
+  \item \textbf{Enforcement of admissible representation.}
   Governance determines which unit system (raw or snapped) is authoritative for
   interpretation, based on upstream \DQC{} classification, and enforces that
   choice consistently across diagnostics and policy.
 
-  \item \textbf{Policy declaration.}  
+  \item \textbf{Policy declaration.}
   Governance emits an explicit, structured decision artifact specifying:
   \begin{itemize}
     \item tolerance interpretation semantics,
@@ -39,12 +39,12 @@ stack. Within this role, its responsibilities are limited to the following:
     \item and a governance status suitable for downstream control systems.
   \end{itemize}
 
-  \item \textbf{Exclusivity and consistency.}  
+  \item \textbf{Exclusivity and consistency.}
   Governance enforces exclusivity across diagnostic interpretations:
   exactly one \FPC{} assessment governs allowability, and raw and snapped
   reasoning are never mixed.
 
-  \item \textbf{Auditability and accountability.}  
+  \item \textbf{Auditability and accountability.}
   Governance decisions are deterministic, threshold-driven, and traceable to
   observable inputs. Each decision can be reviewed, reproduced, and justified
   without reliance on model internals or subjective judgment.
@@ -60,28 +60,28 @@ Equally important are the capabilities Governance explicitly excludes. Governanc
 does \textbf{not} attempt to:
 
 \begin{itemize}
-  \item \textbf{Optimize outcomes.}  
+  \item \textbf{Optimize outcomes.}
   Governance does not optimize cost, service level, or accuracy. It does not
   select policies based on objective functions or tradeoff curves.
 
-  \item \textbf{Learn or adapt.}  
+  \item \textbf{Learn or adapt.}
   Governance contains no learning, adaptation, or stateful behavior. All logic
   is deterministic and driven solely by current inputs and declared thresholds.
 
-  \item \textbf{Reinterpret diagnostics.}  
+  \item \textbf{Reinterpret diagnostics.}
   Governance does not reweight, smooth, or reinterpret \DQC{} or \FPC{} outputs.
   It consumes them exactly as produced and applies fixed decision rules.
 
-  \item \textbf{Override upstream conclusions.}  
+  \item \textbf{Override upstream conclusions.}
   Governance cannot override a snapping requirement, tolerance interpretation,
   or incompatibility determination. Manual or discretionary overrides are
   explicitly out of scope.
 
-  \item \textbf{Act as a monitoring or analytics layer.}  
+  \item \textbf{Act as a monitoring or analytics layer.}
   Governance is not a dashboard, reporting system, or exploratory analytics
   tool. Its outputs are prescriptive, not descriptive.
 
-  \item \textbf{Guarantee downstream performance.}  
+  \item \textbf{Guarantee downstream performance.}
   A permissive governance decision does not guarantee improved outcomes, nor
   does a restrictive decision imply poor forecasting quality. Governance
   addresses admissibility, not success.

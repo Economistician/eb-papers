@@ -48,13 +48,13 @@ This repository is organized around **research artifacts**, not executable code.
 
 At a high level, the structure follows a consistent pattern:
 
-- **Framework papers**  
+- **Framework papers**
   Directories containing full-length papers that establish core concepts and unifying theory (e.g., the Forecast Readiness Framework itself).
 
-- **Technical notes**  
+- **Technical notes**
   Focused documents that define individual metrics, diagnostics, or supporting constructs. These notes develop specific components of the framework in greater mathematical or operational detail.
 
-- **Document substructure**  
+- **Document substructure**
   Within each paper or note:
   - `main.tex` serves as the compilation entry point
   - Section files are organized under `sections/`
@@ -70,13 +70,13 @@ This structure is intentionally stable: theoretical definitions and methodologic
 
 If you use material from this repository, please cite it appropriately based on what you reference.
 
-- **Framework-level concepts or the repository as a whole**  
+- **Framework-level concepts or the repository as a whole**
   Cite the *Forecast Readiness Framework (FRF)* paper, which serves as the unifying reference for this research series.
 
-- **Specific metrics, diagnostics, or technical constructs**  
+- **Specific metrics, diagnostics, or technical constructs**
   Cite the corresponding paper or technical note directly (e.g., CWSL, FRS, RAL).
 
-Citation metadata for the repository is provided in [`CITATION.cff`](./CITATION.cff).  
+Citation metadata for the repository is provided in [`CITATION.cff`](./CITATION.cff).
 Each paper is intended to be self-contained and citable as an independent research artifact.
 
 When in doubt, cite the most specific paper that defines the concept you are using.
@@ -85,5 +85,5 @@ When in doubt, cite the most specific paper that defines the concept you are usi
 
 ## License
 
-BSD 3-Clause License.  
+BSD 3-Clause License.
 © 2025 Kyle Corrie.

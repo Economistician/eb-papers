@@ -36,24 +36,24 @@ where uncertainty is deliberate rather than incidental.
 
 This directory is organized as follows:
 
-- `main.tex`  
+- `main.tex`
   The canonical LTOR research paper, including abstract, sections,
   figures, tables, and references.
 
-- `sections/`  
+- `sections/`
   Individual LaTeX section files composing the paper.
 
-- `figures/`  
+- `figures/`
   LaTeX-based figures illustrating readiness-centric production control
   and system architecture.
 
-- `tables/`  
+- `tables/`
   Summary and comparative tables referenced in the manuscript.
 
-- `macros/`  
+- `macros/`
   Shared notation and command definitions specific to the LTOR paper.
 
-- `references.bib`  
+- `references.bib`
   Bibliographic references cited in the paper.
 
 ---
